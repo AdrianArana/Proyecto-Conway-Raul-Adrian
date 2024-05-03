@@ -1,18 +1,20 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
 
-import javafx.fxml.Initializable;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NombreController implements Initializable {
+
     @FXML
-    protected void onSiguientebuttonClick(){
+    protected void onSiguienteButtonClick(){
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("configuracion.fxml"));
         try{
@@ -24,6 +26,7 @@ public class NombreController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

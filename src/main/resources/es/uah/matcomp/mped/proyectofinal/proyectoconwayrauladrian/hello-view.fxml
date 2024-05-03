@@ -11,4 +11,5 @@
 
   <Label fx:id="welcomeText" prefWidth="132.0" text="¡BIENVENIDO JUGADOR!" />
   <Button mnemonicParsing="false" onAction="#onMiBotonNuevaPartidaButtonClick" text="NUEVA PARTIDA" />
+   <Button mnemonicParsing="false" text="CARGAR PARTIDA" />
 </VBox>

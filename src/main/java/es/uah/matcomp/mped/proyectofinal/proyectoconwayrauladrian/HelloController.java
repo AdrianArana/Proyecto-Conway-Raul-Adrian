@@ -24,10 +24,23 @@ public class HelloController implements Initializable {
     @FXML
     protected void onMiBotonNuevaPartidaButtonClick() {
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nombre-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nombre.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 320, 240);
             stage.setTitle("Nombre");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    protected void onSiguienteButtonClick(){
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("configuracion.fxml"));
+        try{
+            Scene scene=new Scene(fxmlLoader.load(),320,240);
+            stage.setTitle("Configuración de parámetros");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
