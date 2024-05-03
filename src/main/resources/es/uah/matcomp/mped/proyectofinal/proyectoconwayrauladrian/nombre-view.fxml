@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.NombreController">>
+   <children>
+       <TextField alignment="TOP_LEFT" promptText="Escribe tu nombre jugador..." xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+         <font>
+            <Font name="Baskerville Old Face" size="19.0" />
+         </font></TextField>
+      <Button mnemonicParsing="false" onAction="#onSiguientebuttonClick" text="Siguiente" textAlignment="CENTER" />
+   </children>
+</VBox>
