@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -22,19 +23,17 @@ public class HelloController implements Initializable {
     private Label welcomeText;
     private Stage scene;
     public Button volverButton;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
+    public Button nuevaPartidaButton;
+    public Button salirButton;
 
     @FXML
     protected void onMiBotonNuevaPartidaButtonClick() {
+        Stage stageAntiguo= (Stage) nuevaPartidaButton.getScene().getWindow();
+        stageAntiguo.close();
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nombre.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
             stage.setTitle("Nombre");
             stage.setScene(scene);
             stage.show();
@@ -42,19 +41,9 @@ public class HelloController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    protected void onSiguienteButtonClick() {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("configuracion.fxml"));
-        try {
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-            stage.setTitle("Configuración de parámetros");
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void onSalirButtonClick(){
+        Stage escenario= (Stage) salirButton.getScene().getWindow();
+        escenario.close();
     }
 
     public void onCreditosButtonClick() {
@@ -71,8 +60,9 @@ public class HelloController implements Initializable {
         }
 
     }
-    public void onVolverButtonClick(){
-        Stage stage=(Stage) volverButton.getScene().getWindow();
+
+    public void onVolverButtonClick() {
+        Stage stage = (Stage) volverButton.getScene().getWindow();
         stage.close();
     }
 
