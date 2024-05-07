@@ -1,23 +1,17 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.cell.CheckBoxTreeTableCell;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class PrincipalController implements Initializable {
 
     @FXML
     private Label welcomeText;
@@ -31,7 +25,7 @@ public class HelloController implements Initializable {
         Stage stageAntiguo= (Stage) nuevaPartidaButton.getScene().getWindow();
         stageAntiguo.close();
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("nombre.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("nombre.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 750, 500);
             stage.setTitle("Nombre");
@@ -48,7 +42,7 @@ public class HelloController implements Initializable {
 
     public void onCreditosButtonClick() {
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("creditos.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("creditos.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
             stage.setTitle("Créditos");

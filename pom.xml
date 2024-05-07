@@ -76,7 +76,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian/es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.HelloApplication</mainClass>
+              <mainClass>es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian/es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
