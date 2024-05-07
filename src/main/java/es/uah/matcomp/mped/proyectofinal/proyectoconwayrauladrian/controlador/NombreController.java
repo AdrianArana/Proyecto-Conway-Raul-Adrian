@@ -1,5 +1,7 @@
-package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
+package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.NombreGuardado;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +27,7 @@ public class NombreController implements Initializable {
         Stage stageAnterior = (Stage) continuarButton.getScene().getWindow();
         stageAnterior.close();
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("configuracion.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
             stage.setTitle("Configuración de parámetros");

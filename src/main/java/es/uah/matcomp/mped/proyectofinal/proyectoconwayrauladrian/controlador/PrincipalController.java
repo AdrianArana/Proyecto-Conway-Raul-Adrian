@@ -1,5 +1,6 @@
-package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
+package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
