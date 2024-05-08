@@ -35,8 +35,17 @@ public class ConfiguracionController implements Initializable {
         parametrosIndividuo.rollback();
     }
 
-    @FXML protected void onBotonCerrarClick(){
+    @FXML
+    protected void onBotonCerrarClick(){
         parametrosIndividuo.close();
+    }
+    public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados) {
+        this.parametrosIndividuo = parametrosIndividuoDados;
+        this.updateGUIwithModel();
+    }
+
+    public void setStage(Stage escenaDada){
+        this.escenaParametros = escenaDada;
     }
 
 }

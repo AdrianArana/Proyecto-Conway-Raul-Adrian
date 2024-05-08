@@ -4,7 +4,7 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 
 public class Biblioteca extends Entorno{
     public void accionBiblioteca(Individuo individuo) {
-        double probabilidadAnterior = individuo.getProbabilidadClonacion();
+        int probabilidadAnterior = individuo.getProbabilidadClonacion();
         if (probabilidadAnterior + 20 <= 100) {
             individuo.setProbabilidadReproduccion(probabilidadAnterior + 20);
         } else {

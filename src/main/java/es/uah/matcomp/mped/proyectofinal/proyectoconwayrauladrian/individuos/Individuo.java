@@ -50,7 +50,7 @@ public class Individuo extends ParametrosIndividuo {
 
     private int turnoGeneracion;
 
-    public Individuo(int turnosVidaRestantes, double probabilidadMuerte, double probabilidadClonacion, double probabilidadReproduccion, int coordenadaX, int coordenadaY, int id, int tipo, int turnoGeneracion) {
+    public Individuo(int turnosVidaRestantes, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion, int coordenadaX, int coordenadaY, int id, int tipo, int turnoGeneracion) {
         super(turnosVidaRestantes, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion);
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;

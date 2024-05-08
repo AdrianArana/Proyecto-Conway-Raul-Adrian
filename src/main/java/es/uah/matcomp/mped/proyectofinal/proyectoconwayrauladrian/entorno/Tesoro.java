@@ -4,12 +4,12 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 
 public class Tesoro extends Entorno{
     public void accionTesoro(Individuo individuo) {
-        double probabilidadAnterior=individuo.getProbabilidadReproduccion();
-        if (probabilidadAnterior+0.10 <=1) {
-            individuo.setProbabilidadReproduccion(probabilidadAnterior + 0.10);
+        int probabilidadAnterior=individuo.getProbabilidadReproduccion();
+        if (probabilidadAnterior+10 <=100) {
+            individuo.setProbabilidadReproduccion(probabilidadAnterior + 10);
 
         } else{
-            individuo.setProbabilidadReproduccion(1);
+            individuo.setProbabilidadReproduccion(100);
         }
     }
 }
