@@ -3,6 +3,9 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 import javafx.beans.property.*;
 
 public class ParametrosIndividuoModelProperties {
+
+
+
     protected ParametrosIndividuo valoresOriginales;
 
     private IntegerProperty turnosVidaRestantes = new SimpleIntegerProperty();

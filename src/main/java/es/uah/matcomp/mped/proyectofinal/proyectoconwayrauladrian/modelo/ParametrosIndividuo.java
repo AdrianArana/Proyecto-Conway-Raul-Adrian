@@ -6,6 +6,7 @@ public class ParametrosIndividuo {
     private int probabilidadClonacion;
     private int probabilidadReproduccion;
 
+
     public ParametrosIndividuo(int turnosVidaRestantes, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
         this.turnosVidaRestantes = turnosVidaRestantes;
         this.probabilidadMuerte = probabilidadMuerte;
