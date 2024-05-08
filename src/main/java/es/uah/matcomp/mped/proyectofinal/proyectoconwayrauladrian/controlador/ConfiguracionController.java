@@ -37,7 +37,7 @@ public class ConfiguracionController implements Initializable {
 
     @FXML
     protected void onBotonCerrarClick(){
-        parametrosIndividuo.close();
+        escenaParametros.close();
     }
     public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados) {
         this.parametrosIndividuo = parametrosIndividuoDados;
