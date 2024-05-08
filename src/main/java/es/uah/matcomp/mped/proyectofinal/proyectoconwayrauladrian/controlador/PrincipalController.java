@@ -52,7 +52,7 @@ public class PrincipalController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("creditos.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
             stage.setTitle("Créditos");
             stage.setScene(scene);
             stage.show();

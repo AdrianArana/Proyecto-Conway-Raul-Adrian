@@ -2,10 +2,12 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.PrincipalController">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.PrincipalController">
    <children>
-      <TextArea layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="211.0" promptText="Progrdamación: Raúl Muñoz Yélamos y Adrián arana Peña.            Estructuras de datos empleadas: " />
-      <Button fx:id="volverButton" layoutX="37.0" layoutY="341.0" mnemonicParsing="false" onAction="#onVolverButtonClick" text="Volver" />
+      <Button fx:id="volverButton" layoutX="14.0" layoutY="265.0" mnemonicParsing="false" onAction="#onVolverButtonClick" text="Volver" />
+      <Text layoutX="190.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Juego realizado por: Raul Muñoz Yélamos  Adrian Arana Peña" wrappingWidth="120.13673400878906" />
+      <Text layoutX="115.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.0" />
    </children>
 </AnchorPane>
