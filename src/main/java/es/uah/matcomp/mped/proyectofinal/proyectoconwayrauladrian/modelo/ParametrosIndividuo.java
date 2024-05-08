@@ -2,11 +2,11 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
 public class ParametrosIndividuo {
     private int turnosVidaRestantes;
-    private double probabilidadMuerte;
-    private double probabilidadClonacion;
-    private double probabilidadReproduccion;
+    private int probabilidadMuerte;
+    private int probabilidadClonacion;
+    private int probabilidadReproduccion;
 
-    public ParametrosIndividuo(int turnosVidaRestantes, double probabilidadMuerte, double probabilidadClonacion, double probabilidadReproduccion) {
+    public ParametrosIndividuo(int turnosVidaRestantes, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
         this.turnosVidaRestantes = turnosVidaRestantes;
         this.probabilidadMuerte = probabilidadMuerte;
         this.probabilidadClonacion = probabilidadClonacion;
@@ -21,27 +21,27 @@ public class ParametrosIndividuo {
         this.turnosVidaRestantes = turnosVidaRestantes;
     }
 
-    public double getProbabilidadMuerte() {
+    public int getProbabilidadMuerte() {
         return probabilidadMuerte;
     }
 
-    public void setProbabilidadMuerte(double probabilidadMuerte) {
+    public void setProbabilidadMuerte(int probabilidadMuerte) {
         this.probabilidadMuerte = probabilidadMuerte;
     }
 
-    public double getProbabilidadClonacion() {
+    public int getProbabilidadClonacion() {
         return probabilidadClonacion;
     }
 
-    public void setProbabilidadClonacion(double probabilidadClonacion) {
+    public void setProbabilidadClonacion(int probabilidadClonacion) {
         this.probabilidadClonacion = probabilidadClonacion;
     }
 
-    public double getProbabilidadReproduccion() {
+    public int getProbabilidadReproduccion() {
         return probabilidadReproduccion;
     }
 
-    public void setProbabilidadReproduccion(double probabilidadReproduccion) {
+    public void setProbabilidadReproduccion(int probabilidadReproduccion) {
         this.probabilidadReproduccion = probabilidadReproduccion;
     }
 }

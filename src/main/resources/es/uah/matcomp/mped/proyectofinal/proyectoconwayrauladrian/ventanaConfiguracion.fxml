@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.ConfiguracionController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.ConfiguracionController">
    <cursor>
       <Cursor fx:constant="CROSSHAIR" />
    </cursor>
    <children>
-      <TabPane layoutX="200.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="200.0" layoutY="27.0" prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Individuos">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="300.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <Slider layoutX="14.0" layoutY="28.0" />
-                        <Slider layoutX="14.0" layoutY="78.0" />
-                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parametro  1" />
+                        <Slider fx:id="sliderTurnosDeVidaRestantes" layoutX="14.0" layoutY="28.0" />
+                        <Slider fx:id="sliderProbabilidadMuerte" layoutX="14.0" layoutY="64.0" />
+                        <Text layoutX="147.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
+                        <Slider fx:id="sliderProbabilidadClonacion" layoutX="14.0" layoutY="107.0" />
+                        <Slider fx:id="sliderProbabilidadReproduccion" layoutX="14.0" layoutY="146.0" />
+                        <Text layoutX="147.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
+                        <Text layoutX="147.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="clonac" wrappingWidth="212.744140625" />
+                        <Text layoutX="147.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reprod" wrappingWidth="212.744140625" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -32,7 +38,7 @@
           </Tab>
           <Tab text="Recursos">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="400.0" />
             </content>
           </Tab>
         </tabs>

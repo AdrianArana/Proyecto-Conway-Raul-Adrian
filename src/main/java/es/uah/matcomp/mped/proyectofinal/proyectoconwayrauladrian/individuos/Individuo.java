@@ -6,6 +6,15 @@ public class Individuo extends ParametrosIndividuo {
     private int coordenadaX;
     private int coordenadaY;
     private int id;
+    private int tipo;
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
 
     public int getCoordenadaX() {
         return coordenadaX;
@@ -41,11 +50,12 @@ public class Individuo extends ParametrosIndividuo {
 
     private int turnoGeneracion;
 
-    public Individuo(int turnosVidaRestantes, double probabilidadMuerte, double probabilidadClonacion, double probabilidadReproduccion, int id, int coordenadaX, int coordenadaY, int turnoGeneracion) {
+    public Individuo(int turnosVidaRestantes, double probabilidadMuerte, double probabilidadClonacion, double probabilidadReproduccion, int coordenadaX, int coordenadaY, int id, int tipo, int turnoGeneracion) {
         super(turnosVidaRestantes, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion);
-        this.id = id;
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+        this.id = id;
+        this.tipo = tipo;
         this.turnoGeneracion = turnoGeneracion;
     }
 }
