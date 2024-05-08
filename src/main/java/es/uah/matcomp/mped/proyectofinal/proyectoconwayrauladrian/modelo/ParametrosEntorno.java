@@ -19,7 +19,6 @@ public class ParametrosEntorno {
         this.probabilidadBiblioteca = probabilidadBiblioteca;
         this.probabilidadPozo = probabilidadPozo;
     }
-
     public int getTiempoHastaDesaparicion() {
         return tiempoHastaDesaparicion;
     }
