@@ -8,6 +8,8 @@ public class Individuo extends ParametrosIndividuo {
     private int id;
     private int tipo;
 
+
+
     public int getTipo() {
         return tipo;
     }

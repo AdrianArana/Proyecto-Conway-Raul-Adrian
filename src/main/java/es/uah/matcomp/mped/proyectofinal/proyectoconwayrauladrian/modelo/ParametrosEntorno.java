@@ -2,7 +2,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
 public class ParametrosEntorno {
     //Esta clase únicamente va a almacenar las propiedades de partida elegidas para cada recurso;
-    private int tiempoHastaDesaparicion;
+    private int tiempoHastaDesaparicion; //todo //porque se llaman distinto tiempohastadesaparicion y tiempoAparicion
     private double probabilidadAgua;
     private double probabilidadComida;
     private double probabilidadMontaña;
@@ -74,4 +74,6 @@ public class ParametrosEntorno {
     public void setProbabilidadPozo(double probabilidadPozo) {
         this.probabilidadPozo = probabilidadPozo;
     }
+
+
 }
