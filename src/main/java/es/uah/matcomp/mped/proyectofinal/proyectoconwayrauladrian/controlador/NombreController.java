@@ -29,7 +29,7 @@ public class NombreController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
             stage.setTitle("Configuración de parámetros");
             stage.setScene(scene);
             stage.show();

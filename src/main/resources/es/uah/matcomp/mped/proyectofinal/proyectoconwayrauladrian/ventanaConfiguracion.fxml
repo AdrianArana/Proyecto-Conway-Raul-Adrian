@@ -22,15 +22,15 @@
                      <children>
                         <Slider fx:id="sliderTurnosDeVidaRestantes" layoutX="14.0" layoutY="28.0" />
                         <Slider fx:id="sliderProbabilidadMuerte" layoutX="14.0" layoutY="64.0" />
-                        <Text layoutX="147.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
+                        <Text layoutX="154.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
                         <Slider fx:id="sliderProbabilidadClonacion" layoutX="14.0" layoutY="107.0" />
                         <Slider fx:id="sliderProbabilidadReproduccion" layoutX="14.0" layoutY="146.0" />
-                        <Text layoutX="147.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
-                        <Text layoutX="147.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="clonac" wrappingWidth="212.744140625" />
-                        <Text layoutX="147.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reprod" wrappingWidth="212.744140625" />
-                        <Button layoutX="176.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
-                        <Button layoutX="117.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
-                        <Button layoutX="68.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
+                        <Text layoutX="154.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
+                        <Text layoutX="154.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad clonacion" wrappingWidth="212.744140625" />
+                        <Text layoutX="154.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad de reproduccion " wrappingWidth="212.744140625" />
+                        <Button fx:id="reiniciarButton" layoutX="176.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
+                        <Button fx:id="guardarButton" layoutX="117.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
+                        <Button fx:id="cerrarButton" layoutX="68.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

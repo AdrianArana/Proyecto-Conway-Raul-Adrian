@@ -3,6 +3,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
@@ -11,6 +12,10 @@ import java.util.ResourceBundle;
 
 public class ConfiguracionController implements Initializable {
     @FXML
+    public Button reiniciarButton;
+    public Button guardarButton;
+    public Button cerrarButton;
+
     private Slider sliderTurnosDeVidaRestantes;
     private Slider sliderProbabilidadDeMuerte;
     private Slider sliderProbabilidadDeClonacion;
