@@ -1,12 +1,17 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -20,6 +25,7 @@ public class PrincipalController implements Initializable {
     public Button volverButton;
     public Button nuevaPartidaButton;
     public Button salirButton;
+
 
     @FXML
     protected void onMiBotonNuevaPartidaButtonClick() {
@@ -36,6 +42,7 @@ public class PrincipalController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void onSalirButtonClick(){
         Stage escenario= (Stage) salirButton.getScene().getWindow();
         escenario.close();
@@ -63,7 +70,7 @@ public class PrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.print("Inicialización en ejecución del controlador\n");
     }
 
 }

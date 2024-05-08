@@ -3,7 +3,6 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 import javafx.beans.property.*;
 
 public class ParametrosIndividuoModelProperties {
-    //Modelo de datos original
     protected ParametrosIndividuo valoresOriginales;
 
     private IntegerProperty turnosVidaRestantes = new SimpleIntegerProperty();
@@ -17,22 +16,21 @@ public class ParametrosIndividuoModelProperties {
     }
 
     public void commit(){
-        valoresOriginales.setProbabilidadClonacion(turnosVidaRestantes.get());
-        valoresOriginales.setProbabilidadReproduccion(probabilidadMuerte.get());
-        valoresOriginales.setProbabilidadMuerte(probabilidadClonacion.get());
-        valoresOriginales.setTurnosVidaRestantes(probabilidadReproduccion.get());
+        valoresOriginales.setTurnosVidaRestantes(turnosVidaRestantes.get());
+        valoresOriginales.setProbabilidadMuerte(probabilidadMuerte.get());
+        valoresOriginales.setProbabilidadClonacion(probabilidadClonacion.get());
+        valoresOriginales.setProbabilidadReproduccion(probabilidadReproduccion.get());
+
     }
 
     public void rollback(){
         turnosVidaRestantes.set(valoresOriginales.getTurnosVidaRestantes());
         probabilidadMuerte.set(valoresOriginales.getProbabilidadMuerte());
-        probabilidadClonacion.set(valoresOriginales.getProbabilidadMuerte());
+        probabilidadClonacion.set(valoresOriginales.getProbabilidadClonacion());
         probabilidadReproduccion.set(valoresOriginales.getProbabilidadReproduccion());
     }
 
-    public ParametrosIndividuo getOriginal(){
-        return valoresOriginales;
-    }
+    public ParametrosIndividuo getOriginal(){return valoresOriginales;}
 
     public void setOriginal(ParametrosIndividuo original){
         this.valoresOriginales = original;
