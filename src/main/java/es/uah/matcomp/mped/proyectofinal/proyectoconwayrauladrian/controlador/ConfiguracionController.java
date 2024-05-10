@@ -1,4 +1,6 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
+
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Tablero;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
@@ -7,6 +9,7 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.Paramet
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.transform.MatrixType;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -63,7 +70,8 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Button botonIniciarPartida;
 
-
+    int cantidadCasillasX = 20;
+    int cantidadCasillasY = 20;
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaProbabilidadMuerte = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaprobabilidadClonacion = new SimpleIntegerProperty(0);
@@ -88,7 +96,6 @@ public class ConfiguracionController implements Initializable {
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosEntornoModelProperties parametrosEntorno;
     private Stage escenaParametros;
-
 
 
 
@@ -156,7 +163,6 @@ public class ConfiguracionController implements Initializable {
             this.updateGUIwithModel();
         }
 
-
     }
 
     @FXML
@@ -201,20 +207,19 @@ public class ConfiguracionController implements Initializable {
         this.escenaParametros = escenaDada;
     }
 
-    public void onIniciarPartidaButtonClick(ActionEvent actionEvent) {
+    public void onIniciarPartidaButtonClick() {
+        //Cerramos la ventana anterior
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
             stage.setTitle("Juego - La vida de Conway");
             stage.setScene(scene);
-            Tablero tablero = new Tablero(20,10);
-            tablero.mostrarGridpane(stage);
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 }
