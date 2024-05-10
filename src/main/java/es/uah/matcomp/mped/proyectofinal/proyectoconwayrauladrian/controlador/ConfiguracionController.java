@@ -93,6 +93,7 @@ public class ConfiguracionController implements Initializable {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 }
