@@ -2,16 +2,16 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
 public class ParametrosEntorno {
     //Esta clase únicamente va a almacenar las propiedades de partida elegidas para cada recurso;
-    private int tiempoHastaDesaparicion; //todo //porque se llaman distinto tiempohastadesaparicion y tiempoAparicion
-    private double probabilidadAgua;
-    private double probabilidadComida;
-    private double probabilidadMontaña;
-    private double probabilidadTesoro;
-    private double probabilidadBiblioteca;
-    private double probabilidadPozo;
 
-    public ParametrosEntorno(int tiempoHastaDesaparicion, double probabilidadAgua, double probabilidadComida, double probabilidadMontaña, double probabilidadTesoro, double probabilidadBiblioteca, double probabilidadPozo) {
-        this.tiempoHastaDesaparicion = tiempoHastaDesaparicion;
+    private int probabilidadAgua;
+    private int probabilidadComida;
+    private int probabilidadMontaña;
+    private int probabilidadTesoro;
+    private int probabilidadBiblioteca;
+    private int probabilidadPozo;
+
+    public ParametrosEntorno( int probabilidadAgua, int probabilidadComida, int probabilidadMontaña, int probabilidadTesoro, int probabilidadBiblioteca, int probabilidadPozo) {
+
         this.probabilidadAgua = probabilidadAgua;
         this.probabilidadComida = probabilidadComida;
         this.probabilidadMontaña = probabilidadMontaña;
@@ -19,61 +19,53 @@ public class ParametrosEntorno {
         this.probabilidadBiblioteca = probabilidadBiblioteca;
         this.probabilidadPozo = probabilidadPozo;
     }
-    public int getTiempoHastaDesaparicion() {
-        return tiempoHastaDesaparicion;
-    }
 
-    public void setTiempoHastaDesaparicion(int tiempoHastaDesaparicion) {
-        this.tiempoHastaDesaparicion = tiempoHastaDesaparicion;
-    }
 
-    public double getProbabilidadAgua() {
+    public int getProbabilidadAgua() {
         return probabilidadAgua;
     }
 
-    public void setProbabilidadAgua(double probabilidadAgua) {
+    public void setProbabilidadAgua(int probabilidadAgua) {
         this.probabilidadAgua = probabilidadAgua;
     }
 
-    public double getProbabilidadComida() {
+    public int getProbabilidadComida() {
         return probabilidadComida;
     }
 
-    public void setProbabilidadComida(double probabilidadComida) {
+    public void setProbabilidadComida(int probabilidadComida) {
         this.probabilidadComida = probabilidadComida;
     }
 
-    public double getProbabilidadMontaña() {
+    public int getProbabilidadMontaña() {
         return probabilidadMontaña;
     }
 
-    public void setProbabilidadMontaña(double probabilidadMontaña) {
+    public void setProbabilidadMontaña(int probabilidadMontaña) {
         this.probabilidadMontaña = probabilidadMontaña;
     }
 
-    public double getProbabilidadTesoro() {
+    public int getProbabilidadTesoro() {
         return probabilidadTesoro;
     }
 
-    public void setProbabilidadTesoro(double probabilidadTesoro) {
+    public void setProbabilidadTesoro(int probabilidadTesoro) {
         this.probabilidadTesoro = probabilidadTesoro;
     }
 
-    public double getProbabilidadBiblioteca() {
+    public int getProbabilidadBiblioteca() {
         return probabilidadBiblioteca;
     }
 
-    public void setProbabilidadBiblioteca(double probabilidadBiblioteca) {
+    public void setProbabilidadBiblioteca(int probabilidadBiblioteca) {
         this.probabilidadBiblioteca = probabilidadBiblioteca;
     }
 
-    public double getProbabilidadPozo() {
+    public int getProbabilidadPozo() {
         return probabilidadPozo;
     }
 
-    public void setProbabilidadPozo(double probabilidadPozo) {
+    public void setProbabilidadPozo(int probabilidadPozo) {
         this.probabilidadPozo = probabilidadPozo;
     }
-
-
 }

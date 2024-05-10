@@ -1,9 +1,7 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.NombreGuardado;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +24,9 @@ public class NombreController implements Initializable {
     private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
     private ParametrosIndividuoModelProperties modeloParaGUICompartido = new ParametrosIndividuoModelProperties(parametrosData);
 
+    private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20);
+
+    private ParametrosEntornoModelProperties modeloGuiCompartido2 = new ParametrosEntornoModelProperties(parametrosDataEntorno);
 
     @FXML
     protected void onSiguienteButtonClick() {
@@ -41,8 +42,10 @@ public class NombreController implements Initializable {
             stage.setScene(scene);
             //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
             ConfiguracionController configuracionController = fxmlLoader.getController();
-            configuracionController.loadUserData(this.modeloParaGUICompartido);
+            configuracionController.loadUserData(modeloParaGUICompartido,modeloGuiCompartido2);
+
             configuracionController.setStage(stage);
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

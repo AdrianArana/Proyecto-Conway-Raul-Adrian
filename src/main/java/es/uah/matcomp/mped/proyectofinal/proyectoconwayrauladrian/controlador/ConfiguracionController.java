@@ -2,7 +2,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Tablero;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -14,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -31,6 +29,8 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Label laborValorSliderProbabilidadReproduccion;
     @FXML
+    private Label labelAgua; /////////////////////
+    @FXML
     private Slider sliderTurnosDeVidaRestantes;
     @FXML
     private Slider sliderProbabilidadMuerte;
@@ -39,6 +39,8 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Slider sliderProbabilidadReproduccion;
     @FXML
+    private Slider sliderAgua; ///////////////////
+    @FXML
     private Button botonIniciarPartida;
 
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
@@ -46,15 +48,26 @@ public class ConfiguracionController implements Initializable {
     protected IntegerProperty medidaprobabilidadClonacion = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaprobabilidadReproduccion = new SimpleIntegerProperty(0);
 
+    protected IntegerProperty medidaAgua = new SimpleIntegerProperty(0);
+
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
+    private ParametrosEntornoModelProperties parametrosEntorno;
     private Stage escenaParametros;
+
+
+
 
     protected void updateGUIwithModel() {
         sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(parametrosIndividuo.turnosVidaRestantesProperty());
         sliderProbabilidadMuerte.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadMuerteProperty());
         sliderProbabilidadClonacion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadClonacionProperty());
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadReproduccionProperty());
+
+
+        sliderAgua.valueProperty().bindBidirectional(parametrosEntorno.probabilidadAgua());
+
+
     }
 
     //hacerlo de los 4
@@ -73,9 +86,13 @@ public class ConfiguracionController implements Initializable {
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(medidaprobabilidadReproduccion);
         laborValorSliderProbabilidadReproduccion.textProperty().bind(medidaprobabilidadReproduccion.asString());
 
-        if (parametrosIndividuo != null) {
+        sliderAgua.valueProperty().bindBidirectional(medidaAgua);
+        labelAgua.textProperty().bind(medidaAgua.asString());
+
+        if (parametrosIndividuo != null && parametrosEntorno != null) {
             this.updateGUIwithModel();
         }
+
 
     }
 
@@ -90,14 +107,32 @@ public class ConfiguracionController implements Initializable {
     }
 
     @FXML
+    protected void onBotonReiniciarEntornoClick() {
+        parametrosEntorno.rollback();
+    }
+    @FXML
+
+    protected void onBotonGuardarEntornoClick() {
+        parametrosEntorno.commit();
+    }
+
+    @FXML
+    protected void onBotonCerrarEntornoClick() {
+        escenaParametros.close();
+    }
+
+
+    @FXML
     protected void onBotonCerrarClick() {
         escenaParametros.close();
     }
 
-    public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados) {
+    public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados,ParametrosEntornoModelProperties parametrosEntorno) {
         this.parametrosIndividuo = parametrosIndividuoDados;
+        this.parametrosEntorno = parametrosEntorno;
         this.updateGUIwithModel();
     }
+
 
     public void setStage(Stage escenaDada) {
         this.escenaParametros = escenaDada;

@@ -32,6 +32,9 @@
                         <Label fx:id="labelValorSliderProbabilidadMuerte" layoutX="258.0" layoutY="138.0" text="2" />
                         <Label fx:id="laberValorSliderProbabilidadClonacion" layoutX="257.0" layoutY="228.0" text="3" />
                         <Label fx:id="laborValorSliderProbabilidadReproduccion" layoutX="267.0" layoutY="314.0" text="4" />
+                        <Button layoutX="309.0" layoutY="213.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
+                        <Button layoutX="309.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
+                        <Button layoutX="310.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -41,14 +44,18 @@
           </Tab>
           <Tab text="Recursos">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="400.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <Slider fx:id="sliderAgua" layoutX="7.0" layoutY="48.0" />
+                        <Label fx:id="labelAgua" layoutX="147.0" layoutY="46.0" text="Agua" />
+                        <Button layoutX="299.0" layoutY="180.0" mnemonicParsing="false" onAction="#onBotonReiniciarEntornoClick" text="Reiniciar" />
+                        <Button layoutX="299.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonGuardarEntornoClick" text="Guardar" />
+                        <Button layoutX="299.0" layoutY="154.0" mnemonicParsing="false" onAction="#onBotonCerrarEntornoClick" text="Cerrar" />
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
       <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="660.0" layoutY="449.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="17.0" prefWidth="110.0" text="INICIAR PARTIDA" textAlignment="CENTER" />
-      <Button layoutX="648.0" layoutY="235.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
-      <Button layoutX="646.0" layoutY="273.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
-      <Button layoutX="658.0" layoutY="313.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
    </children>
 </AnchorPane>
