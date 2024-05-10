@@ -1,4 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Tablero;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
@@ -13,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -32,7 +35,6 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Button botonIniciarPartida;
 
-    protected IntegerProperty //todo (nombre varianble) = new SimpleIntegerProperty(0);
     //todo
 
     //Creamos un modelo de la clase observable
@@ -44,14 +46,16 @@ public class ConfiguracionController implements Initializable {
         sliderProbabilidadMuerte.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadMuerteProperty());
         sliderProbabilidadClonacion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadClonacionProperty());
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadReproduccionProperty());
+
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.print("Inicialización en ejecución del controlador de parámetros\n");
-        sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medida);
+        //sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medida);
         //todo sliderProbabilidadMuerte.valueProperty().bindBidirectional(medidaMuerte);
-        labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medida.asString());
+        //labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medida.asString());
         if (parametrosIndividuo != null) {
             this.updateGUIwithModel();
         }
@@ -81,7 +85,6 @@ public class ConfiguracionController implements Initializable {
         this.escenaParametros = escenaDada;
     }
 
-
     public void onIniciarPartidaButtonClick(ActionEvent actionEvent) {
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();
@@ -91,8 +94,8 @@ public class ConfiguracionController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load(), 750, 500);
             stage.setTitle("Juego - La vida de Conway");
             stage.setScene(scene);
-            //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
-            stage.show();
+            Tablero tablero = new Tablero(20,10);
+            tablero.mostrarGridpane(stage);
         } catch (Exception e) {
             e.printStackTrace();
 
