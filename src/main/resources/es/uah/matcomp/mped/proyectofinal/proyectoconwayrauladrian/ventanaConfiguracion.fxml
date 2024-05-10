@@ -20,18 +20,18 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <Slider fx:id="sliderTurnosDeVidaRestantes" layoutX="14.0" layoutY="28.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="31.0" prefWidth="234.0" showTickMarks="true" />
-                        <Text layoutX="269.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
-                        <Slider fx:id="sliderProbabilidadMuerte" layoutX="14.0" layoutY="64.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
-                        <Slider fx:id="sliderProbabilidadClonacion" layoutX="14.0" layoutY="107.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="232.0" showTickMarks="true" />
-                        <Slider fx:id="sliderProbabilidadReproduccion" layoutX="14.0" layoutY="146.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
-                        <Text layoutX="253.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
-                        <Text layoutX="280.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="clonac" wrappingWidth="212.744140625" />
-                        <Text layoutX="300.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reprod" wrappingWidth="212.744140625" />
-                        <Button layoutX="169.0" layoutY="282.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
-                        <Button layoutX="278.0" layoutY="282.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
-                        <Button layoutX="14.0" layoutY="282.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
-                        <Label fx:id="labelValorSliderTurnosDeVidaRestantes" layoutX="140.0" layoutY="274.0" text="--" />
+                        <Slider fx:id="sliderTurnosDeVidaRestantes" layoutX="8.0" layoutY="27.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="31.0" prefWidth="234.0" showTickMarks="true" />
+                        <Text layoutX="9.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
+                        <Slider fx:id="sliderProbabilidadMuerte" layoutX="8.0" layoutY="138.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
+                        <Slider fx:id="sliderProbabilidadClonacion" layoutX="9.0" layoutY="225.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="232.0" showTickMarks="true" />
+                        <Slider fx:id="sliderProbabilidadReproduccion" layoutX="14.0" layoutY="313.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
+                        <Text layoutX="9.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
+                        <Text layoutX="9.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Clonación" wrappingWidth="212.744140625" />
+                        <Text layoutX="9.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Reproduccion" wrappingWidth="129.744140625" />
+                        <Label fx:id="labelValorSliderTurnosDeVidaRestantes" layoutX="261.0" layoutY="32.0" prefHeight="21.0" prefWidth="13.0" text="1" />
+                        <Label fx:id="labelValorSliderProbabilidadMuerte" layoutX="258.0" layoutY="138.0" text="2" />
+                        <Label fx:id="laberValorSliderProbabilidadClonacion" layoutX="257.0" layoutY="228.0" text="3" />
+                        <Label fx:id="laborValorSliderProbabilidadReproduccion" layoutX="267.0" layoutY="314.0" text="4" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -47,5 +47,8 @@
         </tabs>
       </TabPane>
       <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="660.0" layoutY="449.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="17.0" prefWidth="110.0" text="INICIAR PARTIDA" textAlignment="CENTER" />
+      <Button layoutX="648.0" layoutY="235.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
+      <Button layoutX="646.0" layoutY="273.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
+      <Button layoutX="658.0" layoutY="313.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
    </children>
 </AnchorPane>

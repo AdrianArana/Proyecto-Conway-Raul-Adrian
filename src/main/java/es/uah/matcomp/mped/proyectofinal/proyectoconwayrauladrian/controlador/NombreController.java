@@ -23,7 +23,7 @@ public class NombreController implements Initializable {
     private TextField textFieldNombre;
 
     //Construimos un modelo para los datos compartidos con las clases ParametrosIndividuo y ParametrosIndividuoModelProperties
-    private ParametrosIndividuo parametrosData = new ParametrosIndividuo(7, 10, 10,30);
+    private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
     private ParametrosIndividuoModelProperties modeloParaGUICompartido = new ParametrosIndividuoModelProperties(parametrosData);
 
 
