@@ -4,6 +4,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Tablero;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillasModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.beans.property.IntegerProperty;
@@ -27,6 +29,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ConfiguracionController implements Initializable {
+    public Slider sliderCasillasX;
+    public Slider sliderCasillasY;
+    public Label labelValorSliderCasillasX;
+    public Label labelValorSliderCasillasY;
+
+
     @FXML
     private Label labelValorSliderTurnosDeVidaRestantes;
     @FXML
@@ -70,49 +78,53 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Button botonIniciarPartida;
 
-    int cantidadCasillasX = 20;
-    int cantidadCasillasY = 20;
+    //Individuo, variables observables para los parámetros de los individuos
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaProbabilidadMuerte = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaprobabilidadClonacion = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaprobabilidadReproduccion = new SimpleIntegerProperty(0);
 
-
+    //Entorno, variables observables para recursos
     protected IntegerProperty medidaAgua = new SimpleIntegerProperty(0);
-    protected IntegerProperty medidaBiblioteca= new SimpleIntegerProperty(0);
 
-    protected IntegerProperty medidaComida= new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaBiblioteca = new SimpleIntegerProperty(0);
 
-    protected IntegerProperty medidaMontaña= new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaComida = new SimpleIntegerProperty(0);
 
-    protected IntegerProperty medidaPozo= new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaMontaña = new SimpleIntegerProperty(0);
+
+    protected IntegerProperty medidaPozo = new SimpleIntegerProperty(0);
 
     protected IntegerProperty medidaTesoro = new SimpleIntegerProperty(0);
+    //Tablero, variables observables
+    protected IntegerProperty medidaCasillasX = new SimpleIntegerProperty(0);
 
-
+    protected IntegerProperty medidaCasillasY = new SimpleIntegerProperty(0);
 
 
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosEntornoModelProperties parametrosEntorno;
+    private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaParametros;
 
 
-
     protected void updateGUIwithModel() {
+        //Bindeamos los sliders del individuo
         sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(parametrosIndividuo.turnosVidaRestantesProperty());
         sliderProbabilidadMuerte.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadMuerteProperty());
         sliderProbabilidadClonacion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadClonacionProperty());
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadReproduccionProperty());
-
-
+        //Bindeamos los sliders de del entorno
         sliderAgua.valueProperty().bindBidirectional(parametrosEntorno.probabilidadAgua());
         sliderBiblioteca.valueProperty().bindBidirectional(parametrosEntorno.probabilidadBiblioteca());
         sliderComida.valueProperty().bindBidirectional(parametrosEntorno.probabilidadComida());
         sliderMontaña.valueProperty().bindBidirectional(parametrosEntorno.probabilidadMontaña());
         sliderPozo.valueProperty().bindBidirectional(parametrosEntorno.probabilidadPozo());
         sliderTesoro.valueProperty().bindBidirectional(parametrosEntorno.probabilidadTesoro());
-
+        //Bindeamos los sliders del tablero
+        sliderCasillasX.valueProperty().bindBidirectional(parametrosCasillas.x());
+        sliderCasillasY.valueProperty().bindBidirectional(parametrosCasillas.y());
 
 
     }
@@ -121,6 +133,7 @@ public class ConfiguracionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.print("Inicialización en ejecución del controlador de parámetros\n");
+        //Sliders de los parámetros del individuo tipo
         sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medidaTurnosDeVida);
         labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medidaTurnosDeVida.asString());
 
@@ -133,12 +146,12 @@ public class ConfiguracionController implements Initializable {
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(medidaprobabilidadReproduccion);
         laborValorSliderProbabilidadReproduccion.textProperty().bind(medidaprobabilidadReproduccion.asString());
 
+        //Sliders para los recursos del entorno
         sliderAgua.valueProperty().bindBidirectional(medidaAgua);
         labelAgua.textProperty().bind(medidaAgua.asString());
 
         sliderBiblioteca.valueProperty().bindBidirectional(medidaBiblioteca);
         labelBiblioteca.textProperty().bind(medidaBiblioteca.asString());
-
 
 
         sliderComida.valueProperty().bindBidirectional(medidaComida);
@@ -152,12 +165,15 @@ public class ConfiguracionController implements Initializable {
         labelPozo.textProperty().bind(medidaPozo.asString());
 
 
-
         sliderTesoro.valueProperty().bindBidirectional(medidaTesoro);
         labelTesoro.textProperty().bind(medidaTesoro.asString());
 
+        //Sliders de las casillas para el tablero, bindeamos las labels
+        sliderCasillasX.valueProperty().bindBidirectional(medidaCasillasX);
+        labelValorSliderCasillasX.textProperty().bind(medidaCasillasX.asString());
 
-
+        sliderCasillasY.valueProperty().bindBidirectional(medidaCasillasY);
+        labelValorSliderCasillasY.textProperty().bind(medidaCasillasY.asString());
 
         if (parametrosIndividuo != null && parametrosEntorno != null) {
             this.updateGUIwithModel();
@@ -179,10 +195,20 @@ public class ConfiguracionController implements Initializable {
     protected void onBotonReiniciarEntornoClick() {
         parametrosEntorno.rollback();
     }
+
+    @FXML
+    public void onBotonReiniciarCasillasClick() {
+        parametrosCasillas.rollback();
+    }
+
     @FXML
 
     protected void onBotonGuardarEntornoClick() {
         parametrosEntorno.commit();
+    }
+
+    public void onBotonGuardarCasillasClick() {
+        parametrosCasillas.commit();
     }
 
     @FXML
@@ -196,9 +222,10 @@ public class ConfiguracionController implements Initializable {
         escenaParametros.close();
     }
 
-    public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados,ParametrosEntornoModelProperties parametrosEntorno) {
+    public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
         this.parametrosIndividuo = parametrosIndividuoDados;
         this.parametrosEntorno = parametrosEntorno;
+        this.parametrosCasillas = parametrosCasillas;
         this.updateGUIwithModel();
     }
 
@@ -214,7 +241,7 @@ public class ConfiguracionController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+            Scene scene = new Scene(fxmlLoader.load(), parametrosCasillas.x().getValue().byteValue()*10, 500);
             stage.setTitle("Juego - La vida de Conway");
             stage.setScene(scene);
             stage.show();
@@ -222,4 +249,6 @@ public class ConfiguracionController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 }

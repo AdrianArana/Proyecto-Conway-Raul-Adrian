@@ -22,12 +22,13 @@ public class NombreController implements Initializable {
 
     //Construimos un modelo para los datos compartidos con las clases ParametrosIndividuo y ParametrosIndividuoModelProperties
     private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
-    private ParametrosIndividuoModelProperties modeloParaGUICompartido = new ParametrosIndividuoModelProperties(parametrosData);
+    private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo = new ParametrosIndividuoModelProperties(parametrosData);
 
     private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20);
+    private ParametrosEntornoModelProperties modeloGuiCompartidoEntorno = new ParametrosEntornoModelProperties(parametrosDataEntorno);
 
-    private ParametrosEntornoModelProperties modeloGuiCompartido2 = new ParametrosEntornoModelProperties(parametrosDataEntorno);
-
+    private ParametrosCasillas parametrosDataCasillas = new ParametrosCasillas(20,10);
+    private ParametrosCasillasModelProperties modeloGUICompartidoTablero = new ParametrosCasillasModelProperties(parametrosDataCasillas);
     @FXML
     protected void onSiguienteButtonClick() {
         nombreGuardado.setNombre(textFieldNombre.getText());
@@ -42,7 +43,7 @@ public class NombreController implements Initializable {
             stage.setScene(scene);
             //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
             ConfiguracionController configuracionController = fxmlLoader.getController();
-            configuracionController.loadUserData(modeloParaGUICompartido,modeloGuiCompartido2);
+            configuracionController.loadUserData(modeloParaGUICompartidoIndividuo,modeloGuiCompartidoEntorno,modeloGUICompartidoTablero);
 
             configuracionController.setStage(stage);
 

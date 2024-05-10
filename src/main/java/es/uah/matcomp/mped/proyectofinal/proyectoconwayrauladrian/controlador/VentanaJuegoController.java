@@ -21,8 +21,8 @@ public class VentanaJuegoController implements Initializable {
     @FXML
     public GridPane tableroFinal;
 
-    int cantidadCasillasX = 20;
-    int cantidadCasillasY = 20;
+    int cantidadCasillasX = 10;
+    int cantidadCasillasY = 10;//todo COMO HAGO PARA USAR LOS VALORES DEL CONFIRGURACIONCONTROLLER AQUI, Y ASI PARA TODO LOS MODELS
 
     private Casilla[][] hacerMatrtiz(int cantidadCasillasX, int cantidadCasillasY) {
         Tablero tablero = new Tablero(cantidadCasillasX, cantidadCasillasY);
@@ -37,11 +37,11 @@ public class VentanaJuegoController implements Initializable {
             for (int j = 0; j < cantidadCasillasY; j++) {
                 Casilla c = tableroMatriz[i][j];
                 Button celdaButton = new Button();
-                celdaButton.setMinSize((double) 800 / cantidadCasillasX, (double) 800 / cantidadCasillasY);
-                celdaButton.setMaxSize((double) 800 / cantidadCasillasX, (double) 800 / cantidadCasillasY);
-                celdaButton.setStyle("-fx-border-color: #ff0000; -fx-text-alignment: center;");
+                celdaButton.setMinSize((double) 400 / cantidadCasillasX, (double) 400 / cantidadCasillasY);
+                celdaButton.setMaxSize((double) 400 / cantidadCasillasX, (double) 400 / cantidadCasillasY);
+                celdaButton.setStyle("-fx-border-color: #3385fa; -fx-text-alignment: center;");
                 celdaButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    ;
+
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         Stage stage = new Stage();
@@ -50,6 +50,7 @@ public class VentanaJuegoController implements Initializable {
                         try {
                             Scene scene = new Scene(fxmlLoader.load(), 800, 800);
                             stage.setTitle("Propiedades de la celda ("+c.getCoordenadaX()+","+c.getCoordenadaY()+")");
+
                             stage.setScene(scene);
                             stage.show();
                         } catch (Exception e) {

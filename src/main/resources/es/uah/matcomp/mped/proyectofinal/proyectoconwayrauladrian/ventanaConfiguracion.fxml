@@ -70,6 +70,29 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Tablero">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="419.0">
+                     <children>
+                        <Slider fx:id="sliderCasillasX" layoutX="8.0" layoutY="27.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="31.0" prefWidth="234.0" showTickMarks="true" />
+                        <Text layoutX="9.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
+                        <Slider fx:id="sliderCasillasY" layoutX="8.0" layoutY="138.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
+                        <Text layoutX="9.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
+                        <Label fx:id="labelValorSliderCasillasX" layoutX="261.0" layoutY="32.0" prefHeight="21.0" prefWidth="13.0" text="1" />
+                        <Label fx:id="labelValorSliderCasillasY" layoutX="258.0" layoutY="138.0" text="2" />
+                        <Button layoutX="309.0" layoutY="213.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
+                        <Button layoutX="309.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBotonReiniciarCasillasClick" text="Reiniciar" />
+                        <Button layoutX="310.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBotonGuardarCasillasClick" text="Guardar" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="544.0" layoutY="427.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="31.0" prefWidth="112.0" text="INICIAR PARTIDA" />
