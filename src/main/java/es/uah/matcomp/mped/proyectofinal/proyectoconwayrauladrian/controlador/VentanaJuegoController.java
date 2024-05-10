@@ -49,7 +49,7 @@ public class VentanaJuegoController implements Initializable {
 
                         try {
                             Scene scene = new Scene(fxmlLoader.load(), 800, 800);
-                            stage.setTitle("Propiedades de la celda ("+")");
+                            stage.setTitle("Propiedades de la celda ("+c.getCoordenadaX()+","+c.getCoordenadaY()+")");
                             stage.setScene(scene);
                             stage.show();
                         } catch (Exception e) {
