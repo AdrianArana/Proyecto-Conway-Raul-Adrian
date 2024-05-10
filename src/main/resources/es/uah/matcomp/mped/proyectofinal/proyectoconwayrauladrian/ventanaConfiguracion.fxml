@@ -48,14 +48,30 @@
                      <children>
                         <Slider fx:id="sliderAgua" layoutX="7.0" layoutY="48.0" />
                         <Label fx:id="labelAgua" layoutX="147.0" layoutY="46.0" text="Agua" />
-                        <Button layoutX="299.0" layoutY="180.0" mnemonicParsing="false" onAction="#onBotonReiniciarEntornoClick" text="Reiniciar" />
-                        <Button layoutX="299.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBotonGuardarEntornoClick" text="Guardar" />
-                        <Button layoutX="299.0" layoutY="154.0" mnemonicParsing="false" onAction="#onBotonCerrarEntornoClick" text="Cerrar" />
+                        <Button layoutX="299.0" layoutY="171.0" mnemonicParsing="false" onAction="#onBotonReiniciarEntornoClick" text="Reiniciar" />
+                        <Button layoutX="300.0" layoutY="141.0" mnemonicParsing="false" onAction="#onBotonGuardarEntornoClick" text="Guardar" />
+                        <Button layoutX="299.0" layoutY="202.0" mnemonicParsing="false" onAction="#onBotonCerrarEntornoClick" text="Cerrar" />
+                        <Slider fx:id="sliderBiblioteca" layoutX="7.0" layoutY="92.0" />
+                        <Label fx:id="labelBiblioteca" layoutX="146.0" layoutY="90.0" text="Biblioteca" />
+                        <Slider fx:id="sliderComida" layoutX="7.0" layoutY="147.0" />
+                        <Label fx:id="labelComida" layoutX="147.0" layoutY="135.0" text="Comida" />
+                        <Slider fx:id="sliderMontaña" layoutX="7.0" layoutY="198.0" />
+                        <Label fx:id="labelMontaña" layoutX="145.0" layoutY="196.0" text="Montaña" />
+                        <Slider fx:id="sliderPozo" layoutX="7.0" layoutY="244.0" />
+                        <Label fx:id="labelPozo" layoutX="143.0" layoutY="243.0" text="Pozo" />
+                        <Slider fx:id="sliderTesoro" layoutY="297.0" />
+                        <Label fx:id="labelTesoro" layoutX="138.0" layoutY="296.0" text="Tesoro" />
+                        <Text layoutX="14.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Agua" />
+                        <Text layoutX="14.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Biblioteca" />
+                        <Text layoutX="14.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Comida" />
+                        <Text layoutX="14.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Montaña" wrappingWidth="172.00000000000003" />
+                        <Text layoutX="13.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Pozo" wrappingWidth="128.00000000000003" />
+                        <Text layoutX="10.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Tesoro" />
                      </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="660.0" layoutY="449.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="17.0" prefWidth="110.0" text="INICIAR PARTIDA" textAlignment="CENTER" />
+      <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="544.0" layoutY="427.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="31.0" prefWidth="112.0" text="INICIAR PARTIDA" />
    </children>
 </AnchorPane>

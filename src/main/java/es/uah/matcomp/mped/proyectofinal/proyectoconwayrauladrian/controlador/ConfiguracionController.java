@@ -29,7 +29,17 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Label laborValorSliderProbabilidadReproduccion;
     @FXML
-    private Label labelAgua; /////////////////////
+    private Label labelAgua;
+    @FXML
+    private Label labelBiblioteca;
+    @FXML
+    private Label labelComida;
+    @FXML
+    private Label labelMontaña;
+    @FXML
+    private Label labelPozo;
+    @FXML
+    private Label labelTesoro;
     @FXML
     private Slider sliderTurnosDeVidaRestantes;
     @FXML
@@ -39,16 +49,40 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Slider sliderProbabilidadReproduccion;
     @FXML
-    private Slider sliderAgua; ///////////////////
+    private Slider sliderAgua;
+    @FXML
+    private Slider sliderBiblioteca;
+    @FXML
+    private Slider sliderMontaña;
+    @FXML
+    private Slider sliderComida;
+    @FXML
+    private Slider sliderPozo;
+    @FXML
+    private Slider sliderTesoro;
     @FXML
     private Button botonIniciarPartida;
+
 
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaProbabilidadMuerte = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaprobabilidadClonacion = new SimpleIntegerProperty(0);
     protected IntegerProperty medidaprobabilidadReproduccion = new SimpleIntegerProperty(0);
 
+
     protected IntegerProperty medidaAgua = new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaBiblioteca= new SimpleIntegerProperty(0);
+
+    protected IntegerProperty medidaComida= new SimpleIntegerProperty(0);
+
+    protected IntegerProperty medidaMontaña= new SimpleIntegerProperty(0);
+
+    protected IntegerProperty medidaPozo= new SimpleIntegerProperty(0);
+
+    protected IntegerProperty medidaTesoro = new SimpleIntegerProperty(0);
+
+
+
 
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
@@ -66,11 +100,17 @@ public class ConfiguracionController implements Initializable {
 
 
         sliderAgua.valueProperty().bindBidirectional(parametrosEntorno.probabilidadAgua());
+        sliderBiblioteca.valueProperty().bindBidirectional(parametrosEntorno.probabilidadBiblioteca());
+        sliderComida.valueProperty().bindBidirectional(parametrosEntorno.probabilidadComida());
+        sliderMontaña.valueProperty().bindBidirectional(parametrosEntorno.probabilidadMontaña());
+        sliderPozo.valueProperty().bindBidirectional(parametrosEntorno.probabilidadPozo());
+        sliderTesoro.valueProperty().bindBidirectional(parametrosEntorno.probabilidadTesoro());
+
 
 
     }
 
-    //hacerlo de los 4
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.print("Inicialización en ejecución del controlador de parámetros\n");
@@ -88,6 +128,29 @@ public class ConfiguracionController implements Initializable {
 
         sliderAgua.valueProperty().bindBidirectional(medidaAgua);
         labelAgua.textProperty().bind(medidaAgua.asString());
+
+        sliderBiblioteca.valueProperty().bindBidirectional(medidaBiblioteca);
+        labelBiblioteca.textProperty().bind(medidaBiblioteca.asString());
+
+
+
+        sliderComida.valueProperty().bindBidirectional(medidaComida);
+        labelComida.textProperty().bind(medidaComida.asString());
+
+        sliderMontaña.valueProperty().bindBidirectional(medidaMontaña);
+        labelMontaña.textProperty().bind(medidaMontaña.asString());
+
+
+        sliderPozo.valueProperty().bindBidirectional(medidaPozo);
+        labelPozo.textProperty().bind(medidaPozo.asString());
+
+
+
+        sliderTesoro.valueProperty().bindBidirectional(medidaTesoro);
+        labelTesoro.textProperty().bind(medidaTesoro.asString());
+
+
+
 
         if (parametrosIndividuo != null && parametrosEntorno != null) {
             this.updateGUIwithModel();
