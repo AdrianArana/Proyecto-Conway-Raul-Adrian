@@ -32,7 +32,8 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Button botonIniciarPartida;
 
-    protected IntegerProperty medida = new SimpleIntegerProperty(0);
+    protected IntegerProperty //todo (nombre varianble) = new SimpleIntegerProperty(0);
+    //todo
 
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
@@ -49,6 +50,7 @@ public class ConfiguracionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.print("Inicialización en ejecución del controlador de parámetros\n");
         sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medida);
+        //todo sliderProbabilidadMuerte.valueProperty().bindBidirectional(medidaMuerte);
         labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medida.asString());
         if (parametrosIndividuo != null) {
             this.updateGUIwithModel();
