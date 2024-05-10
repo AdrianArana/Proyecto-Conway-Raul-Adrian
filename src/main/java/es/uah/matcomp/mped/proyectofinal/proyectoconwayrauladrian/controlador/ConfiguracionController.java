@@ -25,6 +25,12 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Label labelValorSliderTurnosDeVidaRestantes;
     @FXML
+    private Label labelValorSliderProbabilidadMuerte;
+    @FXML
+    private Label laberValorSliderProbabilidadClonacion;
+    @FXML
+    private Label laborValorSliderProbabilidadReproduccion;
+    @FXML
     private Slider sliderTurnosDeVidaRestantes;
     @FXML
     private Slider sliderProbabilidadMuerte;
@@ -35,7 +41,10 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Button botonIniciarPartida;
 
-    //todo
+    protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaProbabilidadMuerte = new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaprobabilidadClonacion = new SimpleIntegerProperty(0);
+    protected IntegerProperty medidaprobabilidadReproduccion = new SimpleIntegerProperty(0);
 
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
@@ -46,19 +55,28 @@ public class ConfiguracionController implements Initializable {
         sliderProbabilidadMuerte.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadMuerteProperty());
         sliderProbabilidadClonacion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadClonacionProperty());
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadReproduccionProperty());
-
-
     }
 
+    //hacerlo de los 4
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.print("Inicialización en ejecución del controlador de parámetros\n");
-        //sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medida);
-        //todo sliderProbabilidadMuerte.valueProperty().bindBidirectional(medidaMuerte);
-        //labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medida.asString());
+        sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medidaTurnosDeVida);
+        labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medidaTurnosDeVida.asString());
+
+        sliderProbabilidadMuerte.valueProperty().bindBidirectional(medidaProbabilidadMuerte);
+        labelValorSliderProbabilidadMuerte.textProperty().bind(medidaProbabilidadMuerte.asString());
+
+        sliderProbabilidadClonacion.valueProperty().bindBidirectional(medidaprobabilidadClonacion);
+        laberValorSliderProbabilidadClonacion.textProperty().bind(medidaprobabilidadClonacion.asString());
+
+        sliderProbabilidadReproduccion.valueProperty().bindBidirectional(medidaprobabilidadReproduccion);
+        laborValorSliderProbabilidadReproduccion.textProperty().bind(medidaprobabilidadReproduccion.asString());
+
         if (parametrosIndividuo != null) {
             this.updateGUIwithModel();
         }
+
     }
 
     @FXML
