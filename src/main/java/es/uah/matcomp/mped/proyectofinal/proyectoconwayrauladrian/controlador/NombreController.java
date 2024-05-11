@@ -23,7 +23,7 @@ public class NombreController implements Initializable {
     private Button VolverButton;
 
     //Construimos un modelo para los datos compartidos con las clases ParametrosIndividuo y ParametrosIndividuoModelProperties
-    private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
+    public ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
     private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo = new ParametrosIndividuoModelProperties(parametrosData);
 
     private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20);
