@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.ConfiguracionController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.ConfiguracionController">
    <cursor>
       <Cursor fx:constant="CROSSHAIR" />
    </cursor>
@@ -20,11 +21,11 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <Slider fx:id="sliderTurnosDeVidaRestantes" layoutX="8.0" layoutY="27.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="31.0" prefWidth="234.0" showTickMarks="true" />
+                        <Slider fx:id="sliderTurnosDeVidaRestantes" layoutX="8.0" layoutY="27.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="31.0" prefWidth="234.0" />
                         <Text layoutX="9.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
-                        <Slider fx:id="sliderProbabilidadMuerte" layoutX="8.0" layoutY="138.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
-                        <Slider fx:id="sliderProbabilidadClonacion" layoutX="9.0" layoutY="225.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="232.0" showTickMarks="true" />
-                        <Slider fx:id="sliderProbabilidadReproduccion" layoutX="14.0" layoutY="313.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
+                        <Slider fx:id="sliderProbabilidadMuerte" layoutX="8.0" layoutY="138.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" />
+                        <Slider fx:id="sliderProbabilidadClonacion" layoutX="9.0" layoutY="225.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="232.0" />
+                        <Slider fx:id="sliderProbabilidadReproduccion" layoutX="14.0" layoutY="313.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" />
                         <Text layoutX="9.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
                         <Text layoutX="9.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Clonación" wrappingWidth="212.744140625" />
                         <Text layoutX="9.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Probabilidad Reproduccion" wrappingWidth="129.744140625" />
@@ -32,7 +33,7 @@
                         <Label fx:id="labelValorSliderProbabilidadMuerte" layoutX="258.0" layoutY="138.0" text="2" />
                         <Label fx:id="laberValorSliderProbabilidadClonacion" layoutX="257.0" layoutY="228.0" text="3" />
                         <Label fx:id="laborValorSliderProbabilidadReproduccion" layoutX="267.0" layoutY="314.0" text="4" />
-                        <Button layoutX="309.0" layoutY="213.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
+                        <Button layoutX="309.0" layoutY="213.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" prefHeight="31.0" prefWidth="77.0" text="Cerrar " />
                         <Button layoutX="309.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
                         <Button layoutX="310.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
                      </children>
@@ -75,9 +76,9 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="419.0">
                      <children>
                         <Slider fx:id="sliderCasillasX" layoutX="8.0" layoutY="27.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="31.0" prefWidth="234.0" showTickMarks="true" />
-                        <Text layoutX="9.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TurnosDeVidaRestantes" wrappingWidth="212.744140625" />
+                        <Text layoutX="9.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filas Tablero" wrappingWidth="212.744140625" />
                         <Slider fx:id="sliderCasillasY" layoutX="8.0" layoutY="138.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="21.0" prefWidth="247.0" showTickMarks="true" />
-                        <Text layoutX="9.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProbabilidadMuerte" wrappingWidth="212.744140625" />
+                        <Text layoutX="9.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Columnas Tablero" wrappingWidth="212.744140625" />
                         <Label fx:id="labelValorSliderCasillasX" layoutX="261.0" layoutY="32.0" prefHeight="21.0" prefWidth="13.0" text="1" />
                         <Label fx:id="labelValorSliderCasillasY" layoutX="258.0" layoutY="138.0" text="2" />
                         <Button layoutX="309.0" layoutY="213.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" text="Cerrar" />
@@ -96,5 +97,6 @@
         </tabs>
       </TabPane>
       <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="544.0" layoutY="427.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="31.0" prefWidth="112.0" text="INICIAR PARTIDA" />
+      <Button fx:id="botonVolver" layoutX="49.0" layoutY="427.0" mnemonicParsing="false" onAction="#onVolver" text="Volver" />
    </children>
 </AnchorPane>

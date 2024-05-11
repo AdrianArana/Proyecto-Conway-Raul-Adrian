@@ -12,7 +12,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,6 +30,7 @@ public class ConfiguracionController implements Initializable {
     public Slider sliderCasillasY;
     public Label labelValorSliderCasillasX;
     public Label labelValorSliderCasillasY;
+
 
     @FXML
     private Label labelValorSliderTurnosDeVidaRestantes;
@@ -74,6 +74,8 @@ public class ConfiguracionController implements Initializable {
     private Slider sliderTesoro;
     @FXML
     private Button botonIniciarPartida;
+    @FXML
+    private Button botonVolver;
 
     //Individuo, variables observables para los parámetros de los individuos
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
@@ -223,11 +225,26 @@ public class ConfiguracionController implements Initializable {
         this.parametrosIndividuo = parametrosIndividuoDados;
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosCasillas = parametrosCasillas;
-
         this.updateGUIwithModel();
     }
 
     //Para pasarlos a la siguiente ventana
+    @FXML
+    public void onVolver() {
+        Stage stageAntiguo = (Stage) botonVolver.getScene().getWindow();
+        stageAntiguo.close();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("nombre.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            stage.setTitle("Nombre");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private ParametrosEntorno EntornoOriginal=new ParametrosEntorno(1,1,1,1,1,1);
     private ParametrosEntornoModelProperties modeloParaGUICompartidoEntorno=new ParametrosEntornoModelProperties(EntornoOriginal);
@@ -236,7 +253,7 @@ public class ConfiguracionController implements Initializable {
     public void setStage(Stage escenaDada) {
         this.escenaParametros = escenaDada;
     }
-    @FXML
+
     public void onIniciarPartidaButtonClick() {
         ParametrosCasillas original=parametrosCasillas.getOriginal();
         ParametrosCasillasModelProperties modeloParaGUICompartidoTablero=new ParametrosCasillasModelProperties(original);
@@ -252,7 +269,6 @@ public class ConfiguracionController implements Initializable {
         //Cerramos la ventana anterior
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();
-        //Nueva ventana
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
