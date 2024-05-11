@@ -37,6 +37,8 @@ public class VentanaJuegoController implements Initializable {
 
     @FXML
     public GridPane tableroFinal;
+    @FXML
+    public Button finalizarButton;
 
     private Casilla[][] hacerMatrtiz(int cantidadCasillasX, int cantidadCasillasY) {
         Tablero tablero = new Tablero(cantidadCasillasX, cantidadCasillasY);
@@ -80,6 +82,23 @@ public class VentanaJuegoController implements Initializable {
                 });
                 tableroFinal.add(celdaButton, i, j);
             }
+        }
+    }
+
+
+    @FXML
+    protected void onFinalizarButton() {
+        Stage stageAnterior = (Stage) finalizarButton.getScene().getWindow();
+        stageAnterior.close();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaFinalizarJuego.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            stage.setTitle("Fin del Juego");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

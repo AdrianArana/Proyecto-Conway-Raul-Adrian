@@ -101,11 +101,13 @@ public class ConfiguracionController implements Initializable {
     protected IntegerProperty medidaCasillasY = new SimpleIntegerProperty(0);
 
 
+
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosEntornoModelProperties parametrosEntorno;
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaParametros;
+
 
 
     protected void updateGUIwithModel() {
@@ -124,6 +126,8 @@ public class ConfiguracionController implements Initializable {
         //Bindeamos los sliders del tablero
         sliderCasillasX.valueProperty().bindBidirectional(parametrosCasillas.x());
         sliderCasillasY.valueProperty().bindBidirectional(parametrosCasillas.y());
+
+
 
 
     }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaFinalizarJuegoController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <Text layoutX="212.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Desea guardar la partida?" />
+      <Button layoutX="268.0" layoutY="234.0" mnemonicParsing="false" text="Si" />
+      <Button fx:id="NoButton" layoutX="300.0" layoutY="234.0" mnemonicParsing="false" onAction="#onNoButton" text="No" />
+   </children>
+</AnchorPane>

@@ -35,7 +35,7 @@
                         <Label fx:id="laborValorSliderProbabilidadReproduccion" layoutX="267.0" layoutY="314.0" text="4" />
                         <Button layoutX="309.0" layoutY="213.0" mnemonicParsing="false" onAction="#onBotonCerrarClick" prefHeight="31.0" prefWidth="77.0" text="Cerrar " />
                         <Button layoutX="309.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBotonReiniciarClick" text="Reiniciar" />
-                        <Button layoutX="310.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" text="Guardar" />
+                        <Button layoutX="310.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBotonGuardarClick" prefHeight="31.0" prefWidth="74.0" text="Guardar" textAlignment="RIGHT" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
