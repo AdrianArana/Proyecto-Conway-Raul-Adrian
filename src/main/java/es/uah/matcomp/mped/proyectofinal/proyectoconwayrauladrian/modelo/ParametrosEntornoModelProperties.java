@@ -38,11 +38,14 @@ public class ParametrosEntornoModelProperties {
         probabilidadTesoro.set(valoresOriginales.getProbabilidadTesoro());
     }
 
-    public ParametrosEntorno getOriginal(){return valoresOriginales;}
 
     public void setOriginal(ParametrosEntorno original){
         this.valoresOriginales = original;
         rollback();
+    }
+
+    public ParametrosEntorno getOriginal() {
+        return valoresOriginales;
     }
 
     public Property<Number> probabilidadAgua(){return probabilidadAgua;}

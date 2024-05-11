@@ -36,5 +36,4 @@ public class ParametrosCasillasModelProperties {
 
     public Property<Number> x(){return x;}
     public Property<Number> y(){return y;}
-
 }

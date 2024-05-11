@@ -31,8 +31,6 @@ public class ParametrosIndividuoModelProperties {
         probabilidadReproduccion.set(valoresOriginales.getProbabilidadReproduccion());
     }
 
-    public ParametrosIndividuo getOriginal(){return valoresOriginales;}
-
     public void setOriginal(ParametrosIndividuo original){
         this.valoresOriginales = original;
         rollback();
@@ -42,4 +40,8 @@ public class ParametrosIndividuoModelProperties {
     public Property<Number> probabilidadMuerteProperty(){return probabilidadMuerte;}
     public Property<Number> probabilidadClonacionProperty(){return probabilidadClonacion;}
     public Property<Number> probabilidadReproduccionProperty(){return probabilidadReproduccion;}
+
+    public ParametrosIndividuo getOriginal() {
+        return valoresOriginales;
+    }
 }

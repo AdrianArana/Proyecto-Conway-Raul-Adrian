@@ -44,9 +44,7 @@ public class NombreController implements Initializable {
             //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
             ConfiguracionController configuracionController = fxmlLoader.getController();
             configuracionController.loadUserData(modeloParaGUICompartidoIndividuo,modeloGuiCompartidoEntorno,modeloGUICompartidoTablero);
-
             configuracionController.setStage(stage);
-
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -4,10 +4,7 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Tablero;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillas;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillasModelProperties;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -15,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,7 +31,6 @@ public class ConfiguracionController implements Initializable {
     public Slider sliderCasillasY;
     public Label labelValorSliderCasillasX;
     public Label labelValorSliderCasillasY;
-
 
     @FXML
     private Label labelValorSliderTurnosDeVidaRestantes;
@@ -226,29 +223,54 @@ public class ConfiguracionController implements Initializable {
         this.parametrosIndividuo = parametrosIndividuoDados;
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosCasillas = parametrosCasillas;
+
         this.updateGUIwithModel();
     }
 
+    //Para pasarlos a la siguiente ventana
 
+    private ParametrosEntorno EntornoOriginal=new ParametrosEntorno(1,1,1,1,1,1);
+    private ParametrosEntornoModelProperties modeloParaGUICompartidoEntorno=new ParametrosEntornoModelProperties(EntornoOriginal);
+    private ParametrosIndividuo IndividuoOriginal=new ParametrosIndividuo(2,2,2,2);
+    private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo=new ParametrosIndividuoModelProperties(IndividuoOriginal);
     public void setStage(Stage escenaDada) {
         this.escenaParametros = escenaDada;
     }
-
+    @FXML
     public void onIniciarPartidaButtonClick() {
+        ParametrosCasillas original=parametrosCasillas.getOriginal();
+        ParametrosCasillasModelProperties modeloParaGUICompartidoTablero=new ParametrosCasillasModelProperties(original);
+        ParametrosEntorno EntornoOriginal=parametrosEntorno.getOriginal();
+        ParametrosEntornoModelProperties modeloParaGUICompartidoEntorno=new ParametrosEntornoModelProperties(EntornoOriginal);
+        ParametrosIndividuo IndividuoOriginal= parametrosIndividuo.getOriginal();
+        ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo=new ParametrosIndividuoModelProperties(IndividuoOriginal);
+
+
+
+
+        System.out.println(parametrosCasillas.x().getValue().intValue());
         //Cerramos la ventana anterior
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();
+        //Nueva ventana
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), parametrosCasillas.x().getValue().byteValue()*10, 500);
-            stage.setTitle("Juego - La vida de Conway");
+
+            Scene scene = new Scene(fxmlLoader.load(),750, 500);//Aqui se hace el initialize
+            System.out.println("dffsdsffds");
             stage.setScene(scene);
+            stage.setTitle("Juego - La vida de Conway");
+            System.out.println("Anres");
+            VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();
+            System.out.println("Despues");
+
+            ventanaJuegoController.setParametros(modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
+            ventanaJuegoController.crearMatriz();
+            ventanaJuegoController.setStage(stage);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }
