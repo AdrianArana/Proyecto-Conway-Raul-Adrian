@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.NombreController">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.NombreController">
    <children>
       <TextField fx:id="textFieldNombre" layoutX="243.0" layoutY="232.0">
          <font>
@@ -17,6 +18,7 @@
          <font>
             <Font name="Baskerville Old Face" size="20.0" />
          </font></Text>
+      <Button fx:id="VolverButton" layoutX="14.0" layoutY="399.0" mnemonicParsing="false" onAction="#onVolverButton" text="Volver" />
    </children>
    <cursor>
       <Cursor fx:constant="CROSSHAIR" />

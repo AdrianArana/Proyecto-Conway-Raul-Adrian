@@ -77,6 +77,8 @@ public class ConfiguracionController implements Initializable {
     private Slider sliderTesoro;
     @FXML
     private Button botonIniciarPartida;
+    @FXML
+    private Button botonVolver;
 
     //Individuo, variables observables para los parámetros de los individuos
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
@@ -227,6 +229,22 @@ public class ConfiguracionController implements Initializable {
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosCasillas = parametrosCasillas;
         this.updateGUIwithModel();
+    }
+
+    @FXML
+    public void onVolver() {
+        Stage stageAntiguo = (Stage) botonVolver.getScene().getWindow();
+        stageAntiguo.close();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("nombre.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            stage.setTitle("Nombre");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

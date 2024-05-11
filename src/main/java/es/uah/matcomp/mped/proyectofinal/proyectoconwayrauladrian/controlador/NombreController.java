@@ -19,6 +19,8 @@ public class NombreController implements Initializable {
     public Button continuarButton;
     @FXML
     private TextField textFieldNombre;
+    @FXML
+    private Button VolverButton;
 
     //Construimos un modelo para los datos compartidos con las clases ParametrosIndividuo y ParametrosIndividuoModelProperties
     private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
@@ -47,6 +49,22 @@ public class NombreController implements Initializable {
 
             configuracionController.setStage(stage);
 
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onVolverButton() {
+        Stage stageAntiguo = (Stage) VolverButton.getScene().getWindow();
+        stageAntiguo.close();
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInicial.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            stage.setTitle("Conway - El juego de la vida");
+            stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
