@@ -53,6 +53,7 @@ public class VentanaJuegoController implements Initializable {
     }
 
     public void crearMatriz() {
+        System.out.println("fghdjsmdsdsd");
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
         Casilla[][] tableroMatriz = hacerMatrtiz(x, y);
@@ -60,7 +61,7 @@ public class VentanaJuegoController implements Initializable {
             for (int j = 0; j < y; j++) {
                 Casilla c = tableroMatriz[i][j];
                 Button celdaButton = new Button();
-                celdaButton.setMinSize((double) 400 / x, (double) 400 / y);
+                celdaButton.setMinSize((double) 400 / x,(double) 400 / y );
                 celdaButton.setMaxSize((double) 400 / x, (double) 400 / y);
                 celdaButton.setStyle("-fx-border-color: #3385fa; -fx-text-alignment: center;");
                 celdaButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
