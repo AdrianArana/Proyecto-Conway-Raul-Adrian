@@ -1,5 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
-
+//6
 public class ListaEnlazadaFilas<ListaEnlazadaColumnas> {
     //Lista que almacena listas de tipo ListaEnlazadaColumnas
     private ElementoListaColumnasLE<ListaEnlazadaColumnas> primero;

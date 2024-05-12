@@ -1,5 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
-
+//5
 public class ElementoListaColumnasLE<ListaEnlazadaColumnas> {
     private ElementoListaColumnasLE<ListaEnlazadaColumnas> siguiente;
     private ListaEnlazadaColumnas data;

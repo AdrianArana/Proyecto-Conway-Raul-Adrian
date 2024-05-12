@@ -1,5 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
-
+//3
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
 
 public class ElementoCasillaLE<Casilla> {

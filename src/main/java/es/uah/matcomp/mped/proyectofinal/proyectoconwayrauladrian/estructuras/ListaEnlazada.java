@@ -1,5 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
-
+//2
 public class ListaEnlazada<TipoDelDato> {
     private ElementoLE<TipoDelDato> primero;
 

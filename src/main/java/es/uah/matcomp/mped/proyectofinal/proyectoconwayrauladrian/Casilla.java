@@ -8,8 +8,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 public class Casilla {
     private int coordenadaX;
     private int coordenadaY;
-    ListaEnlazada<Individuo> individuos = new ListaEnlazada();
-    ListaEnlazada<Entorno> recursos = new ListaEnlazada();
+    ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
+    ListaEnlazada<Entorno> recursos = new ListaEnlazada<Entorno>();
 
     public Casilla(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;

@@ -1,5 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
-
+//4
 public class ListaEnlazadaColumnas<Casilla> {
     //ListaEnlazadaColumnas que almacena Casillas
     private ElementoCasillaLE<Casilla> primero;

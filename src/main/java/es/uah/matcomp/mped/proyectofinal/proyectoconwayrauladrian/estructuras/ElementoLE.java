@@ -1,5 +1,5 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
-
+//1
 public class ElementoLE<TipoDelDato> {
     private ElementoLE<TipoDelDato> siguiente;
     private TipoDelDato data;
