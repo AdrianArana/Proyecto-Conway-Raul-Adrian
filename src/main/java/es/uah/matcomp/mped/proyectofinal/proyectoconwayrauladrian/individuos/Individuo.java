@@ -8,6 +8,10 @@ public class Individuo extends ParametrosIndividuo {
     private int id;
     private int tipo;
 
+    //Constructor vacío
+    public Individuo() {
+        super();
+    }
 
 
     public int getTipo() {

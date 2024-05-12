@@ -13,6 +13,10 @@ public class ParametrosIndividuo {
         this.probabilidadClonacion = probabilidadClonacion;
         this.probabilidadReproduccion = probabilidadReproduccion;
     }
+    //Constructor vacio, que temporalmente permite crear un individuo vacío,ya que implementa esta clase
+    public ParametrosIndividuo() {
+
+    }
 
     public int getTurnosVidaRestantes() {
         return turnosVidaRestantes;

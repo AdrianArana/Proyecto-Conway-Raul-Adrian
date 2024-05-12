@@ -286,6 +286,7 @@ public class ConfiguracionController implements Initializable {
             System.out.println("Despues");
 
             ventanaJuegoController.setParametros(modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
+            ventanaJuegoController.crearTableroDeJuego();
             ventanaJuegoController.crearMatriz();
             ventanaJuegoController.setStage(stage);
             stage.show();
