@@ -3,7 +3,13 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Tablero;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoCasillaLE;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoListaColumnasLE;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +24,14 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class VentanaJuegoController implements Initializable {
+public class VentanaJuegoController extends FuncionesBucle implements Initializable{
     private ParametrosEntornoModelProperties parametrosEntorno;
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaJuego;
 
+    //Creamos el tablero vacío, que se generará despues
+    ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero=new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
 
     public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
         this.parametrosEntorno = parametrosEntorno;
@@ -102,4 +110,28 @@ public class VentanaJuegoController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
+//TODO-> Borrar esta funcion, es solo temporal y valdra para probar metodos hasta que este todo finalizado
+    public void onPlayButton() {
+       recorrerIndividuos(tablero);
+    }
+
+    public void onCrearTableroDeJuego() {
+        for(int x=1;x<=parametrosCasillas.x().getValue().intValue();x++) {
+            ListaEnlazadaColumnas<Casilla> filaCompleta=new ListaEnlazadaColumnas<Casilla>();
+            for(int y=1;y<=parametrosCasillas.y().getValue().intValue();y++) {
+                ElementoCasillaLE<Casilla> casillaNueva= new ElementoCasillaLE<Casilla>(new Casilla(x,y));
+                filaCompleta.add(casillaNueva);
+
+            }
+            tablero.add(new ElementoListaColumnasLE<ListaEnlazadaColumnas<Casilla>>(filaCompleta));
+        }
+    }
+
+    //EjecutarBucle() al tocar un boton
+    //checkear
+    //matar
+    //clonar
+    //Se ejecuta el bucle de la clase simoplemente llamando a este
 }

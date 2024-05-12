@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="1600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
+<AnchorPane prefHeight="1600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
    <children>
+      <Button mnemonicParsing="false" onAction="#onCrearTableroDeJuego" text="Button" />
       <GridPane fx:id="tableroFinal" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
       </GridPane>
       <Button layoutX="306.0" layoutY="552.0" mnemonicParsing="false" text="Ajustes" />
       <Button layoutX="374.0" layoutY="552.0" mnemonicParsing="false" text="Pausar" />
-      <Button layoutX="438.0" layoutY="552.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="64.0" text="Jugar" />
+      <Button layoutX="438.0" layoutY="552.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="31.0" prefWidth="64.0" text="Jugar" />
       <Button fx:id="finalizarButton" layoutX="710.0" layoutY="552.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
    </children>
 </AnchorPane>

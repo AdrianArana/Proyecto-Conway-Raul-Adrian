@@ -2,9 +2,8 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 public class Casilla {
     private int coordenadaX;
@@ -12,7 +11,7 @@ public class Casilla {
     ListaEnlazada<Individuo> individuos = new ListaEnlazada();
     ListaEnlazada<Entorno> recursos = new ListaEnlazada();
 
-    public Casilla( int coordenadaX, int coordenadaY) {
+    public Casilla(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
     }
@@ -47,5 +46,11 @@ public class Casilla {
 
     public void setRecursos(ListaEnlazada<Entorno> recursos) {
         this.recursos = recursos;
+    }
+
+    @Override
+    public String toString() {
+        return "Casilla(" +coordenadaX+","+coordenadaY+")";
+
     }
 }
