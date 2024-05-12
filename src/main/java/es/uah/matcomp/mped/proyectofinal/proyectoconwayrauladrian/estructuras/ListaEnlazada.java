@@ -26,12 +26,12 @@ public class ListaEnlazada<TipoDelDato> {
             this.primero = elem;
             return 0;
         }else{
-            ElementoLE actual = this.primero;
-            while (actual.getSiguiente() != null) {
-                actual = actual.getSiguiente();
+            ElementoLE puntero = this.primero;
+            while (puntero.getSiguiente() != null) {
+                puntero = puntero.getSiguiente();
                 posicion += 1;
             }
-            elem.insertarmeEn(actual);
+            puntero.setSiguiente(elem);
             return posicion;
         }
     }
