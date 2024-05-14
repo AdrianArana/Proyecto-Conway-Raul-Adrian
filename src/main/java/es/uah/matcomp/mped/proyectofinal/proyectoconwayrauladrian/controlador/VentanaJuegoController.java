@@ -122,7 +122,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     //TODO-> Borrar esta funcion, es solo temporal y valdra para probar metodos hasta que este todo finalizado
     public void onPlayButton() {
-        recorrerIndividuos(tablero);
+        recorrerCasillas(tablero);
     }
 
     public void crearTableroDeJuego() {
