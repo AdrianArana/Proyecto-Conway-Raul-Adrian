@@ -19,7 +19,8 @@ public class VentanaCasillaController {
     public Label labelCasilla;
     public Label labelIndividuoCreado;
     //El id que se le pone a cada individuo cuando se crea uno nuevo
-    //TODO-> HACER QUE FUNCIONE EL ID int id;
+    //TODO-> HACER QUE FUNCIONE EL ID
+    int id;
     int turnoActual;
     ParametrosIndividuoModelProperties parametrosIndividuo;
     ParametrosEntornoModelProperties parametrosEntorno;
