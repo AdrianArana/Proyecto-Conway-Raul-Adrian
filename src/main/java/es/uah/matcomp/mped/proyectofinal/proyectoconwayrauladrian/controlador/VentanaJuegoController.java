@@ -57,6 +57,28 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         //ponerle algo
         System.out.println("initi");
     }
+    @FXML
+    protected void onBotonCelda(int i, int j){
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaCasilla.fxml"));
+        try {
+            //Casilla accesible, para poder mostrar sus datos
+            Casilla casillaActual=tablero.getElemento(i).getData().getElemento(j).getData();
+            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+            stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
+            VentanaCasillaController controladorCelda=new VentanaCasillaController();
+
+            VentanaCasillaController ventanaCasillActual = fxmlLoader.getController();
+            ventanaCasillActual.setLabel1("Probabilidad de clonacion: "+casillaActual.getIndividuos().getPrimero().getData().getProbabilidadClonacion() + "," + casillaActual.getCoordenadaY() + ")");
+
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void crearMatriz() {
         int x = parametrosCasillas.x().getValue().intValue();
@@ -69,28 +91,9 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 celdaButton.setStyle("-fx-border-color: #3385fa; -fx-text-alignment: center;");
                 int finalI = i;
                 int finalJ = j;
-                celdaButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                celdaButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        Stage stage = new Stage();
-                        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaCasilla.fxml"));
-                        try {
-                            //Casilla accesible, para poder mostrar sus datos
-                            Casilla casillaActual=tablero.getElemento(finalI).getData().getElemento(finalJ).getData();
-                            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
-                            stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
-
-
-                            VentanaCasillaController ventanaCasillActual = fxmlLoader.getController();
-                            ventanaCasillActual.setLabel1("Probabilidad de clonacion: "+casillaActual.getIndividuos().getPrimero().getData().getProbabilidadClonacion() + "," + casillaActual.getCoordenadaY() + ")");
-
-
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    public void handle(ActionEvent actionEvent) {onBotonCelda(finalI,finalJ);}
                 });
                 gridPane.add(celdaButton, i, j);
             }
