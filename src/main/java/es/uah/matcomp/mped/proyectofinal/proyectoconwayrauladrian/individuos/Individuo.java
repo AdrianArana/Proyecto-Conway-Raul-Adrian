@@ -2,15 +2,21 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
 
-public class Individuo extends ParametrosIndividuo {
+public class Individuo extends ParametrosIndividuo{
     private int coordenadaX;
     private int coordenadaY;
     private int id;
     private int tipo;
+    private int turnoGeneracion;
 
     //Constructor vacío
-    public Individuo() {
-        super();
+    public Individuo(int x, int y, int id, int tipo, int turnosVidaRestantes,int turnoGeneracion, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
+        super(turnosVidaRestantes,probabilidadMuerte,probabilidadClonacion,probabilidadReproduccion);
+        this.coordenadaX = x;
+        this.coordenadaY = y;
+        this.id = id;
+        this.tipo = tipo;
+        this.turnoGeneracion = turnoGeneracion;
     }
 
 
@@ -54,14 +60,7 @@ public class Individuo extends ParametrosIndividuo {
         this.turnoGeneracion = turnoGeneracion;
     }
 
-    private int turnoGeneracion;
 
-    public Individuo(int turnosVidaRestantes, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion, int coordenadaX, int coordenadaY, int id, int tipo, int turnoGeneracion) {
-        super(turnosVidaRestantes, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion);
-        this.coordenadaX = coordenadaX;
-        this.coordenadaY = coordenadaY;
-        this.id = id;
-        this.tipo = tipo;
-        this.turnoGeneracion = turnoGeneracion;
+    public void setTurnosVidaRestantes(int i) {
     }
 }
