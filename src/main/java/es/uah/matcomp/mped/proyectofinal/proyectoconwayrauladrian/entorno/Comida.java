@@ -4,8 +4,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 
 public class Comida extends Entorno{
 
-    public Comida(int coordenadaX, int coordenadaY, int tiempoAparicion, int probabilidadDeEsteRecurso) {
-        super(coordenadaX, coordenadaY, tiempoAparicion, probabilidadDeEsteRecurso);
+    public Comida(int coordenadaX, int coordenadaY, int tiempoAparicion) {
+        super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
     public void accionComida(Individuo individuo){

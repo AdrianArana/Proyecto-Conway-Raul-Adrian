@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaCasillaController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaCasillaController">
    <children>
       <Label fx:id="individuos" layoutX="61.0" layoutY="60.0" text="INDIVIDUOS:" />
       <Label fx:id="labelCasilla" layoutX="160.0" layoutY="14.0" text="TITULO DE LA CASILLA" />
-      <Label fx:id="labelIndividuosTipo1" layoutX="34.0" layoutY="135.0" text="Tipo 1:" />
-      <Label fx:id="labelIndividuosTipo2" layoutX="34.0" layoutY="194.0" text="Tipo 2:" />
-      <Label fx:id="labelIndividuosTipo3" layoutX="34.0" layoutY="252.0" text="Tipo 3:" />
+      <Label fx:id="labelIndividuosTipo1" layoutX="34.0" layoutY="135.0" text="--" />
+      <Label fx:id="labelIndividuosTipo2" layoutX="34.0" layoutY="194.0" text="--" />
+      <Label fx:id="labelIndividuosTipo3" layoutX="34.0" layoutY="252.0" text="--" />
       <Button fx:id="botonAñadirTesoro" layoutX="365.0" layoutY="427.0" mnemonicParsing="false" onAction="#onBotonAñadirTesoro" prefHeight="60.0" prefWidth="60.0" text="+">
          <font>
             <Font name="Arial Rounded MT Bold" size="30.0" />
@@ -114,6 +113,9 @@
       </Button>
       <Label fx:id="labelCantidadPozo" layoutX="543.0" layoutY="376.0" text="--" />
       <Label fx:id="labelCantidadTesoro" layoutX="543.0" layoutY="443.0" text="--" />
-      <Label fx:id="labelIndividuoCreado" layoutX="30.0" layoutY="328.0" prefHeight="161.0" prefWidth="213.0" />
+      <Label fx:id="labelIndividuoCreado" layoutX="30.0" layoutY="328.0" prefHeight="154.0" prefWidth="200.0">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
    </children>
 </AnchorPane>

@@ -19,6 +19,15 @@ public class Individuo extends ParametrosIndividuo{
         this.turnoGeneracion = turnoGeneracion;
     }
 
+    @Override
+    public String toString() {
+        return
+                "\n Coordenadas: (" + coordenadaX +
+                "," + coordenadaY +
+                ")\n Id: '" + id +
+                "'\n Tipo: " + tipo +
+                "'\n Turno de Generacion=" + turnoGeneracion;
+    }
 
     public int getTipo() {
         return tipo;

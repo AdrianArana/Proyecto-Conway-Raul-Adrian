@@ -9,15 +9,17 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class VentanaCasillaController {
+    @FXML
     public Label labelCasilla;
     public Label labelIndividuoCreado;
     //El id que se le pone a cada individuo cuando se crea uno nuevo
-    int id = 0;
+    //TODO-> HACER QUE FUNCIONE EL ID int id;
     int turnoActual;
     ParametrosIndividuoModelProperties parametrosIndividuo;
     ParametrosEntornoModelProperties parametrosEntorno;
@@ -74,6 +76,7 @@ public class VentanaCasillaController {
         this.escenaVentana = escenaDada;
     }
 
+    //Función que actualiza las labels donde se muestra la cantida de elenentos e individuos
     public void mostrarInfo() {
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
@@ -117,8 +120,7 @@ public class VentanaCasillaController {
         labelIndividuosTipo1.setText(String.valueOf(cantidadIndividuo1));
         labelIndividuosTipo2.setText(String.valueOf(cantidadIndividuo2));
         labelIndividuosTipo3.setText(String.valueOf(cantidadIndividuo3));
-        labelCasilla.setText("CASILLA ACTUAL: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
-        labelIndividuoCreado.setText(null);
+        labelCasilla.setText("CASILLA ACTUAL: (" + casilla.getCoordenadaX() + "," + casilla.getCoordenadaY() + ")");
     }
 
 
@@ -139,7 +141,11 @@ public class VentanaCasillaController {
         id++;
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
         if (individuos.getNumeroElementos() < 3) {
-            individuos.add(new Individuo(casilla.getCoordenadaX(), casilla.getCoordenadaY(), id, tipo, turnosDeVidaRestantes, turnoActual, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion));
+            Individuo nuevoIndividuo = new Individuo(casilla.getCoordenadaX(), casilla.getCoordenadaY(),
+                    id, tipo, turnosDeVidaRestantes, turnoActual, probabilidadMuerte,
+                    probabilidadClonacion, probabilidadReproduccion);
+            individuos.add(nuevoIndividuo);
+            labelIndividuoCreado.setText("Individuo añadido: " + nuevoIndividuo.toString());
         } else if (individuos.getNumeroElementos() == 3) {
             ponerBotonEnRojo(tipo);
             casilla.setIndividuos(individuos);
@@ -152,27 +158,93 @@ public class VentanaCasillaController {
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
             if (individuos.getElemento(i).getData().getTipo() == tipo) {
                 individuos.delete(i);
+                ponerBotonesSinColor();
                 casilla.setIndividuos(individuos);
                 mostrarInfo();
                 return;
             }
         }
     }
-    public void ponerBotonEnRojo (int numeroBoton){
-        if (numeroBoton == 1){
+
+
+    public void nuevoRecurso(String clase) {
+        ListaEnlazada<Entorno> recursos = casilla.getRecursos();
+        int x = casilla.getCoordenadaX();
+        int y = casilla.getCoordenadaY();
+        if (recursos.getNumeroElementos() == 3) {
+            if (clase == "Agua") {
+                botonAñadirAgua.setStyle("-fx-background-color: #ff0000;");
+            } else if (clase == "Biblioteca") {
+                botonAñadirBiblioteca.setStyle("-fx-background-color: #ff0000;");
+            } else if (clase == "Comida") {
+                botonAñadirComida.setStyle("-fx-background-color: #ff0000;");
+            } else if (clase == "Montaña") {
+                botonAñadirMontaña.setStyle("-fx-background-color: #ff0000;");
+            } else if (clase == "Pozo") {
+                botonAñadirPozo.setStyle("-fx-background-color: #ff0000;");
+            } else if (clase == "Tesoro") {
+                botonAñadirTesoro.setStyle("-fx-background-color: #ff0000;");
+            }
+        }
+        if (recursos.getNumeroElementos() < 3) {
+            if (clase == "Agua") {
+                recursos.add(new Agua(x, y, 10));
+            } else if (clase == "Biblioteca") {
+                recursos.add(new Biblioteca(x, y, 10));
+            } else if (clase == "Comida") {
+                recursos.add(new Comida(x, y, 10));
+            } else if (clase == "Montaña") {
+                recursos.add(new Montaña(x, y, 10));
+            } else if (clase == "Pozo") {
+                recursos.add(new Pozo(x, y, 10));
+            } else if (clase == "Tesoro") {
+                recursos.add(new Tesoro(x, y, 10));
+            }
+            mostrarInfo();
+        }
+        casilla.setRecursos(recursos);
+    }
+
+    public void eliminarRecurso(Class clase) {
+        ListaEnlazada<Entorno> recursos = casilla.getRecursos();
+        for (int i = 0; i < recursos.getNumeroElementos(); i++) {
+            if (clase == recursos.getElemento(i).getData().getClass()) {
+                recursos.delete(i);
+                setBotonesNulos();
+                mostrarInfo();
+                return;
+            }
+        }
+        casilla.setRecursos(recursos);
+    }
+
+    //Funciones para la visualización de los botones
+    public void ponerBotonEnRojo(int numeroBoton) {
+        if (numeroBoton == 1) {
             botonAñadirIndividuo1.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
-        }else if (numeroBoton == 2){
+        } else if (numeroBoton == 2) {
             botonAñadirIndividuo2.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
-        }else if (numeroBoton == 3){
+        } else if (numeroBoton == 3) {
             botonAñadirIndividuo3.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
         }
     }
-    public void ponerBotonSinColor(){
+
+    public void ponerBotonesSinColor() {
         botonAñadirIndividuo1.setStyle(null);
         botonAñadirIndividuo2.setStyle(null);
         botonAñadirIndividuo3.setStyle(null);
     }
 
+    private void setBotonesNulos() {
+        botonAñadirMontaña.setStyle(null);
+        botonAñadirComida.setStyle(null);
+        botonAñadirAgua.setStyle(null);
+        botonAñadirBiblioteca.setStyle(null);
+        botonAñadirTesoro.setStyle(null);
+        botonAñadirPozo.setStyle(null);
+    }
+
+    //Ejecución de las funciones creadas al tocar cada botón
     public void onbotonAñadirIndividuo1(ActionEvent actionEvent) {
         nuevoIndividuo(1);
     }
@@ -184,72 +256,65 @@ public class VentanaCasillaController {
     public void onbotonAñadirIndividuo3(ActionEvent actionEvent) {
         nuevoIndividuo(3);
     }
+
     public void onBotonEliminarIndividuo1(ActionEvent actionEvent) {
-        ponerBotonSinColor();
         quitarIndividuo(1);
     }
 
     public void onBotonEliminarIndividuo2(ActionEvent actionEvent) {
-        ponerBotonSinColor();
         quitarIndividuo(2);
     }
 
     public void onBotonEliminarIndividuo3(ActionEvent actionEvent) {
-        ponerBotonSinColor();
         quitarIndividuo(3);
-    }
-    public void nuevoRecurso(String tipoEntorno) {
-        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
-        if (recursos.getNumeroElementos() < 3) {
-            if (tipoEntorno=="agua"){
-                recursos.add(new Agua())
-            }
-            recursos.add();
-
-        }
-    }
-    public void eliminarRecurso(Class tipo) {
-        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
-        for (int i = 0; i < recursos.getNumeroElementos(); i++) {
-            if(tipo==recursos.getElemento(i));
-        }
     }
 
     public void onBotonAñadirAgua(ActionEvent actionEvent) {
-        nuevoRecurso(Agua.class);
+        nuevoRecurso("Agua");
     }
 
     public void onBotonAñadirComida(ActionEvent actionEvent) {
+        nuevoRecurso("Comida");
     }
 
     public void onBotonAñadirBiblioteca(ActionEvent actionEvent) {
+        nuevoRecurso("Biblioteca");
     }
 
     public void onBotonAñadirMontaña(ActionEvent actionEvent) {
+        nuevoRecurso("Montaña");
     }
 
     public void onBotonAñadirPozo(ActionEvent actionEvent) {
+        nuevoRecurso("Pozo");
     }
 
     public void onBotonAñadirTesoro(ActionEvent actionEvent) {
+        nuevoRecurso("Tesoro");
     }
 
 
     public void onBotonEliminarAgua(ActionEvent actionEvent) {
+        eliminarRecurso(Agua.class);
     }
 
     public void onBotonEliminarComida(ActionEvent actionEvent) {
+        eliminarRecurso(Comida.class);
     }
 
     public void onBotonEliminarBiblioteca(ActionEvent actionEvent) {
+        eliminarRecurso(Biblioteca.class);
     }
 
     public void onBotonEliminarMontaña(ActionEvent actionEvent) {
+        eliminarRecurso(Montaña.class);
     }
 
     public void onBotonEliminarPozo(ActionEvent actionEvent) {
+        eliminarRecurso(Pozo.class);
     }
 
     public void onBotonEliminarTesoro(ActionEvent actionEvent) {
+        eliminarRecurso(Agua.class);
     }
 }
