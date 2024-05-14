@@ -6,7 +6,6 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillasModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.event.ActionEvent;
@@ -16,8 +15,9 @@ import javafx.stage.Stage;
 
 public class VentanaCasillaController {
     public Label labelCasilla;
+    public Label labelIndividuoCreado;
     //El id que se le pone a cada individuo cuando se crea uno nuevo
-    int id=0;
+    int id = 0;
     int turnoActual;
     ParametrosIndividuoModelProperties parametrosIndividuo;
     ParametrosEntornoModelProperties parametrosEntorno;
@@ -25,12 +25,14 @@ public class VentanaCasillaController {
     int probabilidadMuerte;
     int probabilidadClonacion;
     int probabilidadReproduccion;
-public void tomarValores(){
-    this.turnosDeVidaRestantes=parametrosIndividuo.turnosVidaRestantesProperty().getValue().intValue();
-    this.probabilidadMuerte=parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
-    this.probabilidadClonacion=parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
-    this.probabilidadReproduccion=parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
-}
+
+    public void tomarValores() {
+        this.turnosDeVidaRestantes = parametrosIndividuo.turnosVidaRestantesProperty().getValue().intValue();
+        this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
+        this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
+        this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
+    }
+
     public Label labelIndividuosTipo1;
     public Label labelIndividuosTipo2;
     public Label labelIndividuosTipo3;
@@ -98,11 +100,11 @@ public void tomarValores(){
             }
         }
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
-            if (individuos.getElemento(i).getData().getTipo()==1){
+            if (individuos.getElemento(i).getData().getTipo() == 1) {
                 cantidadIndividuo1++;
-            } else if(individuos.getElemento(i).getData().getTipo()==2){
+            } else if (individuos.getElemento(i).getData().getTipo() == 2) {
                 cantidadIndividuo2++;
-            } else if(individuos.getElemento(i).getData().getTipo()==3){
+            } else if (individuos.getElemento(i).getData().getTipo() == 3) {
                 cantidadIndividuo3++;
             }
         }
@@ -115,39 +117,106 @@ public void tomarValores(){
         labelIndividuosTipo1.setText(String.valueOf(cantidadIndividuo1));
         labelIndividuosTipo2.setText(String.valueOf(cantidadIndividuo2));
         labelIndividuosTipo3.setText(String.valueOf(cantidadIndividuo3));
-
+        labelCasilla.setText("CASILLA ACTUAL: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+        labelIndividuoCreado.setText(null);
     }
 
 
     public void setCasilla(Casilla casillaActual) {
         this.casilla = casillaActual;
     }
-    public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno,int turnoActual){
-        this.parametrosIndividuo=parametrosIndividuo;
-        this.parametrosEntorno=parametrosEntorno;
-        this.turnoActual=turnoActual;
+
+    public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual) {
+        this.parametrosIndividuo = parametrosIndividuo;
+        this.parametrosEntorno = parametrosEntorno;
+        this.turnoActual = turnoActual;
 
     }
 
     //FUNCIONES PARA LOS BOTONES DE AÑADIR INDIVIDUOS O RECURSOS
-    public void onbotonAñadirIndividuo1(ActionEvent actionEvent) {
-
+    //Ejecutable por botón
+    private void nuevoIndividuo(int tipo) {
         id++;
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
-        if (individuos.getNumeroElementos()<3){
-            individuos.add(new Individuo(casilla.getCoordenadaX(),casilla.getCoordenadaY(), id,1,turnosDeVidaRestantes,turnoActual,probabilidadMuerte,probabilidadClonacion,probabilidadReproduccion));
+        if (individuos.getNumeroElementos() < 3) {
+            individuos.add(new Individuo(casilla.getCoordenadaX(), casilla.getCoordenadaY(), id, tipo, turnosDeVidaRestantes, turnoActual, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion));
+        } else if (individuos.getNumeroElementos() == 3) {
+            ponerBotonEnRojo(tipo);
+            casilla.setIndividuos(individuos);
         }
-        casilla.setIndividuos(individuos);
         mostrarInfo();
     }
 
+    private void quitarIndividuo(int tipo) {
+        ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
+        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
+            if (individuos.getElemento(i).getData().getTipo() == tipo) {
+                individuos.delete(i);
+                casilla.setIndividuos(individuos);
+                mostrarInfo();
+                return;
+            }
+        }
+    }
+    public void ponerBotonEnRojo (int numeroBoton){
+        if (numeroBoton == 1){
+            botonAñadirIndividuo1.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
+        }else if (numeroBoton == 2){
+            botonAñadirIndividuo2.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
+        }else if (numeroBoton == 3){
+            botonAñadirIndividuo3.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
+        }
+    }
+    public void ponerBotonSinColor(){
+        botonAñadirIndividuo1.setStyle(null);
+        botonAñadirIndividuo2.setStyle(null);
+        botonAñadirIndividuo3.setStyle(null);
+    }
+
+    public void onbotonAñadirIndividuo1(ActionEvent actionEvent) {
+        nuevoIndividuo(1);
+    }
+
     public void onbotonAñadirIndividuo2(ActionEvent actionEvent) {
+        nuevoIndividuo(2);
     }
 
     public void onbotonAñadirIndividuo3(ActionEvent actionEvent) {
+        nuevoIndividuo(3);
+    }
+    public void onBotonEliminarIndividuo1(ActionEvent actionEvent) {
+        ponerBotonSinColor();
+        quitarIndividuo(1);
+    }
+
+    public void onBotonEliminarIndividuo2(ActionEvent actionEvent) {
+        ponerBotonSinColor();
+        quitarIndividuo(2);
+    }
+
+    public void onBotonEliminarIndividuo3(ActionEvent actionEvent) {
+        ponerBotonSinColor();
+        quitarIndividuo(3);
+    }
+    public void nuevoRecurso(String tipoEntorno) {
+        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
+        if (recursos.getNumeroElementos() < 3) {
+            if (tipoEntorno=="agua"){
+                recursos.add(new Agua())
+            }
+            recursos.add();
+
+        }
+    }
+    public void eliminarRecurso(Class tipo) {
+        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
+        for (int i = 0; i < recursos.getNumeroElementos(); i++) {
+            if(tipo==recursos.getElemento(i));
+        }
     }
 
     public void onBotonAñadirAgua(ActionEvent actionEvent) {
+        nuevoRecurso(Agua.class);
     }
 
     public void onBotonAñadirComida(ActionEvent actionEvent) {
@@ -165,14 +234,6 @@ public void tomarValores(){
     public void onBotonAñadirTesoro(ActionEvent actionEvent) {
     }
 
-    public void onBotonEliminarIndividuo1(ActionEvent actionEvent) {
-    }
-
-    public void onBotonEliminarIndividuo2(ActionEvent actionEvent) {
-    }
-
-    public void onBotonEliminarIndividuo3(ActionEvent actionEvent) {
-    }
 
     public void onBotonEliminarAgua(ActionEvent actionEvent) {
     }

@@ -64,7 +64,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         try {
             //Casilla accesible, para poder mostrar sus datos
             Casilla casillaActual=tablero.getElemento(i).getData().getElemento(j).getData();
-            Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
             stage.setScene(scene);
             VentanaCasillaController ventanaCasillaController = fxmlLoader.getController();
