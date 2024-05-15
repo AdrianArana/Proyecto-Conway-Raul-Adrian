@@ -162,7 +162,10 @@ public class VentanaCasillaController {
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
             if (individuos.getElemento(i).getData().getTipo() == tipo) {
+                Individuo eliminado=individuos.getElemento(i).getData();
+                labelIndividuoCreado.setText("Individuo eliminado: " + eliminado.toString());
                 individuos.delete(i);
+
                 ponerBotonesSinColor();
                 casilla.setIndividuos(individuos);
                 mostrarInfo();
@@ -194,16 +197,22 @@ public class VentanaCasillaController {
         if (recursos.getNumeroElementos() < 3) {
             if (clase == "Agua") {
                 recursos.add(new Agua(x, y, 10));
+                labelIndividuoCreado.setText("¡¡Has añadido: AGUA!!");
             } else if (clase == "Biblioteca") {
                 recursos.add(new Biblioteca(x, y, 10));
+                labelIndividuoCreado.setText("¡¡Has añadido: BIBLIOTECA!!");
             } else if (clase == "Comida") {
                 recursos.add(new Comida(x, y, 10));
+                labelIndividuoCreado.setText("¡¡Has añadido: COMIDA!!");
             } else if (clase == "Montaña") {
                 recursos.add(new Montaña(x, y, 10));
+                labelIndividuoCreado.setText("¡¡Has añadido: MONTAÑA!!");
             } else if (clase == "Pozo") {
                 recursos.add(new Pozo(x, y, 10));
+                labelIndividuoCreado.setText("¡¡Has añadido: POZO!!");
             } else if (clase == "Tesoro") {
                 recursos.add(new Tesoro(x, y, 10));
+                labelIndividuoCreado.setText("¡¡Has añadido: TESORO!!");
             }
             mostrarInfo();
         }
@@ -214,6 +223,8 @@ public class VentanaCasillaController {
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
         for (int i = 0; i < recursos.getNumeroElementos(); i++) {
             if (clase == recursos.getElemento(i).getData().getClass()) {
+                Entorno eliminado=recursos.getElemento(i).getData();
+                labelIndividuoCreado.setText("¡¡Has eliminado: "+eliminado.toString());
                 recursos.delete(i);
                 setBotonesNulos();
                 mostrarInfo();

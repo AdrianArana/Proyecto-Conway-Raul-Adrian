@@ -19,4 +19,8 @@ public class Tesoro extends Entorno{
     }
 
 
+    @Override
+    public String toString() {
+        return "TESORO";
+    }
 }

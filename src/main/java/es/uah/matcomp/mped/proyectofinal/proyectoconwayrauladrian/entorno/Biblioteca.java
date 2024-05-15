@@ -21,4 +21,10 @@ public class Biblioteca extends Entorno{
     private void subirDeTipo(Individuo individuo) {
         individuo.setTipo(individuo.getTipo() + 1);
     }
+
+    @Override
+    public String toString() {
+        return "BIBLIOTECA";
+    }
 }
+

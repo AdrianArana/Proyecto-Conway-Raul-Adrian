@@ -11,5 +11,9 @@ public class Agua extends Entorno {
     public void accionAgua(Individuo individuo) {
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()+2);
     }
+    @Override
+    public String toString() {
+        return "AGUA";
+    }
 
 }

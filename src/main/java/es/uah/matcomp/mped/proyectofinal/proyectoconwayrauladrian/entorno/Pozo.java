@@ -10,6 +10,10 @@ public class Pozo extends Entorno{
     public void accionPozo(Individuo individuo){
         individuo.setTurnosVidaRestantes(-1);
     }
+    @Override
+    public String toString() {
+        return "POZO";
+    }
 
 
 }

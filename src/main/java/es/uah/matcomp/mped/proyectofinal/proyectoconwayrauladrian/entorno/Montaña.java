@@ -11,5 +11,8 @@ public class Montaña extends Entorno{
     public void accionMontaña(Individuo individuo){
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()-2);
     }
-
+    @Override
+    public String toString() {
+        return "MONTAÑA";
+    }
 }
