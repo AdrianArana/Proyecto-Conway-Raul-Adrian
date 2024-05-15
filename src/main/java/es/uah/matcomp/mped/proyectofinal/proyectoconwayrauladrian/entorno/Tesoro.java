@@ -4,8 +4,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 
 public class Tesoro extends Entorno{
 
-    public Tesoro(int coordenadaX, int coordenadaY, int tiempoAparicion, int probabilidadDeEsteRecurso) {
-        super(coordenadaX, coordenadaY, tiempoAparicion, probabilidadDeEsteRecurso);
+    public Tesoro(int coordenadaX, int coordenadaY, int tiempoAparicion) {
+        super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
     public void accionTesoro(Individuo individuo) {
@@ -19,4 +19,8 @@ public class Tesoro extends Entorno{
     }
 
 
+    @Override
+    public String toString() {
+        return "TESORO";
+    }
 }

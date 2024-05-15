@@ -27,7 +27,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaJuego;
-
+    int turnoActual;
     //Creamos el tablero vacío, que se generará despues
     ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero = new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
 
@@ -64,15 +64,18 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         try {
             //Casilla accesible, para poder mostrar sus datos
             Casilla casillaActual=tablero.getElemento(i).getData().getElemento(j).getData();
-            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
-            VentanaCasillaController controladorCelda=new VentanaCasillaController();
-
-            VentanaCasillaController ventanaCasillActual = fxmlLoader.getController();
-            ventanaCasillActual.setLabel1("Probabilidad de clonacion: "+casillaActual.getIndividuos().getPrimero().getData().getProbabilidadClonacion() + "," + casillaActual.getCoordenadaY() + ")");
-
-
             stage.setScene(scene);
+            VentanaCasillaController ventanaCasillaController = fxmlLoader.getController();
+            ventanaCasillaController.setStage(stage);
+
+            ventanaCasillaController.setCasilla(casillaActual);
+            //Le mandamos al controlador los parametros deseados
+            ventanaCasillaController.setParametros(parametrosIndividuo, parametrosEntorno, turnoActual);
+            ventanaCasillaController.tomarValores();
+            ventanaCasillaController.mostrarInfo();
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,9 +133,11 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             ListaEnlazadaColumnas<Casilla> filaCompleta = new ListaEnlazadaColumnas<Casilla>();
             for (int y = 1; y <= parametrosCasillas.y().getValue().intValue(); y++) {
                 ElementoCasillaLE<Casilla> casillaNueva = new ElementoCasillaLE<Casilla>(new Casilla(x, y));
-                ElementoLE<Individuo> individuoActual=new ElementoLE<Individuo>(new Individuo());
-                ListaEnlazada<Individuo> individuos= new ListaEnlazada<Individuo>(individuoActual);
-                casillaNueva.getData().setIndividuos(individuos);
+
+
+                //ElementoLE<Individuo> individuoActual=new ElementoLE<Individuo>(new Individuo());
+                //ListaEnlazada<Individuo> individuos= new ListaEnlazada<Individuo>(individuoActual);
+                //casillaNueva.getData().setIndividuos(individuos);
                 filaCompleta.add(casillaNueva);
 
             }

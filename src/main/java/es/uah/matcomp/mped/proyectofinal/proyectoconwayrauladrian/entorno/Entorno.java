@@ -7,11 +7,10 @@ public  class Entorno {
 
     int probabilidadDeEsteRecurso;
 
-    public Entorno(int coordenadaX, int coordenadaY, int tiempoAparicion, int probabilidadDeEsteRecurso) {
+    public Entorno(int coordenadaX, int coordenadaY, int tiempoAparicion) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
         this.tiempoAparicion = tiempoAparicion;
-        this.probabilidadDeEsteRecurso = probabilidadDeEsteRecurso;
     }
 
 

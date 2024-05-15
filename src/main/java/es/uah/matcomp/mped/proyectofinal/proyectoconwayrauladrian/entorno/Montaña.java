@@ -4,12 +4,15 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 
 public class Montaña extends Entorno{
 
-    public Montaña(int coordenadaX, int coordenadaY, int tiempoAparicion, int probabilidadDeEsteRecurso) {
-        super(coordenadaX, coordenadaY, tiempoAparicion, probabilidadDeEsteRecurso);
+    public Montaña(int coordenadaX, int coordenadaY, int tiempoAparicion) {
+        super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
     public void accionMontaña(Individuo individuo){
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()-2);
     }
-
+    @Override
+    public String toString() {
+        return "MONTAÑA";
+    }
 }

@@ -3,8 +3,8 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 
 public class Biblioteca extends Entorno{
-    public Biblioteca(int coordenadaX, int coordenadaY, int tiempoAparicion, int probabilidadDeEsteRecurso) {
-        super(coordenadaX, coordenadaY, tiempoAparicion, probabilidadDeEsteRecurso);
+    public Biblioteca(int coordenadaX, int coordenadaY, int tiempoAparicion) {
+        super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
     public void accionBiblioteca(Individuo individuo) {
@@ -21,4 +21,10 @@ public class Biblioteca extends Entorno{
     private void subirDeTipo(Individuo individuo) {
         individuo.setTipo(individuo.getTipo() + 1);
     }
+
+    @Override
+    public String toString() {
+        return "BIBLIOTECA";
+    }
 }
+

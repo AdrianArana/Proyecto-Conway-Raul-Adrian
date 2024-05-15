@@ -278,12 +278,9 @@ public class ConfiguracionController implements Initializable {
         try {
 
             Scene scene = new Scene(fxmlLoader.load(),750, 500);//Aqui se hace el initialize
-            System.out.println("dffsdsffds");
             stage.setScene(scene);
             stage.setTitle("Juego - La vida de Conway");
-            System.out.println("Anres");
             VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();
-            System.out.println("Despues");
 
             ventanaJuegoController.setParametros(modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
             ventanaJuegoController.crearTableroDeJuego();
