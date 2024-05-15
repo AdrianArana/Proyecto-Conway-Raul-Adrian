@@ -46,17 +46,14 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     @FXML
     public Button finalizarButton;
 
-    private Casilla[][] hacerMatrtiz(int cantidadCasillasX, int cantidadCasillasY) {
-        Tablero tablero = new Tablero(cantidadCasillasX, cantidadCasillasY);
-        //Creamos una matriz para nuestro tablero
-        return tablero.getCasillas();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //ponerle algo
         System.out.println("initi");
     }
+
+    //ACCION AL TOCAR UN BOTON
     @FXML
     protected void onBotonCelda(int i, int j){
         Stage stage = new Stage();
@@ -64,16 +61,14 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         try {
             //Casilla accesible, para poder mostrar sus datos
             Casilla casillaActual=tablero.getElemento(i).getData().getElemento(j).getData();
-            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
             stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
             stage.setScene(scene);
             VentanaCasillaController ventanaCasillaController = fxmlLoader.getController();
             ventanaCasillaController.setStage(stage);
 
-            ventanaCasillaController.setCasilla(casillaActual);
             //Le mandamos al controlador los parametros deseados
-            ventanaCasillaController.setParametros(parametrosIndividuo, parametrosEntorno, turnoActual);
-            ventanaCasillaController.tomarValores();
+            ventanaCasillaController.setParametros(casillaActual,parametrosIndividuo, parametrosEntorno, turnoActual);
             ventanaCasillaController.mostrarInfo();
 
             stage.show();
@@ -83,7 +78,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
 
-    public void crearMatriz() {
+    public void rellenarGridpane() {
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
         for (int i = 0; i < x; i++) {

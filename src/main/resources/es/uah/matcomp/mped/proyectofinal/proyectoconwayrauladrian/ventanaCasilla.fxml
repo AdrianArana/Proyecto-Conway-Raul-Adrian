@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaCasillaController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaCasillaController">
    <children>
       <Label fx:id="individuos" layoutX="61.0" layoutY="60.0" text="INDIVIDUOS:" />
       <Label fx:id="labelCasilla" layoutX="160.0" layoutY="14.0" text="TITULO DE LA CASILLA" />
@@ -117,5 +117,20 @@
          <font>
             <Font size="15.0" />
          </font></Label>
+      <Button fx:id="botonSalir" layoutX="34.0" layoutY="530.0" mnemonicParsing="false" onAction="#onBotonSalir" prefHeight="40.0" prefWidth="160.0" text="Salir">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonAplicarCambios" layoutX="400.0" layoutY="530.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="Aplicar cambios">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonReiniciar" layoutX="219.0" layoutY="530.0" mnemonicParsing="false" onAction="#onBotonReiniciar" prefHeight="40.0" prefWidth="160.0" text="Reiniciar">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

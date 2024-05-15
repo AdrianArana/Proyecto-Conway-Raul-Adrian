@@ -14,10 +14,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class VentanaCasillaController {
     @FXML
     public Label labelCasilla;
     public Label labelIndividuoCreado;
+    public Button botonSalir;
+    public Button botonAplicarCambios;
+    public Button botonReiniciar;
     //El id que se le pone a cada individuo cuando se crea uno nuevo
     //TODO-> HACER QUE FUNCIONE EL ID
     //se me ocurre hacer que se envien a este controlador, desde el del tyablero el
@@ -33,11 +38,10 @@ public class VentanaCasillaController {
     int probabilidadClonacion;
     int probabilidadReproduccion;
 
+    Casilla casillaValoresIniciales=new Casilla();
+
     public void tomarValores() {
-        this.turnosDeVidaRestantes = parametrosIndividuo.turnosVidaRestantesProperty().getValue().intValue();
-        this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
-        this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
-        this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
+
     }
 
     public Label labelIndividuosTipo1;
@@ -131,14 +135,20 @@ public class VentanaCasillaController {
     }
 
 
-    public void setCasilla(Casilla casillaActual) {
-        this.casilla = casillaActual;
-    }
-
-    public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual) {
+    public void setParametros(Casilla casillaActual,ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual) {
         this.parametrosIndividuo = parametrosIndividuo;
         this.parametrosEntorno = parametrosEntorno;
         this.turnoActual = turnoActual;
+        this.casilla = casillaActual;
+        this.turnosDeVidaRestantes = parametrosIndividuo.turnosVidaRestantesProperty().getValue().intValue();
+        this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
+        this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
+        this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
+        //TODO -> No funcionan los botones reiniciar y guardar
+        ListaEnlazada<Individuo> individuos=casilla.getIndividuos();
+        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
+        casillaValoresIniciales.setIndividuos(individuos);
+        casillaValoresIniciales.setRecursos(recursos);
 
     }
 
@@ -229,8 +239,8 @@ public class VentanaCasillaController {
                 labelIndividuoCreado.setText("¡¡Has eliminado: "+eliminado.toString()+"!!");
                 recursos.delete(i);
                 setBotonesNulos();
-                mostrarInfo();
                 casilla.setRecursos(recursos);
+                mostrarInfo();
                 return;
             }
         }
@@ -334,5 +344,17 @@ public class VentanaCasillaController {
 
     public void onBotonEliminarTesoro(ActionEvent actionEvent) {
         eliminarRecurso(Tesoro.class);
+    }
+
+    public void onBotonSalir(ActionEvent actionEvent) {
+        escenaVentana.close();
+    }
+
+
+    public void onBotonReiniciar(ActionEvent actionEvent) {
+        ListaEnlazada<Entorno> recursos=casillaValoresIniciales.getRecursos();
+        ListaEnlazada<Individuo> individuos=casillaValoresIniciales.getIndividuos();
+        casilla.setRecursos(recursos);
+        casilla.setIndividuos(individuos);
     }
 }

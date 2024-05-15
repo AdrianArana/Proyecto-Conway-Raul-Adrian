@@ -140,7 +140,8 @@ public class FuncionesBucle {
             if (individuo1.getProbabilidadReproduccion() >= probabilidadAleatoria ||
                     individuo2.getProbabilidadReproduccion() >= probabilidadAleatoria) {
 
-                Individuo hijo = new Individuo();
+                //TODO -> cambiar valores
+                Individuo hijo = new Individuo(1,1,1,1,1,1,1,1,1);
                 hijo.setId(generarID(casillaActual));
 
 

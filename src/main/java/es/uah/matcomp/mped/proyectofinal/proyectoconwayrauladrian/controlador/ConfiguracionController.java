@@ -277,14 +277,16 @@ public class ConfiguracionController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
 
-            Scene scene = new Scene(fxmlLoader.load(),750, 500);//Aqui se hace el initialize
+            Scene scene = new Scene(fxmlLoader.load(),750, 500);//Aquí se hace el initialize
             stage.setScene(scene);
             stage.setTitle("Juego - La vida de Conway");
             VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();
-
+            //Le mandamos los parámetros al controlador de la siguiente ventana
             ventanaJuegoController.setParametros(modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
+            //Ahora se crea el tablero con la lista de listas
             ventanaJuegoController.crearTableroDeJuego();
-            ventanaJuegoController.crearMatriz();
+            //Se rellena el GridPane
+            ventanaJuegoController.rellenarGridpane();
             ventanaJuegoController.setStage(stage);
             stage.show();
         } catch (Exception e) {
