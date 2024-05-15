@@ -105,6 +105,8 @@ public class VentanaCasillaController {
                 cantidadMontaña++;
             } else if (recursos.getElemento(i).getData().getClass() == Tesoro.class) {
                 cantidadTesoro++;
+            } else if(recursos.getElemento(i).getData().getClass()==Pozo.class){
+                cantidadPozo++;
             }
         }
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
@@ -224,14 +226,14 @@ public class VentanaCasillaController {
         for (int i = 0; i < recursos.getNumeroElementos(); i++) {
             if (clase == recursos.getElemento(i).getData().getClass()) {
                 Entorno eliminado=recursos.getElemento(i).getData();
-                labelIndividuoCreado.setText("¡¡Has eliminado: "+eliminado.toString());
+                labelIndividuoCreado.setText("¡¡Has eliminado: "+eliminado.toString()+"!!");
                 recursos.delete(i);
                 setBotonesNulos();
                 mostrarInfo();
+                casilla.setRecursos(recursos);
                 return;
             }
         }
-        casilla.setRecursos(recursos);
     }
 
     //Funciones para la visualización de los botones
@@ -331,6 +333,6 @@ public class VentanaCasillaController {
     }
 
     public void onBotonEliminarTesoro(ActionEvent actionEvent) {
-        eliminarRecurso(Agua.class);
+        eliminarRecurso(Tesoro.class);
     }
 }
