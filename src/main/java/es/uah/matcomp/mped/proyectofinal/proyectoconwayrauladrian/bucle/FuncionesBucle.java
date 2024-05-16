@@ -12,8 +12,6 @@ import java.util.Random;
 
 public class FuncionesBucle {
 
-
-
     public FuncionesBucle() {
     }
 
@@ -152,6 +150,8 @@ public class FuncionesBucle {
                 Individuo hijo = new Individuo();
 
                 //genero su id
+                //TODO -> cambiar valores
+                Individuo hijo = new Individuo(1,1,1,1,1,1,1,1,1);
                 hijo.setId(generarID(casillaActual));
                 //su generacion
                 int generacion = Math.max(individuo1.getTurnoGeneracion(), individuo2.getTurnoGeneracion());
@@ -219,6 +219,8 @@ public class FuncionesBucle {
 
 
                 individuos.add(clon);
+
+
                 casillaActual.setIndividuos(individuos);
 
             }

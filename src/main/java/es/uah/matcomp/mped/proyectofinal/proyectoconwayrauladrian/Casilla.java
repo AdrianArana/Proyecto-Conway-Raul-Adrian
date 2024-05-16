@@ -6,8 +6,6 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 
 public class Casilla {
-
-
     private int coordenadaX;
     private int coordenadaY;
     ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
@@ -19,7 +17,6 @@ public class Casilla {
     }
 
     public Casilla() {
-
     }
 
     public int getCoordenadaX() {
