@@ -132,5 +132,6 @@
             <Font name="Baskerville Old Face" size="20.0" />
          </font>
       </Button>
+      <Text layoutX="400.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECURSOS:" />
    </children>
 </AnchorPane>

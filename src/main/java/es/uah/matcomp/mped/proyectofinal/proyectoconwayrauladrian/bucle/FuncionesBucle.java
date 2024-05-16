@@ -42,7 +42,9 @@ public class FuncionesBucle {
 
 
 
-
+    //por cada turno, todos los individuos pierden 1 vida
+    //si los turnos de vida del individuo son menores o ihuales a cero, se eliminan de la casilla y de la lisat de individuos
+    //a los individuos por cada turno, se les actualiza su probabilidad de reproduccion y de clonacion
     public void tiempoDeVida(Casilla casillaActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
@@ -58,15 +60,28 @@ public class FuncionesBucle {
         }
 
         for (int k = 0; k < individuos.getNumeroElementos(); k++) {
-            individuos.getElemento(k).getData().setProbabilidadReproduccion((individuos.getElemento(k).getData().getProbabilidadReproduccion()) - (10));
-        }
-        for (int l = 0; l < individuos.getNumeroElementos(); l++) {
+            if (individuos.getElemento(k).getData().getProbabilidadReproduccion()>=10){
+                individuos.getElemento(k).getData().setProbabilidadReproduccion((individuos.getElemento(k).getData().getProbabilidadReproduccion()) - (10));
+            }
+            else{
+                individuos.getElemento(k).getData().setProbabilidadReproduccion(0);
+            }
 
-            individuos.getElemento(l).getData().setProbabilidadClonacion(individuos.getElemento(l).getData().getProbabilidadClonacion() - (10));
+        }
+
+        for (int l = 0; l < individuos.getNumeroElementos(); l++) {
+            if (individuos.getElemento(l).getData().getProbabilidadClonacion()>=10){
+                individuos.getElemento(l).getData().setProbabilidadReproduccion((individuos.getElemento(l).getData().getProbabilidadClonacion()) - (10));
+            }
+            else{
+                individuos.getElemento(l).getData().setProbabilidadClonacion(0);
+            }
+
         }
     }
 
     public void recursoActivo(Casilla casillaActual) {
+
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
 
         for (int i = 0; i < entorno.getNumeroElementos(); i++) {
@@ -84,6 +99,12 @@ public class FuncionesBucle {
 
 
     //HACER LA FUNCION DE LOS MOVIMIENTOS DE LOS INDIVIDUOS //todo
+
+
+
+
+
+
 
 
 
@@ -127,9 +148,11 @@ public class FuncionesBucle {
 
     }
 
+
+
+
     // Si 2 individuos ocupan la misma posición de la matriz, o se
     //reproducen generando otro individuo más, o mueren ambos
-
     //La reproducción de dos individuos del mismo tipo da lugar a otro individuo de ese tipo.
     //• La reproducción de individuos de distinto tipo da lugar a otro individuo del tipo más alto
 
@@ -147,7 +170,6 @@ public class FuncionesBucle {
             if (individuo1.getProbabilidadReproduccion() >= probabilidadAleatoria ||
                     individuo2.getProbabilidadReproduccion() >= probabilidadAleatoria) {
 
-                Individuo hijo = new Individuo();
 
                 //genero su id
                 //TODO -> cambiar valores
@@ -177,6 +199,12 @@ public class FuncionesBucle {
             }
 
             else {
+                for (int i=0; i<individuos.getNumeroElementos();i++){
+                    if (individuos.getElemento(i).getData().getProbabilidadMuerte()>probabilidadAleatoria){
+                        individuos.delete(i);
+                        casillaActual.setIndividuos(individuos);
+                    }
+                }
                 System.out.println("No hay reproduccion");
             }
         } else if (individuos.getNumeroElementos() == 3) {
@@ -231,6 +259,9 @@ public class FuncionesBucle {
 
 
     //individuos desaparecen cuando sus turnos de vida son menores o iguales que 1 y tambien desaparecen si caen al pozo y luego su proababilidadde muerte es 1-prob.de.reproduccion
+
+
+
     public void muerteIndividuos(Casilla casillaActual){
         Random random= new Random();
         int probabilidadsobrevivir= random.nextInt(101);
