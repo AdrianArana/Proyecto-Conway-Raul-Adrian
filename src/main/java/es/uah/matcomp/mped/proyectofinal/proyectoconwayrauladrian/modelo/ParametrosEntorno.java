@@ -9,8 +9,9 @@ public class ParametrosEntorno {
     private int probabilidadTesoro;
     private int probabilidadBiblioteca;
     private int probabilidadPozo;
+    private int probabilidadGeneral;
 
-    public ParametrosEntorno( int probabilidadAgua, int probabilidadComida, int probabilidadMontaña, int probabilidadTesoro, int probabilidadBiblioteca, int probabilidadPozo) {
+    public ParametrosEntorno(int probabilidadGeneral, int probabilidadAgua, int probabilidadComida, int probabilidadMontaña, int probabilidadTesoro, int probabilidadBiblioteca, int probabilidadPozo) {
 
         this.probabilidadAgua = probabilidadAgua;
         this.probabilidadComida = probabilidadComida;
@@ -18,6 +19,7 @@ public class ParametrosEntorno {
         this.probabilidadTesoro = probabilidadTesoro;
         this.probabilidadBiblioteca = probabilidadBiblioteca;
         this.probabilidadPozo = probabilidadPozo;
+        this.probabilidadGeneral = probabilidadGeneral;
     }
 
     public ParametrosEntorno() {
@@ -70,5 +72,12 @@ public class ParametrosEntorno {
 
     public void setProbabilidadPozo(int probabilidadPozo) {
         this.probabilidadPozo = probabilidadPozo;
+    }
+
+    public void setProbabilidadGeneral(int probabilidadGeneral) {
+        this.probabilidadGeneral = probabilidadGeneral;
+    }
+    public int getProbabilidadGeneral(){
+        return probabilidadGeneral;
     }
 }

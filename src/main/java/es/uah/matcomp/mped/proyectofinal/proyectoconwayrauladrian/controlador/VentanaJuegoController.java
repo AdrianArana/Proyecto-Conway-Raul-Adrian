@@ -63,14 +63,14 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         try {
             //Casilla accesible, para poder mostrar sus datos
             Casilla casillaActual=tablero.getElemento(i).getData().getElemento(j).getData();
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
             stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
             stage.setScene(scene);
             VentanaCasillaController ventanaCasillaController = fxmlLoader.getController();
             ventanaCasillaController.setStage(stage);
 
             //Le mandamos al controlador los parametros deseados
-            ventanaCasillaController.setParametros(casillaActual,parametrosIndividuo, parametrosEntorno, turnoActual);
+            ventanaCasillaController.setParametros(casillaActual,parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anteriort para que non haya ids repetidos
             ventanaCasillaController.cogerValoresIniciales();
             ventanaCasillaController.mostrarInfo();
 
@@ -87,8 +87,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 Button celdaButton = new Button();
-                celdaButton.setMinSize((double) 400 / x, (double) 400 / y);
-                celdaButton.setMaxSize((double) 400 / x, (double) 400 / y);
+                celdaButton.setMinSize((double) 600 / x, (double) 600 / y);
+                celdaButton.setMaxSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setStyle("-fx-border-color: #3385fa; -fx-text-alignment: center;");
                 int finalI = i;
                 int finalJ = j;
@@ -111,7 +111,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaFinalizarJuego.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
             stage.setTitle("Fin del Juego");
             stage.setScene(scene);
             stage.show();
@@ -125,7 +125,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
             stage.setTitle("Configuración de parámetros");
             stage.setScene(scene);
             stage.show();
@@ -135,9 +135,9 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
 
-    //TODO-> Borrar esta funcion, es solo temporal y valdra para probar metodos hasta que este todo finalizado
     public void onPlayButton() {
-        recorrerCasillas(tablero);
+        turnoActual++;
+        recorrerCasillas(tablero,turnoActual);
     }
 
     public void crearTableroDeJuego() {

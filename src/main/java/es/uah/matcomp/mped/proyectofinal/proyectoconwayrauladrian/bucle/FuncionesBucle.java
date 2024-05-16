@@ -15,7 +15,7 @@ public class FuncionesBucle {
     public FuncionesBucle() {
     }
 
-    public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
+    public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual) {
         int filas = tablero.getNumeroFilas();
         for (int fila = 0; fila < filas; fila++) {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
@@ -27,19 +27,17 @@ public class FuncionesBucle {
                 System.out.println("CasillaActual: " + casillaActual.toString());
 
 
-
                 //esto segun lo que me explico arana asi chequearemos el bucle???
 
                 tiempoDeVida(casillaActual);
                 recursoActivo(casillaActual);
-                reproduccion(casillaActual);
-                clonacion(casillaActual);
+                reproduccion(casillaActual, turnoActual);
+                clonacion(casillaActual, turnoActual);
                 muerteIndividuos(casillaActual);
                 aparicionRecursos(casillaActual);
             }
         }
     }
-
 
 
     //por cada turno, todos los individuos pierden 1 vida
@@ -60,24 +58,22 @@ public class FuncionesBucle {
         }
 
         for (int k = 0; k < individuos.getNumeroElementos(); k++) {
-            if (individuos.getElemento(k).getData().getProbabilidadReproduccion()>=10){
+            if (individuos.getElemento(k).getData().getProbabilidadReproduccion() >= 10) {
                 individuos.getElemento(k).getData().setProbabilidadReproduccion((individuos.getElemento(k).getData().getProbabilidadReproduccion()) - (10));
-            }
-            else{
+            } else {
                 individuos.getElemento(k).getData().setProbabilidadReproduccion(0);
             }
 
         }
 
         for (int l = 0; l < individuos.getNumeroElementos(); l++) {
-            if (individuos.getElemento(l).getData().getProbabilidadClonacion()>=10){
+            if (individuos.getElemento(l).getData().getProbabilidadClonacion() >= 10) {
                 individuos.getElemento(l).getData().setProbabilidadReproduccion((individuos.getElemento(l).getData().getProbabilidadClonacion()) - (10));
-            }
-            else{
+            } else {
                 individuos.getElemento(l).getData().setProbabilidadClonacion(0);
             }
-
         }
+        casillaActual.setIndividuos(individuos);
     }
 
     public void recursoActivo(Casilla casillaActual) {
@@ -94,22 +90,14 @@ public class FuncionesBucle {
                 casillaActual.setRecursos(entorno);
             }
         }
-
+        casillaActual.setRecursos(entorno);
     }
 
 
     //HACER LA FUNCION DE LOS MOVIMIENTOS DE LOS INDIVIDUOS //todo
 
 
-
-
-
-
-
-
-
-
-//hacer la funcion de mejoras del individuo
+    //hacer la funcion de mejoras del individuo
 /*
     public void mejorasIndividuos(Casilla casillaActual){
 
@@ -131,24 +119,22 @@ public class FuncionesBucle {
 
 
  */
-
+    //todo CUIDAO
     public int generarID(Casilla casillaActual) {
-        ListaEnlazada<Individuo> individuos= casillaActual.getIndividuos();
+        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
 
 
         int id = 0;
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
-            if(individuos.getElemento(i).getData().getId()>id){
-                id=individuos.getElemento(i).getData().getId();
+            if (individuos.getElemento(i).getData().getId() > id) {
+                id = individuos.getElemento(i).getData().getId();
             }
         }
-        id=id+1;
+        id = id + 1;
         return id;
 
 
     }
-
-
 
 
     // Si 2 individuos ocupan la misma posición de la matriz, o se
@@ -157,7 +143,7 @@ public class FuncionesBucle {
     //• La reproducción de individuos de distinto tipo da lugar a otro individuo del tipo más alto
 
 
-    public void reproduccion(Casilla casillaActual) {
+    public void reproduccion(Casilla casillaActual, int turnoActual) {
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
 
         if (individuos.getNumeroElementos() == 2) {
@@ -173,34 +159,28 @@ public class FuncionesBucle {
 
                 //genero su id
                 //TODO -> cambiar valores
-                Individuo hijo = new Individuo(1,1,1,1,1,1,1,1,1);
+                Individuo hijo = new Individuo();
                 hijo.setId(generarID(casillaActual));
                 //su generacion
-                int generacion = Math.max(individuo1.getTurnoGeneracion(), individuo2.getTurnoGeneracion());
-                hijo.setTurnoGeneracion(generacion);
 
-                //el tipo
-                if (individuo1.getTipo() == individuo2.getTipo()) {
-                    hijo.setTipo(individuo1.getTipo());
-                }
-                else {
-                    hijo.setTipo(Math.max(individuo1.getTipo(), individuo2.getTipo()));
-                }
+                hijo.setTurnoGeneracion(turnoActual);
+
+                hijo.setTipo(Math.max(individuo1.getTipo(), individuo2.getTipo()));
+
                 //su probabilidad de reproduccion y clonacion sera la misma q la del padre
-                hijo.setProbabilidadClonacion(individuo1.getProbabilidadClonacion());
-                hijo.setProbabilidadReproduccion(individuo1.getProbabilidadReproduccion());
-                hijo.setProbabilidadMuerte(individuo1.getProbabilidadMuerte());
+                hijo.setProbabilidadClonacion(Math.max(individuo1.getProbabilidadReproduccion(), individuo2.getProbabilidadClonacion()));
+                hijo.setProbabilidadReproduccion(Math.max(individuo1.getProbabilidadReproduccion(), individuo2.getProbabilidadReproduccion()));
+                hijo.setProbabilidadMuerte(Math.min(individuo1.getProbabilidadMuerte(), individuo2.getProbabilidadMuerte()));
+                hijo.setTurnosVidaRestantes(Math.max(individuo1.getTurnosVidaRestantes(), individuo2.getTurnosVidaRestantes()));
                 hijo.setCoordenadaX(individuo1.getCoordenadaX());
                 hijo.setCoordenadaY(individuo1.getCoordenadaY());
 
 
                 individuos.add(hijo);
                 casillaActual.setIndividuos(individuos);
-            }
-
-            else {
-                for (int i=0; i<individuos.getNumeroElementos();i++){
-                    if (individuos.getElemento(i).getData().getProbabilidadMuerte()>probabilidadAleatoria){
+            } else {
+                for (int i = 0; i < individuos.getNumeroElementos(); i++) {
+                    if (individuos.getElemento(i).getData().getProbabilidadMuerte() > probabilidadAleatoria) {
                         individuos.delete(i);
                         casillaActual.setIndividuos(individuos);
                     }
@@ -208,92 +188,71 @@ public class FuncionesBucle {
                 System.out.println("No hay reproduccion");
             }
         } else if (individuos.getNumeroElementos() == 3) {
-            System.out.println("YA HAY 3 INDIVIDUOS EN LA CELDA, IMPOSIBLE REPRODUCIRSE");
+            System.out.println("YA HAY 3 INDIVIDUOS EN LA CELDA, IMPOSIBLE REPRODUCIRSE");//todo quitarlo
         }
     }
 
 
-
-
-
     //un individuo puede clonarse a sí mismo, y el clon
     //aparecerá en la misma posición del mapa.
-    public void clonacion(Casilla casillaActual){
+    public void clonacion(Casilla casillaActual, int turnoActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
 
-        for(int i=0; i<individuos.getNumeroElementos(); i++){
-            Random random= new Random();
-            int probabilidad= random.nextInt(101);
+        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
+            Random random = new Random();
+            int probabilidad = random.nextInt(101);
+            Individuo individuo = individuos.getElemento(i).getData();
+            if (probabilidad <= individuos.getElemento(i).getData().getProbabilidadClonacion()) {
 
-            if(probabilidad<=individuos.getElemento(i).getData().getProbabilidadClonacion()){
 
-
-                Individuo clon= new Individuo(); //todo ver si coje bien la informacion el clon
+                Individuo clon = new Individuo(); //todo ver si coje bien la informacion el clon
 
                 //id
                 clon.setId(generarID(casillaActual));
                 //generacion
-                clon.setTurnoGeneracion(individuos.getElemento(i).getData().getTurnoGeneracion());
+                clon.setTurnoGeneracion(turnoActual);
 
                 //el tipo
                 clon.setTipo(individuos.getElemento(i).getData().getTipo());
                 //su probabilidad de reproduccion y clonacion sera la misma q la del padre
-                clon.setProbabilidadClonacion(individuos.getElemento(i).getData().getProbabilidadClonacion());
-                clon.setProbabilidadReproduccion(individuos.getElemento(i).getData().getProbabilidadReproduccion());
+                clon.setProbabilidadClonacion(individuo.getProbabilidadClonacion());
+                clon.setProbabilidadReproduccion(individuo.getProbabilidadReproduccion());
                 clon.setProbabilidadMuerte(individuos.getElemento(i).getData().getProbabilidadMuerte());
-                clon.setCoordenadaX(individuos.getElemento(i).getData().getCoordenadaX());
-                clon.setCoordenadaY(individuos.getElemento(i).getData().getCoordenadaY());
-
-
+                clon.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes());
+                clon.setCoordenadaX(individuo.getCoordenadaX());
+                clon.setCoordenadaY(individuo.getCoordenadaY());
                 individuos.add(clon);
-
-
                 casillaActual.setIndividuos(individuos);
 
             }
         }
 
     }
-
 
 
     //individuos desaparecen cuando sus turnos de vida son menores o iguales que 1 y tambien desaparecen si caen al pozo y luego su proababilidadde muerte es 1-prob.de.reproduccion
 
 
-
-    public void muerteIndividuos(Casilla casillaActual){
-        Random random= new Random();
-        int probabilidadsobrevivir= random.nextInt(101);
-
+    public void muerteIndividuos(Casilla casillaActual) {
+        Random random = new Random();
+        int probabilidadsobrevivir = random.nextInt(101);
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
-
-        for (int i=0; i<individuos.getNumeroElementos(); i++){
-            if (individuos.getElemento(i).getData().getTurnosVidaRestantes()<1){
+        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
+            if (individuos.getElemento(i).getData().getTurnosVidaRestantes() < 1) {
                 individuos.delete(i);
-                casillaActual.setIndividuos(individuos);
-            }
-
-            else if (probabilidadsobrevivir<individuos.getElemento(i).getData().getProbabilidadMuerte()){
+            } else if (probabilidadsobrevivir < individuos.getElemento(i).getData().getProbabilidadMuerte()) {
                 individuos.delete(i);
-                casillaActual.setIndividuos(individuos);
-
-            }
-
-            else{
-                for (int j=0; j<entorno.getNumeroElementos();j++){
-                    if (entorno.getElemento(j).getData().getClass()== Pozo.class){
+            } else {
+                for (int j = 0; j < entorno.getNumeroElementos(); j++) {
+                    if (entorno.getElemento(j).getData().getClass() == Pozo.class) {
                         individuos.delete(i);
-                        casillaActual.setIndividuos(individuos);
                     }
                 }
-
             }
-
-
-
         }
+        casillaActual.setIndividuos(individuos);
 
     }
 
@@ -301,65 +260,64 @@ public class FuncionesBucle {
     //ME FALTA LA FUNCION DE APARICION DE RECURSOS
 
 
-
     //los recursos aparecen si una probabilidad de aparicion de recursos gana a la probabilidad generada aleatoriamente, si haay mas de 3 recursos en una posicion no pueden incluirse mas recursos en esta
     //se va a ir comparando la probabilidad de creacion de un nuevo recurso y la probabilidad de aparecer el recurso x, si la probabiliad de el nuevo recurso a aparecer es mayor que la probabilidad de el recurso x, entonces se crea un nuevo recurso del tipo x.
 
 
-   //todo /con como lo he hecho, los reecursos saben la posicion en la que van a aparecer???????
+    //todo /con como lo he hecho, los reecursos saben la posicion en la que van a aparecer???????
 
     //todo?????????¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿por cada vez que le demos a avanzar va a haber una probabilidad distinta de si puede aparecer un nuevo recurso o no (simulando como que cada tiempo hay distintas vecees en las cuales hay mas recursos o menos) y si esta es mayor que la probabilidad de aparicion de un nuevo recurso entonces se llevaran acabo todas las probabilidades de lo demas
-    public void aparicionRecursos(Casilla casillaActual){
+    public void aparicionRecursos(Casilla casillaActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
-        ParametrosEntorno parametrosEntorno= new ParametrosEntorno();
+        ParametrosEntorno parametrosEntorno = new ParametrosEntorno();
 
 
-        while (entorno.getNumeroElementos()<3){
-            Random random= new Random();
-            int probabilidaddenuevorecurso= random.nextInt(101);
+        if (entorno.getNumeroElementos() < 3) {
+            //Sumamos todos los valores de las probabilidades, generamos un número aleatorio entre el 1 y el de la suma total
+            int sumatotal = parametrosEntorno.getProbabilidadAgua() + parametrosEntorno.getProbabilidadBiblioteca() +
+                    parametrosEntorno.getProbabilidadComida() + parametrosEntorno.getProbabilidadMontaña() +
+                    parametrosEntorno.getProbabilidadPozo() + parametrosEntorno.getProbabilidadTesoro();
 
-            if (probabilidaddenuevorecurso> parametrosEntorno.getProbabilidadAgua()){
-                Agua agua= new Agua();
+            int cota1 = parametrosEntorno.getProbabilidadAgua();
+            int cota2 = cota1 + parametrosEntorno.getProbabilidadBiblioteca();
+            int cota3 = cota2 + parametrosEntorno.getProbabilidadComida();
+            int cota4 = cota3 + parametrosEntorno.getProbabilidadPozo();
+            int cota5 = cota4 + parametrosEntorno.getProbabilidadTesoro();
+            Random random = new Random();
+            int probabilidadDeNuevorecurso = random.nextInt(sumatotal);
+            if (probabilidadDeNuevorecurso <= cota1) {
+                Agua agua = new Agua();
                 agua.setTiempoAparicion(3);
                 entorno.add(agua);
                 casillaActual.setRecursos(entorno);
-            }
-
-            if(probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadComida()){
-                Comida comida= new Comida();
+            } else if (probabilidadDeNuevorecurso <= cota2) {
+                Biblioteca biblioteca = new Biblioteca();
+                biblioteca.setTiempoAparicion(3);
+                entorno.add(biblioteca);
+                casillaActual.setRecursos(entorno);
+            } else if (probabilidadDeNuevorecurso <= cota3) {
+                Comida comida = new Comida();
                 comida.setTiempoAparicion(3);
                 entorno.add(comida);
                 casillaActual.setRecursos(entorno);
             }
-
-            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadMontaña()){
-                Montaña montaña= new Montaña();
-                montaña.setTiempoAparicion(3);
-                entorno.add(montaña);
-                casillaActual.setRecursos(entorno);
-            }
-
-            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadBiblioteca()){
-                Biblioteca biblioteca= new Biblioteca();
-                biblioteca.setTiempoAparicion(3);
-                entorno.add(biblioteca);
-                casillaActual.setRecursos(entorno);
-            }
-
-            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadPozo()){
-                Pozo pozo= new Pozo();
+            if (probabilidadDeNuevorecurso <= cota4) {
+                Pozo pozo = new Pozo();
                 pozo.setTiempoAparicion(3);
                 entorno.add(pozo);
                 casillaActual.setRecursos(entorno);
             }
-
-
-            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadTesoro()){
-                Tesoro tesoro= new Tesoro();
+            if (probabilidadDeNuevorecurso <= cota5) {
+                Tesoro tesoro = new Tesoro();
                 tesoro.setTiempoAparicion(3);
                 entorno.add(tesoro);
+                casillaActual.setRecursos(entorno);
+            }else {
+                Montaña montaña = new Montaña();
+                montaña.setTiempoAparicion(3);
+                entorno.add(montaña);
                 casillaActual.setRecursos(entorno);
             }
 

@@ -14,7 +14,7 @@ public class ParametrosEntornoModelProperties {
     private IntegerProperty probabilidadMontaña = new SimpleIntegerProperty();
     private IntegerProperty probabilidadPozo = new SimpleIntegerProperty();
     private IntegerProperty probabilidadTesoro = new SimpleIntegerProperty();
-
+    private IntegerProperty probabilidadGeneral=new SimpleIntegerProperty();
 
     public ParametrosEntornoModelProperties(ParametrosEntorno original){
         setOriginal(original);
@@ -27,6 +27,7 @@ public class ParametrosEntornoModelProperties {
         valoresOriginales.setProbabilidadMontaña(probabilidadMontaña.get());
         valoresOriginales.setProbabilidadPozo(probabilidadPozo.get());
         valoresOriginales.setProbabilidadTesoro(probabilidadTesoro.get());
+        valoresOriginales.setProbabilidadGeneral(probabilidadGeneral.get());
     }
 
     public void rollback(){
@@ -36,6 +37,7 @@ public class ParametrosEntornoModelProperties {
         probabilidadMontaña.set(valoresOriginales.getProbabilidadMontaña());
         probabilidadPozo.set(valoresOriginales.getProbabilidadPozo());
         probabilidadTesoro.set(valoresOriginales.getProbabilidadTesoro());
+        probabilidadGeneral.set(valoresOriginales.getProbabilidadGeneral());
     }
 
 
@@ -54,4 +56,5 @@ public class ParametrosEntornoModelProperties {
     public Property<Number> probabilidadMontaña(){return probabilidadMontaña;}
     public Property<Number> probabilidadPozo(){return probabilidadPozo;}
     public Property<Number> probabilidadTesoro(){return probabilidadTesoro;}
+    public Property<Number> probabilidadGeneral() {return probabilidadGeneral;}
 }

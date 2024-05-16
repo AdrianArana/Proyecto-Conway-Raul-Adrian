@@ -354,7 +354,6 @@ public class VentanaCasillaController {
     }
 
     public void cogerValoresIniciales() {
-        //TODO -> No funcionan los botones reiniciar y guardar
         ListaEnlazada<Individuo> individuos=casilla.getIndividuos();
         ListaEnlazada<Entorno> recursos=casilla.getRecursos();
         int x=casilla.getCoordenadaX();

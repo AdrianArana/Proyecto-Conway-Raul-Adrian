@@ -30,6 +30,7 @@ public class ConfiguracionController implements Initializable {
     public Slider sliderCasillasY;
     public Label labelValorSliderCasillasX;
     public Label labelValorSliderCasillasY;
+    public Slider sliderProbabilidadGeneral;
 
 
     @FXML
@@ -117,6 +118,7 @@ public class ConfiguracionController implements Initializable {
         sliderProbabilidadClonacion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadClonacionProperty());
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadReproduccionProperty());
         //Bindeamos los sliders de del entorno
+        sliderProbabilidadGeneral.valueProperty().bindBidirectional(parametrosEntorno.probabilidadGeneral());
         sliderAgua.valueProperty().bindBidirectional(parametrosEntorno.probabilidadAgua());
         sliderBiblioteca.valueProperty().bindBidirectional(parametrosEntorno.probabilidadBiblioteca());
         sliderComida.valueProperty().bindBidirectional(parametrosEntorno.probabilidadComida());

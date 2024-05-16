@@ -26,7 +26,7 @@ public class NombreController implements Initializable {
     private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
     private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo = new ParametrosIndividuoModelProperties(parametrosData);
 
-    private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20);
+    private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20,20);
     private ParametrosEntornoModelProperties modeloGuiCompartidoEntorno = new ParametrosEntornoModelProperties(parametrosDataEntorno);
 
     private ParametrosCasillas parametrosDataCasillas = new ParametrosCasillas(20,20);
@@ -60,7 +60,7 @@ public class NombreController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInicial.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
             stage.setTitle("Conway - El juego de la vida");
             stage.setScene(scene);
             stage.show();
