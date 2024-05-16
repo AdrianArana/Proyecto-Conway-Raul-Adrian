@@ -10,7 +10,7 @@ class MontañaTest {
     @Test
     void accionMontaña() {
         Individuo individuo= new Individuo(3,1,1,1,1,1,1,1,1);
-        Montaña montaña= new Montaña(1,1,1,1);
+        Montaña montaña= new Montaña(1,1,1);
 
         montaña.accionMontaña(individuo);
 

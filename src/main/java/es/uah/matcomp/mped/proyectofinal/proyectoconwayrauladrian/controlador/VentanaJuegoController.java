@@ -45,6 +45,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     public GridPane gridPane;
     @FXML
     public Button finalizarButton;
+    @FXML
+    public Button pauseButton;
 
     private Casilla[][] hacerMatrtiz(int cantidadCasillasX, int cantidadCasillasY) {
         Tablero tablero = new Tablero(cantidadCasillasX, cantidadCasillasY);
@@ -115,6 +117,20 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         try {
             Scene scene = new Scene(fxmlLoader.load(), 750, 500);
             stage.setTitle("Fin del Juego");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void onPauseButton() {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            stage.setTitle("Configuración de parámetros");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

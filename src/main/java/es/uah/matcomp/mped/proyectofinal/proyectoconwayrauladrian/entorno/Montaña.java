@@ -8,6 +8,10 @@ public class Montaña extends Entorno{
         super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
+    public Montaña() {
+
+    }
+
     public void accionMontaña(Individuo individuo){
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()-2);
     }

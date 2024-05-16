@@ -10,7 +10,7 @@ class BibliotecaTest {
     @Test
     void accionBiblioteca() {
         Individuo individuo=new Individuo(2,2,2,2,2,2,2,2,2);
-        Biblioteca biblioteca= new Biblioteca(1,1,1,1);
+        Biblioteca biblioteca= new Biblioteca(1,1,1);
         biblioteca.accionBiblioteca(individuo);
 
         assertEquals(22, individuo.getProbabilidadClonacion());

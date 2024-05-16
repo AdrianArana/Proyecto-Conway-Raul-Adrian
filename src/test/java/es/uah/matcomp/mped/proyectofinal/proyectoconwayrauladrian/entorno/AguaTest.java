@@ -10,7 +10,7 @@ class AguaTest {
     @Test
     void accionAgua() {
         Individuo individuo=new Individuo(2,2,2,2,2,2,2,2,2);
-        Agua agua=new Agua(1,1,3,23);
+        Agua agua=new Agua(1,1,3);
 
         agua.accionAgua(individuo);
 

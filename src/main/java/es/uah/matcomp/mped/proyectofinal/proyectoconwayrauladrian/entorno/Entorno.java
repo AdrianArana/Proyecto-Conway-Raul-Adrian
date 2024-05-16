@@ -13,6 +13,10 @@ public  class Entorno {
         this.tiempoAparicion = tiempoAparicion;
     }
 
+    public Entorno() {
+
+    }
+
 
     public int getCoordenadaX() {
         return coordenadaX;

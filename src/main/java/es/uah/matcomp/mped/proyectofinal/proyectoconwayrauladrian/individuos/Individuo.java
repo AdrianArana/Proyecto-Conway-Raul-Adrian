@@ -19,6 +19,10 @@ public class Individuo extends ParametrosIndividuo{
         this.turnoGeneracion = turnoGeneracion;
     }
 
+    public Individuo() {
+    }
+
+
     @Override
     public String toString() {
         return

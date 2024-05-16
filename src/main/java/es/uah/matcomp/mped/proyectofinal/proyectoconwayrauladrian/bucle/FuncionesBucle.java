@@ -1,16 +1,18 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Pozo;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntorno;
 
 import java.util.Random;
 
 public class FuncionesBucle {
+
+
 
     public FuncionesBucle() {
     }
@@ -25,17 +27,24 @@ public class FuncionesBucle {
                 // NO DESDE EL 0 AL 9 COMO AQUI, PUEDE QUE DE PROBLEMAS
                 Casilla casillaActual = filaActual.getElemento(columna).getData();//Ya podemos trabajar con cada casilla
                 System.out.println("CasillaActual: " + casillaActual.toString());
+
+
+
+                //esto segun lo que me explico arana asi chequearemos el bucle???
+
                 tiempoDeVida(casillaActual);
                 recursoActivo(casillaActual);
                 reproduccion(casillaActual);
                 clonacion(casillaActual);
                 muerteIndividuos(casillaActual);
+                aparicionRecursos(casillaActual);
             }
         }
     }
 
 
-    //todo
+
+
     public void tiempoDeVida(Casilla casillaActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
@@ -141,18 +150,26 @@ public class FuncionesBucle {
                     individuo2.getProbabilidadReproduccion() >= probabilidadAleatoria) {
 
                 Individuo hijo = new Individuo();
+
+                //genero su id
                 hijo.setId(generarID(casillaActual));
-
-
+                //su generacion
                 int generacion = Math.max(individuo1.getTurnoGeneracion(), individuo2.getTurnoGeneracion());
                 hijo.setTurnoGeneracion(generacion);
 
+                //el tipo
                 if (individuo1.getTipo() == individuo2.getTipo()) {
                     hijo.setTipo(individuo1.getTipo());
                 }
                 else {
                     hijo.setTipo(Math.max(individuo1.getTipo(), individuo2.getTipo()));
                 }
+                //su probabilidad de reproduccion y clonacion sera la misma q la del padre
+                hijo.setProbabilidadClonacion(individuo1.getProbabilidadClonacion());
+                hijo.setProbabilidadReproduccion(individuo1.getProbabilidadReproduccion());
+                hijo.setProbabilidadMuerte(individuo1.getProbabilidadMuerte());
+                hijo.setCoordenadaX(individuo1.getCoordenadaX());
+                hijo.setCoordenadaY(individuo1.getCoordenadaY());
 
 
                 individuos.add(hijo);
@@ -184,12 +201,24 @@ public class FuncionesBucle {
             if(probabilidad<=individuos.getElemento(i).getData().getProbabilidadClonacion()){
 
 
-                Individuo clon= individuos.getElemento(i).getData();
+                Individuo clon= new Individuo(); //todo ver si coje bien la informacion el clon
+
+                //id
                 clon.setId(generarID(casillaActual));
+                //generacion
                 clon.setTurnoGeneracion(individuos.getElemento(i).getData().getTurnoGeneracion());
+
+                //el tipo
+                clon.setTipo(individuos.getElemento(i).getData().getTipo());
+                //su probabilidad de reproduccion y clonacion sera la misma q la del padre
+                clon.setProbabilidadClonacion(individuos.getElemento(i).getData().getProbabilidadClonacion());
+                clon.setProbabilidadReproduccion(individuos.getElemento(i).getData().getProbabilidadReproduccion());
+                clon.setProbabilidadMuerte(individuos.getElemento(i).getData().getProbabilidadMuerte());
+                clon.setCoordenadaX(individuos.getElemento(i).getData().getCoordenadaX());
+                clon.setCoordenadaY(individuos.getElemento(i).getData().getCoordenadaY());
+
+
                 individuos.add(clon);
-
-
                 casillaActual.setIndividuos(individuos);
 
             }
@@ -237,6 +266,73 @@ public class FuncionesBucle {
 
 
     //ME FALTA LA FUNCION DE APARICION DE RECURSOS
+
+
+
+    //los recursos aparecen si una probabilidad de aparicion de recursos gana a la probabilidad generada aleatoriamente, si haay mas de 3 recursos en una posicion no pueden incluirse mas recursos en esta
+    //se va a ir comparando la probabilidad de creacion de un nuevo recurso y la probabilidad de aparecer el recurso x, si la probabiliad de el nuevo recurso a aparecer es mayor que la probabilidad de el recurso x, entonces se crea un nuevo recurso del tipo x.
+
+
+   //todo /con como lo he hecho, los reecursos saben la posicion en la que van a aparecer???????
+
+    //todo?????????¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿por cada vez que le demos a avanzar va a haber una probabilidad distinta de si puede aparecer un nuevo recurso o no (simulando como que cada tiempo hay distintas vecees en las cuales hay mas recursos o menos) y si esta es mayor que la probabilidad de aparicion de un nuevo recurso entonces se llevaran acabo todas las probabilidades de lo demas
+    public void aparicionRecursos(Casilla casillaActual){
+
+        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
+        ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
+        ParametrosEntorno parametrosEntorno= new ParametrosEntorno();
+
+
+        while (entorno.getNumeroElementos()<3){
+            Random random= new Random();
+            int probabilidaddenuevorecurso= random.nextInt(101);
+
+            if (probabilidaddenuevorecurso> parametrosEntorno.getProbabilidadAgua()){
+                Agua agua= new Agua();
+                agua.setTiempoAparicion(3);
+                entorno.add(agua);
+                casillaActual.setRecursos(entorno);
+            }
+
+            if(probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadComida()){
+                Comida comida= new Comida();
+                comida.setTiempoAparicion(3);
+                entorno.add(comida);
+                casillaActual.setRecursos(entorno);
+            }
+
+            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadMontaña()){
+                Montaña montaña= new Montaña();
+                montaña.setTiempoAparicion(3);
+                entorno.add(montaña);
+                casillaActual.setRecursos(entorno);
+            }
+
+            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadBiblioteca()){
+                Biblioteca biblioteca= new Biblioteca();
+                biblioteca.setTiempoAparicion(3);
+                entorno.add(biblioteca);
+                casillaActual.setRecursos(entorno);
+            }
+
+            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadPozo()){
+                Pozo pozo= new Pozo();
+                pozo.setTiempoAparicion(3);
+                entorno.add(pozo);
+                casillaActual.setRecursos(entorno);
+            }
+
+
+            if (probabilidaddenuevorecurso>parametrosEntorno.getProbabilidadTesoro()){
+                Tesoro tesoro= new Tesoro();
+                tesoro.setTiempoAparicion(3);
+                entorno.add(tesoro);
+                casillaActual.setRecursos(entorno);
+            }
+
+        }
+
+    }
 }
 
 

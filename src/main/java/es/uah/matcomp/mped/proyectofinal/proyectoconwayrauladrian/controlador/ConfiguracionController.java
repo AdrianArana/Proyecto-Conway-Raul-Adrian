@@ -75,7 +75,7 @@ public class ConfiguracionController implements Initializable {
     @FXML
     private Button botonIniciarPartida;
     @FXML
-    private Button botonVolver;
+    private Button botonVolver;  //todo lo quito para asi puedo utilizar cuando le de al pause ir a configuracion y en este caso si activo este boton me va a volver a la pantalla nombre y yo no quiero eso
 
     //Individuo, variables observables para los parámetros de los individuos
     protected IntegerProperty medidaTurnosDeVida = new SimpleIntegerProperty(0);
@@ -248,6 +248,8 @@ public class ConfiguracionController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
 
     private ParametrosEntorno EntornoOriginal=new ParametrosEntorno(1,1,1,1,1,1);

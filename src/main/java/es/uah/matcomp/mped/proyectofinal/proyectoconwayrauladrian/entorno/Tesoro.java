@@ -8,6 +8,10 @@ public class Tesoro extends Entorno{
         super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
+    public Tesoro() {
+
+    }
+
     public void accionTesoro(Individuo individuo) {
         int probabilidadAnterior=individuo.getProbabilidadReproduccion();
         if (probabilidadAnterior+10 <=100) {

@@ -8,6 +8,10 @@ public class Comida extends Entorno{
         super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
+    public Comida() {
+
+    }
+
     public void accionComida(Individuo individuo){
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()+10);
     }

@@ -10,7 +10,7 @@ class PozoTest {
     @Test
     void accionPozo() {
         Individuo individuo= new Individuo(2,2,2,2,2,2,2,2,2);
-        Pozo pozo= new Pozo(1,1,1,1);
+        Pozo pozo= new Pozo(1,1,1);
 
         pozo.accionPozo(individuo);
 

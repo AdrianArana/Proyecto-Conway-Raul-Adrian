@@ -20,6 +20,9 @@ public class ParametrosEntorno {
         this.probabilidadPozo = probabilidadPozo;
     }
 
+    public ParametrosEntorno() {
+    }
+
 
     public int getProbabilidadAgua() {
         return probabilidadAgua;

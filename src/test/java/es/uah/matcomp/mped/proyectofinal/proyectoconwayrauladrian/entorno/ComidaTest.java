@@ -10,7 +10,7 @@ class ComidaTest {
     @Test
     void accionComida() {
         Individuo individuo=new Individuo(2,2,2,2,2,2,2,2,2);
-        Comida comida=new Comida(1,1,1,1 );
+        Comida comida=new Comida(1,1,1);
 
         comida.accionComida(individuo);
 

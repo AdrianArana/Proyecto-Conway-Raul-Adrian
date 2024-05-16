@@ -3,6 +3,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
 
 public class ElementoCasillaLE<Casilla> {
+
     private ElementoCasillaLE<Casilla> siguiente;
     private Casilla data;
 

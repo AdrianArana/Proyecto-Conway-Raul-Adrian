@@ -7,6 +7,10 @@ public class Biblioteca extends Entorno{
         super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
+    public Biblioteca() {
+
+    }
+
     public void accionBiblioteca(Individuo individuo) {
         int probabilidadAnterior = individuo.getProbabilidadClonacion();
         if (probabilidadAnterior + 20 <= 100) {

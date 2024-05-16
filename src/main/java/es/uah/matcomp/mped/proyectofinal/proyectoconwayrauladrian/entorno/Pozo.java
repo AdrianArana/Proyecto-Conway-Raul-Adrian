@@ -7,6 +7,10 @@ public class Pozo extends Entorno{
         super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
+    public Pozo() {
+
+    }
+
     public void accionPozo(Individuo individuo){
         individuo.setTurnosVidaRestantes(-1);
     }

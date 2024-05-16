@@ -8,6 +8,10 @@ public class Agua extends Entorno {
         super(coordenadaX, coordenadaY, tiempoAparicion);
     }
 
+    public Agua() {
+        super();
+    }
+
     public void accionAgua(Individuo individuo) {
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()+2);
     }

@@ -8,9 +8,8 @@
       <Button mnemonicParsing="false" text="Crear Tablero" />
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
       </GridPane>
-      <Button layoutX="306.0" layoutY="552.0" mnemonicParsing="false" text="Ajustes" />
-      <Button layoutX="374.0" layoutY="552.0" mnemonicParsing="false" text="Pausar" />
-      <Button layoutX="438.0" layoutY="552.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="31.0" prefWidth="64.0" text="Jugar" />
+      <Button fx:id="pauseButton" layoutX="352.0" layoutY="552.0" mnemonicParsing="false" onAction="#onPauseButton" text=" Pausar/Ajustes" />
+      <Button layoutX="450.0" layoutY="551.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Jugar" />
       <Button fx:id="finalizarButton" layoutX="710.0" layoutY="552.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
    </children>
 </AnchorPane>
