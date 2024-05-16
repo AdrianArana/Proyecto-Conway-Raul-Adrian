@@ -252,10 +252,6 @@ public class ConfiguracionController implements Initializable {
 
 
 
-    private ParametrosEntorno EntornoOriginal=new ParametrosEntorno(1,1,1,1,1,1);
-    private ParametrosEntornoModelProperties modeloParaGUICompartidoEntorno=new ParametrosEntornoModelProperties(EntornoOriginal);
-    private ParametrosIndividuo IndividuoOriginal=new ParametrosIndividuo(2,2,2,2);
-    private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo=new ParametrosIndividuoModelProperties(IndividuoOriginal);
     public void setStage(Stage escenaDada) {
         this.escenaParametros = escenaDada;
     }
@@ -279,7 +275,7 @@ public class ConfiguracionController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
 
-            Scene scene = new Scene(fxmlLoader.load(),750, 500);//Aquí se hace el initialize
+            Scene scene = new Scene(fxmlLoader.load(),850, 750);//Aquí se hace el initialize
             stage.setScene(scene);
             stage.setTitle("Juego - La vida de Conway");
             VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();

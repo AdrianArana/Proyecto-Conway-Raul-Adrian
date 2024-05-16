@@ -71,6 +71,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
             //Le mandamos al controlador los parametros deseados
             ventanaCasillaController.setParametros(casillaActual,parametrosIndividuo, parametrosEntorno, turnoActual);
+            ventanaCasillaController.cogerValoresIniciales();
             ventanaCasillaController.mostrarInfo();
 
             stage.show();

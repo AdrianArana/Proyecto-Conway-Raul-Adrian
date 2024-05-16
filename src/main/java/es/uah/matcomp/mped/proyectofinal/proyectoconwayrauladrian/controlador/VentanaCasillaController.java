@@ -10,11 +10,14 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.Paramet
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class VentanaCasillaController {
     @FXML
@@ -40,9 +43,6 @@ public class VentanaCasillaController {
 
     Casilla casillaValoresIniciales=new Casilla();
 
-    public void tomarValores() {
-
-    }
 
     public Label labelIndividuosTipo1;
     public Label labelIndividuosTipo2;
@@ -144,11 +144,7 @@ public class VentanaCasillaController {
         this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
         this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
         this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
-        //TODO -> No funcionan los botones reiniciar y guardar
-        ListaEnlazada<Individuo> individuos=casilla.getIndividuos();
-        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
-        casillaValoresIniciales.setIndividuos(individuos);
-        casillaValoresIniciales.setRecursos(recursos);
+
 
     }
 
@@ -165,7 +161,6 @@ public class VentanaCasillaController {
             labelIndividuoCreado.setText("Individuo añadido: " + nuevoIndividuo.toString());
         } else if (individuos.getNumeroElementos() == 3) {
             ponerBotonEnRojo(tipo);
-            casilla.setIndividuos(individuos);
         }
         mostrarInfo();
     }
@@ -352,9 +347,21 @@ public class VentanaCasillaController {
 
 
     public void onBotonReiniciar(ActionEvent actionEvent) {
-        ListaEnlazada<Entorno> recursos=casillaValoresIniciales.getRecursos();
-        ListaEnlazada<Individuo> individuos=casillaValoresIniciales.getIndividuos();
-        casilla.setRecursos(recursos);
-        casilla.setIndividuos(individuos);
+        casilla.setIndividuos(new ListaEnlazada<Individuo>());
+        casilla.setRecursos(new ListaEnlazada<Entorno>());
+        mostrarInfo();
+        labelIndividuoCreado.setText("¡¡Valores Reiniciados!!");
+    }
+
+    public void cogerValoresIniciales() {
+        //TODO -> No funcionan los botones reiniciar y guardar
+        ListaEnlazada<Individuo> individuos=casilla.getIndividuos();
+        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
+        int x=casilla.getCoordenadaX();
+        int y=casilla.getCoordenadaY();
+        casillaValoresIniciales.setIndividuos(individuos);
+        casillaValoresIniciales.setRecursos(recursos);
+        casillaValoresIniciales.setCoordenadaX(x);
+        casillaValoresIniciales.setCoordenadaY(y);
     }
 }

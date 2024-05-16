@@ -11,22 +11,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Tablero {
+//TODO-> cargarse esta clase
     private Casilla[][] casillas;
     int xTablero;
     int yTablero;
 
     //Constructor del tablero con la clase Casilla
-    public Tablero(int x,int y) {
+    public Tablero(int x, int y) {
         this.xTablero = x;
         this.yTablero = y;
         casillas = new Casilla[x][y];
         // Inicializa las celdas
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                casillas[i][j] = new Casilla(i,j);
+                casillas[i][j] = new Casilla(i, j);
             }
         }
     }
+
     public Casilla[][] getCasillas() {
         return casillas;
     }
@@ -44,7 +46,7 @@ public class Tablero {
         for (int i = 0; i < this.getxTablero(); i++) {
             for (int j = 0; j < this.getyTablero(); j++) {
                 Casilla celda = casillas[i][j];
-                Button casilla = new Button(celda.getCoordenadaX()+","+celda.getCoordenadaY()); // Mostrar datos de la celda
+                Button casilla = new Button(celda.getCoordenadaX() + "," + celda.getCoordenadaY()); // Mostrar datos de la celda
                 //casilla.setMinSize((double) xVentana /this.getxTablero(), (double) yVentana /this.getyTablero());
                 //casilla.setMaxSize((double) xVentana /this.getxTablero(), (double) yVentana /this.getyTablero());
                 casilla.setStyle("-fx-border-color: black; -fx-text-alignment: center;");
@@ -64,7 +66,7 @@ public class Tablero {
         }
         //Scene scene = new Scene(mainGrid, xVentana, yVentana);
         primaryStage.setTitle("Grid de 10x10 con Componentes Personalizados");
-       // primaryStage.setScene(scene);
+        // primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
