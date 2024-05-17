@@ -8,7 +8,6 @@ public class Biblioteca extends Entorno{
     }
 
     public Biblioteca() {
-
     }
 
     public void accionBiblioteca(Individuo individuo) {
