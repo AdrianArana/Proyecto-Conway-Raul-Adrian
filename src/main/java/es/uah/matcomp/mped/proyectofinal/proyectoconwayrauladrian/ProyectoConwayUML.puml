@@ -1,0 +1,171 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+VentanaInicial *-- nombre
+VentanaInicial *-- VentanaJuego
+VentanaJuego *-- configuracion
+VentanaJuego *-- Casilla
+Casilla *-- ParametrosCasillas
+configuracion *-- individuo : uses
+individuo *-- ParametrosIndividuos
+configuracion *-- Entorno : uses
+Entorno *-- ParametrosEntorno
+configuracion *-- Casilla : uses
+VentanaJuego *-- GuardarPartida
+GuardarPartida *-- nombre
+VentanaJuego *-- FinPartida
+
+class VentanaInicial {
+    +nuevaPartida()
+    +cargarPartida()
+}
+
+class GuardarPartida {
+}
+
+class Casilla {
+    -coordenadaX
+    -coordenadaY
+    +listaIndividuos : ListaEnlazada<Individuo>
+    +listaEntorno : ListaEnlazada<Entorno>
+
+    +getCoordenadaX()
+    +setCoordenadaX()
+    +getCoordenadaY()
+    +setCoordenadaY()
+}
+
+class ParametrosCasillas {
+    -x
+    -y
+
+    +getX()
+    +setX()
+    +getY()
+    +setY()
+}
+
+class ParametrosEntorno {
+    -probabilidadAgua
+    -probabilidadMontaña
+    -probabilidadTesoro
+    -probabilidadComida
+    -probabilidadPozo
+    -probabilidadBiblioteca
+    -probabilidadGeneral
+
+    +getProbabilidadAgua()
+    +setProbabilidadAgua()
+    +getProbabilidadMontaña()
+    +setProbabilidadMontaña()
+    +getProbabilidadTesoro()
+    +setProbabilidadTesoro()
+    +getProbabilidadComida()
+    +setProbabilidadComida()
+    +getProbabilidadPozo()
+    +setProbabilidadPozo()
+    +getProbabilidadBiblioteca()
+    +setProbabilidadBiblioteca()
+    +getProbabilidadGeneral()
+    +setProbabilidadGeneral()
+}
+
+class ParametrosIndividuos {
+    -turnosVidaRestantes
+    -probabilidadMuerte
+    -probabilidadClonacion
+    -probabilidadReproduccion
+
+    +getTurnosVidaRestantes()
+    +setTurnosVidaRestantes()
+    +getProbabilidadMuerte()
+    +setProbabilidadMuerte()
+    +getProbabilidadClonacion()
+    +setProbabilidadClonacion()
+    +getProbabilidadReproduccion()
+    +setProbabilidadReproduccion()
+}
+
+class VentanaJuego {
+    +nuevaPartida()
+    +cargarPartida()
+}
+
+class nombre {
+    -nombre
+    +getNombre()
+    +setNombre()
+}
+
+class configuracion {
+    -parametrosEntorno
+    -parametrosIndividuo
+    -parametrosCasilla
+
+    +onButtonIniciarPartida()
+    +onButtonVolver()
+    +onButtonGuardarClick()
+    +onButtonReiniciarClick()
+    +onButtonCerrarClick()
+}
+
+class individuo {
+    -ID
+    -vida
+    -reproduccion
+    -clonacion
+    -mutacion
+    -tipo
+    -muerte
+    -coord
+
+    +getID()
+    +getVida()
+    +getReproduccion()
+    +getClonacion()
+    +getMutacion()
+    +getTipo()
+    +getMuerte()
+    +getCoordenadas()
+
+    +setID()
+    +setVida()
+    +setReproduccion()
+    +setClonacion()
+    +setMutacion()
+    +setTipo()
+    +setMuerte()
+    +setCoordenadas()
+    +setParametros()
+}
+
+class Entorno {
+    -agua
+    -comida
+    -montaña
+    -tesoro
+    -biblioteca
+    -pozo
+    -tasaEvolucion
+
+    +getAgua() : int
+    +getComida() : int
+    +getMontaña() : int
+    +getTesoro() : int
+    +getBiblioteca() : int
+    +getPozo() : int
+
+    +setAgua(elección : int)
+    +setComida()
+    +setMontaña()
+    +setTesoro()
+    +setBiblioteca()
+    +setPozo()
+
+    +reproduccion(a : Individuo, b : Individuo)
+    +getArbolGenealogico(i : Individuo)
+    +getOperaciones(p : Individuo)
+    +getGrafica()
+}
+
+@enduml
