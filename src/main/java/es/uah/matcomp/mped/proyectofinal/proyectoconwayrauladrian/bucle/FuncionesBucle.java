@@ -26,16 +26,20 @@ public class FuncionesBucle {
                 Casilla casillaActual = filaActual.getElemento(columna).getData();//Ya podemos trabajar con cada casilla
                 System.out.println("CasillaActual: " + casillaActual.toString());
 
+                if (casillaActual.getIndividuos().getNumeroElementos()<=3){
+                    reproduccion(casillaActual, turnoActual);
+                    clonacion(casillaActual, turnoActual);
+                    muerteIndividuos(casillaActual);
+                    recursoActivo(casillaActual);
+                    aparicionRecursos(casillaActual, parametrosEntorno);
+                    actualizarBotones(casillaActual);
 
-                //esto segun lo que me explico arana asi chequearemos el bucle???
+                    actualizarBotones(casillaActual);
+                }
 
-                tiempoDeVida(casillaActual);
-                recursoActivo(casillaActual);
-                reproduccion(casillaActual, turnoActual);
-                clonacion(casillaActual, turnoActual);
-                muerteIndividuos(casillaActual);
-                aparicionRecursos(casillaActual, parametrosEntorno);
-                actualizarBotones(casillaActual);
+                else{
+                    //TODO si hay mas de tres individuos en una casilla que salte un error
+                }
 
             }
         }
@@ -54,6 +58,9 @@ public class FuncionesBucle {
     public void tiempoDeVida(Casilla casillaActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
+
+
+
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
             individuos.getElemento(i).getData().setTurnosVidaRestantes(individuos.getElemento(i).getData().getTurnosVidaRestantes() - 1);
         }
