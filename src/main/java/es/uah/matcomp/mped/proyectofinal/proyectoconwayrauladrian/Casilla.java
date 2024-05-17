@@ -21,6 +21,10 @@ public class Casilla {
         this.boton=botonDado;
     }
 
+    public Button getBoton() {
+        return boton;
+    }
+
     public void setColorBotonRojo(){
         this.boton.setStyle("-fx-background-color: #ff0000; -fx-text-alignment: center;");
         this.boton.setText(coordenadaX+","+coordenadaY);

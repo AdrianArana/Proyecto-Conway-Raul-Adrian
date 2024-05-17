@@ -65,7 +65,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             ventanaCasillaController.setStage(stage);
 
             //Le mandamos al controlador los parametros deseados
-            ventanaCasillaController.setParametros(tablero.getElemento(j).getData().getElemento(i).getData(), parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anteriort para que non haya ids repetidos
+            ventanaCasillaController.setParametros(tablero.getElemento(j).getData().getElemento(i).getData(), parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anterior para que no haya ids repetidos
             ventanaCasillaController.cogerValoresIniciales();
             ventanaCasillaController.mostrarInfo();
 
