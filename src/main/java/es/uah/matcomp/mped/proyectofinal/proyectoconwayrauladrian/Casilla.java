@@ -2,8 +2,8 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
+import javafx.scene.control.Button;
 
 public class Casilla {
     private int coordenadaX;
@@ -11,9 +11,19 @@ public class Casilla {
     ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
     ListaEnlazada<Entorno> recursos = new ListaEnlazada<Entorno>();
 
+    private Button boton;
+
     public Casilla(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+    }
+    public void setBoton(Button botonDado){
+        this.boton=botonDado;
+    }
+
+    public void setColorBotonRojo(){
+        this.boton.setStyle("-fx-background-color: #ff0000; -fx-text-alignment: center;");
+        this.boton.setText(coordenadaX+","+coordenadaY);
     }
 
     public Casilla() {

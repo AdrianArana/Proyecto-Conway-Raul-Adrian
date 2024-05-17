@@ -57,20 +57,19 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     //ACCION AL TOCAR UN BOTON
     @FXML
-    protected void onBotonCelda(int i, int j){
+    protected void onBotonCelda(int i, int j) {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaCasilla.fxml"));
         try {
             //Casilla accesible, para poder mostrar sus datos
-            Casilla casillaActual=tablero.getElemento(i).getData().getElemento(j).getData();
             Scene scene = new Scene(fxmlLoader.load(), 800, 800);
-            stage.setTitle("Propiedades de la celda: (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
+            stage.setTitle("Propiedades de la celda: (" + tablero.getElemento(j).getData().getElemento(i).getData().getCoordenadaX() + "," + tablero.getElemento(j).getData().getElemento(i).getData().getCoordenadaY() + ")");
             stage.setScene(scene);
             VentanaCasillaController ventanaCasillaController = fxmlLoader.getController();
             ventanaCasillaController.setStage(stage);
 
             //Le mandamos al controlador los parametros deseados
-            ventanaCasillaController.setParametros(casillaActual,parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anteriort para que non haya ids repetidos
+            ventanaCasillaController.setParametros(tablero.getElemento(j).getData().getElemento(i).getData(), parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anteriort para que non haya ids repetidos
             ventanaCasillaController.cogerValoresIniciales();
             ventanaCasillaController.mostrarInfo();
 
@@ -84,24 +83,25 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     public void rellenarGridpane() {
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
+        for (int i = y; i > 0; i--) {
+            for (int j = 0; j < x; j++) {
                 Button celdaButton = new Button();
                 celdaButton.setMinSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setMaxSize((double) 600 / x, (double) 600 / y);
-                celdaButton.setStyle("-fx-border-color: #3385fa; -fx-text-alignment: center;");
-                int finalI = i;
-                int finalJ = j;
+                celdaButton.setStyle("-fx-border-color: #000000; -fx-text-alignment: center;");
+                int finalI = j;
+                int finalJ = i;
                 celdaButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent actionEvent) {onBotonCelda(finalI,finalJ);}
+                    public void handle(ActionEvent actionEvent) {
+                        onBotonCelda(finalI, finalJ-1);
+                    }
                 });
-                gridPane.add(celdaButton, i, j);
+                gridPane.add(celdaButton, finalI, finalJ-1);
+                tablero.getElemento(finalJ-1).getData().getElemento(finalI).getData().setBoton(celdaButton);
             }
         }
     }
-
-
 
 
     @FXML
@@ -137,14 +137,14 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     public void onPlayButton() {
         turnoActual++;
-        recorrerCasillas(tablero,turnoActual);
+        recorrerCasillas(tablero, turnoActual, parametrosEntorno.getOriginal());
     }
 
     public void crearTableroDeJuego() {
-        for (int x = 1; x <= parametrosCasillas.x().getValue().intValue(); x++) {
+        for (int y = 0; y < parametrosCasillas.y().getValue().intValue(); y++) {
             ListaEnlazadaColumnas<Casilla> filaCompleta = new ListaEnlazadaColumnas<Casilla>();
-            for (int y = 1; y <= parametrosCasillas.y().getValue().intValue(); y++) {
-                ElementoCasillaLE<Casilla> casillaNueva = new ElementoCasillaLE<Casilla>(new Casilla(x, y));
+            for (int x = 1; x <= parametrosCasillas.x().getValue().intValue(); x++) {
+                ElementoCasillaLE<Casilla> casillaNueva = new ElementoCasillaLE<Casilla>(new Casilla(x, parametrosCasillas.y().getValue().intValue() - y));
 
 
                 //ElementoLE<Individuo> individuoActual=new ElementoLE<Individuo>(new Individuo());

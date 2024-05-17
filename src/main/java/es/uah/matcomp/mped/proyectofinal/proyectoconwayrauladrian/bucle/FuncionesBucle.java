@@ -15,7 +15,7 @@ public class FuncionesBucle {
     public FuncionesBucle() {
     }
 
-    public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual) {
+    public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno) {
         int filas = tablero.getNumeroFilas();
         for (int fila = 0; fila < filas; fila++) {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
@@ -34,8 +34,16 @@ public class FuncionesBucle {
                 reproduccion(casillaActual, turnoActual);
                 clonacion(casillaActual, turnoActual);
                 muerteIndividuos(casillaActual);
-                aparicionRecursos(casillaActual);
+                aparicionRecursos(casillaActual, parametrosEntorno);
+                actualizarBotones(casillaActual);
+
             }
+        }
+    }
+
+    private void actualizarBotones(Casilla casilla) {
+        if(casilla.getIndividuos().getNumeroElementos()>0){
+
         }
     }
 
@@ -96,6 +104,43 @@ public class FuncionesBucle {
 
     //HACER LA FUNCION DE LOS MOVIMIENTOS DE LOS INDIVIDUOS //todo
 
+    //Funciones para el movimiento de los individuos
+
+
+    public void moverIndividuos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual) {
+        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
+        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
+            Individuo individuoActual = individuos.getElemento(i).getData();
+            if (individuoActual.getTipo() == 1) {
+                //moverSimple(tablero, individuo,i)
+            }
+        }
+
+    }
+
+
+    public void moverSimple(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo,int posicion) {
+        Random random = new Random();
+        int dir = random.nextInt(8);
+
+        int x = casillaActual.getCoordenadaX();
+        int y = casillaActual.getCoordenadaY();
+
+
+        if (dir == 0) {
+            //arriba
+
+            individuo.setCoordenadaY(y + 1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+        }
+        if (dir==1){
+
+        }
+
+
+    }
+
 
     //hacer la funcion de mejoras del individuo
 /*
@@ -148,7 +193,7 @@ public class FuncionesBucle {
 
         if (individuos.getNumeroElementos() == 2) {
             Random random = new Random();
-            int probabilidadAleatoria = random.nextInt(101);
+            int probabilidadAleatoria = random.nextInt(1, 101);
 
             Individuo individuo1 = individuos.getElemento(0).getData();
             Individuo individuo2 = individuos.getElemento(1).getData();
@@ -201,7 +246,7 @@ public class FuncionesBucle {
 
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
             Random random = new Random();
-            int probabilidad = random.nextInt(101);
+            int probabilidad = random.nextInt(1, 101);
             Individuo individuo = individuos.getElemento(i).getData();
             if (probabilidad <= individuos.getElemento(i).getData().getProbabilidadClonacion()) {
 
@@ -236,7 +281,7 @@ public class FuncionesBucle {
 
     public void muerteIndividuos(Casilla casillaActual) {
         Random random = new Random();
-        int probabilidadsobrevivir = random.nextInt(101);
+        int probabilidadsobrevivir = random.nextInt(1, 101);
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
         for (int i = 0; i < individuos.getNumeroElementos(); i++) {
@@ -267,62 +312,63 @@ public class FuncionesBucle {
     //todo /con como lo he hecho, los reecursos saben la posicion en la que van a aparecer???????
 
     //todo?????????¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿por cada vez que le demos a avanzar va a haber una probabilidad distinta de si puede aparecer un nuevo recurso o no (simulando como que cada tiempo hay distintas vecees en las cuales hay mas recursos o menos) y si esta es mayor que la probabilidad de aparicion de un nuevo recurso entonces se llevaran acabo todas las probabilidades de lo demas
-    public void aparicionRecursos(Casilla casillaActual) {
+    public void aparicionRecursos(Casilla casillaActual, ParametrosEntorno parametrosEntorno) {
 
-        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
-        ParametrosEntorno parametrosEntorno = new ParametrosEntorno();
 
+        int probGeneral = parametrosEntorno.getProbabilidadGeneral();
 
-        if (entorno.getNumeroElementos() < 3) {
-            //Sumamos todos los valores de las probabilidades, generamos un número aleatorio entre el 1 y el de la suma total
-            int sumatotal = parametrosEntorno.getProbabilidadAgua() + parametrosEntorno.getProbabilidadBiblioteca() +
-                    parametrosEntorno.getProbabilidadComida() + parametrosEntorno.getProbabilidadMontaña() +
-                    parametrosEntorno.getProbabilidadPozo() + parametrosEntorno.getProbabilidadTesoro();
+        Random random = new Random();
+        int n = random.nextInt(1, 101);
+        if (probGeneral >= n) {
+            if (entorno.getNumeroElementos() < 3) {
+                //Sumamos todos los valores de las probabilidades, generamos un número aleatorio entre el 1 y el de la suma total
+                int sumatotal = parametrosEntorno.getProbabilidadAgua() + parametrosEntorno.getProbabilidadBiblioteca() +
+                        parametrosEntorno.getProbabilidadComida() + parametrosEntorno.getProbabilidadMontaña() +
+                        parametrosEntorno.getProbabilidadPozo() + parametrosEntorno.getProbabilidadTesoro();
 
-            int cota1 = parametrosEntorno.getProbabilidadAgua();
-            int cota2 = cota1 + parametrosEntorno.getProbabilidadBiblioteca();
-            int cota3 = cota2 + parametrosEntorno.getProbabilidadComida();
-            int cota4 = cota3 + parametrosEntorno.getProbabilidadPozo();
-            int cota5 = cota4 + parametrosEntorno.getProbabilidadTesoro();
-            Random random = new Random();
-            int probabilidadDeNuevorecurso = random.nextInt(sumatotal);
-            if (probabilidadDeNuevorecurso <= cota1) {
-                Agua agua = new Agua();
-                agua.setTiempoAparicion(3);
-                entorno.add(agua);
-                casillaActual.setRecursos(entorno);
-            } else if (probabilidadDeNuevorecurso <= cota2) {
-                Biblioteca biblioteca = new Biblioteca();
-                biblioteca.setTiempoAparicion(3);
-                entorno.add(biblioteca);
-                casillaActual.setRecursos(entorno);
-            } else if (probabilidadDeNuevorecurso <= cota3) {
-                Comida comida = new Comida();
-                comida.setTiempoAparicion(3);
-                entorno.add(comida);
-                casillaActual.setRecursos(entorno);
+                int cota1 = parametrosEntorno.getProbabilidadAgua();
+                int cota2 = cota1 + parametrosEntorno.getProbabilidadBiblioteca();
+                int cota3 = cota2 + parametrosEntorno.getProbabilidadComida();
+                int cota4 = cota3 + parametrosEntorno.getProbabilidadPozo();
+                int cota5 = cota4 + parametrosEntorno.getProbabilidadTesoro();
+
+                Random random1 = new Random();
+                int probabilidadDeNuevorecurso = random1.nextInt(1, sumatotal);
+
+                if (probabilidadDeNuevorecurso <= cota1) {
+                    Agua agua = new Agua();
+                    agua.setTiempoAparicion(3);
+                    entorno.add(agua);
+                    casillaActual.setRecursos(entorno);
+                } else if (probabilidadDeNuevorecurso <= cota2) {
+                    Biblioteca biblioteca = new Biblioteca();
+                    biblioteca.setTiempoAparicion(3);
+                    entorno.add(biblioteca);
+                    casillaActual.setRecursos(entorno);
+                } else if (probabilidadDeNuevorecurso <= cota3) {
+                    Comida comida = new Comida();
+                    comida.setTiempoAparicion(3);
+                    entorno.add(comida);
+                    casillaActual.setRecursos(entorno);
+                } else if (probabilidadDeNuevorecurso <= cota4) {
+                    Pozo pozo = new Pozo();
+                    pozo.setTiempoAparicion(3);
+                    entorno.add(pozo);
+                    casillaActual.setRecursos(entorno);
+                } else if (probabilidadDeNuevorecurso <= cota5) {
+                    Tesoro tesoro = new Tesoro();
+                    tesoro.setTiempoAparicion(3);
+                    entorno.add(tesoro);
+                    casillaActual.setRecursos(entorno);
+                } else {
+                    Montaña montaña = new Montaña();
+                    montaña.setTiempoAparicion(3);
+                    entorno.add(montaña);
+                    casillaActual.setRecursos(entorno);
+                }
             }
-            if (probabilidadDeNuevorecurso <= cota4) {
-                Pozo pozo = new Pozo();
-                pozo.setTiempoAparicion(3);
-                entorno.add(pozo);
-                casillaActual.setRecursos(entorno);
-            }
-            if (probabilidadDeNuevorecurso <= cota5) {
-                Tesoro tesoro = new Tesoro();
-                tesoro.setTiempoAparicion(3);
-                entorno.add(tesoro);
-                casillaActual.setRecursos(entorno);
-            }else {
-                Montaña montaña = new Montaña();
-                montaña.setTiempoAparicion(3);
-                entorno.add(montaña);
-                casillaActual.setRecursos(entorno);
-            }
-
         }
-
     }
 }
 
