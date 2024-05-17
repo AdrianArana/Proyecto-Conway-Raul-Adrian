@@ -135,7 +135,7 @@ public class VentanaCasillaController {
     }
 
 
-    public void setParametros(Casilla casillaActual,ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual) {
+    public void setParametros(Casilla casillaActual,ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual,int id) {
         this.parametrosIndividuo = parametrosIndividuo;
         this.parametrosEntorno = parametrosEntorno;
         this.turnoActual = turnoActual;
@@ -144,7 +144,7 @@ public class VentanaCasillaController {
         this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
         this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
         this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
-
+        this.id=id;
 
     }
 

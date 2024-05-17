@@ -32,12 +32,11 @@ public class FuncionesBucle {
                 muerteIndividuos(casillaActual);
                 recursoActivo(casillaActual);
                 //aparicionRecursos(casillaActual, parametrosEntorno);
-                actualizarBotones(casillaActual);
                 moverIndividuos(tablero, casillaActual);
-                actualizarBotones(casillaActual);
                 tiempoDeVida(casillaActual);
                 //TODO si hay mas de tres individuos en una casilla que salte un error
 
+                actualizarBotones(casillaActual);
 
             }
         }
@@ -99,56 +98,48 @@ public class FuncionesBucle {
     //si los turnos de vida del individuo son menores o ihuales a cero, se eliminan de la casilla y de la lisat de individuos
     //a los individuos por cada turno, se les actualiza su probabilidad de reproduccion y de clonacion
     public void tiempoDeVida(Casilla casillaActual) {
-
-        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
-
-
-
-        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
-            individuos.getElemento(i).getData().setTurnosVidaRestantes(individuos.getElemento(i).getData().getTurnosVidaRestantes() - 1);
+        for (int i = 0; i < casillaActual.getIndividuos().getNumeroElementos(); i++) {
+            casillaActual.getIndividuos().getElemento(i).getData().setTurnosVidaRestantes(casillaActual.getIndividuos().getElemento(i).getData().getTurnosVidaRestantes() - 1);
         }
 
-        for (int j = 0; j < individuos.getNumeroElementos(); j++) {
-            if (individuos.getElemento(j).getData().getTurnosVidaRestantes() <= 0) {
-                individuos.delete(j);
-                casillaActual.setIndividuos(individuos);
+        for (int j = 0; j < casillaActual.getIndividuos().getNumeroElementos(); j++) {
+            if (casillaActual.getIndividuos().getElemento(j).getData().getTurnosVidaRestantes() <= 0) {
+                casillaActual.getIndividuos().delete(j);
+                casillaActual.setIndividuos(casillaActual.getIndividuos());
             }
         }
 
-        for (int k = 0; k < individuos.getNumeroElementos(); k++) {
-            if (individuos.getElemento(k).getData().getProbabilidadReproduccion() >= 10) {
-                individuos.getElemento(k).getData().setProbabilidadReproduccion((individuos.getElemento(k).getData().getProbabilidadReproduccion()) - (10));
+        for (int k = 0; k < casillaActual.getIndividuos().getNumeroElementos(); k++) {
+            if (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion() >= 10) {
+                casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion((casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion()) - (10));
             } else {
-                individuos.getElemento(k).getData().setProbabilidadReproduccion(0);
+                casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion(0);
             }
 
         }
 
-        for (int l = 0; l < individuos.getNumeroElementos(); l++) {
-            if (individuos.getElemento(l).getData().getProbabilidadClonacion() >= 10) {
-                individuos.getElemento(l).getData().setProbabilidadReproduccion((individuos.getElemento(l).getData().getProbabilidadClonacion()) - (10));
+        for (int l = 0; l < casillaActual.getIndividuos().getNumeroElementos(); l++) {
+            if (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion() >= 10) {
+                casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadReproduccion((casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion()) - (10));
             } else {
-                individuos.getElemento(l).getData().setProbabilidadClonacion(0);
+                casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadClonacion(0);
             }
         }
-        casillaActual.setIndividuos(individuos);
     }
 
     public void recursoActivo(Casilla casillaActual) {
 
-        ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
 
-        for (int i = 0; i < entorno.getNumeroElementos(); i++) {
-            entorno.getElemento(i).getData().setTiempoAparicion(entorno.getElemento(i).getData().getTiempoAparicion() - 1);
+        for (int i = 0; i < casillaActual.getRecursos().getNumeroElementos(); i++) {
+            casillaActual.getRecursos().getElemento(i).getData().setTiempoAparicion(casillaActual.getRecursos().getElemento(i).getData().getTiempoAparicion() - 1);
         }
 
-        for (int j = 0; j < entorno.getNumeroElementos(); j++) {
-            if (entorno.getElemento(j).getData().getTiempoAparicion() <= 0) {
-                entorno.delete(j);
-                casillaActual.setRecursos(entorno);
+        for (int j = 0; j < casillaActual.getRecursos().getNumeroElementos(); j++) {
+            if (casillaActual.getRecursos().getElemento(j).getData().getTiempoAparicion() <= 0) {
+                casillaActual.getRecursos().delete(j);
+                casillaActual.setRecursos(casillaActual.getRecursos());
             }
         }
-        casillaActual.setRecursos(entorno);
     }
 
 
@@ -182,7 +173,7 @@ public class FuncionesBucle {
             individuo.setCoordenadaY(y + 1);
             casillaActual.getIndividuos().delete(posicion);
             //Accedemos a la casilla
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
 
         }
         if (dir==1){
@@ -191,7 +182,7 @@ public class FuncionesBucle {
             individuo.setCoordenadaX(x+1);
             individuo.setCoordenadaY(y+1);
             casillaActual.getIndividuos().delete(posicion);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
 
         }
 
@@ -200,7 +191,7 @@ public class FuncionesBucle {
 
             individuo.setCoordenadaX(x+1);
             casillaActual.getIndividuos().delete(posicion);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
 
 
         }
@@ -210,7 +201,7 @@ public class FuncionesBucle {
             individuo.setCoordenadaX(x+1);
             individuo.setCoordenadaY(y-1);
             casillaActual.getIndividuos().delete(posicion);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
 
         }
 
@@ -219,7 +210,7 @@ public class FuncionesBucle {
 
             individuo.setCoordenadaY(y-1);
             casillaActual.getIndividuos().delete(posicion);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
         }
 
         if (dir==5){
@@ -227,7 +218,7 @@ public class FuncionesBucle {
             individuo.setCoordenadaY(y-1);
             individuo.setCoordenadaX(x-1);
             casillaActual.getIndividuos().delete(posicion);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
 
         }
 
@@ -236,13 +227,13 @@ public class FuncionesBucle {
 
             individuo.setCoordenadaX(x-1);
             casillaActual.getIndividuos().delete(posicion);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
         }
         if (dir==7){
             //arriba izquierda
             individuo.setCoordenadaX(x-1);
             individuo.setCoordenadaY(y+1);
-            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+            tablero.getElemento(tablero.getNumeroFilas()-y).getData().getElemento(x).getData().getIndividuos().add(individuo);
         }
 
     }
@@ -416,7 +407,7 @@ public class FuncionesBucle {
         }
 
 
-        for (int i=0;i<individuos.getNumeroElementos(); i--) {
+        for (int i=0;i<individuos.getNumeroElementos(); i++) {
             Individuo individuo = individuos.getElemento(i).getData();
             int probabilidadsobrevivir = random.nextInt(101);
 

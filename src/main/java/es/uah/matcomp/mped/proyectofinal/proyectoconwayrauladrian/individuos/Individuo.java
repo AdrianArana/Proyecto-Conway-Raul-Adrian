@@ -25,11 +25,19 @@ public class Individuo extends ParametrosIndividuo{
 
     @Override
     public String toString() {
+        String tipoString = "";
+        if(tipo==1){
+            tipoString="Básico";
+        }else if (tipo==2){
+            tipoString="Normal";
+        }else if (tipo==3){
+            tipoString="Avanzado";
+        }
         return
                 "\n Coordenadas: (" + coordenadaX +
                 "," + coordenadaY +
                 ")\n Id: '" + id +
-                "'\n Tipo: " + tipo +
+                "'\n Tipo: " + tipoString +
                 "'\n Turno de Generacion=" + turnoGeneracion;
     }
 

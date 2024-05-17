@@ -274,10 +274,8 @@ public class ConfiguracionController implements Initializable {
             VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
             ventanaJuegoController.setParametros(modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
-            //Ahora se crea el tablero con la lista de listas
-            ventanaJuegoController.crearTableroDeJuego();
-            //Se rellena el GridPane
-            ventanaJuegoController.rellenarGridpane();
+            //Ahora se crea el tablero con la lista de listas, y se rellena el gridPane previamente vacío
+            ventanaJuegoController.hacerTablero();
             ventanaJuegoController.setStage(stage);
             stage.show();
         } catch (Exception e) {

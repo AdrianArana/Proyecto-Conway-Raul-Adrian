@@ -26,7 +26,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     int turnoActual;
     //Creamos el tablero vacío, que se generará despues
     ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero = new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
-
+    int id=0;
     public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosIndividuo = parametrosIndividuo;
@@ -59,13 +59,13 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         try {
             //Casilla accesible, para poder mostrar sus datos
             Scene scene = new Scene(fxmlLoader.load(), 800, 800);
-            stage.setTitle("Propiedades de la celda: (" + tablero.getElemento(j).getData().getElemento(i).getData().getCoordenadaX() + "," + tablero.getElemento(j).getData().getElemento(i).getData().getCoordenadaY() + ")");
+            stage.setTitle("Propiedades de la celda: (" + tablero.getElemento(i-1).getData().getElemento(j-1).getData().getCoordenadaX() + "," + tablero.getElemento(i-1).getData().getElemento(j-1).getData().getCoordenadaY() + ")");
             stage.setScene(scene);
             VentanaCasillaController ventanaCasillaController = fxmlLoader.getController();
             ventanaCasillaController.setStage(stage);
 
             //Le mandamos al controlador los parametros deseados
-            ventanaCasillaController.setParametros(tablero.getElemento(j).getData().getElemento(i).getData(), parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anterior para que no haya ids repetidos
+            ventanaCasillaController.setParametros(tablero.getElemento(i-1).getData().getElemento(j-1).getData(), parametrosIndividuo, parametrosEntorno, turnoActual,id);//TODO-> Generar id coger el anterior para que no haya ids repetidos
             ventanaCasillaController.cogerValoresIniciales();
             ventanaCasillaController.mostrarInfo();
 
@@ -75,30 +75,37 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         }
     }
 
-
-    public void rellenarGridpane() {
+    public void hacerTablero(){
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
-        for (int i = y; i > 0; i--) {
-            for (int j = 0; j < x; j++) {
+        for (int i=1;i<=x;i++){
+            ListaEnlazadaColumnas<Casilla> filaCompleta = new ListaEnlazadaColumnas<>();
+            for (int j=1;j<=y;j++){
                 Button celdaButton = new Button();
                 celdaButton.setMinSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setMaxSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setStyle("-fx-border-color: #000000; -fx-text-alignment: center;");
-                int finalI = j;
-                int finalJ = i;
+                int finalI = i;
+                int finalJ = j;
                 celdaButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        onBotonCelda(finalI, finalJ-1);
+                        onBotonCelda(finalI, finalJ);
                     }
                 });
-                gridPane.add(celdaButton, finalI, finalJ-1);
-                tablero.getElemento(finalJ-1).getData().getElemento(finalI).getData().setBoton(celdaButton);
+                gridPane.add(celdaButton, finalI, finalJ);
+                ElementoCasillaLE<Casilla> casillaNueva = new ElementoCasillaLE<>(new Casilla(finalI, finalJ));
+                casillaNueva.getData().setBoton(celdaButton);
+
+                //ElementoLE<Individuo> individuoActual=new ElementoLE<Individuo>(new Individuo());
+                //ListaEnlazada<Individuo> individuos= new ListaEnlazada<Individuo>(individuoActual);
+                //casillaNueva.getData().setIndividuos(individuos);
+                filaCompleta.add(casillaNueva);
+
             }
+            tablero.add(new ElementoListaColumnasLE<ListaEnlazadaColumnas<Casilla>>(filaCompleta));
         }
     }
-
 
     @FXML
     protected void onFinalizarButton() {
@@ -136,22 +143,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         recorrerCasillas(tablero, turnoActual, parametrosEntorno.getOriginal());
     }
 
-    public void crearTableroDeJuego() {
-        for (int y = 0; y < parametrosCasillas.y().getValue().intValue(); y++) {
-            ListaEnlazadaColumnas<Casilla> filaCompleta = new ListaEnlazadaColumnas<Casilla>();
-            for (int x = 1; x <= parametrosCasillas.x().getValue().intValue(); x++) {
-                ElementoCasillaLE<Casilla> casillaNueva = new ElementoCasillaLE<Casilla>(new Casilla(x, parametrosCasillas.y().getValue().intValue() - y));
 
-
-                //ElementoLE<Individuo> individuoActual=new ElementoLE<Individuo>(new Individuo());
-                //ListaEnlazada<Individuo> individuos= new ListaEnlazada<Individuo>(individuoActual);
-                //casillaNueva.getData().setIndividuos(individuos);
-                filaCompleta.add(casillaNueva);
-
-            }
-            tablero.add(new ElementoListaColumnasLE<ListaEnlazadaColumnas<Casilla>>(filaCompleta));
-        }
-    }
 
     //EjecutarBucle() al tocar un boton
     //checkear
