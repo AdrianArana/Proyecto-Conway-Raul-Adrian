@@ -140,11 +140,67 @@ public class FuncionesBucle {
             individuo.setCoordenadaY(y + 1);
             casillaActual.getIndividuos().delete(posicion);
             tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+
         }
         if (dir==1){
+            //arriba derecha
+
+            individuo.setCoordenadaX(x+1);
+            individuo.setCoordenadaY(y+1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
 
         }
 
+        if(dir==2){
+            //derecha
+
+            individuo.setCoordenadaX(x+1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+
+
+        }
+
+        if (dir==3){
+            //abajo derecha
+            individuo.setCoordenadaX(x+1);
+            individuo.setCoordenadaY(y-1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+
+        }
+
+        if (dir==4){
+            //abajo
+
+            individuo.setCoordenadaY(y-1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+        }
+
+        if (dir==5){
+            //abajo izquierda
+            individuo.setCoordenadaY(y-1);
+            individuo.setCoordenadaX(x-1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+
+        }
+
+        if (dir==6){
+            //izquierda
+
+            individuo.setCoordenadaX(x-1);
+            casillaActual.getIndividuos().delete(posicion);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+        }
+        if (dir==7){
+            //arriba izquierda
+            individuo.setCoordenadaX(x-1);
+            individuo.setCoordenadaY(y+1);
+            tablero.getElemento(y).getData().getElemento(x).getData().getIndividuos().add(individuo);
+        }
 
     }
 
@@ -274,6 +330,8 @@ public class FuncionesBucle {
                 clon.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes());
                 clon.setCoordenadaX(individuo.getCoordenadaX());
                 clon.setCoordenadaY(individuo.getCoordenadaY());
+
+
                 individuos.add(clon);
                 casillaActual.setIndividuos(individuos);
 
@@ -288,25 +346,30 @@ public class FuncionesBucle {
 
     public void muerteIndividuos(Casilla casillaActual) {
         Random random = new Random();
-        int probabilidadsobrevivir = random.nextInt(1, 101);
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
-        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
-            if (individuos.getElemento(i).getData().getTurnosVidaRestantes() < 1) {
-                individuos.delete(i);
-            } else if (probabilidadsobrevivir < individuos.getElemento(i).getData().getProbabilidadMuerte()) {
-                individuos.delete(i);
-            } else {
-                for (int j = 0; j < entorno.getNumeroElementos(); j++) {
-                    if (entorno.getElemento(j).getData().getClass() == Pozo.class) {
-                        individuos.delete(i);
-                    }
-                }
+
+        boolean hasPozo = false;
+        for (int j = 0; j < entorno.getNumeroElementos(); j++) {
+            if (entorno.getElemento(j).getData().getClass() == Pozo.class) {
+                hasPozo = true;
+                break;
             }
         }
-        casillaActual.setIndividuos(individuos);
 
+
+        for (int i=0;i<individuos.getNumeroElementos(); i--) {
+            Individuo individuo = individuos.getElemento(i).getData();
+            int probabilidadsobrevivir = random.nextInt(101);
+
+            if (individuo.getTurnosVidaRestantes() < 1 || probabilidadsobrevivir < individuo.getProbabilidadMuerte() || hasPozo) {
+                individuos.delete(i);
+            }
+        }
+
+        casillaActual.setIndividuos(individuos);
     }
+
 
 
     //ME FALTA LA FUNCION DE APARICION DE RECURSOS
