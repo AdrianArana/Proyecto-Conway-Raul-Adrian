@@ -7,8 +7,8 @@
    <children>
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
       </GridPane>
-      <Button fx:id="pauseButton" layoutX="352.0" layoutY="552.0" mnemonicParsing="false" onAction="#onPauseButton" text=" Pausar/Ajustes" />
-      <Button layoutX="450.0" layoutY="551.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Jugar" />
-      <Button fx:id="finalizarButton" layoutX="710.0" layoutY="552.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
+      <Button fx:id="pauseButton" layoutX="690.0" layoutY="500.0" mnemonicParsing="false" onAction="#onPauseButton" prefHeight="0.0" prefWidth="98.0" text=" Pausar/Ajustes" />
+      <Button layoutX="710.0" layoutY="539.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Jugar" />
+      <Button fx:id="finalizarButton" layoutX="710.0" layoutY="578.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
    </children>
 </AnchorPane>
