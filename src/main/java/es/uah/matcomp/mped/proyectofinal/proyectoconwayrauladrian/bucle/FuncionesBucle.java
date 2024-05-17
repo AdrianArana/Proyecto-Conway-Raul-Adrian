@@ -358,7 +358,7 @@ public class FuncionesBucle {
         }
 
 
-        for (int i=0;i<individuos.getNumeroElementos(); i--) {
+        for (int i=0;i<individuos.getNumeroElementos(); i++) {
             Individuo individuo = individuos.getElemento(i).getData();
             int probabilidadsobrevivir = random.nextInt(101);
 

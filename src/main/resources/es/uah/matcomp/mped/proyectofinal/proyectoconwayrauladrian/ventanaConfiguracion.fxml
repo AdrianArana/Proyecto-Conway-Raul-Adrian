@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.ConfiguracionController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.ConfiguracionController">
    <cursor>
       <Cursor fx:constant="CROSSHAIR" />
    </cursor>
@@ -98,6 +97,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="544.0" layoutY="521.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="31.0" prefWidth="112.0" text="INICIAR PARTIDA" />
+      <Button fx:id="botonIniciarPartida" alignment="BOTTOM_RIGHT" layoutX="488.0" layoutY="434.0" mnemonicParsing="false" onAction="#onIniciarPartidaButtonClick" prefHeight="31.0" prefWidth="112.0" text="INICIAR PARTIDA" />
    </children>
 </AnchorPane>
