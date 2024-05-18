@@ -13,6 +13,10 @@ public class ElementoLE<TipoDelDato> {
         this.siguiente = siguiente;
     }
 
+    public ElementoLE() {
+
+    }
+
     protected void insertarmeEn(ElementoLE<TipoDelDato> el){
         el.siguiente = this.siguiente;
         this.siguiente=el;

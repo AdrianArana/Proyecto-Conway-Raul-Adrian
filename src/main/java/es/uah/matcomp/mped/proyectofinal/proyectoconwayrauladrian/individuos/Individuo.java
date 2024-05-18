@@ -83,5 +83,10 @@ public class Individuo extends ParametrosIndividuo{
 
 
     public void setTurnosVidaRestantes(int i) {
+        super.setTurnosVidaRestantes(i);
+    }
+
+    public void restarUnoDeVida() {
+        this.setTurnosVidaRestantes(getTurnosVidaRestantes()-1);
     }
 }
