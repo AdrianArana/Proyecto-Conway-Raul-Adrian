@@ -8,6 +8,7 @@ public class ParametrosEntornoModelProperties {
 
     protected ParametrosEntorno valoresOriginales;
 
+    private IntegerProperty tiempoAparicion = new SimpleIntegerProperty();
     private IntegerProperty probabilidadAgua = new SimpleIntegerProperty();
     private IntegerProperty probabilidadBiblioteca = new SimpleIntegerProperty();
     private IntegerProperty probabilidadComida = new SimpleIntegerProperty();
@@ -21,6 +22,7 @@ public class ParametrosEntornoModelProperties {
     }
 
     public void commit(){
+        valoresOriginales.setTiempoAparicion(tiempoAparicion.get());
         valoresOriginales.setProbabilidadAgua(probabilidadAgua.get());
         valoresOriginales.setProbabilidadBiblioteca(probabilidadBiblioteca.get());
         valoresOriginales.setProbabilidadComida(probabilidadComida.get());
@@ -31,6 +33,7 @@ public class ParametrosEntornoModelProperties {
     }
 
     public void rollback(){
+        tiempoAparicion.set(valoresOriginales.getTiempoAparicion());
         probabilidadAgua.set(valoresOriginales.getProbabilidadAgua());
         probabilidadBiblioteca.set(valoresOriginales.getProbabilidadBiblioteca());
         probabilidadComida.set(valoresOriginales.getProbabilidadComida());
@@ -50,6 +53,7 @@ public class ParametrosEntornoModelProperties {
         return valoresOriginales;
     }
 
+    public Property<Number> tiempoAparicion(){return tiempoAparicion;}
     public Property<Number> probabilidadAgua(){return probabilidadAgua;}
     public Property<Number> probabilidadBiblioteca(){return probabilidadBiblioteca;}
     public Property<Number> probabilidadComida(){return probabilidadComida;}

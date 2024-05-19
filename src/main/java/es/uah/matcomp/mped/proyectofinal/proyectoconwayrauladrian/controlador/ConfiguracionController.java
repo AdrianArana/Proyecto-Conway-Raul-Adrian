@@ -22,6 +22,8 @@ public class ConfiguracionController implements Initializable {
     public Label labelValorSliderCasillasX;
     public Label labelValorSliderCasillasY;
     public Slider sliderProbabilidadGeneral;
+    public Slider sliderTiempoAparicion;
+    public Label labelTiempoAparicion;
 
 
     @FXML
@@ -76,6 +78,8 @@ public class ConfiguracionController implements Initializable {
     protected IntegerProperty medidaprobabilidadReproduccion = new SimpleIntegerProperty(0);
 
     //Entorno, variables observables para recursos
+    protected IntegerProperty medidatiempoAparicion = new SimpleIntegerProperty(0);
+
     protected IntegerProperty medidaAgua = new SimpleIntegerProperty(0);
 
     protected IntegerProperty medidaBiblioteca = new SimpleIntegerProperty(0);
@@ -109,6 +113,7 @@ public class ConfiguracionController implements Initializable {
         sliderProbabilidadClonacion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadClonacionProperty());
         sliderProbabilidadReproduccion.valueProperty().bindBidirectional(parametrosIndividuo.probabilidadReproduccionProperty());
         //Bindeamos los sliders de del entorno
+        sliderTiempoAparicion.valueProperty().bindBidirectional(parametrosEntorno.tiempoAparicion());
         sliderProbabilidadGeneral.valueProperty().bindBidirectional(parametrosEntorno.probabilidadGeneral());
         sliderAgua.valueProperty().bindBidirectional(parametrosEntorno.probabilidadAgua());
         sliderBiblioteca.valueProperty().bindBidirectional(parametrosEntorno.probabilidadBiblioteca());
@@ -143,6 +148,9 @@ public class ConfiguracionController implements Initializable {
         laborValorSliderProbabilidadReproduccion.textProperty().bind(medidaprobabilidadReproduccion.asString());
 
         //Sliders para los recursos del entorno
+        sliderTiempoAparicion.valueProperty().bindBidirectional(medidatiempoAparicion);
+        labelTiempoAparicion.textProperty().bind(medidatiempoAparicion.asString());
+
         sliderAgua.valueProperty().bindBidirectional(medidaAgua);
         labelAgua.textProperty().bind(medidaAgua.asString());
 
@@ -180,6 +188,8 @@ public class ConfiguracionController implements Initializable {
     @FXML
     protected void onBotonGuardarClick() {
         parametrosIndividuo.commit();
+        parametrosEntorno.commit();
+        parametrosCasillas.commit();
     }
 
     @FXML
@@ -195,16 +205,6 @@ public class ConfiguracionController implements Initializable {
     @FXML
     public void onBotonReiniciarCasillasClick() {
         parametrosCasillas.rollback();
-    }
-
-    @FXML
-
-    protected void onBotonGuardarEntornoClick() {
-        parametrosEntorno.commit();
-    }
-
-    public void onBotonGuardarCasillasClick() {
-        parametrosCasillas.commit();
     }
 
     @FXML

@@ -8,7 +8,9 @@
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
       </GridPane>
       <Button fx:id="pauseButton" layoutX="690.0" layoutY="500.0" mnemonicParsing="false" onAction="#onPauseButton" prefHeight="0.0" prefWidth="98.0" text=" Pausar/Ajustes" />
-      <Button layoutX="710.0" layoutY="539.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Jugar" />
+      <Button layoutX="710.0" layoutY="539.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Avance" />
       <Button fx:id="finalizarButton" layoutX="710.0" layoutY="578.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
+      <Slider fx:id="sliderVelocidad" layoutX="732.0" layoutY="298.0" orientation="VERTICAL" />
+      <Button layoutX="498.0" layoutY="620.0" mnemonicParsing="false" onAction="#onBotonComenzar" prefHeight="25.0" prefWidth="143.0" text="COMENZAR" textFill="#5900ff" />
    </children>
 </AnchorPane>

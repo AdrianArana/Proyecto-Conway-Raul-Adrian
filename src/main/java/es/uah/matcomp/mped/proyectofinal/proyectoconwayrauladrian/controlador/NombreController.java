@@ -26,7 +26,7 @@ public class NombreController implements Initializable {
     private ParametrosIndividuo parametrosData = new ParametrosIndividuo(20, 20, 20,20);
     private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo = new ParametrosIndividuoModelProperties(parametrosData);
 
-    private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20,20);
+    private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,20,20,20,20,20,20,20);
     private ParametrosEntornoModelProperties modeloGuiCompartidoEntorno = new ParametrosEntornoModelProperties(parametrosDataEntorno);
 
     private ParametrosCasillas parametrosDataCasillas = new ParametrosCasillas(20,20);
