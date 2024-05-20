@@ -1,5 +1,6 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
 
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
 
 public class Individuo extends ParametrosIndividuo {
@@ -8,7 +9,7 @@ public class Individuo extends ParametrosIndividuo {
     private int id;
     private int tipo;
     private int turnoGeneracion;
-
+    //private <? extends Entorno> recursoElegido=
     //Constructor vacío
     public Individuo(int x, int y, int id, int tipo, int turnosVidaRestantes, int turnoGeneracion, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
         super(turnosVidaRestantes, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion);

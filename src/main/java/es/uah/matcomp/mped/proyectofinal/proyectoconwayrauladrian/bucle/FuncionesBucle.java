@@ -38,11 +38,6 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
-                // pero REMARCAMOS QUE LOS NUMEROS DE LAS POSICIONES DE LAS CASILLAS SON DESDE EL 1 HASTA EL 10,
-                // NO DESDE EL 0 AL 9 COMO AQUI, PUEDE QUE DE PROBLEMAS
-                Casilla casillaActual = filaActual.getElemento(columna).getData();//Ya podemos trabajar con cada casilla
-
-
                 reproduccion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 clonacion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
@@ -470,8 +465,8 @@ public class FuncionesBucle {
 
                 Individuo individuo1 = casillaActual.getIndividuos().getElemento(0).getData();
                 Individuo individuo2 = casillaActual.getIndividuos().getElemento(1).getData();
-                System.out.println("reproduccion de: " + individuo1.toString() + "y de " + individuo2.toString());
-                System.out.println("Individuo con: " + individuo1.getProbabilidadReproduccion() + " prob de reprod y el numero que ha tocado: " + probabilidadAleatoria);
+                //System.out.println("reproduccion de: " + individuo1.toString() + "y de " + individuo2.toString());
+                //System.out.println("Individuo con: " + individuo1.getProbabilidadReproduccion() + " prob de reprod y el numero que ha tocado: " + probabilidadAleatoria);
 
                 if (individuo1.getProbabilidadReproduccion() >= probabilidadAleatoria ||
                         individuo2.getProbabilidadReproduccion() >= probabilidadAleatoria) {
@@ -487,26 +482,26 @@ public class FuncionesBucle {
                     hijo.setTipo(Math.max(individuo1.getTipo(), individuo2.getTipo()));
                     //todo hacer con constructor
                     //su probabilidad de reproduccion y clonacion sera la misma q la del padre
-                    hijo.setProbabilidadClonacion(Math.max(individuo1.getProbabilidadReproduccion(), individuo2.getProbabilidadClonacion()));
+                    hijo.setProbabilidadClonacion(Math.max(individuo1.getProbabilidadClonacion(), individuo2.getProbabilidadClonacion()));
                     hijo.setProbabilidadReproduccion(Math.max(individuo1.getProbabilidadReproduccion(), individuo2.getProbabilidadReproduccion()));
                     hijo.setProbabilidadMuerte(Math.min(individuo1.getProbabilidadMuerte(), individuo2.getProbabilidadMuerte()));
                     hijo.setTurnosVidaRestantes(Math.max(individuo1.getTurnosVidaRestantes(), individuo2.getTurnosVidaRestantes()));
                     hijo.setCoordenadaX(individuo1.getCoordenadaX());
                     hijo.setCoordenadaY(individuo1.getCoordenadaY());
-                    System.out.println("comprobar"+hijo);
+                    //System.out.println("comprobar"+hijo);
 
                     casillaActual.getIndividuos().add(hijo);
-                    System.out.println("Ahora hay :" + casillaActual.getIndividuos().getNumeroElementos() + " individuos en la casilla");
+                    //System.out.println("Ahora hay :" + casillaActual.getIndividuos().getNumeroElementos() + " individuos en la casilla");
                 } else {
                     for (int i = 0; i < casillaActual.getIndividuos().getNumeroElementos(); i++) {
                         if (casillaActual.getIndividuos().getElemento(i).getData().getProbabilidadMuerte() > probabilidadAleatoria) {
                             casillaActual.getIndividuos().delete(i);
                         }
                     }
-                    System.out.println("No hay reproduccion");
+
                 }
             } else if (casillaActual.getIndividuos().getNumeroElementos() == 3) {
-                System.out.println("YA HAY 3 INDIVIDUOS EN LA CELDA, IMPOSIBLE REPRODUCIRSE");//todo quitarlo
+                //System.out.println("YA HAY 3 INDIVIDUOS EN LA CELDA, IMPOSIBLE REPRODUCIRSE");//todo quitarlo
             }
 
         } catch (Exception e) {
@@ -528,33 +523,20 @@ public class FuncionesBucle {
                 for (int i = 0; i < individuos.getNumeroElementos(); i++) {
                     Random random = new Random();
                     int probabilidad = random.nextInt(101);
-                    Individuo individuo = individuos.getElemento(i).getData();
                     if (probabilidad <= individuos.getElemento(i).getData().getProbabilidadClonacion()) {
-                        System.out.println("individuo con: " + individuo.getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
+                        if (casillaActual.getCoordenadaX()!=individuos.getElemento(i).getData().getCoordenadaX()){
+                            System.out.println("LAS COORDENADAS NO COINCIDEN, ESTÁN MAL");
+                        }
+                        //System.out.println("individuo con: " + individuos.getElemento(i).getData().getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
 
 
-                        Individuo clon = individuo; //todo ver si coje bien la informacion el clon
+                        Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(),individuos.getElemento(i).getData().getCoordenadaY(),individuos.getElemento(i).getData().getId(),individuos.getElemento(i).getData().getTipo(),individuos.getElemento(i).getData().getTurnosVidaRestantes(),turnoActual,individuos.getElemento(i).getData().getProbabilidadMuerte(),individuos.getElemento(i).getData().getProbabilidadClonacion(),individuos.getElemento(i).getData().getProbabilidadReproduccion()); //todo ver si coje bien la informacion el clon
 
-                        //id todo no funciona lo del id
-                        clon.setId(generarID(casillaActual));
-                        //generacion
-                        clon.setTurnoGeneracion(turnoActual);
-
-                        //el tipo
-                        clon.setTipo(individuos.getElemento(i).getData().getTipo());
-                        //su probabilidad de reproduccion y clonacion sera la misma q la del padre
-                        clon.setProbabilidadClonacion(individuo.getProbabilidadClonacion());
-                        clon.setProbabilidadReproduccion(individuo.getProbabilidadReproduccion());
-                        clon.setProbabilidadMuerte(individuos.getElemento(i).getData().getProbabilidadMuerte());
-                        clon.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes());
-                        clon.setCoordenadaX(individuo.getCoordenadaX());
-                        clon.setCoordenadaY(individuo.getCoordenadaY());
-
-                        System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
+                        //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
                         casillaActual.getIndividuos().add(clon);
-                        System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
+                        //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
 
-                        System.out.println("hay clonacion");
+                        //System.out.println("hay clonacion");
                         return;
                     }
                 }
