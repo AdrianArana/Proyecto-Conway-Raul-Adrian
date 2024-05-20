@@ -254,8 +254,17 @@ public class FuncionesBucle {
         return individuo;
     }
 
-    private ElementoLE<Individuo> moverAvanzado(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int i) {
-        return null;
+    private ElementoLE<Individuo> moverAvanzado(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int pos) {
+        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
+        for (int a=0; a<tablero.getNumeroFilas(); a++) {
+            for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
+
+                for (int i = 0; i < recursos.getNumeroElementos(); i++) {
+                    System.out.println(i);
+                }
+            }
+        }
+return  null;
     }
 
     private ListaEnlazada<ElementoLE<Entorno>> obtenerRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
@@ -431,7 +440,7 @@ public class FuncionesBucle {
 
 
  */
-//todo CUIDAO
+//todo CUIDAO -- HECHO :)
     public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
         int id = 0;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
