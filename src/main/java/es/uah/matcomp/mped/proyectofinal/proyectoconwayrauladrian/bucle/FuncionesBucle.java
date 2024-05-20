@@ -31,26 +31,28 @@ public class FuncionesBucle {
     public FuncionesBucle() {
     }
 
+
     public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno) {
+
         int filas = tablero.getNumeroFilas();
         ListaEnlazada<ElementoLE<Individuo>> individuosMover = new ListaEnlazada<>();
         for (int fila = 0; fila < filas; fila++) {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
-                reproduccion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
-                clonacion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
+                reproduccion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
+                clonacion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 recursoActivo(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 aparicionRecursos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), parametrosEntorno);
 
                 //Añadimos a la lista de movimientos el individuo que corresponde, solo si hay algun individuo que mover en esa casilla
 
-
                 if (hayMovimiento(tablero.getElemento(fila).getData().getElemento(columna).getData())) {
                     //Añadimos un individuo a la lista con sus nuevas coordenadas,para despues colocarlo donde le correponda
                     individuosMover.add(moverIndividuos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData()));
                 }
+
                 //todo-> !!!!!!ESTA ES LA QUE LA LIA
                 tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
             }
@@ -158,7 +160,7 @@ public class FuncionesBucle {
     //si los turnos de vida del individuo son menores o ihuales a cero, se eliminan de la casilla y de la lisat de individuos
     //a los individuos por cada turno, se les actualiza su probabilidad de reproduccion y de clonacion
     public void tiempoDeVida(Casilla casillaActual) {
-        //todo - > no hace absolutamente nada
+        //todo - > no hace absolutamente nada, SOLUCIONADO
         for (int i = 0; i < casillaActual.getIndividuos().getNumeroElementos(); i++) {
             casillaActual.getIndividuos().getElemento(i).getData().restarUnoDeVida();
         }
@@ -289,12 +291,10 @@ public class FuncionesBucle {
             int recursoEscogido = random.nextInt(cantidadDeRecursos);
             int xIndividuo = individuo.getCoordenadaX();
             int yIndividuo = individuo.getCoordenadaY();
-            for (int i = 0; i < cantidadDeRecursos; i++) {
-                System.out.println(recursos.getElemento(i).getData().getData().toString() + " COORDENADAS: " + recursos.getElemento(i).getData().getData().getCoordenadaX() + "," + recursos.getElemento(i).getData().getData().getCoordenadaY());
-            }
             //System.out.println("recursoEscogido: numero:" + recursoEscogido + " x:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX() + " y:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY());
             int xRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX();
             int yRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY();
+
             //System.out.println("Ubicacion del recurso: " + xRecursoEscogido + "," + yRecursoEscogido);
             if (xIndividuo < xRecursoEscogido) {
                 xIndividuo++;
@@ -432,20 +432,22 @@ public class FuncionesBucle {
 
  */
 //todo CUIDAO
-    public int generarID(Casilla casillaActual) {
-        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
-
-
+    public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
         int id = 0;
-        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
-            if (individuos.getElemento(i).getData().getId() > id) {
-                id = individuos.getElemento(i).getData().getId();
+        for (int i = 0; i < tablero.getNumeroFilas(); i++) {
+            for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
+                if (tablero.getElemento(i).getData().getElemento(j) != null) {
+                    //Accedemos a la casilla si no está vacía
+                    for (int k=0; k<tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
+                        if (tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId()>id){
+                            id=tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId();
+                        }
+                    }
+                }
             }
         }
-        id = id + 1;
+        id++;
         return id;
-
-
     }
 
 
@@ -455,7 +457,7 @@ public class FuncionesBucle {
 //• La reproducción de individuos de distinto tipo da lugar a otro individuo del tipo más alto
 
 
-    public void reproduccion(Casilla casillaActual, int turnoActual) {
+    public void reproduccion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
 
 
         try {
@@ -474,7 +476,7 @@ public class FuncionesBucle {
                     //genero su id
                     //TODO -> cambiar valores
                     Individuo hijo = new Individuo();
-                    hijo.setId(generarID(casillaActual));
+                    hijo.setId(generarID(tablero));
                     //su generacion
 
                     hijo.setTurnoGeneracion(turnoActual);
@@ -515,7 +517,7 @@ public class FuncionesBucle {
 
     //un individuo puede clonarse a sí mismo, y el clon
 //aparecerá en la misma posición del mapa.
-    public void clonacion(Casilla casillaActual, int turnoActual) {
+    public void clonacion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         try {
@@ -524,13 +526,13 @@ public class FuncionesBucle {
                     Random random = new Random();
                     int probabilidad = random.nextInt(101);
                     if (probabilidad <= individuos.getElemento(i).getData().getProbabilidadClonacion()) {
-                        if (casillaActual.getCoordenadaX()!=individuos.getElemento(i).getData().getCoordenadaX()){
+                        if (casillaActual.getCoordenadaX() != individuos.getElemento(i).getData().getCoordenadaX()) {
                             System.out.println("LAS COORDENADAS NO COINCIDEN, ESTÁN MAL");
                         }
                         //System.out.println("individuo con: " + individuos.getElemento(i).getData().getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
 
 
-                        Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(),individuos.getElemento(i).getData().getCoordenadaY(),individuos.getElemento(i).getData().getId(),individuos.getElemento(i).getData().getTipo(),individuos.getElemento(i).getData().getTurnosVidaRestantes(),turnoActual,individuos.getElemento(i).getData().getProbabilidadMuerte(),individuos.getElemento(i).getData().getProbabilidadClonacion(),individuos.getElemento(i).getData().getProbabilidadReproduccion()); //todo ver si coje bien la informacion el clon
+                        Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(), individuos.getElemento(i).getData().getCoordenadaY(), generarID(tablero), individuos.getElemento(i).getData().getTipo(), individuos.getElemento(i).getData().getTurnosVidaRestantes(), turnoActual, individuos.getElemento(i).getData().getProbabilidadMuerte(), individuos.getElemento(i).getData().getProbabilidadClonacion(), individuos.getElemento(i).getData().getProbabilidadReproduccion()); //todo ver si coje bien la informacion el clon
 
                         //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
                         casillaActual.getIndividuos().add(clon);
@@ -575,7 +577,7 @@ public class FuncionesBucle {
     }
 
 
-//ME FALTA LA FUNCION DE APARICION DE RECURSOS
+//ME FALTA LA FUNCION DE APARICION DE RECURSOS -- HECHO
 
 
 //los recursos aparecen si una probabilidad de aparicion de recursos gana a la probabilidad generada aleatoriamente, si haay mas de 3 recursos en una posicion no pueden incluirse mas recursos en esta
@@ -585,7 +587,8 @@ public class FuncionesBucle {
 //todo /con como lo he hecho, los reecursos saben la posicion en la que van a aparecer???????
 
     //todo?????????¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿por cada vez que le demos a avanzar va a haber una probabilidad distinta de si puede aparecer un nuevo recurso o no (simulando como que cada tiempo hay distintas vecees en las cuales hay mas recursos o menos) y si esta es mayor que la probabilidad de aparicion de un nuevo recurso entonces se llevaran acabo todas las probabilidades de lo demas
-    public void aparicionRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, ParametrosEntorno parametrosEntorno) {
+    public void aparicionRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla
+            casillaActual, ParametrosEntorno parametrosEntorno) {
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
         int tiempoDeAparicionRecursos = parametrosEntorno.getTiempoAparicion();
         try {
@@ -640,15 +643,11 @@ public class FuncionesBucle {
                     }
                 }
             }
-            //}
+
 
         } catch (Exception e) {
             System.err.println("Error en el método Aaparicion Recursos: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
-
 }
-
-

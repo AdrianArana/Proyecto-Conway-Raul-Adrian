@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class VentanaCasillaController {
@@ -47,7 +48,7 @@ public class VentanaCasillaController {
     int probabilidadClonacion;
     int probabilidadReproduccion;
 
-    Casilla casillaValoresIniciales=new Casilla();
+    Casilla casillaValoresIniciales = new Casilla();
 
 
     public Label labelIndividuosTipo1;
@@ -83,6 +84,7 @@ public class VentanaCasillaController {
 
     private Stage escenaVentana;
 
+    private ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero;
 
     public void setStage(Stage escenaDada) {
         this.escenaVentana = escenaDada;
@@ -112,7 +114,7 @@ public class VentanaCasillaController {
                 cantidadMontaña++;
             } else if (recursos.getElemento(i).getData().getClass() == Tesoro.class) {
                 cantidadTesoro++;
-            } else if(recursos.getElemento(i).getData().getClass()==Pozo.class){
+            } else if (recursos.getElemento(i).getData().getClass() == Pozo.class) {
                 cantidadPozo++;
             }
         }
@@ -138,7 +140,8 @@ public class VentanaCasillaController {
     }
 
 
-    public void setParametros(Casilla casillaActual,ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual,int id) {
+    public void setParametros(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tableroDado, Casilla casillaActual, ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual) {
+        this.tablero = tableroDado;
         this.parametrosIndividuo = parametrosIndividuo;
         this.parametrosEntorno = parametrosEntorno;
         this.turnoActual = turnoActual;
@@ -147,20 +150,35 @@ public class VentanaCasillaController {
         this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
         this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
         this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
-        this.id=id;
+    }
 
+    public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
+        int id = 0;
+        for (int i = 0; i < tablero.getNumeroFilas(); i++) {
+            for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
+                if (tablero.getElemento(i).getData().getElemento(j) != null) {
+                    //Accedemos a la casilla si no está vacía
+                    for (int k=0; k<tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
+                        if (tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId()>id){
+                            id=tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId();
+                        }
+                    }
+                }
+            }
+        }
+        id++;
+        return id;
     }
 
     //FUNCIONES PARA LOS BOTONES DE AÑADIR INDIVIDUOS O RECURSOS
     //Ejecutable por botón
     private void nuevoIndividuo(int tipo) {
-        id++;
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
 
-        try{
+        try {
             if (individuos.getNumeroElementos() < 3) {
                 Individuo nuevoIndividuo = new Individuo(casilla.getCoordenadaX(), casilla.getCoordenadaY(),
-                        id, tipo, turnosDeVidaRestantes, turnoActual, probabilidadMuerte,
+                        generarID(tablero), tipo, turnosDeVidaRestantes, turnoActual, probabilidadMuerte,
                         probabilidadClonacion, probabilidadReproduccion);
                 individuos.add(nuevoIndividuo);
                 labelIndividuoCreado.setText("Individuo añadido: " + nuevoIndividuo.toString());
@@ -169,8 +187,7 @@ public class VentanaCasillaController {
             }
             mostrarInfo();
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
@@ -180,10 +197,10 @@ public class VentanaCasillaController {
     private void quitarIndividuo(int tipo) {
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
 
-        try{
+        try {
             for (int i = 0; i < individuos.getNumeroElementos(); i++) {
                 if (individuos.getElemento(i).getData().getTipo() == tipo) {
-                    Individuo eliminado=individuos.getElemento(i).getData();
+                    Individuo eliminado = individuos.getElemento(i).getData();
                     labelIndividuoCreado.setText("Individuo eliminado: " + eliminado.toString());
                     individuos.delete(i);
 
@@ -194,8 +211,7 @@ public class VentanaCasillaController {
                 }
             }
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -209,17 +225,17 @@ public class VentanaCasillaController {
             int x = casilla.getCoordenadaX();
             int y = casilla.getCoordenadaY();
             if (recursos.getNumeroElementos() == 3) {
-                if (clase == "Agua") {
+                if (Objects.equals(clase, "Agua")) {
                     botonAñadirAgua.setStyle("-fx-background-color: #ff0000;");
-                } else if (clase == "Biblioteca") {
+                } else if (Objects.equals(clase, "Biblioteca")) {
                     botonAñadirBiblioteca.setStyle("-fx-background-color: #ff0000;");
-                } else if (clase == "Comida") {
+                } else if (Objects.equals(clase, "Comida")) {
                     botonAñadirComida.setStyle("-fx-background-color: #ff0000;");
-                } else if (clase == "Montaña") {
+                } else if (Objects.equals(clase, "Montaña")) {
                     botonAñadirMontaña.setStyle("-fx-background-color: #ff0000;");
-                } else if (clase == "Pozo") {
+                } else if (Objects.equals(clase, "Pozo")) {
                     botonAñadirPozo.setStyle("-fx-background-color: #ff0000;");
-                } else if (clase == "Tesoro") {
+                } else if (Objects.equals(clase, "Tesoro")) {
                     botonAñadirTesoro.setStyle("-fx-background-color: #ff0000;");
                 }
             }
@@ -247,8 +263,7 @@ public class VentanaCasillaController {
             }
             casilla.setRecursos(recursos);
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -256,11 +271,11 @@ public class VentanaCasillaController {
 
     public void eliminarRecurso(Class clase) {
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
-        try{
+        try {
             for (int i = 0; i < recursos.getNumeroElementos(); i++) {
                 if (clase == recursos.getElemento(i).getData().getClass()) {
-                    Entorno eliminado=recursos.getElemento(i).getData();
-                    labelIndividuoCreado.setText("¡¡Has eliminado: "+eliminado.toString()+"!!");
+                    Entorno eliminado = recursos.getElemento(i).getData();
+                    labelIndividuoCreado.setText("¡¡Has eliminado: " + eliminado.toString() + "!!");
                     recursos.delete(i);
                     setBotonesNulos();
                     casilla.setRecursos(recursos);
@@ -268,7 +283,7 @@ public class VentanaCasillaController {
                     return;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -276,7 +291,7 @@ public class VentanaCasillaController {
 
     //Funciones para la visualización de los botones
     public void ponerBotonEnRojo(int numeroBoton) {
-        try{
+        try {
             if (numeroBoton == 1) {
                 botonAñadirIndividuo1.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
             } else if (numeroBoton == 2) {
@@ -285,36 +300,32 @@ public class VentanaCasillaController {
                 botonAñadirIndividuo3.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
             }
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     public void ponerBotonesSinColor() {
-        try{
+        try {
             botonAñadirIndividuo1.setStyle(null);
             botonAñadirIndividuo2.setStyle(null);
             botonAñadirIndividuo3.setStyle(null);
 
-        }
-
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void setBotonesNulos() {
-        try{
+        try {
             botonAñadirMontaña.setStyle(null);
             botonAñadirComida.setStyle(null);
             botonAñadirAgua.setStyle(null);
             botonAñadirBiblioteca.setStyle(null);
             botonAñadirTesoro.setStyle(null);
             botonAñadirPozo.setStyle(null);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -407,10 +418,10 @@ public class VentanaCasillaController {
     }
 
     public void cogerValoresIniciales() {
-        ListaEnlazada<Individuo> individuos=casilla.getIndividuos();
-        ListaEnlazada<Entorno> recursos=casilla.getRecursos();
-        int x=casilla.getCoordenadaX();
-        int y=casilla.getCoordenadaY();
+        ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
+        ListaEnlazada<Entorno> recursos = casilla.getRecursos();
+        int x = casilla.getCoordenadaX();
+        int y = casilla.getCoordenadaY();
         casillaValoresIniciales.setIndividuos(individuos);
         casillaValoresIniciales.setRecursos(recursos);
         casillaValoresIniciales.setCoordenadaX(x);
@@ -421,9 +432,9 @@ public class VentanaCasillaController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(),400, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 400, 400);
             stage.setScene(scene);
-            stage.setTitle("Info de los individuos de tipo BÁSICO de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            stage.setTitle("Info de los individuos de tipo BÁSICO de la casilla: (" + casilla.getCoordenadaX() + "," + casilla.getCoordenadaY() + ")");
             VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
             ventanaInfo.setIndividuos(casilla.getIndividuos(), casilla.getCoordenadaX(), casilla.getCoordenadaY());
@@ -437,12 +448,12 @@ public class VentanaCasillaController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(),400, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 400, 400);
             stage.setScene(scene);
-            stage.setTitle("Individuos de tipo NORMAL de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            stage.setTitle("Individuos de tipo NORMAL de la casilla: (" + casilla.getCoordenadaX() + "," + casilla.getCoordenadaY() + ")");
             VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
-            ventanaInfo.setIndividuos(casilla.getIndividuos(),casilla.getCoordenadaX(), casilla.getCoordenadaY());
+            ventanaInfo.setIndividuos(casilla.getIndividuos(), casilla.getCoordenadaX(), casilla.getCoordenadaY());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -453,12 +464,12 @@ public class VentanaCasillaController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(),400, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 400, 400);
             stage.setScene(scene);
-            stage.setTitle("Info de los individuos de tipo AVANZADO de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            stage.setTitle("Info de los individuos de tipo AVANZADO de la casilla: (" + casilla.getCoordenadaX() + "," + casilla.getCoordenadaY() + ")");
             VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
-            ventanaInfo.setIndividuos(casilla.getIndividuos(),casilla.getCoordenadaX(), casilla.getCoordenadaY());
+            ventanaInfo.setIndividuos(casilla.getIndividuos(), casilla.getCoordenadaX(), casilla.getCoordenadaY());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

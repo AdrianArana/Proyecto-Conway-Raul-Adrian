@@ -37,7 +37,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     int turnoActual;
     //Creamos el tablero vacío, que se generará despues
     ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero = new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
-    int id = 0;
+
 
     public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
         this.parametrosEntorno = parametrosEntorno;
@@ -78,7 +78,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             ventanaCasillaController.setStage(stage);
 
             //Le mandamos al controlador los parametros deseados
-            ventanaCasillaController.setParametros(tablero.getElemento(i - 1).getData().getElemento(j - 1).getData(), parametrosIndividuo, parametrosEntorno, turnoActual, id);//TODO-> Generar id coger el anterior para que no haya ids repetidos
+            ventanaCasillaController.setParametros(tablero,tablero.getElemento(i - 1).getData().getElemento(j - 1).getData(), parametrosIndividuo, parametrosEntorno, turnoActual);//TODO-> Generar id coger el anterior para que no haya ids repetidos
             ventanaCasillaController.cogerValoresIniciales();
             ventanaCasillaController.mostrarInfo();
 
