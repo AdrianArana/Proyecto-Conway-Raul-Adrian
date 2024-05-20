@@ -78,7 +78,7 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(a).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int b = 0; b < columnas; b++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
-                actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData());
+
                 while (tablero.getElemento(a).getData().getElemento(b).getData().getIndividuos().getNumeroElementos() > 3) {
                     int posicionDelMásViejo = 0;
                     int mayorEdad = 0;
@@ -89,6 +89,7 @@ public class FuncionesBucle {
                     }
                     tablero.getElemento(a).getData().getElemento(b).getData().getIndividuos().delete(posicionDelMásViejo);
                 }
+                actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData());
             }
         }
     }
