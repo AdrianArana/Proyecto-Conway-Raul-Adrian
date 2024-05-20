@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
    <children>
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
       </GridPane>
       <Button fx:id="pauseButton" layoutX="684.0" layoutY="416.0" mnemonicParsing="false" onAction="#onPauseButton" prefHeight="0.0" prefWidth="98.0" text=" Pausar/Ajustes" />
       <Button layoutX="704.0" layoutY="469.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Avance" />
       <Button fx:id="finalizarButton" layoutX="697.0" layoutY="523.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
-      <Button layoutX="507.0" layoutY="578.0" mnemonicParsing="false" onAction="#onBotonComenzar" prefHeight="25.0" prefWidth="143.0" text="COMENZAR" textFill="#5900ff" />
       <Sphere radius="0.77" />
       <Circle fill="#ffae00" layoutX="659.0" layoutY="58.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="676.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 individuo" />
