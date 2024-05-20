@@ -426,7 +426,7 @@ public class VentanaCasillaController {
             stage.setTitle("Info de los individuos de tipo BÁSICO de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
             VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
-            ventanaInfo.setIndividuos(casilla.getIndividuos());
+            ventanaInfo.setIndividuos(casilla.getIndividuos(), casilla.getCoordenadaX(), casilla.getCoordenadaY());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -458,7 +458,7 @@ public class VentanaCasillaController {
             stage.setTitle("Info de los individuos de tipo AVANZADO de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
             VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
-            ventanaInfo.setIndividuos(casilla.getIndividuos());
+            ventanaInfo.setIndividuos(casilla.getIndividuos(),casilla.getCoordenadaX(), casilla.getCoordenadaY());
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
