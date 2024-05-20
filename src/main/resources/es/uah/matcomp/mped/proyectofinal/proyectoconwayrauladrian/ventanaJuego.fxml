@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
    <children>
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
       </GridPane>
-      <Button fx:id="pauseButton" layoutX="690.0" layoutY="500.0" mnemonicParsing="false" onAction="#onPauseButton" prefHeight="0.0" prefWidth="98.0" text=" Pausar/Ajustes" />
-      <Button layoutX="710.0" layoutY="539.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Avance" />
-      <Button fx:id="finalizarButton" layoutX="710.0" layoutY="578.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
-      <Slider fx:id="sliderVelocidad" layoutX="732.0" layoutY="298.0" orientation="VERTICAL" />
-      <Button layoutX="498.0" layoutY="620.0" mnemonicParsing="false" onAction="#onBotonComenzar" prefHeight="25.0" prefWidth="143.0" text="COMENZAR" textFill="#5900ff" />
+      <Button fx:id="pauseButton" layoutX="684.0" layoutY="416.0" mnemonicParsing="false" onAction="#onPauseButton" prefHeight="0.0" prefWidth="98.0" text=" Pausar/Ajustes" />
+      <Button layoutX="704.0" layoutY="469.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Avance" />
+      <Button fx:id="finalizarButton" layoutX="697.0" layoutY="523.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
+      <Button layoutX="507.0" layoutY="578.0" mnemonicParsing="false" onAction="#onBotonComenzar" prefHeight="25.0" prefWidth="143.0" text="COMENZAR" textFill="#5900ff" />
+      <Sphere radius="0.77" />
+      <Circle fill="#ffae00" layoutX="659.0" layoutY="58.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="676.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 individuo" />
+      <Circle fill="#ff4d00" layoutX="659.0" layoutY="91.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="676.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 individuos" />
+      <Circle fill="RED" layoutX="659.0" layoutY="121.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="676.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 individuos" />
+      <Text layoutX="679.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INDIVIDUOS" />
+      <Text layoutX="684.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECURSOS">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </Text>
+      <Circle fill="#0c0c0c" layoutX="659.0" layoutY="189.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pozo" />
+      <Circle fill="#7a8cce" layoutX="659.0" layoutY="220.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agua" />
+      <Circle fill="#cb82de" layoutX="659.0" layoutY="255.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteca" />
+      <Circle fill="#f5a76e" layoutX="659.0" layoutY="289.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="682.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comida" />
+      <Circle fill="#7a4716" layoutX="659.0" layoutY="320.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="685.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montaña" />
+      <Circle fill="#ffcf3d" layoutX="659.0" layoutY="351.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="685.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tesoro" />
    </children>
 </AnchorPane>

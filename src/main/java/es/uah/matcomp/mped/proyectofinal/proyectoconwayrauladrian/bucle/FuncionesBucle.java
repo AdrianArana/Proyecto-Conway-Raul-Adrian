@@ -114,27 +114,27 @@ public class FuncionesBucle {
                 Class<? extends Entorno> clase = casilla.getRecursos().getElemento(i).getData().getClass();
                 if (clase == Pozo.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#393434FF;");
+                    casilla.getBoton().setStyle("-fx-background-color:#0c0c0c;");
                 }
                 if (clase == Agua.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#1c38a5;");
+                    casilla.getBoton().setStyle("-fx-background-color:#7a8cce;");
                 }
                 if (clase == Biblioteca.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#831ca5;");
+                    casilla.getBoton().setStyle("-fx-background-color:#cb82de;");
                 }
                 if (clase == Comida.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#8e3f00;");
+                    casilla.getBoton().setStyle("-fx-background-color:#f5a76e;");
                 }
                 if (clase == Montaña.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#ffffff;");
+                    casilla.getBoton().setStyle("-fx-background-color:#7a4716;");
                 }
                 if (clase == Tesoro.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#ffff00;");
+                    casilla.getBoton().setStyle("-fx-background-color:#ffcf3d;");
                 }
             }
         }
