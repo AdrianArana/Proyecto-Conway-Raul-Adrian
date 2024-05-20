@@ -2,7 +2,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
 
-public class Individuo extends ParametrosIndividuo{
+public class Individuo extends ParametrosIndividuo {
     private int coordenadaX;
     private int coordenadaY;
     private int id;
@@ -10,8 +10,8 @@ public class Individuo extends ParametrosIndividuo{
     private int turnoGeneracion;
 
     //Constructor vacío
-    public Individuo(int x, int y, int id, int tipo, int turnosVidaRestantes,int turnoGeneracion, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
-        super(turnosVidaRestantes,probabilidadMuerte,probabilidadClonacion,probabilidadReproduccion);
+    public Individuo(int x, int y, int id, int tipo, int turnosVidaRestantes, int turnoGeneracion, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
+        super(turnosVidaRestantes, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion);
         this.coordenadaX = x;
         this.coordenadaY = y;
         this.id = id;
@@ -26,19 +26,21 @@ public class Individuo extends ParametrosIndividuo{
     @Override
     public String toString() {
         String tipoString = "";
-        if(tipo==1){
-            tipoString="Básico";
-        }else if (tipo==2){
-            tipoString="Normal";
-        }else if (tipo==3){
-            tipoString="Avanzado";
+        if (tipo == 1) {
+            tipoString = "Básico";
+        } else if (tipo == 2) {
+            tipoString = "Normal";
+        } else if (tipo == 3) {
+            tipoString = "Avanzado";
         }
         return
-                "\n Coordenadas: (" + coordenadaX +
-                "," + coordenadaY +
-                ")\n Id: '" + id +
-                "'\n Tipo: " + tipoString +
-                "'\n Turno de Generacion=" + turnoGeneracion;
+                "\n Coordenadas: (" + coordenadaX + "," + coordenadaY +
+                        ")\n Id: '" + id +
+                        "'\n Tipo: '" + tipoString +
+                        "'\n Turno de Generacion= '" + turnoGeneracion +
+                        "'\n Probabilidad de clonación: '" + getProbabilidadClonacion() +
+                        "'\n Probabilidad de reproducción: '" + getProbabilidadReproduccion()+
+                        "'\n Turnos de vida restantes: '"+getTurnosVidaRestantes()+"'";
     }
 
     public int getTipo() {
@@ -87,6 +89,6 @@ public class Individuo extends ParametrosIndividuo{
     }
 
     public void restarUnoDeVida() {
-        this.setTurnosVidaRestantes(getTurnosVidaRestantes()-1);
+        this.setTurnosVidaRestantes(getTurnosVidaRestantes() - 1);
     }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaInfoConcretaController">
+   <children>
+      <Accordion layoutX="50.0" layoutY="50.0" prefHeight="224.0" prefWidth="332.0">
+        <panes>
+          <TitledPane animated="false" prefHeight="0.0" prefWidth="200.0" text="Individuo 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="label1" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="195.0" prefWidth="310.0" text="Vacío" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Individuo 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="330.0">
+                     <children>
+                        <Label fx:id="label2" alignment="TOP_LEFT" layoutX="13.0" layoutY="12.0" prefHeight="224.0" prefWidth="308.0" text="Vacío" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" prefHeight="400.0" prefWidth="332.0" text="Individuo 3">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="label3" layoutX="13.0" layoutY="12.0" prefHeight="216.0" prefWidth="312.0" text="Vacío" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+      <Label fx:id="labelCasillaElegida" layoutX="50.0" layoutY="14.0" prefHeight="27.0" prefWidth="355.0" text="Label" />
+   </children>
+</AnchorPane>

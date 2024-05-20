@@ -177,8 +177,8 @@ public class FuncionesBucle {
 
         for (int k = 0; k < casillaActual.getIndividuos().getNumeroElementos(); k++) {
             if (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion() >= 10) {
-                int nuevaProb = (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion()) - (10);
-                casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion(nuevaProb);
+                int nuevaProbReproduccion = (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion()) - (10);
+                casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion(nuevaProbReproduccion);
             } else {
                 casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion(0);
             }
@@ -187,7 +187,8 @@ public class FuncionesBucle {
 
         for (int l = 0; l < casillaActual.getIndividuos().getNumeroElementos(); l++) {
             if (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion() >= 10) {
-                casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadReproduccion((casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion()) - (10));
+                int nuevaProbClonacion = (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion()) - (10);
+                casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadClonacion(nuevaProbClonacion);
             } else {
                 casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadClonacion(0);
             }
@@ -492,7 +493,7 @@ public class FuncionesBucle {
                     hijo.setTurnosVidaRestantes(Math.max(individuo1.getTurnosVidaRestantes(), individuo2.getTurnosVidaRestantes()));
                     hijo.setCoordenadaX(individuo1.getCoordenadaX());
                     hijo.setCoordenadaY(individuo1.getCoordenadaY());
-
+                    System.out.println("comprobar"+hijo);
 
                     casillaActual.getIndividuos().add(hijo);
                     System.out.println("Ahora hay :" + casillaActual.getIndividuos().getNumeroElementos() + " individuos en la casilla");

@@ -39,8 +39,7 @@ public class ParametrosIndividuo {
     }
 
     public void setProbabilidadClonacion(int probabilidadClonacion) {
-        this.probabilidadClonacion = probabilidadClonacion;
-    }
+        this.probabilidadClonacion = probabilidadClonacion; }
 
     public int getProbabilidadReproduccion() {
         return probabilidadReproduccion;

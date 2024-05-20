@@ -1,6 +1,7 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
@@ -10,7 +11,9 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.Paramet
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -26,6 +29,9 @@ public class VentanaCasillaController {
     public Button botonSalir;
     public Button botonAplicarCambios;
     public Button botonReiniciar;
+    public Button botonInfoTipo1;
+    public Button botonInfoTipo2;
+    public Button botonInfoTipo3;
     //El id que se le pone a cada individuo cuando se crea uno nuevo
     //TODO-> HACER QUE FUNCIONE EL ID
     //se me ocurre hacer que se envien a este controlador, desde el del tyablero el
@@ -76,9 +82,6 @@ public class VentanaCasillaController {
     private Casilla casilla;
 
     private Stage escenaVentana;
-
-    //Creamos el tablero vacío, que se generará despues
-    ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero = new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
 
 
     public void setStage(Stage escenaDada) {
@@ -412,5 +415,53 @@ public class VentanaCasillaController {
         casillaValoresIniciales.setRecursos(recursos);
         casillaValoresIniciales.setCoordenadaX(x);
         casillaValoresIniciales.setCoordenadaY(y);
+    }
+
+    public void onBotonInfoTipo1(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),400, 400);
+            stage.setScene(scene);
+            stage.setTitle("Info de los individuos de tipo BÁSICO de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
+            //Le mandamos los parámetros al controlador de la siguiente ventana
+            ventanaInfo.setIndividuos(casilla.getIndividuos());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onBotonInfoTipo2(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),400, 400);
+            stage.setScene(scene);
+            stage.setTitle("Info de los individuos de tipo NORMAL de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
+            //Le mandamos los parámetros al controlador de la siguiente ventana
+            ventanaInfo.setIndividuos(casilla.getIndividuos(),casilla.getCoordenadaX(), casilla.getCoordenadaY());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onBotonInfoTipo3(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),400, 400);
+            stage.setScene(scene);
+            stage.setTitle("Info de los individuos de tipo AVANZADO de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
+            //Le mandamos los parámetros al controlador de la siguiente ventana
+            ventanaInfo.setIndividuos(casilla.getIndividuos());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
