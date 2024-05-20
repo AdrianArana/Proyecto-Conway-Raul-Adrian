@@ -10,7 +10,7 @@ public class Biblioteca extends Entorno{
     public Biblioteca() {
     }
 
-    public void accionBiblioteca(Individuo individuo) {
+    public static void accionBiblioteca(Individuo individuo) {
         int probabilidadAnterior = individuo.getProbabilidadClonacion();
         if (probabilidadAnterior + 20 <= 100) {
             individuo.setProbabilidadClonacion(probabilidadAnterior + 20);
@@ -21,7 +21,7 @@ public class Biblioteca extends Entorno{
     }
 
 
-    private void subirDeTipo(Individuo individuo) {
+    private static void subirDeTipo(Individuo individuo) {
         individuo.setTipo(individuo.getTipo() + 1);
     }
 

@@ -11,7 +11,7 @@ public class Pozo extends Entorno{
 
     }
 
-    public void accionPozo(Individuo individuo){
+    public static void accionPozo(Individuo individuo){
         individuo.setTurnosVidaRestantes(-1);
     }
     @Override

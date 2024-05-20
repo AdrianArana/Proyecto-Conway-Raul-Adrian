@@ -12,7 +12,7 @@ public class Agua extends Entorno {
         super();
     }
 
-    public void accionAgua(Individuo individuo) {
+    public static void accionAgua(Individuo individuo) {
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()+2);
     }
     @Override

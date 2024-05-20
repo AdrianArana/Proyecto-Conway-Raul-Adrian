@@ -38,6 +38,10 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
+
+
+                mejoras(tablero.getElemento(fila).getData().getElemento(columna).getData());
+                tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 reproduccion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 clonacion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
@@ -51,8 +55,8 @@ public class FuncionesBucle {
                     //Añadimos un individuo a la lista con sus nuevas coordenadas,para despues colocarlo donde le correponda
                     individuosMover.add(moverIndividuos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData()));
                 }
-                //todo-> !!!!!!ESTA ES LA QUE LA LIA
-                tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
+
+
             }
         }
 
@@ -408,29 +412,6 @@ public class FuncionesBucle {
         return new ElementoLE<Individuo>(individuo);
     }
 
-
-    //hacer la funcion de mejoras del individuo
-/*
-    public void mejorasIndividuos(Casilla casillaActual){
-
-        ListaEnlazada<Entorno> entorno= casillaActual.getRecursos();
-        ListaEnlazada<Individuo> individuos= casillaActual.getIndividuos();
-
-
-        for (int i = 0; i < entorno.getNumeroElementos(); i++) {
-            for (int j = 0; j < individuos.getNumeroElementos(); j++) {
-                if (entorno.getElemento(i).getData().getCelda() == individuos.getElemento(j).getData().getCelda()) {
-                    recursos.getElemento(i).getData().Propiedad(individuos.getElemento(j).getData());
-                    recursos.del(i);
-                }
-            }
-        }
-
-    }
-
-
-
- */
 //todo CUIDAO
     public int generarID(Casilla casillaActual) {
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
@@ -649,6 +630,50 @@ public class FuncionesBucle {
     }
 
 
-}
 
+
+    //funcion de que cuando haya en una misma casilla individuo y entorno se produzcan las mejoras correspondientes
+
+    public void mejoras(Casilla casillaActual){
+        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
+        ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
+
+        for (int i=0; i<individuos.getNumeroElementos();i++){
+
+            for (int j = 0; j < entorno.getNumeroElementos(); j++) {
+
+                if (entorno.getElemento(j).getData().getClass() == Agua.class) {
+                    Agua.accionAgua(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                else if (entorno.getElemento(j).getData().getClass()==Comida.class){
+                    Comida.accionComida(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                else if(entorno.getElemento(j).getData().getClass()==Biblioteca.class){
+                    Biblioteca.accionBiblioteca(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                //entonces para que te sirve poder añadir mas de 1 agua en la configuracuion?
+
+                else if(entorno.getElemento(j).getData().getClass()==Montaña.class){
+                    Montaña.accionMontaña(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                else if(entorno.getElemento(j).getData().getClass()==Tesoro.class){
+                    Tesoro.accionTesoro(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                casillaActual.setRecursos(entorno);
+            }
+
+        }
+
+    }
+}
 
