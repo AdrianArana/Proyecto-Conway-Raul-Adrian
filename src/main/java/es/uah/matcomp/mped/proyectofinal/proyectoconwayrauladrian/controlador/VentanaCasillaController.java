@@ -439,7 +439,7 @@ public class VentanaCasillaController {
         try {
             Scene scene = new Scene(fxmlLoader.load(),400, 400);
             stage.setScene(scene);
-            stage.setTitle("Info de los individuos de tipo NORMAL de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
+            stage.setTitle("Individuos de tipo NORMAL de la casilla: ("+casilla.getCoordenadaX()+","+casilla.getCoordenadaY()+")");
             VentanaInfoConcretaController ventanaInfo = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
             ventanaInfo.setIndividuos(casilla.getIndividuos(),casilla.getCoordenadaX(), casilla.getCoordenadaY());

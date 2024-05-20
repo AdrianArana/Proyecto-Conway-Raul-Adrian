@@ -38,11 +38,6 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
-                // pero REMARCAMOS QUE LOS NUMEROS DE LAS POSICIONES DE LAS CASILLAS SON DESDE EL 1 HASTA EL 10,
-                // NO DESDE EL 0 AL 9 COMO AQUI, PUEDE QUE DE PROBLEMAS
-                Casilla casillaActual = filaActual.getElemento(columna).getData();//Ya podemos trabajar con cada casilla
-
-
                 reproduccion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 clonacion(tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
@@ -114,19 +109,19 @@ public class FuncionesBucle {
                 Class<? extends Entorno> clase = casilla.getRecursos().getElemento(i).getData().getClass();
                 if (clase == Pozo.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#393434FF;");
+                    casilla.getBoton().setStyle("-fx-background-color:#3e3838;");
                 }
                 if (clase == Agua.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#1c38a5;");
+                    casilla.getBoton().setStyle("-fx-background-color:#6075cd;");
                 }
                 if (clase == Biblioteca.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#831ca5;");
+                    casilla.getBoton().setStyle("-fx-background-color:#b569d1;");
                 }
                 if (clase == Comida.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#8e3f00;");
+                    casilla.getBoton().setStyle("-fx-background-color:#b87743;");
                 }
                 if (clase == Montaña.class) {
                     casilla.getBoton().setText(null);
@@ -134,7 +129,7 @@ public class FuncionesBucle {
                 }
                 if (clase == Tesoro.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#ffff00;");
+                    casilla.getBoton().setStyle("-fx-background-color:#caca56;");
                 }
             }
         }
@@ -528,12 +523,11 @@ public class FuncionesBucle {
                 for (int i = 0; i < individuos.getNumeroElementos(); i++) {
                     Random random = new Random();
                     int probabilidad = random.nextInt(101);
-                    Individuo individuo = individuos.getElemento(i).getData();
                     if (probabilidad <= individuos.getElemento(i).getData().getProbabilidadClonacion()) {
-                        System.out.println("individuo con: " + individuo.getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
+                        System.out.println("individuo con: " + individuos.getElemento(i).getData().getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
 
 
-                        Individuo clon = individuo; //todo ver si coje bien la informacion el clon
+                        Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(), ); //todo ver si coje bien la informacion el clon
 
                         //id todo no funciona lo del id
                         clon.setId(generarID(casillaActual));
