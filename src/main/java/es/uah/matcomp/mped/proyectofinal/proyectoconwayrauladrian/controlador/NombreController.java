@@ -40,7 +40,7 @@ public class NombreController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 650);
             stage.setTitle("Configuración de parámetros");
             stage.setScene(scene);
             //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data

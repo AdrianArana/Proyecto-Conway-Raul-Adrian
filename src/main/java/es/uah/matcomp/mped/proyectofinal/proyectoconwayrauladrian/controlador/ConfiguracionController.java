@@ -4,6 +4,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tab;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,6 +28,7 @@ public class ConfiguracionController implements Initializable {
     public Slider sliderProbabilidadGeneral;
     public Slider sliderTiempoAparicion;
     public Label labelTiempoAparicion;
+    public Tab tabTablero;
 
 
     @FXML
@@ -97,13 +102,11 @@ public class ConfiguracionController implements Initializable {
     protected IntegerProperty medidaCasillasY = new SimpleIntegerProperty(0);
 
 
-
     //Creamos un modelo de la clase observable
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosEntornoModelProperties parametrosEntorno;
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaParametros;
-
 
 
     protected void updateGUIwithModel() {
@@ -124,9 +127,6 @@ public class ConfiguracionController implements Initializable {
         //Bindeamos los sliders del tablero
         sliderCasillasX.valueProperty().bindBidirectional(parametrosCasillas.x());
         sliderCasillasY.valueProperty().bindBidirectional(parametrosCasillas.y());
-
-
-
 
     }
 
@@ -182,7 +182,6 @@ public class ConfiguracionController implements Initializable {
         if (parametrosIndividuo != null && parametrosEntorno != null) {
             this.updateGUIwithModel();
         }
-
     }
 
     @FXML
@@ -243,22 +242,17 @@ public class ConfiguracionController implements Initializable {
     }
 
 
-
-
     public void setStage(Stage escenaDada) {
         this.escenaParametros = escenaDada;
     }
 
     public void onIniciarPartidaButtonClick() {
-        ParametrosCasillas original=parametrosCasillas.getOriginal();
-        ParametrosCasillasModelProperties modeloParaGUICompartidoTablero=new ParametrosCasillasModelProperties(original);
-        ParametrosEntorno EntornoOriginal=parametrosEntorno.getOriginal();
-        ParametrosEntornoModelProperties modeloParaGUICompartidoEntorno=new ParametrosEntornoModelProperties(EntornoOriginal);
-        ParametrosIndividuo IndividuoOriginal= parametrosIndividuo.getOriginal();
-        ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo=new ParametrosIndividuoModelProperties(IndividuoOriginal);
-
-
-
+        ParametrosCasillas original = parametrosCasillas.getOriginal();
+        ParametrosCasillasModelProperties modeloParaGUICompartidoTablero = new ParametrosCasillasModelProperties(original);
+        ParametrosEntorno EntornoOriginal = parametrosEntorno.getOriginal();
+        ParametrosEntornoModelProperties modeloParaGUICompartidoEntorno = new ParametrosEntornoModelProperties(EntornoOriginal);
+        ParametrosIndividuo IndividuoOriginal = parametrosIndividuo.getOriginal();
+        ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo = new ParametrosIndividuoModelProperties(IndividuoOriginal);
 
         System.out.println(parametrosCasillas.x().getValue().intValue());
         //Cerramos la ventana anterior
@@ -268,7 +262,7 @@ public class ConfiguracionController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
         try {
 
-            Scene scene = new Scene(fxmlLoader.load(),850, 750);//Aquí se hace el initialize
+            Scene scene = new Scene(fxmlLoader.load(), 1100, 800);//Aquí se hace el initialize
             stage.setScene(scene);
             stage.setTitle("Juego - La vida de Conway");
             VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();
@@ -277,9 +271,33 @@ public class ConfiguracionController implements Initializable {
             //Ahora se crea el tablero con la lista de listas, y se rellena el gridPane previamente vacío
             ventanaJuegoController.hacerTablero();
             ventanaJuegoController.setStage(stage);
+            ventanaJuegoController.elegirColorGridPane();
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void cargarDatosInGame(VentanaJuegoController controlador, ParametrosIndividuoModelProperties parametrosIndividuoDados, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
+        this.parametrosEntorno = parametrosEntorno;
+        this.parametrosIndividuo = parametrosIndividuoDados;
+        this.parametrosCasillas = parametrosCasillas;
+        tabTablero.setDisable(true);
+        this.updateGUIwithModel();
+        botonIniciarPartida.setText("Reanudar");
+        botonIniciarPartida.setStyle("-fx-alignment: center;");
+        botonIniciarPartida.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                onBotonReanudarClick(controlador);
+            }
+        });
+    }
+
+    private void onBotonReanudarClick(VentanaJuegoController ventanaJuegoController) {
+        System.out.println("la prob de aparicion de recursos general esde: "+parametrosEntorno.probabilidadGeneral());
+        ventanaJuegoController.setParametros(parametrosIndividuo,parametrosEntorno,parametrosCasillas);
+        Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
+        stageAnterior.close();
     }
 }

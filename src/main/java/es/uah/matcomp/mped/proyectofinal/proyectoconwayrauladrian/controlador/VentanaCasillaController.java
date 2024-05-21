@@ -86,6 +86,9 @@ public class VentanaCasillaController {
 
     private ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero;
 
+    String colorBordes;
+
+
     public void setStage(Stage escenaDada) {
         this.escenaVentana = escenaDada;
     }
@@ -140,7 +143,7 @@ public class VentanaCasillaController {
     }
 
 
-    public void setParametros(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tableroDado, Casilla casillaActual, ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual) {
+    public void setParametros(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tableroDado, Casilla casillaActual, ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, int turnoActual, String colorBordesDado) {
         this.tablero = tableroDado;
         this.parametrosIndividuo = parametrosIndividuo;
         this.parametrosEntorno = parametrosEntorno;
@@ -150,6 +153,7 @@ public class VentanaCasillaController {
         this.probabilidadMuerte = parametrosIndividuo.probabilidadMuerteProperty().getValue().intValue();
         this.probabilidadClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
         this.probabilidadReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
+        this.colorBordes=colorBordesDado;
     }
 
     public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
@@ -172,7 +176,7 @@ public class VentanaCasillaController {
 
     //FUNCIONES PARA LOS BOTONES DE AÑADIR INDIVIDUOS O RECURSOS
     //Ejecutable por botón
-    private void nuevoIndividuo(int tipo) {
+    private void nuevoIndividuo(int tipo,String color) {
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
 
         try {
@@ -182,6 +186,20 @@ public class VentanaCasillaController {
                         probabilidadClonacion, probabilidadReproduccion);
                 individuos.add(nuevoIndividuo);
                 labelIndividuoCreado.setText("Individuo añadido: " + nuevoIndividuo.toString());
+                int numeroIndividuos = casilla.getIndividuos().getNumeroElementos();
+                if (numeroIndividuos > 0) {
+                    if (numeroIndividuos == 1) {
+                        casilla.getBoton().setStyle("-fx-background-color: #ffae00;-fx-border-color: " + color + ";");
+                        casilla.getBoton().setText("1");
+                    } else if (numeroIndividuos == 2) {
+                        casilla.getBoton().setStyle("-fx-background-color: #ff4d00;-fx-border-color: " + color + ";");
+                        casilla.getBoton().setText("2");
+
+                    } else if (numeroIndividuos == 3) {
+                        casilla.getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + color + ";");
+                        casilla.getBoton().setText("3");
+                    }
+                }
             } else if (individuos.getNumeroElementos() == 3) {
                 ponerBotonEnRojo(tipo);
             }
@@ -241,22 +259,22 @@ public class VentanaCasillaController {
             }
             if (recursos.getNumeroElementos() < 3) {
                 if (Objects.equals(clase, "Agua")) {
-                    recursos.add(new Agua(x, y, 10));
+                    recursos.add(new Agua(x, y, parametrosEntorno.tiempoAparicion().getValue().intValue()));
                     labelIndividuoCreado.setText("¡¡Has añadido: AGUA!!");
                 } else if (Objects.equals(clase, "Biblioteca")) {
-                    recursos.add(new Biblioteca(x, y, 10));
+                    recursos.add(new Biblioteca(x, y, parametrosEntorno.tiempoAparicion().getValue().intValue()));
                     labelIndividuoCreado.setText("¡¡Has añadido: BIBLIOTECA!!");
                 } else if (Objects.equals(clase, "Comida")) {
-                    recursos.add(new Comida(x, y, 10));
+                    recursos.add(new Comida(x, y, parametrosEntorno.tiempoAparicion().getValue().intValue()));
                     labelIndividuoCreado.setText("¡¡Has añadido: COMIDA!!");
                 } else if (Objects.equals(clase, "Montaña")) {
-                    recursos.add(new Montaña(x, y, 10));
+                    recursos.add(new Montaña(x, y, parametrosEntorno.tiempoAparicion().getValue().intValue()));
                     labelIndividuoCreado.setText("¡¡Has añadido: MONTAÑA!!");
                 } else if (Objects.equals(clase, "Pozo")) {
-                    recursos.add(new Pozo(x, y, 10));
+                    recursos.add(new Pozo(x, y, parametrosEntorno.tiempoAparicion().getValue().intValue()));
                     labelIndividuoCreado.setText("¡¡Has añadido: POZO!!");
                 } else if (Objects.equals(clase, "Tesoro")) {
-                    recursos.add(new Tesoro(x, y, 10));
+                    recursos.add(new Tesoro(x, y, parametrosEntorno.tiempoAparicion().getValue().intValue()));
                     labelIndividuoCreado.setText("¡¡Has añadido: TESORO!!");
                 }
                 mostrarInfo();
@@ -333,15 +351,15 @@ public class VentanaCasillaController {
 
     //Ejecución de las funciones creadas al tocar cada botón
     public void onbotonAñadirIndividuo1(ActionEvent actionEvent) {
-        nuevoIndividuo(1);
+        nuevoIndividuo(1,colorBordes);
     }
 
     public void onbotonAñadirIndividuo2(ActionEvent actionEvent) {
-        nuevoIndividuo(2);
+        nuevoIndividuo(2,colorBordes);
     }
 
     public void onbotonAñadirIndividuo3(ActionEvent actionEvent) {
-        nuevoIndividuo(3);
+        nuevoIndividuo(3,colorBordes);
     }
 
     public void onBotonEliminarIndividuo1(ActionEvent actionEvent) {

@@ -1,43 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
+<AnchorPane prefHeight="800.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
    <children>
-      <GridPane fx:id="gridPane" layoutX="21.0" layoutY="24.0" prefHeight="67.0" prefWidth="0.0">
-      </GridPane>
-      <Button fx:id="pauseButton" layoutX="684.0" layoutY="416.0" mnemonicParsing="false" onAction="#onPauseButton" prefHeight="0.0" prefWidth="98.0" text=" Pausar/Ajustes" />
-      <Button layoutX="704.0" layoutY="469.0" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="26.0" prefWidth="59.0" text="Avance" />
-      <Button fx:id="finalizarButton" layoutX="697.0" layoutY="523.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar" />
-      <Sphere radius="0.77" />
-      <Circle fill="#ffae00" layoutX="659.0" layoutY="58.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="676.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 individuo" />
-      <Circle fill="#ff4d00" layoutX="659.0" layoutY="91.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="676.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 individuos" />
-      <Circle fill="RED" layoutX="659.0" layoutY="121.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="676.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 individuos" />
-      <Text layoutX="679.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INDIVIDUOS" />
-      <Text layoutX="684.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECURSO">
+      <GridPane fx:id="gridPane" layoutX="21.0" layoutY="32.0" prefHeight="67.0" prefWidth="0.0">
+   </GridPane>
+      <Button fx:id="botonAjustes" layoutX="664.0" layoutY="398.0" mnemonicParsing="false" onAction="#onBotonAjustes" prefHeight="39.0" prefWidth="103.0" text="Ajustes">
          <font>
-            <Font size="15.0" />
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonAvance" layoutX="664.0" layoutY="447.0" mnemonicParsing="false" onAction="#onAvanceButton" prefHeight="39.0" prefWidth="103.0" text="Avance">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="finalizarButton" layoutX="21.0" layoutY="743.0" mnemonicParsing="false" onAction="#onFinalizarButton" text="Finalizar">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Button>
+      <Circle fill="#ffae00" layoutX="659.0" layoutY="66.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="676.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 individuo">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
          </font>
       </Text>
-      <Circle fill="#0c0c0c" layoutX="659.0" layoutY="189.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="680.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pozo" />
-      <Circle fill="#7a8cce" layoutX="659.0" layoutY="220.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="680.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agua" />
-      <Circle fill="#cb82de" layoutX="659.0" layoutY="255.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="680.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteca" />
-      <Circle fill="#f5a76e" layoutX="659.0" layoutY="289.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="682.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comida" />
-      <Circle fill="#7a4716" layoutX="659.0" layoutY="320.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="685.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montaña" />
-      <Circle fill="#ffcf3d" layoutX="659.0" layoutY="351.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="685.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tesoro" />
-      <Slider fx:id="sliderVelocidad" layoutX="623.0" layoutY="371.0" />
+      <Circle fill="#ff4d00" layoutX="659.0" layoutY="99.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="676.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 individuos">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="RED" layoutX="659.0" layoutY="129.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="676.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 individuos">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="663.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INDIVIDUOS">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Text fontSmoothingType="LCD" layoutX="672.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECURSOS">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="#0c0c0c" layoutX="659.0" layoutY="197.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pozo">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="#7a8cce" layoutX="659.0" layoutY="228.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agua">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="#cb82de" layoutX="659.0" layoutY="263.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteca">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="#f5a76e" layoutX="659.0" layoutY="297.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="681.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comida">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="#7a4716" layoutX="659.0" layoutY="328.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="680.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montaña">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Circle fill="#ffcf3d" layoutX="659.0" layoutY="359.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="681.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tesoro">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Text>
+      <Slider fx:id="sliderVelocidad" layoutX="159.0" layoutY="751.0" />
+      <ColorPicker fx:id="colorPicker" editable="true" layoutX="642.0" layoutY="566.0" prefHeight="49.0" prefWidth="136.0" />
+      <ToolBar fx:id="toolBoxIndividuos" layoutX="363.0" layoutY="713.0" prefHeight="67.0" prefWidth="317.0">
+         <items>
+            <Button fx:id="botonBasico" mnemonicParsing="false" onAction="#onBotonBasico" prefHeight="39.0" prefWidth="74.0" text="Básico">
+               <font>
+                  <Font name="Baskerville Old Face" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="botonIntermedio" mnemonicParsing="false" onAction="#onBotonIntermedio" prefHeight="39.0" prefWidth="105.0" text="Intermedio">
+               <font>
+                  <Font name="Baskerville Old Face" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="botonAvanzado" mnemonicParsing="false" onAction="#onBotonAvanzado" prefHeight="39.0" prefWidth="107.0" text="Avanzado">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
+      <Label layoutX="447.0" layoutY="664.0" text="Pintar Individuos">
+         <font>
+            <Font name="Baskerville Old Face" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="botonPintar" layoutX="385.0" layoutY="666.0" mnemonicParsing="false" onAction="#onPintarIndividuos" prefHeight="27.0" prefWidth="54.0" text="--" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="16.0" />
+         </font></Button>
+      <BarChart fx:id="graficaPantallaJuego" layoutX="800.0" layoutY="15.0" prefHeight="627.0" prefWidth="259.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
+      <Label layoutX="175.0" layoutY="719.0" text="Velocidad">
+         <font>
+            <Font name="Baskerville Old Face" size="27.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="638.0" layoutY="542.0" prefHeight="24.0" prefWidth="186.0" text="Cambiar color del tablero" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Baskerville Old Face" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="773.0" layoutY="651.0" text="Pintar Recursos">
+         <font>
+            <Font name="Baskerville Old Face" size="25.0" />
+         </font>
+      </Label>
+      <ToolBar fx:id="toolBoxRecursos" layoutX="703.0" layoutY="713.0" prefHeight="67.0" prefWidth="300.0">
+         <items>
+            <Circle fill="#0c0c0c" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="P ">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Text>
+            <Circle fill="#7a8cce" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A ">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Text>
+            <Circle fill="#cb82de" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="B ">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Text>
+            <Circle fill="#f5a76e" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="C ">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Text>
+            <Circle fill="#7a4716" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="M ">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Text>
+            <Circle fill="#ffcf3d" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T">
+               <font>
+                  <Font name="Baskerville Old Face" size="20.0" />
+               </font>
+            </Text>
+         </items>
+      </ToolBar>
+      <Button fx:id="botonPintarRecursos" layoutX="711.0" layoutY="666.0" mnemonicParsing="false" onAction="#onPintarRecursos" prefHeight="27.0" prefWidth="54.0" text="--" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="16.0" />
+         </font></Button>
+      <Button layoutX="710.0" layoutY="732.0" mnemonicParsing="false" onAction="#onBotonPintarPozo" opacity="0.0" prefHeight="39.0" prefWidth="41.0" />
+      <Button layoutX="750.0" layoutY="729.0" mnemonicParsing="false" onAction="#onBotonPintarAgua" opacity="0.0" prefHeight="39.0" prefWidth="41.0" />
+      <Button layoutX="798.0" layoutY="729.0" mnemonicParsing="false" onAction="#onBotonPintarBiblioteca" opacity="0.0" prefHeight="39.0" prefWidth="41.0" />
+      <Button layoutX="845.0" layoutY="730.0" mnemonicParsing="false" onAction="#onBotonPintarComida" opacity="0.0" prefHeight="39.0" prefWidth="41.0" />
+      <Button layoutX="893.0" layoutY="730.0" mnemonicParsing="false" onAction="#onBotonPintarMontaña" opacity="0.0" prefHeight="39.0" prefWidth="41.0" />
+      <Button layoutX="943.0" layoutY="730.0" mnemonicParsing="false" onAction="#onBotonPintarTesoro" opacity="0.0" prefHeight="39.0" prefWidth="41.0" />
+      <Label layoutX="773.0" layoutY="680.0" prefHeight="31.0" prefWidth="74.0" text="Actual:">
+         <font>
+            <Font name="Baskerville Old Face" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelRecursoSeleccionado" layoutX="851.0" layoutY="680.0" prefHeight="31.0" prefWidth="156.0" text="Sin selección">
+         <font>
+            <Font name="Baskerville Old Face" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="botonPausar" layoutX="672.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBotonPausar" prefHeight="40.0" prefWidth="40.0" text="I I" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7c7c7c" height="24.0" layoutX="680.0" layoutY="501.0" onMouseClicked="#onBotonPausar" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7c7c7c" height="24.0" layoutX="694.0" layoutY="501.0" onMouseClicked="#onBotonPausar" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+      <Button fx:id="botonReanudar" layoutX="718.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBotonReanudar" prefHeight="40.0" prefWidth="40.0" />
+      <Polygon fill="DODGERBLUE" layoutX="780.0" layoutY="500.0" onMouseClicked="#onBotonReanudar" points="-50.0, 24.22998046875, -30.77001953125, 13.22998046875, -50.0, 3.230010986328125" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

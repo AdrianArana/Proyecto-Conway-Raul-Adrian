@@ -8,6 +8,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntorno;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
+import javafx.scene.paint.Color;
 
 import java.util.Random;
 
@@ -31,7 +33,7 @@ public class FuncionesBucle {
     public FuncionesBucle() {
     }
 
-    public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno) {
+    public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno, ParametrosIndividuo parametrosIndividuo, String colorBordes) {
         int filas = tablero.getNumeroFilas();
         ListaEnlazada<ElementoLE<Individuo>> individuosMover = new ListaEnlazada<>();
         for (int fila = 0; fila < filas; fila++) {
@@ -41,8 +43,8 @@ public class FuncionesBucle {
 
                 mejoras((tablero.getElemento(fila).getData().getElemento(columna).getData()));
                 tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
-                reproduccion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
-                clonacion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
+                reproduccion(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual, parametrosIndividuo);
+                clonacion(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual, parametrosIndividuo);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 recursoActivo(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 aparicionRecursos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), parametrosEntorno);
@@ -86,23 +88,20 @@ public class FuncionesBucle {
                     }
                     tablero.getElemento(a).getData().getElemento(b).getData().getIndividuos().delete(posicionDelMásViejo);
                 }
-                actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData());
+                actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData(),colorBordes);
             }
         }
     }
 
     private void quitarObjetivos(Casilla casilla) {
         if (casilla.getIndividuos().getNumeroElementos() != 0) {
-            System.out.println("entramos al bucle");
             for (int i = 0; i < casilla.getIndividuos().getNumeroElementos(); i++) {
                 if (casilla.getIndividuos().getElemento(i).getData().getObjetivo() != null) {
-                    System.out.println("no es nulo, veamos si comparten posicion");
                     int xIndividuo = casilla.getIndividuos().getElemento(i).getData().getCoordenadaX();
                     int yIndividuo = casilla.getIndividuos().getElemento(i).getData().getCoordenadaY();
                     int xObjetivo = casilla.getIndividuos().getElemento(i).getData().getObjetivo().getData().getCoordenadaX();
                     int yObjetivo = casilla.getIndividuos().getElemento(i).getData().getObjetivo().getData().getCoordenadaY();
                     if (xObjetivo == xIndividuo && yObjetivo == yIndividuo) {
-                        System.out.println("compartian posicion");
                         casilla.getIndividuos().getElemento(i).getData().setObjetivo(null);
                     }
                 }
@@ -110,19 +109,19 @@ public class FuncionesBucle {
         }
     }
 
-    private void actualizarBotones(Casilla casilla) {
+    private void actualizarBotones(Casilla casilla, String color) {
         int numeroIndividuos = casilla.getIndividuos().getNumeroElementos();
         int numeroRecursos = casilla.getRecursos().getNumeroElementos();
         if (numeroIndividuos > 0) {
             if (numeroIndividuos == 1) {
-                casilla.getBoton().setStyle("-fx-background-color: #ffae00;");
+                casilla.getBoton().setStyle("-fx-background-color: #ffae00;-fx-border-color: " + color + ";");
 
             } else if (numeroIndividuos == 2) {
-                casilla.getBoton().setStyle("-fx-background-color: #ff4d00;");
+                casilla.getBoton().setStyle("-fx-background-color: #ff4d00;-fx-border-color: " + color + ";");
                 casilla.getBoton().setText("2");
 
             } else if (numeroIndividuos == 3) {
-                casilla.getBoton().setStyle("-fx-background-color: #ff0000;");
+                casilla.getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + color + ";");
                 casilla.getBoton().setText("3");
             }
         } else if (numeroRecursos > 0) {
@@ -130,32 +129,32 @@ public class FuncionesBucle {
                 Class<? extends Entorno> clase = casilla.getRecursos().getElemento(i).getData().getClass();
                 if (clase == Pozo.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#0c0c0c;");
+                    casilla.getBoton().setStyle("-fx-background-color:#0c0c0c;-fx-border-color: " + color + ";");
                 }
                 if (clase == Agua.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#7a8cce;");
+                    casilla.getBoton().setStyle("-fx-background-color:#7a8cce;-fx-border-color: " + color + ";");
                 }
                 if (clase == Biblioteca.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#cb82de;");
+                    casilla.getBoton().setStyle("-fx-background-color:#cb82de;-fx-border-color: " + color + ";");
                 }
                 if (clase == Comida.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#f5a76e;");
+                    casilla.getBoton().setStyle("-fx-background-color:#f5a76e;-fx-border-color: " + color + ";");
                 }
                 if (clase == Montaña.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#7a4716;");
+                    casilla.getBoton().setStyle("-fx-background-color:#7a4716;-fx-border-color: " + color + ";");
                 }
                 if (clase == Tesoro.class) {
                     casilla.getBoton().setText(null);
-                    casilla.getBoton().setStyle("-fx-background-color:#ffcf3d;");
+                    casilla.getBoton().setStyle("-fx-background-color:#ffcf3d;-fx-border-color: " + color + ";");
                 }
             }
         }
         if (numeroIndividuos == 0 && numeroRecursos == 0) {
-            casilla.getBoton().setStyle(null);
+            casilla.getBoton().setStyle("-fx-background-color:null;-fx-border-color: " + color + ";");
             casilla.getBoton().setText(null);
         }
         if (numeroIndividuos == 1) {
@@ -254,9 +253,9 @@ public class FuncionesBucle {
                     individuo = moverSimple(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                     //Lo retornamos con su posicion ya cambiada
                 } else if (individuoActual.getTipo() == 2) {
-                    individuo = moverNormal(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(),i);
+                    individuo = moverNormal(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 } else if (individuoActual.getTipo() == 3) {
-                    individuo=moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
+                    individuo = moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 }
             }
         } catch (Exception e) {
@@ -410,7 +409,7 @@ public class FuncionesBucle {
         }
         //System.out.println("OBJETIVO : "+individuo.getObjetivo().getData().toString());
         if (individuo.getObjetivo() != null) {
-            System.out.println("ya tiene objetivo! "+individuo.getObjetivo().getData().toString()+individuo.getObjetivo().getData().getCoordenadaX());
+            System.out.println("ya tiene objetivo! " + individuo.getObjetivo().getData().toString() + individuo.getObjetivo().getData().getCoordenadaX());
             //Coordenadas del individuo
             int xIndividuo = individuo.getCoordenadaX();
             int yIndividuo = individuo.getCoordenadaY();
@@ -485,38 +484,28 @@ public class FuncionesBucle {
 
     //INDIVIDUOS
 
-    public void reproduccion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
+    public void reproduccion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual, ParametrosIndividuo parametrosIndividuo) {
         try {
             if (casillaActual.getIndividuos().getNumeroElementos() == 2) {
                 Random random = new Random();
                 int probabilidadAleatoria = random.nextInt(1, 101);
-
                 Individuo individuo1 = casillaActual.getIndividuos().getElemento(0).getData();
                 Individuo individuo2 = casillaActual.getIndividuos().getElemento(1).getData();
-                //System.out.println("reproduccion de: " + individuo1.toString() + "y de " + individuo2.toString());
-                //System.out.println("Individuo con: " + individuo1.getProbabilidadReproduccion() + " prob de reprod y el numero que ha tocado: " + probabilidadAleatoria);
-
                 if (individuo1.getProbabilidadReproduccion() >= probabilidadAleatoria ||
                         individuo2.getProbabilidadReproduccion() >= probabilidadAleatoria) {
 
                     //genero su id
-                    //TODO -> cambiar valores
                     Individuo hijo = new Individuo();
                     hijo.setId(generarID(tablero));
                     //su generacion
-
                     hijo.setTurnoGeneracion(turnoActual);
-
                     hijo.setTipo(Math.max(individuo1.getTipo(), individuo2.getTipo()));
-                    //todo hacer con constructor
-                    //su probabilidad de reproduccion y clonacion sera la misma q la del padre
                     hijo.setProbabilidadClonacion(Math.max(individuo1.getProbabilidadClonacion(), individuo2.getProbabilidadClonacion()));
                     hijo.setProbabilidadReproduccion(Math.max(individuo1.getProbabilidadReproduccion(), individuo2.getProbabilidadReproduccion()));
                     hijo.setProbabilidadMuerte(Math.min(individuo1.getProbabilidadMuerte(), individuo2.getProbabilidadMuerte()));
-                    hijo.setTurnosVidaRestantes(Math.max(individuo1.getTurnosVidaRestantes(), individuo2.getTurnosVidaRestantes()));
+                    hijo.setTurnosVidaRestantes(parametrosIndividuo.getTurnosVidaRestantes());
                     hijo.setCoordenadaX(individuo1.getCoordenadaX());
                     hijo.setCoordenadaY(individuo1.getCoordenadaY());
-                    //System.out.println("comprobar"+hijo);
 
                     casillaActual.getIndividuos().add(hijo);
                     //System.out.println("Ahora hay :" + casillaActual.getIndividuos().getNumeroElementos() + " individuos en la casilla");
@@ -529,7 +518,6 @@ public class FuncionesBucle {
 
                 }
             } else if (casillaActual.getIndividuos().getNumeroElementos() == 3) {
-                //System.out.println("YA HAY 3 INDIVIDUOS EN LA CELDA, IMPOSIBLE REPRODUCIRSE");//todo quitarlo
             }
 
         } catch (Exception e) {
@@ -540,7 +528,7 @@ public class FuncionesBucle {
 
     }
 
-    public void clonacion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
+    public void clonacion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual, ParametrosIndividuo parametrosIndividuo) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         try {
@@ -549,14 +537,10 @@ public class FuncionesBucle {
                     Random random = new Random();
                     int probabilidad = random.nextInt(101);
                     if (probabilidad <= individuos.getElemento(i).getData().getProbabilidadClonacion()) {
-                        if (casillaActual.getCoordenadaX() != individuos.getElemento(i).getData().getCoordenadaX()) {
-                            System.out.println("LAS COORDENADAS NO COINCIDEN, ESTÁN MAL");
-                        }
+
                         //System.out.println("individuo con: " + individuos.getElemento(i).getData().getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
 
-
-                        Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(), individuos.getElemento(i).getData().getCoordenadaY(), generarID(tablero), individuos.getElemento(i).getData().getTipo(), individuos.getElemento(i).getData().getTurnosVidaRestantes(), turnoActual, individuos.getElemento(i).getData().getProbabilidadMuerte(), individuos.getElemento(i).getData().getProbabilidadClonacion(), individuos.getElemento(i).getData().getProbabilidadReproduccion()); //todo ver si coje bien la informacion el clon
-
+                        Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(), individuos.getElemento(i).getData().getCoordenadaY(), generarID(tablero), individuos.getElemento(i).getData().getTipo(), parametrosIndividuo.getTurnosVidaRestantes(), turnoActual, individuos.getElemento(i).getData().getProbabilidadMuerte(), individuos.getElemento(i).getData().getProbabilidadClonacion(), individuos.getElemento(i).getData().getProbabilidadReproduccion());
                         //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
                         casillaActual.getIndividuos().add(clon);
                         //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
@@ -660,37 +644,31 @@ public class FuncionesBucle {
         }
     }
 
-    public void mejoras(Casilla casillaActual){
+    public void mejoras(Casilla casillaActual) {
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
 
-        for (int i=0; i<individuos.getNumeroElementos();i++){
+        for (int i = 0; i < individuos.getNumeroElementos(); i++) {
 
             for (int j = 0; j < entorno.getNumeroElementos(); j++) {
 
                 if (entorno.getElemento(j).getData().getClass() == Agua.class) {
                     Agua.accionAgua(individuos.getElemento(i).getData());
                     entorno.delete(j);
-                }
-
-                else if (entorno.getElemento(j).getData().getClass()==Comida.class){
+                } else if (entorno.getElemento(j).getData().getClass() == Comida.class) {
                     Comida.accionComida(individuos.getElemento(i).getData());
                     entorno.delete(j);
-                }
-
-                else if(entorno.getElemento(j).getData().getClass()==Biblioteca.class){
+                } else if (entorno.getElemento(j).getData().getClass() == Biblioteca.class) {
                     Biblioteca.accionBiblioteca(individuos.getElemento(i).getData());
                     entorno.delete(j);
                 }
 
                 //entonces para que te sirve poder añadir mas de 1 agua en la configuracuion?
 
-                else if(entorno.getElemento(j).getData().getClass()==Montaña.class){
+                else if (entorno.getElemento(j).getData().getClass() == Montaña.class) {
                     Montaña.accionMontaña(individuos.getElemento(i).getData());
                     entorno.delete(j);
-                }
-
-                else if(entorno.getElemento(j).getData().getClass()==Tesoro.class){
+                } else if (entorno.getElemento(j).getData().getClass() == Tesoro.class) {
                     Tesoro.accionTesoro(individuos.getElemento(i).getData());
                     entorno.delete(j);
                 }
