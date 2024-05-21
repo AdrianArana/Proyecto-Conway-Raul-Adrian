@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaFinalizarJuegoController">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaFinalizarJuegoController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <Text layoutX="212.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Desea guardar la partida?" />
-      <Button layoutX="268.0" layoutY="234.0" mnemonicParsing="false" text="Si" />
+      <Text layoutX="230.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Desea guardar la partida?" />
+      <Button layoutX="261.0" layoutY="234.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="Si" />
       <Button fx:id="NoButton" layoutX="300.0" layoutY="234.0" mnemonicParsing="false" onAction="#onNoButton" text="No" />
    </children>
 </AnchorPane>

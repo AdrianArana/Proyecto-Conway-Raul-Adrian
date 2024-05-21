@@ -38,6 +38,9 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
+
+                mejoras((tablero.getElemento(fila).getData().getElemento(columna).getData()));
+                tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 reproduccion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 clonacion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
@@ -51,8 +54,7 @@ public class FuncionesBucle {
                     //Añadimos un individuo a la lista con sus nuevas coordenadas,para despues colocarlo donde le correponda
                     individuosMover.add(moverIndividuos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData()));
                 }
-                //todo-> !!!!!!ESTA ES LA QUE LA LIA
-                tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
+
             }
         }
 
@@ -242,7 +244,7 @@ public class FuncionesBucle {
                 } else if (individuoActual.getTipo() == 2) {
                     individuo = moverNormal(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 } else if (individuoActual.getTipo() == 3) {
-                    //individuo=moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
+                    individuo=moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 }
             }
         } catch (Exception e) {
@@ -660,6 +662,50 @@ return  null;
             System.err.println("Error en el método Aaparicion Recursos: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+
+
+    public void mejoras(Casilla casillaActual){
+        ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
+        ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
+
+        for (int i=0; i<individuos.getNumeroElementos();i++){
+
+            for (int j = 0; j < entorno.getNumeroElementos(); j++) {
+
+                if (entorno.getElemento(j).getData().getClass() == Agua.class) {
+                    Agua.accionAgua(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                else if (entorno.getElemento(j).getData().getClass()==Comida.class){
+                    Comida.accionComida(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                else if(entorno.getElemento(j).getData().getClass()==Biblioteca.class){
+                    Biblioteca.accionBiblioteca(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                //entonces para que te sirve poder añadir mas de 1 agua en la configuracuion?
+
+                else if(entorno.getElemento(j).getData().getClass()==Montaña.class){
+                    Montaña.accionMontaña(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                else if(entorno.getElemento(j).getData().getClass()==Tesoro.class){
+                    Tesoro.accionTesoro(individuos.getElemento(i).getData());
+                    entorno.delete(j);
+                }
+
+                casillaActual.setRecursos(entorno);
+            }
+
+        }
+
     }
 
 
