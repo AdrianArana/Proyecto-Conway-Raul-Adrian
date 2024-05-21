@@ -12,7 +12,7 @@ public class Comida extends Entorno{
 
     }
 
-    public void accionComida(Individuo individuo){
+    public static void accionComida(Individuo individuo){
         individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()+10);
     }
     @Override

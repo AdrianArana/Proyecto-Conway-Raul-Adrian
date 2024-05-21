@@ -12,7 +12,7 @@ public class Tesoro extends Entorno{
 
     }
 
-    public void accionTesoro(Individuo individuo) {
+    public static void accionTesoro(Individuo individuo) {
         int probabilidadAnterior=individuo.getProbabilidadReproduccion();
         if (probabilidadAnterior+10 <=100) {
             individuo.setProbabilidadReproduccion(probabilidadAnterior + 10);
