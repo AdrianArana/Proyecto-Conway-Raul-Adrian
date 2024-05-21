@@ -127,10 +127,11 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 celdaButton.setStyle("-fx-border-color: #000000; -fx-text-alignment: center;");
                 int finalI = i;
                 int finalJ = j;
+                int finalI1 = i;
                 celdaButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        onBotonCelda(finalI, finalJ);
+                        onBotonCelda(finalI1, finalJ);
                     }
                 });
                 gridPane.add(celdaButton, finalI, finalJ);
