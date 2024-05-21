@@ -175,9 +175,6 @@ public class FuncionesBucle {
         }
     }
 
-    //por cada turno, todos los individuos pierden 1 vida
-    //si los turnos de vida del individuo son menores o ihuales a cero, se eliminan de la casilla y de la lisat de individuos
-    //a los individuos por cada turno, se les actualiza su probabilidad de reproduccion y de clonacion
     public void tiempoDeVida(Casilla casillaActual) {
         //todo - > no hace absolutamente nada
         for (int i = 0; i < casillaActual.getIndividuos().getNumeroElementos(); i++) {
@@ -246,11 +243,7 @@ public class FuncionesBucle {
 
     }
 
-
-    //HACER LA FUNCION DE LOS MOVIMIENTOS DE LOS INDIVIDUOS //todo
-
-    //Funciones para el movimiento de los individuos
-
+    //FUNCIONES DE MOVIMIENTO DE LOS INDIVIDUOS
 
     public ElementoLE<Individuo> moverIndividuos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual) {
         ElementoLE<Individuo> individuo = new ElementoLE<>();
@@ -261,7 +254,7 @@ public class FuncionesBucle {
                     individuo = moverSimple(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                     //Lo retornamos con su posicion ya cambiada
                 } else if (individuoActual.getTipo() == 2) {
-                    individuo = moverNormal(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
+                    individuo = moverNormal(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(),i);
                 } else if (individuoActual.getTipo() == 3) {
                     individuo=moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 }
@@ -272,81 +265,6 @@ public class FuncionesBucle {
         }
         return individuo;
     }
-
-    private ElementoLE<Individuo> moverAvanzado(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int pos) {
-        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
-        for (int a=0; a<tablero.getNumeroFilas(); a++) {
-            for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
-
-                for (int i = 0; i < recursos.getNumeroElementos(); i++) {
-                    System.out.println(i);
-                }
-            }
-        }
-return  null;
-    }
-
-    private ListaEnlazada<ElementoLE<Entorno>> obtenerRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
-        int filas = tablero.getNumeroFilas();
-        ListaEnlazada<ElementoLE<Entorno>> recursos = new ListaEnlazada<>();
-        //System.out.println("bucando elementps");
-        for (int fila = 0; fila < filas; fila++) {
-            ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();
-            int columnas = filaActual.getNumeroColumnas();
-            for (int columna = 0; columna < columnas; columna++) {
-                //System.out.println("Casilla entrada");
-                //System.out.println(tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos());
-                if (tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos() != 0) {
-                    //System.out.println("Entramos a la data de los recursos de la casilla que esta vacia? " + tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().isVacia() + " y esta en las coords: " + fila + " , " + columna);
-                    for (int r = 0; r < tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos(); r++) {
-                        //System.out.println("Casilla con recursos" + tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getElemento(r).getData());
-                        recursos.add(tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getElemento(r));
-                    }
-                }
-            }
-
-        }
-        return recursos;
-    }
-
-    protected ElementoLE<Individuo> moverNormal(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
-        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
-        int cantidadDeRecursos = recursos.getNumeroElementos();
-        //System.out.println("cantidad de recursos: " + cantidadDeRecursos);
-        if (cantidadDeRecursos > 0) {
-            //System.out.println("Vamos a mover al individuo normal ");
-            Random random = new Random();
-            int recursoEscogido = random.nextInt(cantidadDeRecursos);
-            int xIndividuo = individuo.getCoordenadaX();
-            int yIndividuo = individuo.getCoordenadaY();
-            for (int i = 0; i < cantidadDeRecursos; i++) {
-                System.out.println(recursos.getElemento(i).getData().getData().toString() + " COORDENADAS: " + recursos.getElemento(i).getData().getData().getCoordenadaX() + "," + recursos.getElemento(i).getData().getData().getCoordenadaY());
-            }
-            //System.out.println("recursoEscogido: numero:" + recursoEscogido + " x:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX() + " y:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY());
-            int xRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX();
-            int yRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY();
-            //System.out.println("Ubicacion del recurso: " + xRecursoEscogido + "," + yRecursoEscogido);
-            if (xIndividuo < xRecursoEscogido) {
-                xIndividuo++;
-                individuo.setCoordenadaX(xIndividuo);
-            }
-            if (yIndividuo < yRecursoEscogido) {
-                yIndividuo++;
-                individuo.setCoordenadaY(yIndividuo);
-            }
-            if (xIndividuo > xRecursoEscogido) {
-                xIndividuo--;
-                individuo.setCoordenadaX(xIndividuo);
-            }
-            if (yIndividuo > yRecursoEscogido) {
-                yIndividuo--;
-                individuo.setCoordenadaY(yIndividuo);
-            }
-        }
-        casillaActual.getIndividuos().delete(posicion);
-        return new ElementoLE<Individuo>(individuo);
-    }
-
 
     protected ElementoLE<Individuo> moverSimple(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
         Random random = new Random();
@@ -543,8 +461,8 @@ return  null;
         return recursos;
     }
 
+    //FUNCIÓN PARA EL ID DE LOS INDIVIDUOS GENERADOS
 
-    //todo CUIDAO -- HECHO :)
     public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
         int id = 0;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
@@ -563,10 +481,11 @@ return  null;
         return id;
     }
 
+    //----OTRAS FUNCIONES PARA EL BULE----
+
+    //INDIVIDUOS
 
     public void reproduccion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
-
-
         try {
             if (casillaActual.getIndividuos().getNumeroElementos() == 2) {
                 Random random = new Random();
@@ -621,9 +540,6 @@ return  null;
 
     }
 
-
-    //un individuo puede clonarse a sí mismo, y el clon
-//aparecerá en la misma posición del mapa.
     public void clonacion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
 
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
@@ -660,10 +576,6 @@ return  null;
 
     }
 
-
-//individuos desaparecen cuando sus turnos de vida son menores o iguales que 1 y tambien desaparecen si caen al pozo y luego su proababilidadde muerte es 1-prob.de.reproduccion
-
-
     public void muerteIndividuos(Casilla casillaActual) {
         Random random = new Random();
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
@@ -683,19 +595,9 @@ return  null;
         casillaActual.setIndividuos(individuos);
     }
 
+    //RECURSOS
 
-//ME FALTA LA FUNCION DE APARICION DE RECURSOS -- HECHO
-
-
-//los recursos aparecen si una probabilidad de aparicion de recursos gana a la probabilidad generada aleatoriamente, si haay mas de 3 recursos en una posicion no pueden incluirse mas recursos en esta
-//se va a ir comparando la probabilidad de creacion de un nuevo recurso y la probabilidad de aparecer el recurso x, si la probabiliad de el nuevo recurso a aparecer es mayor que la probabilidad de el recurso x, entonces se crea un nuevo recurso del tipo x.
-
-
-//todo /con como lo he hecho, los reecursos saben la posicion en la que van a aparecer???????
-
-    //todo?????????¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿por cada vez que le demos a avanzar va a haber una probabilidad distinta de si puede aparecer un nuevo recurso o no (simulando como que cada tiempo hay distintas vecees en las cuales hay mas recursos o menos) y si esta es mayor que la probabilidad de aparicion de un nuevo recurso entonces se llevaran acabo todas las probabilidades de lo demas
-    public void aparicionRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla
-            casillaActual, ParametrosEntorno parametrosEntorno) {
+    public void aparicionRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, ParametrosEntorno parametrosEntorno) {
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
         int tiempoDeAparicionRecursos = parametrosEntorno.getTiempoAparicion();
         try {
@@ -757,8 +659,6 @@ return  null;
             e.printStackTrace();
         }
     }
-
-
 
     public void mejoras(Casilla casillaActual){
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
