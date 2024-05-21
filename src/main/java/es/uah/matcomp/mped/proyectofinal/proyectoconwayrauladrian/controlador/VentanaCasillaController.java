@@ -240,22 +240,22 @@ public class VentanaCasillaController {
                 }
             }
             if (recursos.getNumeroElementos() < 3) {
-                if (clase == "Agua") {
+                if (Objects.equals(clase, "Agua")) {
                     recursos.add(new Agua(x, y, 10));
                     labelIndividuoCreado.setText("¡¡Has añadido: AGUA!!");
-                } else if (clase == "Biblioteca") {
+                } else if (Objects.equals(clase, "Biblioteca")) {
                     recursos.add(new Biblioteca(x, y, 10));
                     labelIndividuoCreado.setText("¡¡Has añadido: BIBLIOTECA!!");
-                } else if (clase == "Comida") {
+                } else if (Objects.equals(clase, "Comida")) {
                     recursos.add(new Comida(x, y, 10));
                     labelIndividuoCreado.setText("¡¡Has añadido: COMIDA!!");
-                } else if (clase == "Montaña") {
+                } else if (Objects.equals(clase, "Montaña")) {
                     recursos.add(new Montaña(x, y, 10));
                     labelIndividuoCreado.setText("¡¡Has añadido: MONTAÑA!!");
-                } else if (clase == "Pozo") {
+                } else if (Objects.equals(clase, "Pozo")) {
                     recursos.add(new Pozo(x, y, 10));
                     labelIndividuoCreado.setText("¡¡Has añadido: POZO!!");
-                } else if (clase == "Tesoro") {
+                } else if (Objects.equals(clase, "Tesoro")) {
                     recursos.add(new Tesoro(x, y, 10));
                     labelIndividuoCreado.setText("¡¡Has añadido: TESORO!!");
                 }

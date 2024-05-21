@@ -40,19 +40,19 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
-                reproduccion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
-                clonacion(tablero,tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
+                reproduccion(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
+                clonacion(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), turnoActual);
                 muerteIndividuos(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 recursoActivo(tablero.getElemento(fila).getData().getElemento(columna).getData());
                 aparicionRecursos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), parametrosEntorno);
 
                 //Añadimos a la lista de movimientos el individuo que corresponde, solo si hay algun individuo que mover en esa casilla
+                quitarObjetivos(tablero.getElemento(fila).getData().getElemento(columna).getData());
 
                 if (hayMovimiento(tablero.getElemento(fila).getData().getElemento(columna).getData())) {
                     //Añadimos un individuo a la lista con sus nuevas coordenadas,para despues colocarlo donde le correponda
                     individuosMover.add(moverIndividuos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData()));
                 }
-
                 //todo-> !!!!!!ESTA ES LA QUE LA LIA
                 tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
             }
@@ -87,6 +87,25 @@ public class FuncionesBucle {
                     tablero.getElemento(a).getData().getElemento(b).getData().getIndividuos().delete(posicionDelMásViejo);
                 }
                 actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData());
+            }
+        }
+    }
+
+    private void quitarObjetivos(Casilla casilla) {
+        if (casilla.getIndividuos().getNumeroElementos() != 0) {
+            System.out.println("entramos al bucle");
+            for (int i = 0; i < casilla.getIndividuos().getNumeroElementos(); i++) {
+                if (casilla.getIndividuos().getElemento(i).getData().getObjetivo() != null) {
+                    System.out.println("no es nulo, veamos si comparten posicion");
+                    int xIndividuo = casilla.getIndividuos().getElemento(i).getData().getCoordenadaX();
+                    int yIndividuo = casilla.getIndividuos().getElemento(i).getData().getCoordenadaY();
+                    int xObjetivo = casilla.getIndividuos().getElemento(i).getData().getObjetivo().getData().getCoordenadaX();
+                    int yObjetivo = casilla.getIndividuos().getElemento(i).getData().getObjetivo().getData().getCoordenadaY();
+                    if (xObjetivo == xIndividuo && yObjetivo == yIndividuo) {
+                        System.out.println("compartian posicion");
+                        casilla.getIndividuos().getElemento(i).getData().setObjetivo(null);
+                    }
+                }
             }
         }
     }
@@ -244,7 +263,7 @@ public class FuncionesBucle {
                 } else if (individuoActual.getTipo() == 2) {
                     individuo = moverNormal(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 } else if (individuoActual.getTipo() == 3) {
-                    //individuo=moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
+                    individuo = moverAvanzado(tablero, casillaActual, casillaActual.getIndividuos().getElemento(i).getData(), i);
                 }
             }
         } catch (Exception e) {
@@ -253,79 +272,6 @@ public class FuncionesBucle {
         }
         return individuo;
     }
-
-    private ElementoLE<Individuo> moverAvanzado(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int pos) {
-        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
-        for (int a=0; a<tablero.getNumeroFilas(); a++) {
-            for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
-
-                for (int i = 0; i < recursos.getNumeroElementos(); i++) {
-                    System.out.println(i);
-                }
-            }
-        }
-return  null;
-    }
-
-    private ListaEnlazada<ElementoLE<Entorno>> obtenerRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
-        int filas = tablero.getNumeroFilas();
-        ListaEnlazada<ElementoLE<Entorno>> recursos = new ListaEnlazada<>();
-        //System.out.println("bucando elementps");
-        for (int fila = 0; fila < filas; fila++) {
-            ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();
-            int columnas = filaActual.getNumeroColumnas();
-            for (int columna = 0; columna < columnas; columna++) {
-                //System.out.println("Casilla entrada");
-                //System.out.println(tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos());
-                if (tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos() != 0) {
-                    //System.out.println("Entramos a la data de los recursos de la casilla que esta vacia? " + tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().isVacia() + " y esta en las coords: " + fila + " , " + columna);
-                    for (int r = 0; r < tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos(); r++) {
-                        //System.out.println("Casilla con recursos" + tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getElemento(r).getData());
-                        recursos.add(tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getElemento(r));
-                    }
-                }
-            }
-
-        }
-        return recursos;
-    }
-
-    protected ElementoLE<Individuo> moverNormal(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
-        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
-        int cantidadDeRecursos = recursos.getNumeroElementos();
-        //System.out.println("cantidad de recursos: " + cantidadDeRecursos);
-        if (cantidadDeRecursos > 0) {
-            //System.out.println("Vamos a mover al individuo normal ");
-            Random random = new Random();
-            int recursoEscogido = random.nextInt(cantidadDeRecursos);
-            int xIndividuo = individuo.getCoordenadaX();
-            int yIndividuo = individuo.getCoordenadaY();
-            //System.out.println("recursoEscogido: numero:" + recursoEscogido + " x:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX() + " y:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY());
-            int xRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX();
-            int yRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY();
-
-            //System.out.println("Ubicacion del recurso: " + xRecursoEscogido + "," + yRecursoEscogido);
-            if (xIndividuo < xRecursoEscogido) {
-                xIndividuo++;
-                individuo.setCoordenadaX(xIndividuo);
-            }
-            if (yIndividuo < yRecursoEscogido) {
-                yIndividuo++;
-                individuo.setCoordenadaY(yIndividuo);
-            }
-            if (xIndividuo > xRecursoEscogido) {
-                xIndividuo--;
-                individuo.setCoordenadaX(xIndividuo);
-            }
-            if (yIndividuo > yRecursoEscogido) {
-                yIndividuo--;
-                individuo.setCoordenadaY(yIndividuo);
-            }
-        }
-        casillaActual.getIndividuos().delete(posicion);
-        return new ElementoLE<Individuo>(individuo);
-    }
-
 
     protected ElementoLE<Individuo> moverSimple(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
         Random random = new Random();
@@ -417,39 +363,122 @@ return  null;
         return new ElementoLE<Individuo>(individuo);
     }
 
+    protected ElementoLE<Individuo> moverNormal(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
+        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
+        int cantidadDeRecursos = recursos.getNumeroElementos();
+        //System.out.println("cantidad de recursos: " + cantidadDeRecursos);
+        if (cantidadDeRecursos > 0) {
+            //System.out.println("Vamos a mover al individuo normal ");
+            Random random = new Random();
+            int recursoEscogido = random.nextInt(cantidadDeRecursos);
+            int xIndividuo = individuo.getCoordenadaX();
+            int yIndividuo = individuo.getCoordenadaY();
+            //System.out.println("recursoEscogido: numero:" + recursoEscogido + " x:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX() + " y:" + recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY());
+            int xRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaX();
+            int yRecursoEscogido = recursos.getElemento(recursoEscogido).getData().getData().getCoordenadaY();
 
-    //hacer la funcion de mejoras del individuo
-/*
-    public void mejorasIndividuos(Casilla casillaActual){
+            //System.out.println("Ubicacion del recurso: " + xRecursoEscogido + "," + yRecursoEscogido);
+            if (xIndividuo < xRecursoEscogido) {
+                xIndividuo++;
+                individuo.setCoordenadaX(xIndividuo);
+            }
+            if (yIndividuo < yRecursoEscogido) {
+                yIndividuo++;
+                individuo.setCoordenadaY(yIndividuo);
+            }
+            if (xIndividuo > xRecursoEscogido) {
+                xIndividuo--;
+                individuo.setCoordenadaX(xIndividuo);
+            }
+            if (yIndividuo > yRecursoEscogido) {
+                yIndividuo--;
+                individuo.setCoordenadaY(yIndividuo);
+            }
+        }
+        casillaActual.getIndividuos().delete(posicion);
+        return new ElementoLE<Individuo>(individuo);
+    }
 
-        ListaEnlazada<Entorno> entorno= casillaActual.getRecursos();
-        ListaEnlazada<Individuo> individuos= casillaActual.getIndividuos();
+    private ElementoLE<Individuo> moverAvanzado(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int pos) {
+        ListaEnlazada<ElementoLE<Entorno>> recursos = obtenerRecursos(tablero);
 
-
-        for (int i = 0; i < entorno.getNumeroElementos(); i++) {
-            for (int j = 0; j < individuos.getNumeroElementos(); j++) {
-                if (entorno.getElemento(i).getData().getCelda() == individuos.getElemento(j).getData().getCelda()) {
-                    recursos.getElemento(i).getData().Propiedad(individuos.getElemento(j).getData());
-                    recursos.del(i);
+        double menorDistancia = 100000000.0;
+        //Obtenemos la menor distancia de todos los elementos del tablero respecto a nuestro individuo
+        if (individuo.getObjetivo() == null) {
+            for (int i = 0; i < recursos.getNumeroElementos(); i++) {
+                if (Math.sqrt(Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaX() - individuo.getCoordenadaX()), 2) +
+                        Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaY() - individuo.getCoordenadaY()), 2)) < menorDistancia) {
+                    System.out.println("le seteamos un nuevo objetivo");
+                    individuo.setObjetivo(recursos.getElemento(i).getData());
+                    menorDistancia = Math.sqrt(Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaX() - individuo.getCoordenadaX()), 2) +
+                            Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaY() - individuo.getCoordenadaY()), 2));
                 }
             }
         }
+        //System.out.println("OBJETIVO : "+individuo.getObjetivo().getData().toString());
+        if (individuo.getObjetivo() != null) {
+            System.out.println("ya tiene objetivo! "+individuo.getObjetivo().getData().toString()+individuo.getObjetivo().getData().getCoordenadaX());
+            //Coordenadas del individuo
+            int xIndividuo = individuo.getCoordenadaX();
+            int yIndividuo = individuo.getCoordenadaY();
+            //Coordenadas del recurso objetivo
+            int xRecursoEscogido = individuo.getObjetivo().getData().getCoordenadaX();
+            int yRecursoEscogido = individuo.getObjetivo().getData().getCoordenadaY();
+            if (xIndividuo < xRecursoEscogido) {
+                xIndividuo++;
+                individuo.setCoordenadaX(xIndividuo);
+            }
+            if (yIndividuo < yRecursoEscogido) {
+                yIndividuo++;
+                individuo.setCoordenadaY(yIndividuo);
+            }
+            if (xIndividuo > xRecursoEscogido) {
+                xIndividuo--;
+                individuo.setCoordenadaX(xIndividuo);
+            }
+            if (yIndividuo > yRecursoEscogido) {
+                yIndividuo--;
+                individuo.setCoordenadaY(yIndividuo);
+            }
+        }
+        casillaActual.getIndividuos().delete(pos);
+        return new ElementoLE<Individuo>(individuo);
+    }
 
+    private ListaEnlazada<ElementoLE<Entorno>> obtenerRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
+        int filas = tablero.getNumeroFilas();
+        ListaEnlazada<ElementoLE<Entorno>> recursos = new ListaEnlazada<>();
+        //System.out.println("bucando elementps");
+        for (int fila = 0; fila < filas; fila++) {
+            ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();
+            int columnas = filaActual.getNumeroColumnas();
+            for (int columna = 0; columna < columnas; columna++) {
+                //System.out.println("Casilla entrada");
+                //System.out.println(tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos());
+                if (tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos() != 0) {
+                    //System.out.println("Entramos a la data de los recursos de la casilla que esta vacia? " + tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().isVacia() + " y esta en las coords: " + fila + " , " + columna);
+                    for (int r = 0; r < tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getNumeroElementos(); r++) {
+                        //System.out.println("Casilla con recursos" + tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getElemento(r).getData());
+                        recursos.add(tablero.getElemento(fila).getData().getElemento(columna).getData().getRecursos().getElemento(r));
+                    }
+                }
+            }
+
+        }
+        return recursos;
     }
 
 
-
- */
-//todo CUIDAO -- HECHO :)
+    //todo CUIDAO -- HECHO :)
     public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
         int id = 0;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
             for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
                 if (tablero.getElemento(i).getData().getElemento(j) != null) {
                     //Accedemos a la casilla si no está vacía
-                    for (int k=0; k<tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
-                        if (tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId()>id){
-                            id=tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId();
+                    for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
+                        if (tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId() > id) {
+                            id = tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getId();
                         }
                     }
                 }
@@ -458,12 +487,6 @@ return  null;
         id++;
         return id;
     }
-
-
-// Si 2 individuos ocupan la misma posición de la matriz, o se
-//reproducen generando otro individuo más, o mueren ambos
-//La reproducción de dos individuos del mismo tipo da lugar a otro individuo de ese tipo.
-//• La reproducción de individuos de distinto tipo da lugar a otro individuo del tipo más alto
 
 
     public void reproduccion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual) {
