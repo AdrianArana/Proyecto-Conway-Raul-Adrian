@@ -20,10 +20,14 @@ public class gsonAdapterIndividuo implements JsonSerializer<Individuo>, JsonDese
             individuo.add("padres", padresJson);
         }
 */
+
+
         //Primero el tipo (1,2 ó 3)
-        individuo.addProperty("tipo", individuoDado.getTipo());
+        //individuo.addProperty("tipo", individuoDado.getTipo());
         //Después sus propiedades, sus variables
-        individuo.add("propiedades", contextoDeSerializacion.serialize(individuoDado));
+        if (individuoDado.getId() != 0) {
+            individuo.add("propiedades", contextoDeSerializacion.serialize(individuoDado));
+        }
         return individuo;
     }
 

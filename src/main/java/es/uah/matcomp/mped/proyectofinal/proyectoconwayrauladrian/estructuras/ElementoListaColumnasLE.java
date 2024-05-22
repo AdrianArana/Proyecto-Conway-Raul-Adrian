@@ -5,9 +5,9 @@ import com.google.gson.annotations.Expose;
 //5
 public class ElementoListaColumnasLE<ListaEnlazadaColumnas> {
     @Expose
-    private ElementoListaColumnasLE<ListaEnlazadaColumnas> siguiente;
+    public ElementoListaColumnasLE<ListaEnlazadaColumnas> siguiente;
     @Expose
-    private ListaEnlazadaColumnas data;
+    public ListaEnlazadaColumnas data;
 
     public ElementoListaColumnasLE(ListaEnlazadaColumnas dato){
         this.data = dato;

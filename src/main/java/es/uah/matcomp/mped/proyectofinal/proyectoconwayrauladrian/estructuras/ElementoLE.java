@@ -5,9 +5,9 @@ import com.google.gson.annotations.Expose;
 //1
 public class ElementoLE<TipoDelDato> {
     @Expose
-    private ElementoLE<TipoDelDato> siguiente;
+    public ElementoLE<TipoDelDato> siguiente;
     @Expose
-    private TipoDelDato data;
+    public TipoDelDato data;
 
     public ElementoLE(TipoDelDato dato){
         this.data = dato;

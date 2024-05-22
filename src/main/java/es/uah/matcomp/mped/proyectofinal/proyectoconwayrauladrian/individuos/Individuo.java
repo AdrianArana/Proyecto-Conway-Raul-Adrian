@@ -1,18 +1,23 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
 
+import com.google.gson.annotations.Expose;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoLE;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
 
 public class Individuo extends ParametrosIndividuo {
-    private int coordenadaX;
-    private int coordenadaY;
-    private int id;
-    private int tipo;
-    private int turnoGeneracion;
-
-
-    private ElementoLE<Entorno> objetivo;
+    @Expose
+    public int coordenadaX;
+    @Expose
+    public int coordenadaY;
+    @Expose
+    public int id;
+    @Expose
+    public int tipo;
+    @Expose
+    public int turnoGeneracion;
+    @Expose
+    public ElementoLE<Entorno> objetivo;
 
 
 

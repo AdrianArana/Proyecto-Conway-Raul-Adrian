@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 public class ListaEnlazadaFilas<ListaEnlazadaColumnas> {
     //Lista que almacena listas de tipo ListaEnlazadaColumnas
     @Expose
-    private ElementoListaColumnasLE<ListaEnlazadaColumnas> primero;
+    public ElementoListaColumnasLE<ListaEnlazadaColumnas> primero;
 
     public ListaEnlazadaFilas(ElementoListaColumnasLE<ListaEnlazadaColumnas> primero) {
         this.primero = primero;

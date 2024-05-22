@@ -5,9 +5,9 @@ import com.google.gson.annotations.Expose;
 
 public class ElementoCasillaLE<Casilla> {
     @Expose
-    private ElementoCasillaLE<Casilla> siguiente;
+    public ElementoCasillaLE<Casilla> siguiente;
     @Expose
-    private Casilla data;
+    public Casilla data;
 
     public ElementoCasillaLE(Casilla dato){
         this.data = dato;

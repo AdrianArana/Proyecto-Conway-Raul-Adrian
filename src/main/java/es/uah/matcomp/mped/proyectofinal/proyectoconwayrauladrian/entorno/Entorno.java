@@ -1,11 +1,17 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno;
 
-public  class Entorno {
-    int coordenadaX;
-    int coordenadaY;
-    private int tiempoAparicion;
 
-    int probabilidadDeEsteRecurso;
+import com.google.gson.annotations.Expose;
+
+public class Entorno {
+    @Expose
+    public int coordenadaX;
+    @Expose
+    public int coordenadaY;
+    @Expose
+    public int tiempoAparicion;
+    @Expose
+    public int probabilidadDeEsteRecurso;
 
     public Entorno(int coordenadaX, int coordenadaY, int tiempoAparicion) {
         this.coordenadaX = coordenadaX;
@@ -14,10 +20,7 @@ public  class Entorno {
     }
 
     public Entorno() {
-
     }
-
-
     public int getCoordenadaX() {
         return coordenadaX;
     }

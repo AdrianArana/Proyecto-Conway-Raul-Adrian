@@ -6,27 +6,24 @@ import java.lang.reflect.Modifier;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.gsonAdapterRecurso;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorCasilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorListaEnlazada;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorListaEnlazadaColumnas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.gsonAdapterIndividuo;
 
 public class FuncionesDeGuardado {
-    public static void guardar(String nombreArchivo, ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
+    public static <T> void guardar(String nombreArchivo, T tablero) {
+        com.google.gson.Gson gson = new com.google.gson.GsonBuilder()
+                .registerTypeAdapter(ListaEnlazada.class, new gsonAdaptadorListaEnlazada())
+                .registerTypeAdapter(ListaEnlazadaColumnas.class, new gsonAdaptadorListaEnlazadaColumnas())
+                .registerTypeAdapter(ListaEnlazadaFilas.class, new gsonAdaptadorListaEnlazadaFilas())
+                .registerTypeAdapter(Casilla.class, new gsonAdaptadorCasilla())
                 .registerTypeAdapter(Entorno.class, new gsonAdapterRecurso())
-                //.registerTypeAdapter(Casilla.class,new gsonAdapterElementoCasillaLE())
-                .registerTypeAdapter(Casilla.class, new gsonAdapterCasilla())
-                .registerTypeAdapter(ListaEnlazadaFilas.class,new gsonAdapterListaEnlazadaFilas())
-                .registerTypeAdapter(ElementoListaColumnasLE.class,new gsonAdapterElementoListaColumnasLE())
-                .registerTypeAdapter(ElementoLE.class, new gsonAdapterElementoLE())
-                .registerTypeAdapter(ListaEnlazada.class, new gsonAdapterListaEnlazada())
-                .registerTypeAdapter(ListaEnlazadaColumnas.class, new gsonAdapterListaColumnas())
-        .excludeFieldsWithoutExposeAnnotation()
-                .excludeFieldsWithModifiers(Modifier.STATIC)
-                .setPrettyPrinting()
+                .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
                 .create();
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
             //this.setGuardado(true);

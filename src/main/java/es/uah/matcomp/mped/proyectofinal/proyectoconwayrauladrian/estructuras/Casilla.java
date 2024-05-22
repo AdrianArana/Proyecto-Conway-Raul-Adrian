@@ -6,15 +6,15 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 import javafx.scene.control.Button;
 public class Casilla {
     @Expose
-    private int coordenadaX;
+    public int coordenadaX;
     @Expose
-    private int coordenadaY;
+    public int coordenadaY;
     @Expose
-    ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
+    public ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
     @Expose
-    ListaEnlazada<Entorno> recursos = new ListaEnlazada<Entorno>();
+    public ListaEnlazada<Entorno> recursos = new ListaEnlazada<Entorno>();
     @Expose
-    private Button boton;
+    public Button boton;
 
     public Casilla(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;

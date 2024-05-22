@@ -1,18 +1,52 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoLE;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+import org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 
 import java.util.Random;
 
 public class FuncionesBucle {
+    private static final Log log = LogFactory.getLog(FuncionesBucle.class);
+
+    public static void configureLogging(String logFilePath) {
+        ConfigurationBuilder<BuiltConfiguration> builder = new DefaultConfigurationBuilder<>();
+
+        builder.setStatusLevel(org.apache.logging.log4j.Level.INFO);
+        builder.setConfigurationName("CustomConfiguration");
+
+        PatternLayout layout = PatternLayout.newBuilder()
+                .withPattern("%d{ISO8601} [%t] %-5p %c %x - %m%n")
+                .build();
+
+        FileAppender appender = FileAppender.newBuilder()
+                .withFileName(logFilePath)
+                .setName("FileLogger")
+                .withLayout(layout)
+                .build();
+
+        appender.start();
+
+        builder.add(builder.newRootLogger(org.apache.logging.log4j.Level.DEBUG)
+                .add(builder.newAppenderRef("FileLogger")));
+
+        LoggerContext ctx = Configurator.initialize(builder.build());
+
+        // Update the Log4j context with the new configuration
+        ctx.updateLoggers();
+    }
+
     /*
     Arreglar lo del ID, no funciona nada,
     Añadir lo de los arboles,
@@ -76,7 +110,7 @@ public class FuncionesBucle {
                     }
                     tablero.getElemento(a).getData().getElemento(b).getData().getIndividuos().delete(posicionDelMásViejo);
                 }
-                actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData(),colorBordes);
+                actualizarBotones(tablero.getElemento(a).getData().getElemento(b).getData(), colorBordes);
             }
         }
     }
@@ -254,6 +288,7 @@ public class FuncionesBucle {
     }
 
     protected ElementoLE<Individuo> moverSimple(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
+        log.info("Comenzando movimiento simple de la casilla (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
         Random random = new Random();
         int dir = random.nextInt(8);
         int x = casillaActual.getCoordenadaX();

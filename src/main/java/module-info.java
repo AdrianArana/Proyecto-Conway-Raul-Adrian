@@ -7,6 +7,9 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     requires org.kordamp.bootstrapfx.core;
     requires java.rmi;
     requires com.google.gson;
+    requires commons.logging;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
 
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;

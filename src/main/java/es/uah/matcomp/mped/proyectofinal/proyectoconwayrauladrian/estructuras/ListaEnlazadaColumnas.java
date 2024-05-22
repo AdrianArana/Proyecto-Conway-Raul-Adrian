@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 public class ListaEnlazadaColumnas<Casilla> {
     //ListaEnlazadaColumnas que almacena Casillas
     @Expose
-    private ElementoCasillaLE<Casilla> primero;
+    public ElementoCasillaLE<Casilla> primero;
 
     public ListaEnlazadaColumnas(ElementoCasillaLE<Casilla> primero) {
         this.primero = primero;
