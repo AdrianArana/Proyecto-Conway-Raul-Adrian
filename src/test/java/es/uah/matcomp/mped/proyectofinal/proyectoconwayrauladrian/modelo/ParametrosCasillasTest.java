@@ -1,6 +1,6 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

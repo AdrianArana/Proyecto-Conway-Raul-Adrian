@@ -1,16 +1,19 @@
-package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
+package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
 
+import com.google.gson.annotations.Expose;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import javafx.scene.control.Button;
-
 public class Casilla {
+    @Expose
     private int coordenadaX;
+    @Expose
     private int coordenadaY;
+    @Expose
     ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
+    @Expose
     ListaEnlazada<Entorno> recursos = new ListaEnlazada<Entorno>();
-
+    @Expose
     private Button boton;
 
     public Casilla(int coordenadaX, int coordenadaY) {

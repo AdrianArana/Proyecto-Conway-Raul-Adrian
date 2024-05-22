@@ -1,6 +1,6 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoLE;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
@@ -9,29 +9,17 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
-import javafx.scene.paint.Color;
 
 import java.util.Random;
 
 public class FuncionesBucle {
-    //TODO- >
     /*
-    No se clonan los individuos ni reproducen, creo, correctamente, ademas creo que no
-    aparecen con los parametros adecuados, ya que cuando configuro numeros altos, mueren sin sentido.
     Arreglar lo del ID, no funciona nada,
     Añadir lo de los arboles,
     tambien lo de los logs
-    poder mostrar los individuos que hay dentro de la casilla seleccionada
-    Ademas no se mueven correctamente los individuos no se porque, ayer se movian bien
-    poner los efectos de los elementos en los individuos,
-    añadir el ultimo tipo de movimiento
-    ajustar valores maximos y minimos de los sliders y valores iniciales
-    comprobar que los individuos que se reproducen aparecen con las caracterisiticas adecuadas, creo que no
     por ultimo hacer lo de que se lea y se guarden los archivos
     si da tiempo, ajustar la velocidad del juego en la propia ventana de juego.
     */
-    public FuncionesBucle() {
-    }
 
     public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno, ParametrosIndividuo parametrosIndividuo, String colorBordes) {
         int filas = tablero.getNumeroFilas();

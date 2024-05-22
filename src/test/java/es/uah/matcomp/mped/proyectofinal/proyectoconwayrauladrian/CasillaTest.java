@@ -1,7 +1,7 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Agua;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
@@ -12,16 +12,12 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.Paramet
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.List;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class VentanaCasillaController {
     @FXML

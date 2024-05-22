@@ -6,6 +6,7 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.rmi;
+    requires com.google.gson;
 
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
@@ -13,4 +14,8 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo to javafx.fxml;
+    exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+    opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras to javafx.fxml;
+    exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
+    opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos to javafx.fxml;
 }

@@ -1,7 +1,12 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+
+import com.google.gson.annotations.Expose;
+
 //5
 public class ElementoListaColumnasLE<ListaEnlazadaColumnas> {
+    @Expose
     private ElementoListaColumnasLE<ListaEnlazadaColumnas> siguiente;
+    @Expose
     private ListaEnlazadaColumnas data;
 
     public ElementoListaColumnasLE(ListaEnlazadaColumnas dato){

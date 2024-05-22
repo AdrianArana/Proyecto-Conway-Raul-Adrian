@@ -1,6 +1,10 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+
+import com.google.gson.annotations.Expose;
+
 //2
 public class ListaEnlazada<TipoDelDato> {
+    @Expose
     private ElementoLE<TipoDelDato> primero;
 
     public ListaEnlazada(ElementoLE<TipoDelDato> primero) {

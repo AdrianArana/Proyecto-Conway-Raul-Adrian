@@ -13,11 +13,15 @@ public class Agua extends Entorno {
     }
 
     public static void accionAgua(Individuo individuo) {
-        individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes()+2);
+        individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes() + 2);
     }
+
     @Override
     public String toString() {
         return "AGUA";
     }
 
+    public String getTipo() {
+        return "Agua";
+    }
 }

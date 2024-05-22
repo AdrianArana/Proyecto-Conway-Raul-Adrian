@@ -207,5 +207,10 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7c7c7c" height="24.0" layoutX="694.0" layoutY="501.0" onMouseClicked="#onBotonPausar" stroke="BLACK" strokeType="INSIDE" width="10.0" />
       <Button fx:id="botonReanudar" layoutX="718.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBotonReanudar" prefHeight="40.0" prefWidth="40.0" />
       <Polygon fill="DODGERBLUE" layoutX="780.0" layoutY="500.0" onMouseClicked="#onBotonReanudar" points="-50.0, 24.22998046875, -30.77001953125, 13.22998046875, -50.0, 3.230010986328125" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="21.0" layoutY="697.0" mnemonicParsing="false" onAction="#onBotonGuardar" prefHeight="37.0" prefWidth="95.0" text="Guardar">
+         <font>
+            <Font name="Baskerville Old Face" size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

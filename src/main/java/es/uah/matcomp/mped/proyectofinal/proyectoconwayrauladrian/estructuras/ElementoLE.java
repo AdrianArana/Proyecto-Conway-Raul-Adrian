@@ -1,7 +1,12 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+
+import com.google.gson.annotations.Expose;
+
 //1
 public class ElementoLE<TipoDelDato> {
+    @Expose
     private ElementoLE<TipoDelDato> siguiente;
+    @Expose
     private TipoDelDato data;
 
     public ElementoLE(TipoDelDato dato){

@@ -3,7 +3,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
@@ -20,16 +20,14 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.guardar;
 import static java.time.LocalTime.now;
 
 public class VentanaJuegoController extends FuncionesBucle implements Initializable {
@@ -469,5 +467,9 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         botonAjustes.setDisable(true);
         botonReanudar.setDisable(true);
         botonPausar.setDisable(false);
+    }
+
+    public void onBotonGuardar(){
+        guardar("tablero.json",tablero);
     }
 }

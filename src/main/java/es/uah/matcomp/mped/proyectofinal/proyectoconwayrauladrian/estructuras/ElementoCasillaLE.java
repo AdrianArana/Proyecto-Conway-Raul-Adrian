@@ -1,10 +1,12 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
 //3
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.Casilla;
+
+import com.google.gson.annotations.Expose;
 
 public class ElementoCasillaLE<Casilla> {
-
+    @Expose
     private ElementoCasillaLE<Casilla> siguiente;
+    @Expose
     private Casilla data;
 
     public ElementoCasillaLE(Casilla dato){

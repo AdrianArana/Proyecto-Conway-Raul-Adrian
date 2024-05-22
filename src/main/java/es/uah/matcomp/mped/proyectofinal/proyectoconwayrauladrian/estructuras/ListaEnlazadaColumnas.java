@@ -1,7 +1,11 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+
+import com.google.gson.annotations.Expose;
+
 //4
 public class ListaEnlazadaColumnas<Casilla> {
     //ListaEnlazadaColumnas que almacena Casillas
+    @Expose
     private ElementoCasillaLE<Casilla> primero;
 
     public ListaEnlazadaColumnas(ElementoCasillaLE<Casilla> primero) {

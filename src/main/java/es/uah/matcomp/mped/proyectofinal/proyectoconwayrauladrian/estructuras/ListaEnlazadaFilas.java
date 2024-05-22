@@ -1,7 +1,11 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+
+import com.google.gson.annotations.Expose;
+
 //6
 public class ListaEnlazadaFilas<ListaEnlazadaColumnas> {
     //Lista que almacena listas de tipo ListaEnlazadaColumnas
+    @Expose
     private ElementoListaColumnasLE<ListaEnlazadaColumnas> primero;
 
     public ListaEnlazadaFilas(ElementoListaColumnasLE<ListaEnlazadaColumnas> primero) {
@@ -26,7 +30,7 @@ public class ListaEnlazadaFilas<ListaEnlazadaColumnas> {
         if (isVacia()) {
             this.primero = elem;
             return 0;
-        }else{
+        } else {
             ElementoListaColumnasLE<ListaEnlazadaColumnas> puntero = this.primero;
             while (puntero.getSiguiente() != null) {
                 puntero = puntero.getSiguiente();
@@ -85,12 +89,12 @@ public class ListaEnlazadaFilas<ListaEnlazadaColumnas> {
         if (!isVacia()) {
             ElementoListaColumnasLE<ListaEnlazadaColumnas> puntero = this.primero;
             while (posicion < this.getNumeroFilas() && !puntero.getData().equals(el.getData())) {
-                if (puntero.getSiguiente()!=null){
+                if (puntero.getSiguiente() != null) {
                     puntero = puntero.getSiguiente();
                 }
                 posicion++;
             }
-            if(puntero.getData().equals(el.getData())){
+            if (puntero.getData().equals(el.getData())) {
                 return posicion;
             }
         }
