@@ -4,10 +4,10 @@ public class NombreGuardado {
 
     private String nombre;
 
-    public NombreGuardado() {
-        this.nombre = null;
+    public NombreGuardado(String nombreGuardado) {
+        this.nombre = nombreGuardado;
     }
-
+    public NombreGuardado(){}
     public String getNombre() {
         return nombre;
     }

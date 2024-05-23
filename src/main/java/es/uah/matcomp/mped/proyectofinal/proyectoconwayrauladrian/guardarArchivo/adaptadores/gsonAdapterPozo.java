@@ -10,6 +10,7 @@ public class gsonAdapterPozo implements JsonSerializer<Pozo>, JsonDeserializer<P
     @Override
     public JsonElement serialize(Pozo recursoDado, Type typeOfSrc, JsonSerializationContext contextoDeSerializacionRecurso) {
         JsonObject recurso = new JsonObject();
+        recurso.addProperty("tipo", recursoDado.getClass().getSimpleName());
         recurso.addProperty("coordenadaX", recursoDado.getCoordenadaX());
         recurso.addProperty("coordenadaY", recursoDado.getCoordenadaY());
         recurso.addProperty("tiempoAparicion", recursoDado.getTiempoAparicion());

@@ -19,34 +19,6 @@ import java.util.Random;
 
 public class FuncionesBucle {
     public static final Log log = LogFactory.getLog(FuncionesBucle.class);
-
-    public static void configureLogging(String logFilePath) {
-        ConfigurationBuilder<BuiltConfiguration> builder = new DefaultConfigurationBuilder<>();
-
-        builder.setStatusLevel(org.apache.logging.log4j.Level.INFO);
-        builder.setConfigurationName("CustomConfiguration");
-
-        PatternLayout layout = PatternLayout.newBuilder()
-                .withPattern("%d{ISO8601} [%t] %-5p %c %x - %m%n")
-                .build();
-
-        FileAppender appender = FileAppender.newBuilder()
-                .withFileName(logFilePath)
-                .setName("FileLogger")
-                .withLayout(layout)
-                .build();
-
-        appender.start();
-
-        builder.add(builder.newRootLogger(org.apache.logging.log4j.Level.DEBUG)
-                .add(builder.newAppenderRef("FileLogger")));
-
-        LoggerContext ctx = Configurator.initialize(builder.build());
-
-        // Update the Log4j context with the new configuration
-        ctx.updateLoggers();
-    }
-
     /*
     Arreglar lo del ID, no funciona nada,
     Añadir lo de los arboles,
@@ -62,6 +34,7 @@ public class FuncionesBucle {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();//Obtenemos la lista de elementos que se encuentra en la fila actual
             int columnas = filaActual.getNumeroColumnas();
             for (int columna = 0; columna < columnas; columna++) {//tiene que ser < o <= ???, creo que da igual, ya que solo la recorro,
+                quitarObjetivos(tablero.getElemento(fila).getData().getElemento(columna).getData());
 
                 mejoras((tablero.getElemento(fila).getData().getElemento(columna).getData()));
                 tiempoDeVida(tablero.getElemento(fila).getData().getElemento(columna).getData());
@@ -72,7 +45,6 @@ public class FuncionesBucle {
                 aparicionRecursos(tablero, tablero.getElemento(fila).getData().getElemento(columna).getData(), parametrosEntorno);
 
                 //Añadimos a la lista de movimientos el individuo que corresponde, solo si hay algun individuo que mover en esa casilla
-                quitarObjetivos(tablero.getElemento(fila).getData().getElemento(columna).getData());
 
                 if (hayMovimiento(tablero.getElemento(fila).getData().getElemento(columna).getData())) {
                     //Añadimos un individuo a la lista con sus nuevas coordenadas,para despues colocarlo donde le correponda
@@ -420,11 +392,10 @@ public class FuncionesBucle {
         double menorDistancia = 100000000.0;
         //Obtenemos la menor distancia de todos los elementos del tablero respecto a nuestro individuo
         if (individuo.getObjetivo() == null) {
-            System.out.println("le seteamos un nuevo objetivo");
-
             for (int i = 0; i < recursos.getNumeroElementos(); i++) {
                 if (Math.sqrt(Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaX() - individuo.getCoordenadaX()), 2) +
                         Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaY() - individuo.getCoordenadaY()), 2)) < menorDistancia) {
+                    individuo.setObjetivo(recursos.getElemento(i).getData());
                     menorDistancia = Math.sqrt(Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaX() - individuo.getCoordenadaX()), 2) +
                             Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaY() - individuo.getCoordenadaY()), 2));
                 }
@@ -432,7 +403,7 @@ public class FuncionesBucle {
         }
         //System.out.println("OBJETIVO : "+individuo.getObjetivo().getData().toString());
         if (individuo.getObjetivo() != null) {
-            //System.out.println("ya tiene objetivo! " + individuo.getObjetivo().getData().toString() + individuo.getObjetivo().getData().getCoordenadaX());
+            System.out.println("ya tiene objetivo! " + individuo.getObjetivo().getData().toString() + individuo.getObjetivo().getData().getCoordenadaX());
             //Coordenadas del individuo
             int xIndividuo = individuo.getCoordenadaX();
             int yIndividuo = individuo.getCoordenadaY();
@@ -503,7 +474,7 @@ public class FuncionesBucle {
         return id;
     }
 
-    //----OTRAS FUNCIONES PARA EL BULE----
+    //----OTRAS FUNCIONES PARA EL BUCLE----
 
     //INDIVIDUOS
 
@@ -544,7 +515,7 @@ public class FuncionesBucle {
             }
 
         } catch (Exception e) {
-            System.err.println("Error en el método moverIndividuos: " + e.getMessage());
+            System.err.println("Error en el método reproducción: " + e.getMessage());
             e.printStackTrace();
 
         }
@@ -703,5 +674,42 @@ public class FuncionesBucle {
 
     }
 
+   /* private void bucleDeControlIniciar
+    int ID = 0;
+    for(int x = 0; x<celda.getNumeroElementos();x++){
+    }
+for(
+    int w = 0; w<celda.getElemento(x).getData().getIndividuolistaEnlazed().getNumeroElementos();
 
+    w++)
+
+    {
+        celda.getElemento(x).getData().getIndividuoLista Enlazed().getElemento(w).getData().getDatos().setID(ID);
+    }
+
+    ID++;
+if(control==null)
+
+    {
+        control = new Timeline(new KeyFrame(Duration.seconds(v:1),event -> {
+        if (!isPausa()) {
+            BucleDeControl contronladorPatria = new BucleDeControl(celda);
+            contronladorPatria.setTableroDataModel(tableroDataModel);
+            try {
+                celda = contronladorPatria.ejecucion(celda, individuosDatamodel, recusosDatamodel);
+            } catch (Camino e) {
+                throw new RuntimeException(e);
+            } catch (ExistentID e) {
+            }
+        } else {
+            throw new RuntimeException(e);
+            System.out.println("Se ha pausado el juego");
+            control.stop();
+            control.setCycleCount(Animation.INDEFINITE);
+        }));
+        control.stop();
+        Felsef
+    }
+        control.play();
+    */
 }

@@ -11,6 +11,8 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
     requires com.google.errorprone.annotations;
+    requires org.checkerframework.checker.qual;
+    requires com.google.api.client;
 
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;

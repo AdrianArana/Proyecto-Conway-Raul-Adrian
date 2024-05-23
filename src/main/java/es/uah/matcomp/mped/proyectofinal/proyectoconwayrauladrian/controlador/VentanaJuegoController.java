@@ -6,6 +6,7 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.modeloDatosFinal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.NombreGuardado;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillasModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
@@ -26,6 +27,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -58,12 +60,17 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     int tipoPintar = 1;
     boolean pintarRecursos = false;
     int tipoPintarRecursos = 0;
+    private NombreGuardado nombreGuardado;
+    boolean guardado = false;
     //Creamos el tablero vacío, que se generará despues
     ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero = new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
 
     String colorBordes = "rgb(0, 0, 0)";
+    String nombreGuardadoString;
 
-    public void setParametros(ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
+
+    public void setParametros(String nombreGuardado, ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
+        this.nombreGuardadoString= nombreGuardado;
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosIndividuo = parametrosIndividuo;
         this.parametrosCasillas = parametrosCasillas;
@@ -213,8 +220,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             }
         } else if (pintarRecursos) {
             if (tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getRecursos().getNumeroElementos() < 3) {
-                int xRecurso = i - 1;
-                int yRecurso = j - 1;
+                int xRecurso = i;
+                int yRecurso = j;
                 if (tipoPintarRecursos != 0) {
                     Entorno recurso = pintarRecurso(tipoPintarRecursos, xRecurso, yRecurso);
                     tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getRecursos().add(recurso);
@@ -225,8 +232,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             }
         } else if (pintarIndividuos) {
             if (tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().getNumeroElementos() < 3) {
-                int xIndividuo = i - 1;
-                int yIndividuo = j - 1;
+                int xIndividuo = i;
+                int yIndividuo = j;
                 int id = generarID(tablero);
                 int turnosDevidaRestantes = parametrosIndividuo.turnosVidaRestantesProperty().getValue().intValue();
                 int turnoGeneracion = turnoActual;
@@ -312,7 +319,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaFinalizarJuego.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+            Scene scene = new Scene(fxmlLoader.load(), 1100, 900);
             stage.setTitle("Fin del Juego");
             stage.setScene(scene);
             stage.show();
@@ -354,12 +361,12 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     private void activarBucle() {
         long tiempoInicio = getSegundos();
-        System.out.println("Tiempo actuañ" + LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond());
+        //tem.out.println("Tiempo actuañ" + LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond());
         while (!parar) {
-            System.out.println(getSegundos());
+            //System.out.println(getSegundos());
             if (getSegundos() > (tiempoInicio + 4)) {
                 turnoActual++;
-                System.out.println("hola");
+                //System.out.println("hola");
                 recorrerCasillas(tablero, turnoActual, parametrosEntorno.getOriginal(), parametrosIndividuo.getOriginal(), colorBordes);
 
                 tiempoInicio = getSegundos();
@@ -472,7 +479,22 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void onBotonGuardar() {
-        guardar("datosGuardados.json", new modeloDatosFinal(tablero,parametrosIndividuo,parametrosEntorno,parametrosCasillas));
+        guardado=true;
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaGuardarPartida.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 850, 750);
+            stage.setScene(scene);
+           VentanaGuardarPartidaController controladorGuardarPartida= fxmlLoader.getController();
+            //System.out.println(datosCargados.getTablero().getElemento(1).getData().getElemento(1).getData().getIndividuos().getElemento(1).getData().toString());
+            controladorGuardarPartida.setModeloDatosFinal(new modeloDatosFinal(nombreGuardadoString,tablero,parametrosIndividuo.getOriginal(),parametrosEntorno.getOriginal(),parametrosCasillas.getOriginal()));
+            controladorGuardarPartida.setStage(stage);
+            stage.show();
+        guardar("datosGuardados.json", new modeloDatosFinal(nombreGuardadoString,tablero,parametrosIndividuo.getOriginal(),parametrosEntorno.getOriginal(),parametrosCasillas.getOriginal()));
+        //System.out.println("datos a guardar: prob General"+parametrosEntorno.probabilidadGeneral().getValue().intValue());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void setTablero(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tableroNoEstatico) {
@@ -482,15 +504,31 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     public void setBotones() {
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
-
-        for (int i = 1; i <= x; i++) {
-            for (int j = 1; j <= y; j++) {
+        //System.out.println("valores cargados"+ parametrosCasillas.x().getValue().intValue()+"casillas");
+        //System.out.println("Valores cargados +"+tablero.getElemento(1).getData().getNumeroColumnas());
+        for (int i=0; i<tablero.getNumeroFilas();i++){
+            for (int j=0;j<tablero.getElemento(1).getData().getNumeroColumnas();j++){
+                if (!tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().isVacia()){
+                    for (int k=0;k<tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos();k++){
+                        //System.out.println(tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().toString());
+                    }
+                }
+                if (!tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().isVacia()){
+                    for (int k=0;k<tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getNumeroElementos();k++){
+                        System.out.println(tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getElemento(k).getData().toString());
+                    }
+                }
+            }
+        }
+        //tem.out.println("Caisllas del ytabeñlrp"+tablero.getElemento(1).getData().getElemento(1).getData().getClass());
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
                 Button celdaButton = new Button();
                 celdaButton.setMinSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setMaxSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setStyle("-fx-border-color:" + colorBordes + "; -fx-text-alignment: center;");
-                int finalI = i;
-                int finalJ = j;
+                int finalI = i+1;
+                int finalJ = j+1;
                 celdaButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -499,6 +537,39 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 });
                 gridPane.add(celdaButton, finalI, finalJ);
                 tablero.getElemento(i).getData().getElemento(j).getData().setBoton(celdaButton);
+            }
+        }
+        for (int i = 0; i < tablero.getNumeroFilas(); i++) {
+            for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
+                int numeroIndividuos = tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos();
+                int numeroRecursos = tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getNumeroElementos();
+                Casilla casilla = tablero.getElemento(i).getData().getElemento(j).getData();
+                if (numeroIndividuos > 0) {
+                    if (numeroIndividuos == 1) {
+                        tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ffae00;-fx-border-color: " + colorBordes + ";");
+                        tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("1");
+                    } else if (numeroIndividuos == 2) {
+                        tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ff4d00;-fx-border-color: " + colorBordes + ";");
+                        tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("2");
+
+                    } else if (numeroIndividuos == 3) {
+                        tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + colorBordes + ";");
+                        tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("3");
+                    }
+                } else {
+                    actualizarCasillaRecurso(i, j, numeroRecursos, casilla);
+                }
+                if (numeroIndividuos == 0 && numeroRecursos == 0) {
+                    casilla.getBoton().setStyle("-fx-background-color:null;-fx-border-color: " + colorBordes + ";");
+                    casilla.getBoton().setText(null);
+                }
+                if (numeroIndividuos == 1) {
+                    casilla.getBoton().setText("1");
+                } else if (numeroIndividuos == 2) {
+                    casilla.getBoton().setText("2");
+                } else if (numeroIndividuos == 3) {
+                    casilla.getBoton().setText("3");
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores;
 
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoListaColumnasLE;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
@@ -9,22 +10,20 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import java.lang.reflect.Type;
 
 
-public class gsonAdapterListaEnlazadaFilas<T> implements JsonSerializer<ListaEnlazadaFilas<T>>, JsonDeserializer<ListaEnlazadaFilas<T>> {
+public class gsonAdapterListaEnlazadaFilas<T> implements JsonDeserializer<ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>> {
 
     @Override
-    public ListaEnlazadaFilas deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        return null;
-    }
+    public ListaEnlazadaFilas deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+        JsonArray jsonArray = jsonElement.getAsJsonArray();
+        ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> listaEnlazadaFilas = new ListaEnlazadaFilas<>();
 
-    @Override
-    public JsonElement serialize(ListaEnlazadaFilas listaEnlazadaFilasDada, Type type, JsonSerializationContext contextoDeSerializacionListaEnlazadaFilas) {
-        JsonObject listaJson = new JsonObject();
-        JsonArray jsonArray = new JsonArray();
-        for (int i=0; i<listaEnlazadaFilasDada.getNumeroFilas();i++) {
-            ElementoListaColumnasLE<ListaEnlazadaColumnas<Casilla>> elemento = listaEnlazadaFilasDada.getElemento(i);
-            jsonArray.add(contextoDeSerializacionListaEnlazadaFilas.serialize(elemento).getAsJsonObject());
+        for (JsonElement element : jsonArray) {
+            ListaEnlazadaColumnas<Casilla> listaEnlazadaColumnas = context.deserialize(element, new TypeToken<ListaEnlazadaColumnas<Casilla>>() {
+            }.getType());
+            listaEnlazadaFilas.add(new ElementoListaColumnasLE<>(listaEnlazadaColumnas));
         }
-        listaJson.addProperty("datos", jsonArray.toString());
-        return listaJson;
+
+        return listaEnlazadaFilas;
     }
+
 }

@@ -17,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -111,6 +110,7 @@ public class ConfiguracionController implements Initializable {
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaParametros;
     private ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero;
+    private String nombreGuardadoString;
 
 
     protected void updateGUIwithModel() {
@@ -221,7 +221,8 @@ public class ConfiguracionController implements Initializable {
         escenaParametros.close();
     }
 
-    public void loadUserData(ParametrosIndividuoModelProperties parametrosIndividuoDados, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
+    public void loadUserData(String nombreGuardadoDado, ParametrosIndividuoModelProperties parametrosIndividuoDados, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
+        this.nombreGuardadoString=nombreGuardadoDado;
         this.parametrosIndividuo = parametrosIndividuoDados;
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosCasillas = parametrosCasillas;
@@ -268,10 +269,9 @@ public class ConfiguracionController implements Initializable {
 
             Scene scene = new Scene(fxmlLoader.load(), 1100, 800);//Aquí se hace el initialize
             stage.setScene(scene);
-            stage.setTitle("Juego - La vida de Conway");
             VentanaJuegoController ventanaJuegoController = fxmlLoader.getController();
             //Le mandamos los parámetros al controlador de la siguiente ventana
-            ventanaJuegoController.setParametros(modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
+            ventanaJuegoController.setParametros(nombreGuardadoString,modeloParaGUICompartidoIndividuo, modeloParaGUICompartidoEntorno, modeloParaGUICompartidoTablero);
             //Ahora se crea el tablero con la lista de listas, y se rellena el gridPane previamente vacío
             ventanaJuegoController.hacerTablero();
             ventanaJuegoController.setStage(stage);
@@ -299,8 +299,8 @@ public class ConfiguracionController implements Initializable {
     }
 
     private void onBotonReanudarClick(VentanaJuegoController ventanaJuegoController) {
-        System.out.println("la prob de aparicion de recursos general esde: "+parametrosEntorno.probabilidadGeneral());
-        ventanaJuegoController.setParametros(parametrosIndividuo,parametrosEntorno,parametrosCasillas);
+        //System.out.println("la prob de aparicion de recursos general esde: "+parametrosEntorno.probabilidadGeneral());
+        ventanaJuegoController.setParametros(nombreGuardadoString, parametrosIndividuo,parametrosEntorno,parametrosCasillas);
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();
     }

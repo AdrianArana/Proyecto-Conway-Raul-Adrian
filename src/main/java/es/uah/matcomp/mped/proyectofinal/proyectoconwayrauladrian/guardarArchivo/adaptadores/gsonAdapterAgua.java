@@ -12,6 +12,7 @@ public class gsonAdapterAgua implements JsonSerializer<Agua>, JsonDeserializer<A
     public JsonElement serialize(Agua recursoDado, Type typeOfSrc, JsonSerializationContext contextoDeSerializacionRecurso) {
         JsonObject recurso = new JsonObject();
         //Guardo como ObjetoJson el recurso, pero le pongo un 'tipo' antes, que es la clase a la que pertenece
+        recurso.addProperty("tipo", recursoDado.getClass().getSimpleName());
         recurso.addProperty("coordenadaX", recursoDado.getCoordenadaX());
         recurso.addProperty("coordenadaY", recursoDado.getCoordenadaY());
         recurso.addProperty("tiempoAparicion", recursoDado.getTiempoAparicion());

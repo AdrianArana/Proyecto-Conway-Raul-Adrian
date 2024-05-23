@@ -10,6 +10,7 @@ public class gsonAdapterComida implements JsonSerializer<Comida>, JsonDeserializ
     @Override
     public JsonElement serialize(Comida recursoDado, Type typeOfSrc, JsonSerializationContext contextoDeSerializacionRecurso) {
         JsonObject recurso = new JsonObject();
+        recurso.addProperty("tipo", recursoDado.getClass().getSimpleName());
         recurso.addProperty("coordenadaX", recursoDado.getCoordenadaX());
         recurso.addProperty("coordenadaY", recursoDado.getCoordenadaY());
         recurso.addProperty("tiempoAparicion", recursoDado.getTiempoAparicion());

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaGuardarPartidaController">
+   <children>
+      <Button fx:id="guardarPartidaButton" layoutX="226.0" layoutY="314.0" mnemonicParsing="false" onAction="#onGuardarPartidaButton" text="Guardar Partida">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font></Button>
+      <TextField fx:id="textField" layoutX="43.0" layoutY="105.0" prefHeight="38.0" prefWidth="224.0">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font></TextField>
+      <Label fx:id="labelEscribaNombreArchivo" layoutX="43.0" layoutY="60.0" prefHeight="27.0" prefWidth="258.0">
+         <font>
+            <Font name="Baskerville Old Face" size="17.0" />
+         </font></Label>
+      <Button fx:id="estadisticasButton" layoutX="344.0" layoutY="105.0" mnemonicParsing="false" text="Estadísticas de la partida">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font></Button>
+      <Label fx:id="labelError" alignment="CENTER" layoutX="48.0" layoutY="152.0" prefHeight="27.0" prefWidth="219.0">
+         <font>
+            <Font name="Baskerville Old Face" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

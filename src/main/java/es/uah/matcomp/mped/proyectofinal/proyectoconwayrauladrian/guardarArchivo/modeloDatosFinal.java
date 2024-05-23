@@ -8,34 +8,42 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 
 public class modeloDatosFinal {
     @Expose
+    public String nombreGuardadoString;
+    @Expose
     public ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero;
     @Expose
-    public ParametrosIndividuoModelProperties parametrosGuardadosIndividuos;
+    public ParametrosIndividuo parametrosGuardadosIndividuos;
     @Expose
-    public ParametrosEntornoModelProperties parametrosGuardadosEntorno;
+    public ParametrosEntorno parametrosGuardadosEntorno;
     @Expose
-    public ParametrosCasillasModelProperties parametrosGuardadosCasillas;
+    public ParametrosCasillas parametrosGuardadosCasillas;
 
-    public modeloDatosFinal(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, ParametrosIndividuoModelProperties parametrosGuardadosIndividuos, ParametrosEntornoModelProperties parametrosGuardadosEntorno, ParametrosCasillasModelProperties parametrosGuardadosCasillas) {
+    public modeloDatosFinal(String nombreGuardado,ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, ParametrosIndividuo parametrosGuardadosIndividuos, ParametrosEntorno parametrosGuardadosEntorno, ParametrosCasillas parametrosGuardadosCasillas) {
+        this.nombreGuardadoString=nombreGuardado;
         this.tablero = tablero;
         this.parametrosGuardadosIndividuos = parametrosGuardadosIndividuos;
         this.parametrosGuardadosEntorno = parametrosGuardadosEntorno;
         this.parametrosGuardadosCasillas = parametrosGuardadosCasillas;
     }
 
+
+    public String getNombreGuardadoString() {
+        return nombreGuardadoString;
+    }
+
     public ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> getTablero() {
         return tablero;
     }
 
-    public ParametrosIndividuoModelProperties getParametrosGuardadosIndividuos() {
+    public ParametrosIndividuo getParametrosGuardadosIndividuos() {
         return parametrosGuardadosIndividuos;
     }
 
-    public ParametrosEntornoModelProperties getParametrosGuardadosEntorno() {
+    public ParametrosEntorno getParametrosGuardadosEntorno() {
         return parametrosGuardadosEntorno;
     }
 
-    public ParametrosCasillasModelProperties getParametrosGuardadosCasillas() {
+    public ParametrosCasillas getParametrosGuardadosCasillas() {
         return parametrosGuardadosCasillas;
     }
 }

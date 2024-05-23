@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.NombreController">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.NombreController">
    <children>
       <TextField fx:id="textFieldNombre" layoutX="235.0" layoutY="231.0">
          <font>
             <Font name="Baskerville Old Face" size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="continuarButton" layoutX="320.0" layoutY="288.0" mnemonicParsing="false" onAction="#onSiguienteButtonClick" text="Continuar">
+      <Button fx:id="continuarButton" layoutX="319.0" layoutY="311.0" mnemonicParsing="false" onAction="#onSiguienteButtonClick" text="Continuar">
          <font>
             <Font name="Baskerville Old Face" size="20.0" />
          </font></Button>
@@ -25,6 +24,10 @@
          <font>
             <Font name="Baskerville Old Face" size="20.0" />
          </font></Button>
+      <Label fx:id="labelError" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="275.0" prefHeight="27.0" prefWidth="260.0">
+         <font>
+            <Font name="Baskerville Old Face" size="17.0" />
+         </font></Label>
    </children>
    <cursor>
       <Cursor fx:constant="CROSSHAIR" />

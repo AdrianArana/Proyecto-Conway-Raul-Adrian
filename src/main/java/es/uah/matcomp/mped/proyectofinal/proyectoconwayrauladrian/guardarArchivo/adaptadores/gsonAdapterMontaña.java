@@ -10,6 +10,7 @@ public class gsonAdapterMontaña implements JsonSerializer<Montaña>, JsonDeseri
     @Override
     public JsonElement serialize(Montaña recursoDado, Type typeOfSrc, JsonSerializationContext contextoDeSerializacionRecurso) {
         JsonObject recurso = new JsonObject();
+        recurso.addProperty("tipo", recursoDado.getClass().getSimpleName());
         recurso.addProperty("coordenadaX", recursoDado.getCoordenadaX());
         recurso.addProperty("coordenadaY", recursoDado.getCoordenadaY());
         recurso.addProperty("tiempoAparicion", recursoDado.getTiempoAparicion());

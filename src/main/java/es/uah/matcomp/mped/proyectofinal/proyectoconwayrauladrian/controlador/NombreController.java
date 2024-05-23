@@ -1,15 +1,13 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,15 +15,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NombreController implements Initializable {
-    NombreGuardado nombreGuardado = new NombreGuardado();
     @FXML
     public Button continuarButton;
+    public Label labelError;
     @FXML
     private TextField textFieldNombre;
     @FXML
     private Button VolverButton;
 
     Stage stage;
+    String nombreGuardadoString;
 
 
     //Construimos un modelo para los datos compartidos con las clases ParametrosIndividuo y ParametrosIndividuoModelProperties
@@ -39,27 +38,31 @@ public class NombreController implements Initializable {
     private ParametrosCasillasModelProperties modeloGUICompartidoTablero = new ParametrosCasillasModelProperties(parametrosDataCasillas);
 
 
-
     @FXML
     protected void onSiguienteButtonClick() {
-        nombreGuardado.setNombre(textFieldNombre.getText());
-        System.out.println("Nombre Guardado: " + nombreGuardado.getNombre());
-        Stage stageAnterior = (Stage) continuarButton.getScene().getWindow();
-        stageAnterior.close();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
-        try {
-            Scene scene = new Scene(fxmlLoader.load(), 800, 650);
-            stage.setTitle("Configuración de parámetros");
-            stage.setScene(scene);
-            //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
-            ConfiguracionController configuracionController = fxmlLoader.getController();
-            configuracionController.loadUserData(modeloParaGUICompartidoIndividuo, modeloGuiCompartidoEntorno, modeloGUICompartidoTablero);
-            configuracionController.setStage(stage);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        nombreGuardadoString = (textFieldNombre.getText());
+        if (nombreGuardadoString.equals("")) {
+            labelError.setText("El nombre no puede ser vacío");
+        } else {
+            System.out.println("Nombre Guardado: " + nombreGuardadoString);
+            Stage stageAnterior = (Stage) continuarButton.getScene().getWindow();
+            stageAnterior.close();
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
+            try {
+                Scene scene = new Scene(fxmlLoader.load(), 800, 650);
+                stage.setTitle("Configuración de parámetros");
+                stage.setScene(scene);
+                //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
+                ConfiguracionController configuracionController = fxmlLoader.getController();
+                configuracionController.loadUserData(nombreGuardadoString, modeloParaGUICompartidoIndividuo, modeloGuiCompartidoEntorno, modeloGUICompartidoTablero);
+                configuracionController.setStage(stage);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML
