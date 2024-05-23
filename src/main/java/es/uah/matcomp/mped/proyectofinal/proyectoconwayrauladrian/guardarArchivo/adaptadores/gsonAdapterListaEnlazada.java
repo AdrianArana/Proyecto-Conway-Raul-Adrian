@@ -1,7 +1,8 @@
-package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores;
 
 import com.google.gson.*;
-import com.google.gson.annotations.Expose;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoLE;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
 
 import java.lang.reflect.Type;
 

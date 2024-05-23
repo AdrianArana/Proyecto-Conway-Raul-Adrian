@@ -1,7 +1,10 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,15 +25,21 @@ public class NombreController implements Initializable {
     @FXML
     private Button VolverButton;
 
+    Stage stage;
+
+
     //Construimos un modelo para los datos compartidos con las clases ParametrosIndividuo y ParametrosIndividuoModelProperties
-    private ParametrosIndividuo parametrosData = new ParametrosIndividuo(40, 3, 90,90);
+    private ParametrosIndividuo parametrosData = new ParametrosIndividuo(40, 3, 90, 90);
     private ParametrosIndividuoModelProperties modeloParaGUICompartidoIndividuo = new ParametrosIndividuoModelProperties(parametrosData);
 
-    private ParametrosEntorno parametrosDataEntorno= new ParametrosEntorno(20,0,20,20,20,20,20,20);
+    private ParametrosEntorno parametrosDataEntorno = new ParametrosEntorno(20, 1, 20, 20, 20, 20, 20, 20);
     private ParametrosEntornoModelProperties modeloGuiCompartidoEntorno = new ParametrosEntornoModelProperties(parametrosDataEntorno);
 
-    private ParametrosCasillas parametrosDataCasillas = new ParametrosCasillas(20,20);
+    private ParametrosCasillas parametrosDataCasillas = new ParametrosCasillas(20, 20);
     private ParametrosCasillasModelProperties modeloGUICompartidoTablero = new ParametrosCasillasModelProperties(parametrosDataCasillas);
+
+
+
     @FXML
     protected void onSiguienteButtonClick() {
         nombreGuardado.setNombre(textFieldNombre.getText());
@@ -45,7 +54,7 @@ public class NombreController implements Initializable {
             stage.setScene(scene);
             //Aqui creamos el controlador de la ventana de configuracion y le guardamos la Data
             ConfiguracionController configuracionController = fxmlLoader.getController();
-            configuracionController.loadUserData(modeloParaGUICompartidoIndividuo,modeloGuiCompartidoEntorno,modeloGUICompartidoTablero);
+            configuracionController.loadUserData(modeloParaGUICompartidoIndividuo, modeloGuiCompartidoEntorno, modeloGUICompartidoTablero);
             configuracionController.setStage(stage);
             stage.show();
         } catch (Exception e) {

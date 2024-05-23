@@ -1,11 +1,11 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
+import com.google.gson.annotations.Expose;
 import javafx.beans.property.*;
 
 public class ParametrosIndividuoModelProperties {
-
-    protected ParametrosIndividuo valoresOriginales;
-
+    @Expose
+    public ParametrosIndividuo valoresOriginales;
     private IntegerProperty turnosVidaRestantes = new SimpleIntegerProperty();
     private IntegerProperty probabilidadMuerte = new SimpleIntegerProperty();
     private IntegerProperty probabilidadClonacion = new SimpleIntegerProperty();

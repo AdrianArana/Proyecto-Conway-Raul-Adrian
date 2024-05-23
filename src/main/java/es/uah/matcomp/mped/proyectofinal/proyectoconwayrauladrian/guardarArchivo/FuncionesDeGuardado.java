@@ -1,54 +1,63 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Modifier;
 
+import com.google.errorprone.annotations.Modifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorCasilla;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorListaEnlazada;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorListaEnlazadaColumnas;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdaptadorListaEnlazadaFilas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.gsonAdapterIndividuo;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdapterIndividuo;
+import org.apache.commons.logging.Log;
+
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle.log;
 
 public class FuncionesDeGuardado {
-    public static <T> void guardar(String nombreArchivo, T tablero) {
+    public static <T> void guardar(String nombreArchivo, T modeloDatosFinal) {
+        log.info("Guardando archivo " + nombreArchivo);
         com.google.gson.Gson gson = new com.google.gson.GsonBuilder()
-                .registerTypeAdapter(ListaEnlazada.class, new gsonAdaptadorListaEnlazada())
-                .registerTypeAdapter(ListaEnlazadaColumnas.class, new gsonAdaptadorListaEnlazadaColumnas())
-                .registerTypeAdapter(ListaEnlazadaFilas.class, new gsonAdaptadorListaEnlazadaFilas())
-                .registerTypeAdapter(Casilla.class, new gsonAdaptadorCasilla())
                 .registerTypeAdapter(Entorno.class, new gsonAdapterRecurso())
+                .registerTypeAdapter(Agua.class, new gsonAdapterAgua())
+                .registerTypeAdapter(Biblioteca.class, new gsonAdapterBiblioteca())
+                .registerTypeAdapter(Montaña.class, new gsonAdapterMontaña())
+                .registerTypeAdapter(Pozo.class, new gsonAdapterPozo())
+                .registerTypeAdapter(Tesoro.class, new gsonAdapterTesoro())
+                .registerTypeAdapter(Comida.class, new gsonAdapterComida())
                 .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
+                .registerTypeAdapter(modeloDatosFinal.class, new gsonAdapterModeloDatosFinal())
+                .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
             //this.setGuardado(true);
-            gson.toJson(tablero, writer);
+            gson.toJson(modeloDatosFinal, writer);
         } catch (IOException e) {
-            //log.error("La ruta para guardar el archivo no existe");
+            log.error("La ruta para guardar el archivo no existe");
         }
     }
 
-    /*public static DataModel cargar (String nombreArchivo) {
+    public static modeloDatosFinal cargar (String nombreArchivo) {
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(individuo.class, new gsonAdapterIndividuo())
-                .registerTypeAdapter(recurso.class, new gsonAdapterRecurso())
-                .registerTypeAdapter(Cola.class, new gsonAdapterCola())
-                .registerTypeAdapter(ElementoLS[].class, new gsonAdapterListaSimple())
+                .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
+                .registerTypeAdapter(Entorno.class, new gsonAdapterRecurso())
+                .registerTypeAdapter(Agua.class, new gsonAdapterAgua())
+                .registerTypeAdapter(Biblioteca.class, new gsonAdapterBiblioteca())
+                .registerTypeAdapter(Montaña.class, new gsonAdapterMontaña())
+                .registerTypeAdapter(Pozo.class, new gsonAdapterPozo())
+                .registerTypeAdapter(Tesoro.class, new gsonAdapterTesoro())
+                .registerTypeAdapter(Comida.class, new gsonAdapterComida())
+                .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
+                .registerTypeAdapter(modeloDatosFinal.class, new gsonAdapterModeloDatosFinal())
                 .excludeFieldsWithoutExposeAnnotation()
-                .excludeFieldsWithModifiers(Modifier.STATIC)
                 .setPrettyPrinting()
                 .create();
-        try (FileReader reader = new FileReader(STR."archivosDePartida/\{nombreArchivo}")) {
-            DataModel model = gson.fromJson(reader, DataModel.class);
-            return model;
+        try (FileReader reader = new FileReader(nombreArchivo)) {
+            return gson.fromJson(reader, modeloDatosFinal.class);
         } catch (IOException e) {
-            log.error("La ruta para cargar el archivo no existe");
-            System.out.println("La ruta al archivo especificado no existe");
+            System.out.println("La ruta al archivo especificada no es correcta");
             return null;
         }
     }

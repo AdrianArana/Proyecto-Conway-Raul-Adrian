@@ -18,7 +18,7 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
 import java.util.Random;
 
 public class FuncionesBucle {
-    private static final Log log = LogFactory.getLog(FuncionesBucle.class);
+    public static final Log log = LogFactory.getLog(FuncionesBucle.class);
 
     public static void configureLogging(String logFilePath) {
         ConfigurationBuilder<BuiltConfiguration> builder = new DefaultConfigurationBuilder<>();
@@ -420,11 +420,11 @@ public class FuncionesBucle {
         double menorDistancia = 100000000.0;
         //Obtenemos la menor distancia de todos los elementos del tablero respecto a nuestro individuo
         if (individuo.getObjetivo() == null) {
+            System.out.println("le seteamos un nuevo objetivo");
+
             for (int i = 0; i < recursos.getNumeroElementos(); i++) {
                 if (Math.sqrt(Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaX() - individuo.getCoordenadaX()), 2) +
                         Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaY() - individuo.getCoordenadaY()), 2)) < menorDistancia) {
-                    System.out.println("le seteamos un nuevo objetivo");
-                    individuo.setObjetivo(recursos.getElemento(i).getData());
                     menorDistancia = Math.sqrt(Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaX() - individuo.getCoordenadaX()), 2) +
                             Math.pow((recursos.getElemento(i).getData().getData().getCoordenadaY() - individuo.getCoordenadaY()), 2));
                 }
@@ -432,7 +432,7 @@ public class FuncionesBucle {
         }
         //System.out.println("OBJETIVO : "+individuo.getObjetivo().getData().toString());
         if (individuo.getObjetivo() != null) {
-            System.out.println("ya tiene objetivo! " + individuo.getObjetivo().getData().toString() + individuo.getObjetivo().getData().getCoordenadaX());
+            //System.out.println("ya tiene objetivo! " + individuo.getObjetivo().getData().toString() + individuo.getObjetivo().getData().getCoordenadaX());
             //Coordenadas del individuo
             int xIndividuo = individuo.getCoordenadaX();
             int yIndividuo = individuo.getCoordenadaY();

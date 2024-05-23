@@ -10,6 +10,7 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     requires commons.logging;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
+    requires com.google.errorprone.annotations;
 
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;
@@ -21,4 +22,6 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos to javafx.fxml;
+    exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores;
+    opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores to javafx.fxml;
 }

@@ -1,8 +1,12 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
+import com.google.gson.annotations.Expose;
+
 public class ParametrosCasillas {
-    int x;
-    int y;
+    @Expose
+    public int x;
+    @Expose
+    public int y;
 
     public ParametrosCasillas(int x, int y) {
         this.x = x;

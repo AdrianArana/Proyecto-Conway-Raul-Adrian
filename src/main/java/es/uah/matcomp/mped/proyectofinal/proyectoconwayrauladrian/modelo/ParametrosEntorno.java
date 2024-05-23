@@ -1,15 +1,25 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
+import com.google.gson.annotations.Expose;
+
 public class ParametrosEntorno {
     //Esta clase únicamente va a almacenar las propiedades de partida elegidas para cada recurso;
-    private int tiempoAparicion;
-    private int probabilidadAgua;
-    private int probabilidadComida;
-    private int probabilidadMontaña;
-    private int probabilidadTesoro;
-    private int probabilidadBiblioteca;
-    private int probabilidadPozo;
-    private int probabilidadGeneral;
+    @Expose
+    public int tiempoAparicion;
+    @Expose
+    public int probabilidadAgua;
+    @Expose
+    public int probabilidadComida;
+    @Expose
+    public int probabilidadMontaña;
+    @Expose
+    public int probabilidadTesoro;
+    @Expose
+    public int probabilidadBiblioteca;
+    @Expose
+    public int probabilidadPozo;
+    @Expose
+    public int probabilidadGeneral;
 
     public ParametrosEntorno(int tiempoAparicion, int probabilidadGeneral, int probabilidadAgua, int probabilidadComida, int probabilidadMontaña, int probabilidadTesoro, int probabilidadBiblioteca, int probabilidadPozo) {
         this.tiempoAparicion = tiempoAparicion;

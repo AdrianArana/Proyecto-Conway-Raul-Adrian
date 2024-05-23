@@ -1,12 +1,14 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
+import com.google.gson.annotations.Expose;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class ParametrosCasillasModelProperties {
     //Parametros del tablero ahora terminados
-    protected ParametrosCasillas valoresOriginales;
+    @Expose
+    public ParametrosCasillas valoresOriginales;
 
     private IntegerProperty x = new SimpleIntegerProperty();
     private IntegerProperty y = new SimpleIntegerProperty();

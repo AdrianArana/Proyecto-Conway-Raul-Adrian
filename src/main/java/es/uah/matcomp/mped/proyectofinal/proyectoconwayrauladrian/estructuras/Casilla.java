@@ -13,7 +13,6 @@ public class Casilla {
     public ListaEnlazada<Individuo> individuos = new ListaEnlazada<Individuo>();
     @Expose
     public ListaEnlazada<Entorno> recursos = new ListaEnlazada<Entorno>();
-    @Expose
     public Button boton;
 
     public Casilla(int coordenadaX, int coordenadaY) {

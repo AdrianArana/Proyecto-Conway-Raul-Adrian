@@ -1,13 +1,13 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
+import com.google.gson.annotations.Expose;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class ParametrosEntornoModelProperties {
-
-    protected ParametrosEntorno valoresOriginales;
-
+    @Expose
+    public ParametrosEntorno valoresOriginales;
     private IntegerProperty tiempoAparicion = new SimpleIntegerProperty();
     private IntegerProperty probabilidadAgua = new SimpleIntegerProperty();
     private IntegerProperty probabilidadBiblioteca = new SimpleIntegerProperty();

@@ -10,8 +10,6 @@ public class Entorno {
     public int coordenadaY;
     @Expose
     public int tiempoAparicion;
-    @Expose
-    public int probabilidadDeEsteRecurso;
 
     public Entorno(int coordenadaX, int coordenadaY, int tiempoAparicion) {
         this.coordenadaX = coordenadaX;
@@ -21,6 +19,7 @@ public class Entorno {
 
     public Entorno() {
     }
+
     public int getCoordenadaX() {
         return coordenadaX;
     }
@@ -45,11 +44,4 @@ public class Entorno {
         this.tiempoAparicion = tiempoAparicion;
     }
 
-    public int getProbabilidadDeEsteRecurso() {
-        return probabilidadDeEsteRecurso;
-    }
-
-    public void setProbabilidadDeEsteRecurso(int probabilidadDeEsteRecurso) {
-        this.probabilidadDeEsteRecurso = probabilidadDeEsteRecurso;
-    }
 }

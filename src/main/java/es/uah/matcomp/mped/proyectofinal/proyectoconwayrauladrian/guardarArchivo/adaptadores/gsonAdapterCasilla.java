@@ -1,6 +1,7 @@
-package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras;
+package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores;
 
 import com.google.gson.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 
 import java.lang.reflect.Type;
 

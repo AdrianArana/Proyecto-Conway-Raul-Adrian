@@ -1,16 +1,18 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.modeloDatosFinal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle;
-import javafx.beans.property.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillasModelProperties;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,10 +27,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.guardar;
-import static java.time.LocalTime.now;
 
 public class VentanaJuegoController extends FuncionesBucle implements Initializable {
     public Slider sliderVelocidad;
@@ -183,7 +186,6 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         int b = (int) (color.getBlue() * 255);
         return String.format("rgb(%d, %d, %d)", r, g, b);
     }
-
 
     //ACCION AL TOCAR UN BOTON
     @FXML
@@ -469,7 +471,35 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         botonPausar.setDisable(false);
     }
 
-    public void onBotonGuardar(){
-        guardar("tablero.json",tablero);
+    public void onBotonGuardar() {
+        guardar("datosGuardados.json", new modeloDatosFinal(tablero,parametrosIndividuo,parametrosEntorno,parametrosCasillas));
+    }
+
+    public void setTablero(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tableroNoEstatico) {
+        this.tablero = tableroNoEstatico;
+    }
+
+    public void setBotones() {
+        int x = parametrosCasillas.x().getValue().intValue();
+        int y = parametrosCasillas.y().getValue().intValue();
+
+        for (int i = 1; i <= x; i++) {
+            for (int j = 1; j <= y; j++) {
+                Button celdaButton = new Button();
+                celdaButton.setMinSize((double) 600 / x, (double) 600 / y);
+                celdaButton.setMaxSize((double) 600 / x, (double) 600 / y);
+                celdaButton.setStyle("-fx-border-color:" + colorBordes + "; -fx-text-alignment: center;");
+                int finalI = i;
+                int finalJ = j;
+                celdaButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        onBotonCelda(finalI, finalJ);
+                    }
+                });
+                gridPane.add(celdaButton, finalI, finalJ);
+                tablero.getElemento(i).getData().getElemento(j).getData().setBoton(celdaButton);
+            }
+        }
     }
 }

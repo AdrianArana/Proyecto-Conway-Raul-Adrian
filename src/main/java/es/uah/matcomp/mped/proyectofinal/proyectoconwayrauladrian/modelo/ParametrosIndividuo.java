@@ -1,10 +1,16 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo;
 
+import com.google.gson.annotations.Expose;
+
 public class ParametrosIndividuo {
-    private int turnosVidaRestantes;
-    private int probabilidadMuerte;
-    private int probabilidadClonacion;
-    private int probabilidadReproduccion;
+    @Expose
+    public int turnosVidaRestantes;
+    @Expose
+    public int probabilidadMuerte;
+    @Expose
+    public int probabilidadClonacion;
+    @Expose
+    public int probabilidadReproduccion;
 
 
     public ParametrosIndividuo(int turnosVidaRestantes, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {

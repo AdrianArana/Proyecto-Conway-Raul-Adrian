@@ -1,6 +1,9 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Casilla;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -107,6 +110,7 @@ public class ConfiguracionController implements Initializable {
     private ParametrosEntornoModelProperties parametrosEntorno;
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaParametros;
+    private ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero;
 
 
     protected void updateGUIwithModel() {
@@ -300,4 +304,6 @@ public class ConfiguracionController implements Initializable {
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();
     }
+
+
 }
