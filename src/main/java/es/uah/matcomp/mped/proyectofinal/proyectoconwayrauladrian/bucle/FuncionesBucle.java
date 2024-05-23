@@ -2,6 +2,8 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.ArbolAVL;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.Nodo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
@@ -14,6 +16,7 @@ import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 import org.apache.logging.log4j.core.config.builder.impl.DefaultConfigurationBuilder;
 import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.Random;
 
@@ -500,6 +503,7 @@ public class FuncionesBucle {
                     hijo.setTurnosVidaRestantes(parametrosIndividuo.getTurnosVidaRestantes());
                     hijo.setCoordenadaX(individuo1.getCoordenadaX());
                     hijo.setCoordenadaY(individuo1.getCoordenadaY());
+                    hijo.setArbolDelIndividuo(new ArbolAVL<>(new Nodo(hijo),new Nodo (individuo1.getArbolDelIndividuo()),new Nodo(individuo2.getArbolDelIndividuo())));
 
                     casillaActual.getIndividuos().add(hijo);
                     //System.out.println("Ahora hay :" + casillaActual.getIndividuos().getNumeroElementos() + " individuos en la casilla");
@@ -535,10 +539,17 @@ public class FuncionesBucle {
                         //System.out.println("individuo con: " + individuos.getElemento(i).getData().getProbabilidadClonacion() + " de prob de clonacion, y ha tocado el numero: " + probabilidad);
 
                         Individuo clon = new Individuo(individuos.getElemento(i).getData().getCoordenadaX(), individuos.getElemento(i).getData().getCoordenadaY(), generarID(tablero), individuos.getElemento(i).getData().getTipo(), parametrosIndividuo.getTurnosVidaRestantes(), turnoActual, individuos.getElemento(i).getData().getProbabilidadMuerte(), individuos.getElemento(i).getData().getProbabilidadClonacion(), individuos.getElemento(i).getData().getProbabilidadReproduccion());
-                        //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
+
+
+
+                        clon.setArbolDelIndividuo(new ArbolAVL(new Nodo(clon)));
+                        clon.getArbolDelIndividuo().add(individuos.getElemento(i).getData().getArbolDelIndividuo());
+                        clon.setArbolDelIndividuo(individuos.getElemento(i).getData().getArbolDelIndividuo());//System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
+
+
+
                         casillaActual.getIndividuos().add(clon);
                         //System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
-
                         //System.out.println("hay clonacion");
                         return;
                     }

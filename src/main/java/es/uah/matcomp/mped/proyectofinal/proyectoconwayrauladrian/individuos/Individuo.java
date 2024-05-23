@@ -3,6 +3,7 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
 import com.google.gson.annotations.Expose;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoLE;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.ArbolAVL;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
 
 public class Individuo extends ParametrosIndividuo {
@@ -19,7 +20,15 @@ public class Individuo extends ParametrosIndividuo {
     @Expose
     public ElementoLE<Entorno> objetivo;
 
+    public ArbolAVL arbolDelIndividuo;
 
+    public ArbolAVL getArbolDelIndividuo() {
+        return arbolDelIndividuo;
+    }
+
+    public void setArbolDelIndividuo(ArbolAVL arbolDelIndividuo) {
+        this.arbolDelIndividuo = arbolDelIndividuo;
+    }
 
     //private <? extends Entorno> recursoElegido=
     //Constructor vacío

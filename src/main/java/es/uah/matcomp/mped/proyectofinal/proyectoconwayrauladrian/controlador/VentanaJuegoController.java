@@ -4,6 +4,7 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.ArbolAVL;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.modeloDatosFinal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.NombreGuardado;
@@ -202,6 +203,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaCasilla.fxml"));
             try {
+
                 //Casilla accesible, para poder mostrar sus datos
                 Scene scene = new Scene(fxmlLoader.load(), 700, 650);
                 stage.setTitle("Propiedades de la celda: (" + tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getCoordenadaX() + "," + tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getCoordenadaY() + ")");
@@ -241,7 +243,15 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 int probClonacion = parametrosIndividuo.probabilidadClonacionProperty().getValue().intValue();
                 int probReproduccion = parametrosIndividuo.probabilidadReproduccionProperty().getValue().intValue();
                 Individuo indivNuevo = new Individuo(xIndividuo, yIndividuo, id, tipoPintar, turnosDevidaRestantes, turnoGeneracion, probMuerte, probClonacion, probReproduccion);
+
+
+
+                indivNuevo.setArbolDelIndividuo(new ArbolAVL(indivNuevo));
+
+
+
                 tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().add(indivNuevo);
+
                 int numeroIndividuos = tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().getNumeroElementos();
 
                 if (numeroIndividuos > 0) {
@@ -314,6 +324,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     @FXML
     protected void onFinalizarButton() {
+        log.info("Saliendo de la ventana de juego");
         Stage stageAnterior = (Stage) finalizarButton.getScene().getWindow();
         stageAnterior.close();
         Stage stage = new Stage();
@@ -486,12 +497,10 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             Scene scene = new Scene(fxmlLoader.load(), 850, 750);
             stage.setScene(scene);
            VentanaGuardarPartidaController controladorGuardarPartida= fxmlLoader.getController();
-            //System.out.println(datosCargados.getTablero().getElemento(1).getData().getElemento(1).getData().getIndividuos().getElemento(1).getData().toString());
             controladorGuardarPartida.setModeloDatosFinal(new modeloDatosFinal(nombreGuardadoString,tablero,parametrosIndividuo.getOriginal(),parametrosEntorno.getOriginal(),parametrosCasillas.getOriginal()));
             controladorGuardarPartida.setStage(stage);
             stage.show();
         guardar("datosGuardados.json", new modeloDatosFinal(nombreGuardadoString,tablero,parametrosIndividuo.getOriginal(),parametrosEntorno.getOriginal(),parametrosCasillas.getOriginal()));
-        //System.out.println("datos a guardar: prob General"+parametrosEntorno.probabilidadGeneral().getValue().intValue());
         }catch(IOException e){
             e.printStackTrace();
         }
