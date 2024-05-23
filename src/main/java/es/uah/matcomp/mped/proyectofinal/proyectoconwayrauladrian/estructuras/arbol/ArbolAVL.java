@@ -38,6 +38,7 @@ public class ArbolAVL<TipoDato> {
             this.raiz.setDato(dato);
             this.raiz.setDerecha(null);
             this.raiz.setIzquierda(null);
+
         } else {
             if (c.compareTo(dato) <= 0) {
                 if (nodoRaiz.getDerecha() == null) {
