@@ -33,6 +33,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     protected void onMiBotonNuevaPartidaButtonClick() {
+        log.info ("Se ha pulsado el boton nueva partida en PrincipalController");
         Stage stageAntiguo = (Stage) nuevaPartidaButton.getScene().getWindow();
         stageAntiguo.close();
         Stage stage = new Stage();
@@ -48,11 +49,13 @@ public class PrincipalController implements Initializable {
     }
 
     public void onSalirButtonClick() {
+        log.info ("Se ha pulsado el boton salir en PrincipalController");
         Stage escenario = (Stage) salirButton.getScene().getWindow();
         escenario.close();
     }
 
     public void onCreditosButtonClick() {
+        log.info ("Se ha pulsado el boton creditos en PrincipalController");
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("creditos.fxml"));
         try {
@@ -68,16 +71,18 @@ public class PrincipalController implements Initializable {
     }
 
     public void onVolverButtonClick() {
+        log.info ("Se ha pulsado el boton volver en PrincipalController");
         Stage stage = (Stage) volverButton.getScene().getWindow();
         stage.close();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.print("Inicialización en ejecución del controlador\n");
+        log.info ("Inicializacion PrincipalController");
     }
 
     public void onBotonCargarPartida(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton cargar partida en PrincipalController");
         String nombreArchivo = "datosGuardados.json";
         modeloDatosFinal datosCargados = cargar(nombreArchivo);
         //System.out.println();

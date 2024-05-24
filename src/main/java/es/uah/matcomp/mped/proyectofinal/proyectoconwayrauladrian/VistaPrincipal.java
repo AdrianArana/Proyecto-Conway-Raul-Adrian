@@ -10,6 +10,7 @@ import java.io.IOException;
 public class VistaPrincipal extends Application {
     @Override
     public void start(Stage stagePrincipal) throws IOException {
+        log.info ("Comienza el programa:");
         FXMLLoader FXMLCargadoPrincipal = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInicial.fxml"));
         Scene escenaPrincipal = new Scene(FXMLCargadoPrincipal.load(), 750, 500);
         stagePrincipal.setTitle("Conway - El juego de la vida");

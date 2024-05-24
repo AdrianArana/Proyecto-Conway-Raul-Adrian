@@ -137,7 +137,7 @@ public class ConfiguracionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.print("Inicialización en ejecución del controlador de parámetros\n");
+        log.info("Inicialización en ejecución del controlador de parámetros");
         //Sliders de los parámetros del individuo tipo
         sliderTurnosDeVidaRestantes.valueProperty().bindBidirectional(medidaTurnosDeVida);
         labelValorSliderTurnosDeVidaRestantes.textProperty().bind(medidaTurnosDeVida.asString());
@@ -186,10 +186,12 @@ public class ConfiguracionController implements Initializable {
         if (parametrosIndividuo != null && parametrosEntorno != null) {
             this.updateGUIwithModel();
         }
+        log.info ("Saliendo del initialize del configuracionController");
     }
 
     @FXML
     protected void onBotonGuardarClick() {
+        log.info ("Se ha pulsado el boton guardar en ConfiguracionController");
         parametrosIndividuo.commit();
         parametrosEntorno.commit();
         parametrosCasillas.commit();
@@ -197,27 +199,32 @@ public class ConfiguracionController implements Initializable {
 
     @FXML
     protected void onBotonReiniciarClick() {
+        log.info ("Se ha pulsado el boton reiniciar en ConfiguracionController");
         parametrosIndividuo.rollback();
     }
 
     @FXML
     protected void onBotonReiniciarEntornoClick() {
+        log.info ("Se ha pulsado el boton reiniciar en ConfiguracionController");
         parametrosEntorno.rollback();
     }
 
     @FXML
     public void onBotonReiniciarCasillasClick() {
+        log.info ("Se ha pulsado el boton reiniciar en ConfiguracionController");
         parametrosCasillas.rollback();
     }
 
     @FXML
     protected void onBotonCerrarEntornoClick() {
+        log.info ("Se ha pulsado el boton cerrar en ConfiguracionController");
         escenaParametros.close();
     }
 
 
     @FXML
     protected void onBotonCerrarClick() {
+        log.info ("Se ha pulsado el boton cerrar en ConfiguracionController");
         escenaParametros.close();
     }
 
@@ -230,21 +237,6 @@ public class ConfiguracionController implements Initializable {
     }
 
     //Para pasarlos a la siguiente ventana
-    @FXML
-    public void onVolver() {
-        Stage stageAntiguo = (Stage) botonVolver.getScene().getWindow();
-        stageAntiguo.close();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("nombre.fxml"));
-        try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
-            stage.setTitle("Nombre");
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void setStage(Stage escenaDada) {
@@ -252,6 +244,7 @@ public class ConfiguracionController implements Initializable {
     }
 
     public void onIniciarPartidaButtonClick() {
+        log.info ("Se ha pulsado el boton iniciar partida en ConfiguracionController");
         ParametrosCasillas original = parametrosCasillas.getOriginal();
         ParametrosCasillasModelProperties modeloParaGUICompartidoTablero = new ParametrosCasillasModelProperties(original);
         ParametrosEntorno EntornoOriginal = parametrosEntorno.getOriginal();
@@ -283,6 +276,7 @@ public class ConfiguracionController implements Initializable {
     }
 
     public void cargarDatosInGame(VentanaJuegoController controlador, ParametrosIndividuoModelProperties parametrosIndividuoDados, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
+        log.info ("Entrando al método de cargarDatos en la partida");
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosIndividuo = parametrosIndividuoDados;
         this.parametrosCasillas = parametrosCasillas;
@@ -296,9 +290,11 @@ public class ConfiguracionController implements Initializable {
                 onBotonReanudarClick(controlador);
             }
         });
+        log.info ("Saliendo del método de cargarDatos en la partida");
     }
 
     private void onBotonReanudarClick(VentanaJuegoController ventanaJuegoController) {
+        log.info ("Se ha pulsado el boton reanudar en ConfiguracionController");
         //System.out.println("la prob de aparicion de recursos general esde: "+parametrosEntorno.probabilidadGeneral());
         ventanaJuegoController.setParametros(nombreGuardadoString, parametrosIndividuo,parametrosEntorno,parametrosCasillas);
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();

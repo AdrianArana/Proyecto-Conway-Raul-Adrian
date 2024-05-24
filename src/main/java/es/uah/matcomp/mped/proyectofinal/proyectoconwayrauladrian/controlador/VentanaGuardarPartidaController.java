@@ -35,6 +35,7 @@ public class VentanaGuardarPartidaController implements Initializable {
     }
 
     public void onGuardarPartidaButton(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton guardar partida en VentanaGuardarPartidaController");
 
         nombreArchivoGuardarPartida = (textField.getText());
         if (Objects.equals(nombreArchivoGuardarPartida, "")) {
@@ -49,6 +50,7 @@ public class VentanaGuardarPartidaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        log.info ("Inicializaacion VentanaGuardarPartidaController");
         estadisticasButton.setDisable(true);
     }
     public void onEstadisticasButtonClick(ActionEvent actionEvent) {

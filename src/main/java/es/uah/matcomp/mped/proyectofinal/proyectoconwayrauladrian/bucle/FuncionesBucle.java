@@ -24,7 +24,6 @@ import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.
 import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.probabilidadReproduccionRestadaPorTurno;
 
 public class FuncionesBucle {
-    public static final Log log = LogFactory.getLog(FuncionesBucle.class);
     /*
     Arreglar lo del ID, no funciona nada,
     Añadir lo de los arboles,
@@ -34,6 +33,7 @@ public class FuncionesBucle {
     */
 
     public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno, ParametrosIndividuo parametrosIndividuo, String colorBordes) {
+        log.info ("Se realiza el recorrido de casillas.");
         int filas = tablero.getNumeroFilas();
         ListaEnlazada<ElementoLE<Individuo>> individuosMover = new ListaEnlazada<>();
         for (int fila = 0; fila < filas; fila++) {
@@ -211,12 +211,14 @@ public class FuncionesBucle {
                 casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadClonacion(0);
             }
         }
-        log.info ("Entrando al método de revisión de los turnos de vida restantes de los individuos");
+        log.info ("Saliendo del método de revisión de los turnos de vida restantes de los individuos");
+
+
 
     }
 
     public void recursoActivo(Casilla casillaActual) {
-        log.info("Entrando al método de revisión de recursos");
+        log.info("Entrando al método de revisión de recursos activos");
         try {
             for (int i = 0; i < casillaActual.getRecursos().getNumeroElementos(); i++) {
                 casillaActual.getRecursos().getElemento(i).getData().setTiempoAparicion(casillaActual.getRecursos().getElemento(i).getData().getTiempoAparicion() - 1);
@@ -240,6 +242,7 @@ public class FuncionesBucle {
     //FUNCIONES DE MOVIMIENTO DE LOS INDIVIDUOS
 
     public ElementoLE<Individuo> moverIndividuos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual) {
+        log.info ("Entrando al método de revisión del movimiento de los individuos");
         ElementoLE<Individuo> individuo = new ElementoLE<>();
         try {
             for (int i = 0; i < casillaActual.getIndividuos().getNumeroElementos(); i++) {
@@ -257,11 +260,12 @@ public class FuncionesBucle {
             System.err.println("Error en el método moverIndividuos: " + e.getMessage());
             e.printStackTrace();
         }
+
         return individuo;
+        log.info ("Saliendo del método de revisión del movimiento de los individuos");
     }
 
     protected ElementoLE<Individuo> moverSimple(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, Individuo individuo, int posicion) {
-        log.info("Comenzando movimiento simple de la casilla (" + casillaActual.getCoordenadaX() + "," + casillaActual.getCoordenadaY() + ")");
         Random random = new Random();
         int dir = random.nextInt(8);
         int x = casillaActual.getCoordenadaX();
@@ -404,7 +408,6 @@ public class FuncionesBucle {
         }
         //System.out.println("OBJETIVO : "+individuo.getObjetivo().getData().toString());
         if (individuo.getObjetivo() != null) {
-            System.out.println("ya tiene objetivo! " + individuo.getObjetivo().getData().toString() + individuo.getObjetivo().getData().getCoordenadaX());
             //Coordenadas del individuo
             int xIndividuo = individuo.getCoordenadaX();
             int yIndividuo = individuo.getCoordenadaY();
@@ -433,9 +436,10 @@ public class FuncionesBucle {
     }
 
     private ListaEnlazada<ElementoLE<Entorno>> obtenerRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
+        log.info ("Entrando al método de revisión de obtencion de recursos");
         int filas = tablero.getNumeroFilas();
         ListaEnlazada<ElementoLE<Entorno>> recursos = new ListaEnlazada<>();
-        //System.out.println("bucando elementps");
+
         for (int fila = 0; fila < filas; fila++) {
             ListaEnlazadaColumnas<Casilla> filaActual = tablero.getElemento(fila).getData();
             int columnas = filaActual.getNumeroColumnas();
@@ -453,11 +457,13 @@ public class FuncionesBucle {
 
         }
         return recursos;
+        log.info ("Saliendo del método de revisión de obtencion de recursos");
     }
 
     //FUNCIÓN PARA EL ID DE LOS INDIVIDUOS GENERADOS
 
     public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
+        log.info ("Entrando al método de generarID");
         int id = 0;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
             for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
@@ -473,6 +479,7 @@ public class FuncionesBucle {
         }
         id++;
         return id;
+        log.info ("Saliendo al método de generarID");
     }
 
     //----OTRAS FUNCIONES PARA EL BUCLE----
@@ -480,6 +487,7 @@ public class FuncionesBucle {
     //INDIVIDUOS
 
     public void reproduccion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual, ParametrosIndividuo parametrosIndividuo) {
+        log.info ("Entrando al método de reproduccion de individuos");
         try {
             if (casillaActual.getIndividuos().getNumeroElementos() == 2) {
                 Random random = new Random();
@@ -521,11 +529,13 @@ public class FuncionesBucle {
             e.printStackTrace();
 
         }
+        log.info ("Saliendo del método de reproduccion de individuos");
 
     }
 
     public void clonacion(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, int turnoActual, ParametrosIndividuo parametrosIndividuo) {
 
+        log.info ("Entrando al método de clonacion de individuos");
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         try {
             if (individuos.getNumeroElementos() < 3) {
@@ -560,10 +570,12 @@ public class FuncionesBucle {
             e.printStackTrace();
 
         }
+        log.info ("Saliendo del método de clonacion de individuos");
 
     }
 
     public void muerteIndividuos(Casilla casillaActual) {
+        log.info ("Entrando al método de muerte de individuos");
         Random random = new Random();
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
@@ -580,11 +592,13 @@ public class FuncionesBucle {
             }
         }
         casillaActual.setIndividuos(individuos);
+        log.info ("Saliendo al método de muerte de individuos");
     }
 
     //RECURSOS
 
     public void aparicionRecursos(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, Casilla casillaActual, ParametrosEntorno parametrosEntorno) {
+        log.info ("Entrando al método de aparicion de recursos");
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
         int tiempoDeAparicionRecursos = parametrosEntorno.getTiempoAparicion();
         try {
@@ -638,6 +652,7 @@ public class FuncionesBucle {
                         casillaActual.setRecursos(entorno);
                     }
                 }
+
             }
 
 
@@ -645,9 +660,11 @@ public class FuncionesBucle {
             System.err.println("Error en el método Aaparicion Recursos: " + e.getMessage());
             e.printStackTrace();
         }
+        log.info ("Saliendo del método de aparicion de recursos");
     }
 
     public void mejoras(Casilla casillaActual) {
+        log.info ("Entrando al método de mejoras de los individuos");
         ListaEnlazada<Individuo> individuos = casillaActual.getIndividuos();
         ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
 
@@ -680,6 +697,7 @@ public class FuncionesBucle {
             }
 
         }
+        log.info ("Saliendo del método de mejoras de los individuos");
 
     }
 

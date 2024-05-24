@@ -91,6 +91,7 @@ public class VentanaCasillaController {
 
     //Función que actualiza las labels donde se muestra la cantida de elenentos e individuos
     public void mostrarInfo() {
+        log.info ("Entrando al método de mostrarinfo de VentanaCasillaController");
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
         int cantidadAgua = 0;
@@ -136,6 +137,7 @@ public class VentanaCasillaController {
         labelIndividuosTipo2.setText(String.valueOf(cantidadIndividuo2));
         labelIndividuosTipo3.setText(String.valueOf(cantidadIndividuo3));
         labelCasilla.setText("CASILLA ACTUAL: (" + casilla.getCoordenadaX() + "," + casilla.getCoordenadaY() + ")");
+        log.info ("Saliendo del método de mostrarinfo de VentanaCasillaController");
     }
 
 
@@ -153,6 +155,7 @@ public class VentanaCasillaController {
     }
 
     public int generarID(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero) {
+        log.info ("Entrando al método de generaId de VentanaCasillaController");
         int id = 0;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
             for (int j = 0; j < tablero.getPrimero().getData().getNumeroColumnas(); j++) {
@@ -168,11 +171,13 @@ public class VentanaCasillaController {
         }
         id++;
         return id;
+        log.info ("Saliendo del método de mostrarinfo de VentanaCasillaController");
     }
 
     //FUNCIONES PARA LOS BOTONES DE AÑADIR INDIVIDUOS O RECURSOS
     //Ejecutable por botón
     private void nuevoIndividuo(int tipo,String color) {
+        log.info ("Entrando al método de nuevo Individuo de VentanaCasillaController");
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
 
         try {
@@ -206,9 +211,11 @@ public class VentanaCasillaController {
 
         }
 
+        log.info ("Saliendo del método de nuevo Individuo de VentanaCasillaController");
     }
 
     private void quitarIndividuo(int tipo) {
+        log.info ("Entrando al método de quitar individuo de VentanaCasillaController");
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
 
         try {
@@ -229,10 +236,12 @@ public class VentanaCasillaController {
             e.printStackTrace();
         }
 
+        log.info ("Saliendo del método de quitar individuo de VentanaCasillaController");
     }
 
 
     public void nuevoRecurso(String clase) {
+        log.info ("Entrando al método de nuevo recurso de VentanaCasillaController");
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
 
         try {
@@ -281,9 +290,11 @@ public class VentanaCasillaController {
             e.printStackTrace();
         }
 
+        log.info ("Saliendo del método de nuevo recurso de VentanaCasillaController");
     }
 
     public void eliminarRecurso(Class clase) {
+        log.info ("Entrando al método de eliminar recurso de VentanaCasillaController");
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
         try {
             for (int i = 0; i < recursos.getNumeroElementos(); i++) {
@@ -300,11 +311,13 @@ public class VentanaCasillaController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        log.info ("Saliendo del método de nuevo recurso de VentanaCasillaController");
 
     }
 
     //Funciones para la visualización de los botones
     public void ponerBotonEnRojo(int numeroBoton) {
+        log.info ("Se ha excedido el numero de 3 individuos por casilla: Boton en rojo");
         try {
             if (numeroBoton == 1) {
                 botonAñadirIndividuo1.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
@@ -321,6 +334,7 @@ public class VentanaCasillaController {
     }
 
     public void ponerBotonesSinColor() {
+
         try {
             botonAñadirIndividuo1.setStyle(null);
             botonAñadirIndividuo2.setStyle(null);
@@ -425,6 +439,7 @@ public class VentanaCasillaController {
 
 
     public void onBotonReiniciar(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton reiniciar partida en VentanaCasillaController");
         casilla.setIndividuos(new ListaEnlazada<Individuo>());
         casilla.setRecursos(new ListaEnlazada<Entorno>());
         mostrarInfo();
@@ -432,6 +447,7 @@ public class VentanaCasillaController {
     }
 
     public void cogerValoresIniciales() {
+        log.info ("Entrando al método de cogerValoresIniciales en la partida");
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
         ListaEnlazada<Entorno> recursos = casilla.getRecursos();
         int x = casilla.getCoordenadaX();
@@ -443,6 +459,7 @@ public class VentanaCasillaController {
     }
 
     public void onBotonInfoTipo1(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton info partida en VentanaCasillaController");
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
         try {
@@ -459,6 +476,7 @@ public class VentanaCasillaController {
     }
 
     public void onBotonInfoTipo2(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton info partida en VentanaCasillaController");
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
         try {
@@ -475,6 +493,7 @@ public class VentanaCasillaController {
     }
 
     public void onBotonInfoTipo3(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton info partida en VentanaCasillaController");
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaInfoConcreta.fxml"));
         try {

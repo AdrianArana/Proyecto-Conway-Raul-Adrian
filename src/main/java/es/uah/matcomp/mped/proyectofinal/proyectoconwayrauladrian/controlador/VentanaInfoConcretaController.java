@@ -14,6 +14,7 @@ public class VentanaInfoConcretaController {
     public Label labelCasillaElegida;
 
     public void setIndividuos(ListaEnlazada<Individuo> individuos, int x, int y) {
+        log.info ("Entrando al método de setIndividuos VentanaConcretaController");
         labelCasillaElegida.setText("Individuos de la casilla: "+x+","+y);
         if (!individuos.isVacia()) {
             if (individuos.getElemento(0) != null) {
@@ -26,5 +27,6 @@ public class VentanaInfoConcretaController {
                 label3.setText(individuos.getElemento(2).getData().toString());
             }
         }
+        log.info ("Saliendo del método de setIndividuos VentanaConcretaController");
     }
 }

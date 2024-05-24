@@ -92,6 +92,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        log.info ("Inicializacion VentanaJuegoController");
         sliderVelocidad.valueProperty().bindBidirectional(velocidadDeJuego);
         botonBasico.setStyle("-fx-background-color: #4a91fa;");
         botonPintar.setStyle("-fx-background-color: #ff0000;");
@@ -116,9 +117,11 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         series2.getData().add(new XYChart.Data<>("Category 3", 40));
 
         graficaPantallaJuego.getData().addAll(series1, series2);
+
     }
 
     public void elegirColorGridPane() {
+        log.info ("Entrando al método de elegirColorGridPane VentanaJuegoController");
         colorPicker.setOnAction(event -> {
             Color color = colorPicker.getValue();
             colorElegido.set(color);
@@ -157,9 +160,12 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 }
             }
         });
+
+        log.info ("Saliendo del método de elegirColorGridPane VentanaJuegoController");
     }
 
     private void actualizarCasillaRecurso(int i, int j, int numeroRecursos, Casilla casilla) {
+        log.info ("Entrando al método de actualizarCasillaRecurso VentanaJuegoController");
         if (numeroRecursos > 0) {
             for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getNumeroElementos(); k++) {
                 Class<? extends Entorno> clase = casilla.getRecursos().getElemento(k).getData().getClass();
@@ -189,7 +195,9 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 }
             }
         }
+        log.info ("Saliendo del método de actualizarCasillaRecurso VentanaJuegoController");
     }
+
 
     private String pasaraRGB(Color color) {
         int r = (int) (color.getRed() * 255);
@@ -201,6 +209,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     //ACCION AL TOCAR UN BOTON
     @FXML
     protected void onBotonCelda(int i, int j) {
+        log.info ("Se ha pulsado el boton celda en VentanaJuegoController");
 
         if (!pintarIndividuos && !pintarRecursos) {
             Stage stage = new Stage();
@@ -273,6 +282,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public Entorno pintarRecurso(int tipo, int x, int y) {
+        log.info ("Entrando al método de pintarRecurso en la partida");
         int xRecurso = x;
         int yRecurso = y;
         if (tipo == 1) {
@@ -289,9 +299,11 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             return new Tesoro(xRecurso, yRecurso, parametrosEntorno.tiempoAparicion().getValue().intValue());
         }
         return null;
+        log.info ("Saliendo del método de pintarRecurso en la partida");
     }
 
     public void hacerTablero() {
+        log.info ("Entrando al método de hacerTablero VentanaJuegoController");
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
         for (int i = 1; i <= x; i++) {
@@ -321,10 +333,13 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             }
             tablero.add(new ElementoListaColumnasLE<ListaEnlazadaColumnas<Casilla>>(filaCompleta));
         }
+        log.info ("Saliendo del método de hacerTablero VentanaJuegoController");
     }
 
     @FXML
     protected void onFinalizarButton() {
+        log.info ("Se ha pulsado el boton finalizar en VentanaJuegoController");
+
         log.info("Saliendo de la ventana de juego");
         Stage stageAnterior = (Stage) finalizarButton.getScene().getWindow();
         stageAnterior.close();
@@ -342,6 +357,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     @FXML
     protected void onBotonAjustes() {
+        log.info ("Se ha pulsado el boton ajustes en VentanaJuegoController");
+
         parar = true;
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
@@ -359,6 +376,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
 
     public void onAvanceButton() {
+        log.info ("Se ha pulsado el boton avanzar en VentanaJuegoController");
+
         turnoActual++;
         turnoActualObservable.set(turnoActual);
         recorrerCasillas(tablero, turnoActual, parametrosEntorno.getOriginal(), parametrosIndividuo.getOriginal(), colorBordes);
@@ -373,6 +392,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     private void activarBucle() {
+        log.info ("Entrando al método de activarBucle VentanaJuegoController");
+
         long tiempoInicio = getSegundos();
         //tem.out.println("Tiempo actuañ" + LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond());
         while (!parar) {
@@ -387,10 +408,12 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
             }
 
         }
+        log.info ("Saliendo del método de activarBucle VentanaJuegoController");
     }
 
 
     public void onBotonBasico(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton individuo basico en VentanaJuegoController");
         tipoPintar = 1;
         botonBasico.setStyle("-fx-background-color: #4a91fa;");
         botonIntermedio.setStyle(null);
@@ -398,6 +421,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void onBotonIntermedio(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton individuo intermedio en VentanaJuegoController");
         tipoPintar = 2;
         botonBasico.setStyle(null);
         botonIntermedio.setStyle("-fx-background-color: #4a91fa;");
@@ -405,6 +429,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void onBotonAvanzado(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton individuo avanzado en VentanaJuegoController");
         tipoPintar = 3;
         botonBasico.setStyle(null);
         botonIntermedio.setStyle(null);
@@ -413,6 +438,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
 
     public void onPintarIndividuos(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarIndividuos en VentanaJuegoController");
+
         if (pintarIndividuos) {
             pintarIndividuos = false;
             botonPintar.setStyle("-fx-background-color: #ff0000;");
@@ -429,6 +456,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
 
     public void onPintarRecursos(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarRecursos en VentanaJuegoController");
 
         if (pintarRecursos) {
             pintarRecursos = false;
@@ -446,36 +474,43 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
 
     public void onBotonPintarPozo(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarPozo en VentanaJuegoController");
         tipoPintarRecursos = 1;
         labelRecursoSeleccionado.setText("Pozo");
     }
 
     public void onBotonPintarAgua(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarAgua en VentanaJuegoController");
         labelRecursoSeleccionado.setText("Agua");
         tipoPintarRecursos = 2;
     }
 
     public void onBotonPintarBiblioteca(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarBiblioteca en VentanaJuegoController");
         labelRecursoSeleccionado.setText("Biblioteca");
         tipoPintarRecursos = 3;
     }
 
     public void onBotonPintarComida(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarComida en VentanaJuegoController");
         labelRecursoSeleccionado.setText("Comida");
         tipoPintarRecursos = 4;
     }
 
     public void onBotonPintarMontaña(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarMontaña en VentanaJuegoController");
         labelRecursoSeleccionado.setText("Montaña");
         tipoPintarRecursos = 5;
     }
 
     public void onBotonPintarTesoro(ActionEvent actionEvent) {
+        log.info ("Se ha pulsado el boton pintarTesoro en VentanaJuegoController");
         labelRecursoSeleccionado.setText("Tesoro");
         tipoPintarRecursos = 6;
     }
 
     public void onBotonPausar() {
+        log.info ("Se ha pulsado el boton pausar en VentanaJuegoController");
         parar = true;
         botonAvance.setDisable(false);
         botonAjustes.setDisable(false);
@@ -484,6 +519,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void onBotonReanudar() {
+        log.info ("Se ha pulsado el boton reanucar en VentanaJuegoController");
         parar = false;
         botonAvance.setDisable(true);
         botonAjustes.setDisable(true);
@@ -492,6 +528,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void onBotonGuardar() {
+        log.info ("Se ha pulsado el boton guardar en VentanaJuegoController");
         guardado = true;
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaGuardarPartida.fxml"));
@@ -513,6 +550,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void setBotones() {
+        log.info ("Entrando al método de setBotones VentanaJuegoController");
+
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
         //System.out.println("valores cargados"+ parametrosCasillas.x().getValue().intValue()+"casillas");
@@ -583,5 +622,6 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 }
             }
         }
+        log.info ("Saliendo del método de setBotones VentanaJuegoController");
     }
 }

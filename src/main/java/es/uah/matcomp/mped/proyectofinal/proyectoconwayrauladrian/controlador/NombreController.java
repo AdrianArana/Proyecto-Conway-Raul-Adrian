@@ -40,6 +40,7 @@ public class NombreController implements Initializable {
 
     @FXML
     protected void onSiguienteButtonClick() {
+        log.info ("Se ha pulsado el boton siguiente en NombreController");
         nombreGuardadoString = (textFieldNombre.getText());
         if (nombreGuardadoString.equals("")) {
             labelError.setText("El nombre no puede ser vacío");
@@ -67,6 +68,7 @@ public class NombreController implements Initializable {
 
     @FXML
     public void onVolverButton() {
+        log.info ("Se ha pulsado el boton volver en NombreController");
         Stage stageAntiguo = (Stage) VolverButton.getScene().getWindow();
         stageAntiguo.close();
         Stage stage = new Stage();
@@ -79,9 +81,11 @@ public class NombreController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        log.info ("Inicializacion NombreController");
     }
 }

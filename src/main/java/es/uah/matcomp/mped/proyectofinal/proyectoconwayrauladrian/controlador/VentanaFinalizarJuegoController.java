@@ -17,6 +17,7 @@ public class VentanaFinalizarJuegoController {
 
     @FXML
     protected void onNoButton() {
+        log.info ("Se ha pulsado el boton 'NO' en VentanaFinalizarJuegoController");
         Stage stageAnterior = (Stage) NoButton.getScene().getWindow();
         stageAnterior.close();
         Stage stage = new Stage();
