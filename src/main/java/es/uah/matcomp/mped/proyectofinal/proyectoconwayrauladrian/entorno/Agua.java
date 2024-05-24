@@ -2,6 +2,8 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno;
 
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.turnosVidaExtraAgua;
+
 public class Agua extends Entorno {
 
     public Agua(int coordenadaX, int coordenadaY, int tiempoAparicion) {
@@ -13,7 +15,7 @@ public class Agua extends Entorno {
     }
 
     public static void accionAgua(Individuo individuo) {
-        individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes() + 2);
+        individuo.setTurnosVidaRestantes(individuo.getTurnosVidaRestantes() + turnosVidaExtraAgua);
     }
 
     @Override

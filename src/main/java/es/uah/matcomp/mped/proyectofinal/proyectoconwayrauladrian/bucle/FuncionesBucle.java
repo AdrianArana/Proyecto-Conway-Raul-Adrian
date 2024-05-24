@@ -20,6 +20,9 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.util.Random;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.probabilidadClonacionRestadaPorTurno;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.probabilidadReproduccionRestadaPorTurno;
+
 public class FuncionesBucle {
     public static final Log log = LogFactory.getLog(FuncionesBucle.class);
     /*
@@ -112,6 +115,7 @@ public class FuncionesBucle {
         if (numeroIndividuos > 0) {
             if (numeroIndividuos == 1) {
                 casilla.getBoton().setStyle("-fx-background-color: #ffae00;-fx-border-color: " + color + ";");
+                casilla.getBoton().setText("1");
 
             } else if (numeroIndividuos == 2) {
                 casilla.getBoton().setStyle("-fx-background-color: #ff4d00;-fx-border-color: " + color + ";");
@@ -120,6 +124,9 @@ public class FuncionesBucle {
             } else if (numeroIndividuos == 3) {
                 casilla.getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + color + ";");
                 casilla.getBoton().setText("3");
+            } else if (numeroIndividuos>3) {
+                casilla.getBoton().setStyle("-fx-background-color: #5a0000;-fx-border-color: " + color + ";");
+                casilla.getBoton().setText(""+numeroIndividuos);
             }
         } else if (numeroRecursos > 0) {
             for (int i = 0; i < numeroRecursos; i++) {
@@ -160,6 +167,8 @@ public class FuncionesBucle {
             casilla.getBoton().setText("2");
         } else if (numeroIndividuos == 3) {
             casilla.getBoton().setText("3");
+        } else if (numeroIndividuos>3){
+            casilla.getBoton().setText(""+numeroIndividuos);
         }
     }
 
@@ -172,7 +181,7 @@ public class FuncionesBucle {
     }
 
     public void tiempoDeVida(Casilla casillaActual) {
-        //todo - > no hace absolutamente nada
+        log.info ("Entrando al método de revisión de los turnos de vida restantes de los individuos");
         for (int i = 0; i < casillaActual.getIndividuos().getNumeroElementos(); i++) {
             casillaActual.getIndividuos().getElemento(i).getData().restarUnoDeVida();
         }
@@ -185,8 +194,8 @@ public class FuncionesBucle {
         }
 
         for (int k = 0; k < casillaActual.getIndividuos().getNumeroElementos(); k++) {
-            if (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion() >= 10) {
-                int nuevaProbReproduccion = (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion()) - (10);
+            if (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion() >= probabilidadReproduccionRestadaPorTurno) {
+                int nuevaProbReproduccion = (casillaActual.getIndividuos().getElemento(k).getData().getProbabilidadReproduccion()) - (probabilidadReproduccionRestadaPorTurno);
                 casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion(nuevaProbReproduccion);
             } else {
                 casillaActual.getIndividuos().getElemento(k).getData().setProbabilidadReproduccion(0);
@@ -195,47 +204,36 @@ public class FuncionesBucle {
         }
 
         for (int l = 0; l < casillaActual.getIndividuos().getNumeroElementos(); l++) {
-            if (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion() >= 10) {
-                int nuevaProbClonacion = (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion()) - (10);
+            if (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion() >= probabilidadClonacionRestadaPorTurno) {
+                int nuevaProbClonacion = (casillaActual.getIndividuos().getElemento(l).getData().getProbabilidadClonacion()) - (probabilidadClonacionRestadaPorTurno);
                 casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadClonacion(nuevaProbClonacion);
             } else {
                 casillaActual.getIndividuos().getElemento(l).getData().setProbabilidadClonacion(0);
             }
         }
+        log.info ("Entrando al método de revisión de los turnos de vida restantes de los individuos");
+
     }
 
     public void recursoActivo(Casilla casillaActual) {
-
-        ListaEnlazada<Entorno> entorno = casillaActual.getRecursos();
-
-        for (int i = 0; i < casillaActual.getRecursos().getNumeroElementos(); i++) {
-            casillaActual.getRecursos().getElemento(i).getData().setTiempoAparicion(casillaActual.getRecursos().getElemento(i).getData().getTiempoAparicion() - 1);
-        }
+        log.info("Entrando al método de revisión de recursos");
         try {
-            for (int i = 0; i < entorno.getNumeroElementos(); i++) {
-                entorno.getElemento(i).getData().setTiempoAparicion(entorno.getElemento(i).getData().getTiempoAparicion() - 1);
+            for (int i = 0; i < casillaActual.getRecursos().getNumeroElementos(); i++) {
+                casillaActual.getRecursos().getElemento(i).getData().setTiempoAparicion(casillaActual.getRecursos().getElemento(i).getData().getTiempoAparicion() - 1);
             }
 
             for (int j = 0; j < casillaActual.getRecursos().getNumeroElementos(); j++) {
                 if (casillaActual.getRecursos().getElemento(j).getData().getTiempoAparicion() <= 0) {
                     casillaActual.getRecursos().delete(j);
-                    casillaActual.setRecursos(casillaActual.getRecursos());
                 }
             }
-            for (int j = 0; j < entorno.getNumeroElementos(); j++) {
-                if (entorno.getElemento(j).getData().getTiempoAparicion() <= 0) {
-                    entorno.delete(j);
-                    casillaActual.setRecursos(entorno);
-                }
-            }
-            casillaActual.setRecursos(entorno);
 
         } catch (Exception e) {
             System.err.println("Error en el método recursoActivo: " + e.getMessage());
             e.printStackTrace();
 
         }
-
+        log.info("Saliendo del método de revisión de recursos");
 
     }
 
@@ -543,7 +541,7 @@ public class FuncionesBucle {
 
 
                         clon.setArbolDelIndividuo(new ArbolAVL(new Nodo(clon)));
-                        clon.getArbolDelIndividuo().add(individuos.getElemento(i).getData().getArbolDelIndividuo());
+                        //clon.getArbolDelIndividuo((individuos.getElemento(i).getData().getArbolDelIndividuo()).;
                         clon.setArbolDelIndividuo(individuos.getElemento(i).getData().getArbolDelIndividuo());//System.out.println("cantidad de individuos: " + casillaActual.getIndividuos().getNumeroElementos());
 
 

@@ -52,11 +52,13 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     public Button botonReanudar;
     public Button botonAjustes;
     public Button botonAvance;
+    public Label labelTurnoActual;
     private ParametrosEntornoModelProperties parametrosEntorno;
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosCasillasModelProperties parametrosCasillas;
     private Stage escenaJuego;
     int turnoActual;
+    IntegerProperty turnoActualObservable = new SimpleIntegerProperty(0);
     boolean pintarIndividuos = false;
     int tipoPintar = 1;
     boolean pintarRecursos = false;
@@ -71,7 +73,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
 
     public void setParametros(String nombreGuardado, ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
-        this.nombreGuardadoString= nombreGuardado;
+        this.nombreGuardadoString = nombreGuardado;
         this.parametrosEntorno = parametrosEntorno;
         this.parametrosIndividuo = parametrosIndividuo;
         this.parametrosCasillas = parametrosCasillas;
@@ -98,6 +100,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         toolBoxRecursos.setStyle("-fx-background-color: #4f5866;");
         botonPintarRecursos.setText("OFF");
         botonPintarRecursos.setStyle("-fx-background-color: #ff0000;");
+        labelTurnoActual.textProperty().bind(turnoActualObservable.asString());
         onBotonPausar();
 
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
@@ -245,9 +248,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 Individuo indivNuevo = new Individuo(xIndividuo, yIndividuo, id, tipoPintar, turnosDevidaRestantes, turnoGeneracion, probMuerte, probClonacion, probReproduccion);
 
 
-
                 indivNuevo.setArbolDelIndividuo(new ArbolAVL(indivNuevo));
-
 
 
                 tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().add(indivNuevo);
@@ -359,6 +360,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     public void onAvanceButton() {
         turnoActual++;
+        turnoActualObservable.set(turnoActual);
         recorrerCasillas(tablero, turnoActual, parametrosEntorno.getOriginal(), parametrosIndividuo.getOriginal(), colorBordes);
     }
 
@@ -490,18 +492,18 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     }
 
     public void onBotonGuardar() {
-        guardado=true;
+        guardado = true;
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaGuardarPartida.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 850, 750);
             stage.setScene(scene);
-           VentanaGuardarPartidaController controladorGuardarPartida= fxmlLoader.getController();
-            controladorGuardarPartida.setModeloDatosFinal(new modeloDatosFinal(nombreGuardadoString,tablero,parametrosIndividuo.getOriginal(),parametrosEntorno.getOriginal(),parametrosCasillas.getOriginal()));
+            VentanaGuardarPartidaController controladorGuardarPartida = fxmlLoader.getController();
+            controladorGuardarPartida.setModeloDatosFinal(new modeloDatosFinal(nombreGuardadoString, tablero, parametrosIndividuo.getOriginal(), parametrosEntorno.getOriginal(), parametrosCasillas.getOriginal()));
             controladorGuardarPartida.setStage(stage);
             stage.show();
-        guardar("datosGuardados.json", new modeloDatosFinal(nombreGuardadoString,tablero,parametrosIndividuo.getOriginal(),parametrosEntorno.getOriginal(),parametrosCasillas.getOriginal()));
-        }catch(IOException e){
+            guardar("datosGuardados.json", new modeloDatosFinal(nombreGuardadoString, tablero, parametrosIndividuo.getOriginal(), parametrosEntorno.getOriginal(), parametrosCasillas.getOriginal()));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -515,15 +517,15 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         int y = parametrosCasillas.y().getValue().intValue();
         //System.out.println("valores cargados"+ parametrosCasillas.x().getValue().intValue()+"casillas");
         //System.out.println("Valores cargados +"+tablero.getElemento(1).getData().getNumeroColumnas());
-        for (int i=0; i<tablero.getNumeroFilas();i++){
-            for (int j=0;j<tablero.getElemento(1).getData().getNumeroColumnas();j++){
-                if (!tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().isVacia()){
-                    for (int k=0;k<tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos();k++){
+        for (int i = 0; i < tablero.getNumeroFilas(); i++) {
+            for (int j = 0; j < tablero.getElemento(1).getData().getNumeroColumnas(); j++) {
+                if (!tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().isVacia()) {
+                    for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
                         //System.out.println(tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().toString());
                     }
                 }
-                if (!tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().isVacia()){
-                    for (int k=0;k<tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getNumeroElementos();k++){
+                if (!tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().isVacia()) {
+                    for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getNumeroElementos(); k++) {
                         System.out.println(tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getElemento(k).getData().toString());
                     }
                 }
@@ -536,8 +538,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 celdaButton.setMinSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setMaxSize((double) 600 / x, (double) 600 / y);
                 celdaButton.setStyle("-fx-border-color:" + colorBordes + "; -fx-text-alignment: center;");
-                int finalI = i+1;
-                int finalJ = j+1;
+                int finalI = i + 1;
+                int finalJ = j + 1;
                 celdaButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {

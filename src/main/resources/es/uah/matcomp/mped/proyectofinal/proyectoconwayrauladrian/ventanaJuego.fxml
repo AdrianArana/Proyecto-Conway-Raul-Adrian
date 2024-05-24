@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
+<AnchorPane prefHeight="800.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaJuegoController">
    <children>
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="32.0" prefHeight="67.0" prefWidth="0.0">
    </GridPane>
@@ -212,5 +213,15 @@
             <Font name="Baskerville Old Face" size="19.0" />
          </font>
       </Button>
+      <Label layoutX="133.0" layoutY="669.0" prefHeight="22.0" prefWidth="103.0" text="Turno actual:">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTurnoActual" layoutX="245.0" layoutY="669.0" prefHeight="22.0" prefWidth="95.0" text="-----">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

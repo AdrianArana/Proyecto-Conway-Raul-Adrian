@@ -1,48 +1,48 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol;
 
-public class Nodo<TipoDato> {
-    Nodo<TipoDato> derecha;
-    Nodo<TipoDato> izquierda;
-    TipoDato dato;
+public class Nodo<Individuo> {
+    Nodo<Individuo> derecha;
+    Nodo<Individuo> izquierda;
+    Individuo dato;
 
 
-    public Nodo(Nodo<TipoDato> derecha, Nodo<TipoDato> izquierda, TipoDato dato) {
+    public Nodo(Nodo<Individuo> derecha, Nodo<Individuo> izquierda, Individuo dato) {
         this.derecha = derecha;
         this.izquierda = izquierda;
         this.dato = dato;
     }
 
 
-    public Nodo(TipoDato dato) {
+    public Nodo(Individuo dato) {
         this.dato = dato;
     }
 
-    public Nodo<TipoDato> getDerecha() {
+    public Nodo<Individuo> getDerecha() {
         return derecha;
     }
 
-    public void setDerecha(Nodo<TipoDato> derecha) {
+    public void setDerecha(Nodo<Individuo> derecha) {
         this.derecha = derecha;
     }
 
-    public Nodo<TipoDato> getIzquierda() {
+    public Nodo<Individuo> getIzquierda() {
         return izquierda;
     }
 
-    public void setIzquierda(Nodo<TipoDato> izquierda) {
+    public void setIzquierda(Nodo<Individuo> izquierda) {
         this.izquierda = izquierda;
     }
 
-    public TipoDato getDato() {
+    public Individuo getDato() {
         return this.dato;
     }
 
-    public void setDato(TipoDato dato) {
+    public void setDato(Individuo dato) {
         this.dato = dato;
     }
 
     public int gradoNodo() {
-        Nodo<TipoDato> n = this;
+        Nodo<Individuo> n = this;
         int contador = 0;
         if (n.getIzquierda() != null) {
             contador++;
@@ -54,7 +54,7 @@ public class Nodo<TipoDato> {
     }
 
     public boolean esHoja() {
-        Nodo<TipoDato> n = this;
+        Nodo<Individuo> n = this;
         return n.getDerecha() == null && n.getIzquierda() == null;
     }
 }
