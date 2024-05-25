@@ -25,8 +25,8 @@ public class VentanaEleccionEstadisticasController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("colaActividades.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 835, 900);
-            stage.setTitle("Cola de Actividades");
+            Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+            stage.setTitle("Cola de Individuos");
             stage.setScene(scene);
             VentanaColaActividades controlador=fxmlLoader.getController();
             controlador.setStage(stage);

@@ -29,14 +29,12 @@ import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardar
 public class VentanaSeleccionCargarArchivoController implements Initializable {
 
     public Pagination paginacionArchivo;
-    public Button botonVolver;
     public Button botonContinuar;
     public String partidaElegida;
     public Label labelNingunaPartidaGuardada;
     public Label labelElegidoCorrectamente;
     private Stage stage;
     ListaEnlazada<String> partidasGuardadas;
-    IntegerProperty indiceElegido= new SimpleIntegerProperty(0);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         
@@ -106,7 +104,5 @@ public class VentanaSeleccionCargarArchivoController implements Initializable {
         this.stage=stage;
     }
 
-    public void onBotonVolver(ActionEvent actionEvent) {
-    }
 
 }

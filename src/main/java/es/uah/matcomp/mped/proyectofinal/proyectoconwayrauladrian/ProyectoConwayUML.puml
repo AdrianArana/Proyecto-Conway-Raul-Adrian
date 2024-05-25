@@ -1,4 +1,3 @@
-@startuml
 'https://plantuml.com/sequence-diagram
 
 VentanaInicial *-- nombre

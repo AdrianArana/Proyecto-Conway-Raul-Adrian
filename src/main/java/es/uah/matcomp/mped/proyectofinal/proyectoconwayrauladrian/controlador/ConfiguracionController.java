@@ -270,6 +270,7 @@ public class ConfiguracionController implements Initializable {
             ventanaJuegoController.hacerTablero();
             ventanaJuegoController.setStage(stage);
             ventanaJuegoController.elegirColorGridPane();
+            ventanaJuegoController.setGrafica();
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,7 +296,6 @@ public class ConfiguracionController implements Initializable {
 
     private void onBotonReanudarClick(VentanaJuegoController ventanaJuegoController) {
         log.info ("Se ha pulsado el boton reanudar en ConfiguracionController");
-        //System.out.println("la prob de aparicion de recursos general esde: "+parametrosEntorno.probabilidadGeneral());
         ventanaJuegoController.setParametros(nombreGuardadoString, parametrosIndividuo,parametrosEntorno,parametrosCasillas);
         Stage stageAnterior = (Stage) botonIniciarPartida.getScene().getWindow();
         stageAnterior.close();

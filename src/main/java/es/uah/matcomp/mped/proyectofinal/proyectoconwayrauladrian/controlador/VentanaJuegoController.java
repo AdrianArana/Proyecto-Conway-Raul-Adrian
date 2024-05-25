@@ -107,20 +107,6 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         labelVelocidadActual.textProperty().bind(velocidadDeJuego.asString());
         onBotonPausar();
 
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Series 1");
-        series1.getData().add(new XYChart.Data<>("Category 1", 50));
-        series1.getData().add(new XYChart.Data<>("Category 2", 80));
-        series1.getData().add(new XYChart.Data<>("Category 3", 30));
-
-        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-        series2.setName("Series 2");
-        series2.getData().add(new XYChart.Data<>("Category 1", 60));
-        series2.getData().add(new XYChart.Data<>("Category 2", 90));
-        series2.getData().add(new XYChart.Data<>("Category 3", 40));
-
-        graficaPantallaJuego.getData().addAll(series1, series2);
-
     }
 
     public void elegirColorGridPane() {
@@ -279,7 +265,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + colorBordes + ";");
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setText("3");
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setTextFill(Color.BLACK);
-                    } else if (numeroIndividuos > 3) {
+                    } else {
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setStyle("-fx-background-color: #5a0000;-fx-border-color: " + colorBordes + ";");
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setText("" + numeroIndividuos);
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setTextFill(Color.WHITE);
@@ -511,6 +497,16 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         botonPintar.setDisable(true);
         botonPintarRecursos.setDisable(true);
         iniciarModoAutomaticoBucle();
+        XYChart.Series<String, Number> probRecursos = new XYChart.Series<>();
+        probRecursos.setName("Probabilidades de Recursos");
+        probRecursos.getData().add(new XYChart.Data<>("Agua", parametrosEntorno.probabilidadAgua().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Biblioteca", parametrosEntorno.probabilidadBiblioteca().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Comida", parametrosEntorno.probabilidadComida().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Tesoro", parametrosEntorno.probabilidadTesoro().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Pozo", parametrosEntorno.probabilidadPozo().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Montaña", parametrosEntorno.probabilidadMontaña().getValue().intValue()));
+
+        graficaPantallaJuego.getData().setAll(probRecursos);
     }
 
     public void onBotonGuardar() {
@@ -602,5 +598,19 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         }));
         timelineJuego.setCycleCount(Timeline.INDEFINITE);
         timelineJuego.play();
+    }
+
+    public void setGrafica() {
+        XYChart.Series<String, Number> probRecursos = new XYChart.Series<>();
+        probRecursos.setName("Probabilidades de Recursos");
+        probRecursos.getData().add(new XYChart.Data<>("Agua", parametrosEntorno.probabilidadAgua().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Biblioteca", parametrosEntorno.probabilidadBiblioteca().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Comida", parametrosEntorno.probabilidadComida().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Tesoro", parametrosEntorno.probabilidadTesoro().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Pozo", parametrosEntorno.probabilidadPozo().getValue().intValue()));
+        probRecursos.getData().add(new XYChart.Data<>("Montaña", parametrosEntorno.probabilidadMontaña().getValue().intValue()));
+
+
+        graficaPantallaJuego.getData().addAll(probRecursos);
     }
 }

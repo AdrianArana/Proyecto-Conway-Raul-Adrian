@@ -24,7 +24,7 @@ class ParametrosEntornoTest {
     @Test
     void getProbabilidadAgua() {
         Agua agua= new Agua(1,1,1);
-        assertEquals(1, agua.getProbabilidadDeEsteRecurso());
+        assertEquals(1, agua.getProbabilidadAgua());
     }
 
     @Test
@@ -33,7 +33,6 @@ class ParametrosEntornoTest {
         agua.setProbabilidadDeEsteRecurso(101);
         assertEquals(101, agua.getProbabilidadDeEsteRecurso());
     }
-    //todo //no puede ser que la probabilidad de aparicion del agua sea 101
 
     @Test
     void getProbabilidadComida() {
