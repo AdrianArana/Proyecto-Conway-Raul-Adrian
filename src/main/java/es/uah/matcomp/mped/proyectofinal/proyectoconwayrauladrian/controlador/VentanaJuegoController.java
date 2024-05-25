@@ -4,17 +4,16 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.VistaPrincipal
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.ArbolAVL;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.Arbol;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.modeloDatosFinal;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.NombreGuardado;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosCasillasModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosEntornoModelProperties;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuoModelProperties;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,14 +26,16 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.guardar;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.cantidadMaximaIndividuosPorCelda;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.cantidadMaximaRecursosPorCelda;
 
 public class VentanaJuegoController extends FuncionesBucle implements Initializable {
     public Slider sliderVelocidad;
@@ -53,6 +54,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     public Button botonAjustes;
     public Button botonAvance;
     public Label labelTurnoActual;
+    public Label labelVelocidadActual;
+    public ListView listView;
     private ParametrosEntornoModelProperties parametrosEntorno;
     private ParametrosIndividuoModelProperties parametrosIndividuo;
     private ParametrosCasillasModelProperties parametrosCasillas;
@@ -67,9 +70,14 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     boolean guardado = false;
     //Creamos el tablero vacío, que se generará despues
     ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero = new ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>>();
-
+    public Timeline timelineJuego;
     String colorBordes = "rgb(0, 0, 0)";
     String nombreGuardadoString;
+    @FXML
+    public GridPane gridPane;
+    @FXML
+    public Button finalizarButton;
+    private ObjectProperty<Color> colorElegido = new SimpleObjectProperty<>();
 
 
     public void setParametros(String nombreGuardado, ParametrosIndividuoModelProperties parametrosIndividuo, ParametrosEntornoModelProperties parametrosEntorno, ParametrosCasillasModelProperties parametrosCasillas) {
@@ -83,12 +91,6 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         this.escenaJuego = escenaDada;
     }
 
-    @FXML
-    public GridPane gridPane;
-    @FXML
-    public Button finalizarButton;
-
-    private ObjectProperty<Color> colorElegido = new SimpleObjectProperty<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -102,6 +104,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         botonPintarRecursos.setText("OFF");
         botonPintarRecursos.setStyle("-fx-background-color: #ff0000;");
         labelTurnoActual.textProperty().bind(turnoActualObservable.asString());
+        labelVelocidadActual.textProperty().bind(velocidadDeJuego.asString());
         onBotonPausar();
 
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
@@ -135,33 +138,33 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                         if (numeroIndividuos == 1) {
                             tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ffae00;-fx-border-color: " + colorBordes + ";");
                             tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("1");
+                            casilla.getBoton().setTextFill(Color.BLACK);
                         } else if (numeroIndividuos == 2) {
                             tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ff4d00;-fx-border-color: " + colorBordes + ";");
                             tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("2");
-
+                            casilla.getBoton().setTextFill(Color.BLACK);
+                            casilla.getBoton().setTextFill(Color.BLACK);
                         } else if (numeroIndividuos == 3) {
                             tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + colorBordes + ";");
                             tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("3");
+                        } else if (numeroIndividuos > 3) {
+                            casilla.getBoton().setStyle("-fx-background-color: #5a0000;-fx-border-color: " + colorBordes + ";");
+                            casilla.getBoton().setText("" + numeroIndividuos);
+                            casilla.getBoton().setTextFill(Color.WHITE);
                         }
                     } else {
                         actualizarCasillaRecurso(i, j, numeroRecursos, casilla);
                     }
-                    if (numeroIndividuos == 0 && numeroRecursos == 0) {
+                    if (numeroRecursos == 0 && numeroIndividuos == 0) {
                         casilla.getBoton().setStyle("-fx-background-color:null;-fx-border-color: " + colorBordes + ";");
-                        casilla.getBoton().setText(null);
                     }
-                    if (numeroIndividuos == 1) {
-                        casilla.getBoton().setText("1");
-                    } else if (numeroIndividuos == 2) {
-                        casilla.getBoton().setText("2");
-                    } else if (numeroIndividuos == 3) {
-                        casilla.getBoton().setText("3");
+                    if (numeroIndividuos == 0) {
+                        casilla.getBoton().setText(null);
                     }
                 }
             }
         });
 
-        log.info ("Saliendo del método de elegirColorGridPane VentanaJuegoController");
     }
 
     private void actualizarCasillaRecurso(int i, int j, int numeroRecursos, Casilla casilla) {
@@ -195,10 +198,10 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 }
             }
         }
-        log.info ("Saliendo del método de actualizarCasillaRecurso VentanaJuegoController");
     }
 
 
+    //Método para poder cambiar el color de los bordes de las celdas
     private String pasaraRGB(Color color) {
         int r = (int) (color.getRed() * 255);
         int g = (int) (color.getGreen() * 255);
@@ -224,8 +227,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 ventanaCasillaController.setStage(stage);
 
                 //Le mandamos al controlador los parametros deseados
-                ventanaCasillaController.setParametros(tablero, tablero.getElemento(i - 1).getData().getElemento(j - 1).getData(), parametrosIndividuo, parametrosEntorno, turnoActual, colorBordes);//TODO-> Generar id coger el anterior para que no haya ids repetidos
-                ventanaCasillaController.cogerValoresIniciales();
+                ventanaCasillaController.setParametros(tablero, tablero.getElemento(i - 1).getData().getElemento(j - 1).getData(), parametrosIndividuo, parametrosEntorno, turnoActual, colorBordes);
                 ventanaCasillaController.mostrarInfo();
 
                 stage.show();
@@ -233,7 +235,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 e.printStackTrace();
             }
         } else if (pintarRecursos) {
-            if (tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getRecursos().getNumeroElementos() < 3) {
+            if (tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getRecursos().getNumeroElementos() < cantidadMaximaRecursosPorCelda) {
                 int xRecurso = i;
                 int yRecurso = j;
                 if (tipoPintarRecursos != 0) {
@@ -245,7 +247,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 }
             }
         } else if (pintarIndividuos) {
-            if (tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().getNumeroElementos() < 3) {
+            if (tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().getNumeroElementos() < cantidadMaximaIndividuosPorCelda) {
                 int xIndividuo = i;
                 int yIndividuo = j;
                 int id = generarID(tablero);
@@ -257,7 +259,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 Individuo indivNuevo = new Individuo(xIndividuo, yIndividuo, id, tipoPintar, turnosDevidaRestantes, turnoGeneracion, probMuerte, probClonacion, probReproduccion);
 
 
-                indivNuevo.setArbolDelIndividuo(new ArbolAVL(indivNuevo));
+                indivNuevo.setArbolDelIndividuo(new Arbol(indivNuevo));
 
 
                 tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getIndividuos().add(indivNuevo);
@@ -268,19 +270,26 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                     if (numeroIndividuos == 1) {
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setStyle("-fx-background-color: #ffae00;-fx-border-color: " + colorBordes + ";");
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setText("1");
+                        tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setTextFill(Color.BLACK);
                     } else if (numeroIndividuos == 2) {
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setStyle("-fx-background-color: #ff4d00;-fx-border-color: " + colorBordes + ";");
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setText("2");
-
+                        tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setTextFill(Color.BLACK);
                     } else if (numeroIndividuos == 3) {
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + colorBordes + ";");
                         tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setText("3");
+                        tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setTextFill(Color.BLACK);
+                    } else if (numeroIndividuos > 3) {
+                        tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setStyle("-fx-background-color: #5a0000;-fx-border-color: " + colorBordes + ";");
+                        tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setText("" + numeroIndividuos);
+                        tablero.getElemento(i - 1).getData().getElemento(j - 1).getData().getBoton().setTextFill(Color.WHITE);
                     }
                 }
             }
         }
     }
 
+    //Función que va a devolver el recurso seleccionado segun el "tipo" enviado para ser añadido al tablero
     public Entorno pintarRecurso(int tipo, int x, int y) {
         log.info ("Entrando al método de pintarRecurso en la partida");
         int xRecurso = x;
@@ -298,8 +307,8 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         } else if (tipo == 6) {
             return new Tesoro(xRecurso, yRecurso, parametrosEntorno.tiempoAparicion().getValue().intValue());
         }
-        return null;
         log.info ("Saliendo del método de pintarRecurso en la partida");
+        return null;
     }
 
     public void hacerTablero() {
@@ -324,16 +333,12 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                 gridPane.add(celdaButton, finalI, finalJ);
                 ElementoCasillaLE<Casilla> casillaNueva = new ElementoCasillaLE<>(new Casilla(finalI, finalJ));
                 casillaNueva.getData().setBoton(celdaButton);
-
-                //ElementoLE<Individuo> individuoActual=new ElementoLE<Individuo>(new Individuo());
-                //ListaEnlazada<Individuo> individuos= new ListaEnlazada<Individuo>(individuoActual);
-                //casillaNueva.getData().setIndividuos(individuos);
                 filaCompleta.add(casillaNueva);
-
+                //Construimos cada fila, casilla por casilla
             }
+            //Construimos el tablero fila por fila
             tablero.add(new ElementoListaColumnasLE<ListaEnlazadaColumnas<Casilla>>(filaCompleta));
         }
-        log.info ("Saliendo del método de hacerTablero VentanaJuegoController");
     }
 
     @FXML
@@ -358,7 +363,6 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     @FXML
     protected void onBotonAjustes() {
         log.info ("Se ha pulsado el boton ajustes en VentanaJuegoController");
-
         parar = true;
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaConfiguracion.fxml"));
@@ -386,30 +390,6 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
 
     boolean parar = false;
     protected IntegerProperty velocidadDeJuego = new SimpleIntegerProperty(1);
-
-    public static long getSegundos() {
-        return LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond();
-    }
-
-    private void activarBucle() {
-        log.info ("Entrando al método de activarBucle VentanaJuegoController");
-
-        long tiempoInicio = getSegundos();
-        //tem.out.println("Tiempo actuañ" + LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond());
-        while (!parar) {
-            //System.out.println(getSegundos());
-            if (getSegundos() > (tiempoInicio + 4)) {
-                turnoActual++;
-                //System.out.println("hola");
-                recorrerCasillas(tablero, turnoActual, parametrosEntorno.getOriginal(), parametrosIndividuo.getOriginal(), colorBordes);
-
-                tiempoInicio = getSegundos();
-
-            }
-
-        }
-        log.info ("Saliendo del método de activarBucle VentanaJuegoController");
-    }
 
 
     public void onBotonBasico(ActionEvent actionEvent) {
@@ -516,6 +496,11 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         botonAjustes.setDisable(false);
         botonPausar.setDisable(true);
         botonReanudar.setDisable(false);
+        botonPintar.setDisable(false);
+        botonPintarRecursos.setDisable(false);
+        if (timelineJuego != null) {
+            timelineJuego.stop();
+        }
     }
 
     public void onBotonReanudar() {
@@ -525,11 +510,23 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         botonAjustes.setDisable(true);
         botonReanudar.setDisable(true);
         botonPausar.setDisable(false);
+        pintarRecursos = false;
+        pintarIndividuos = false;
+        botonPintar.setDisable(true);
+        botonPintarRecursos.setDisable(true);
+        iniciarModoAutomaticoBucle();
     }
 
     public void onBotonGuardar() {
         log.info ("Se ha pulsado el boton guardar en VentanaJuegoController");
-        guardado = true;
+        //Guardamos los individuos del tablero en la cola
+        for (int i=0;i<tablero.getNumeroFilas();i++){
+            for(int j=0; j<tablero.getElemento(1).getData().getNumeroColumnas();j++){
+                for (int k=0; k<tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos();k++){
+                    colaIndividuos.push(tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData());
+                }
+            }
+        }guardado = true;
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaGuardarPartida.fxml"));
         try {
@@ -543,34 +540,19 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void setTablero(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tableroNoEstatico) {
         this.tablero = tableroNoEstatico;
     }
 
+    //Método solo usado para cargar la partida guardada, y construir el gridPane
     public void setBotones() {
         log.info ("Entrando al método de setBotones VentanaJuegoController");
 
         int x = parametrosCasillas.x().getValue().intValue();
         int y = parametrosCasillas.y().getValue().intValue();
-        //System.out.println("valores cargados"+ parametrosCasillas.x().getValue().intValue()+"casillas");
-        //System.out.println("Valores cargados +"+tablero.getElemento(1).getData().getNumeroColumnas());
-        for (int i = 0; i < tablero.getNumeroFilas(); i++) {
-            for (int j = 0; j < tablero.getElemento(1).getData().getNumeroColumnas(); j++) {
-                if (!tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().isVacia()) {
-                    for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
-                        //System.out.println(tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().toString());
-                    }
-                }
-                if (!tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().isVacia()) {
-                    for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getNumeroElementos(); k++) {
-                        System.out.println(tablero.getElemento(i).getData().getElemento(j).getData().getRecursos().getElemento(k).getData().toString());
-                    }
-                }
-            }
-        }
-        //tem.out.println("Caisllas del ytabeñlrp"+tablero.getElemento(1).getData().getElemento(1).getData().getClass());
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 Button celdaButton = new Button();
@@ -605,23 +587,24 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
                     } else if (numeroIndividuos == 3) {
                         tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + colorBordes + ";");
                         tablero.getElemento(i).getData().getElemento(j).getData().getBoton().setText("3");
+                    } else if (numeroIndividuos > 3) {
+                        casilla.getBoton().setStyle("-fx-background-color: #5a0000;-fx-border-color: " + colorBordes + ";");
+                        casilla.getBoton().setText("" + numeroIndividuos);
                     }
                 } else {
                     actualizarCasillaRecurso(i, j, numeroRecursos, casilla);
                 }
-                if (numeroIndividuos == 0 && numeroRecursos == 0) {
-                    casilla.getBoton().setStyle("-fx-background-color:null;-fx-border-color: " + colorBordes + ";");
-                    casilla.getBoton().setText(null);
-                }
-                if (numeroIndividuos == 1) {
-                    casilla.getBoton().setText("1");
-                } else if (numeroIndividuos == 2) {
-                    casilla.getBoton().setText("2");
-                } else if (numeroIndividuos == 3) {
-                    casilla.getBoton().setText("3");
-                }
             }
         }
-        log.info ("Saliendo del método de setBotones VentanaJuegoController");
+    }
+
+
+    private void iniciarModoAutomaticoBucle() {
+        timelineJuego = null;
+        timelineJuego = new Timeline(new KeyFrame(Duration.seconds((0.5 / velocidadDeJuego.getValue().doubleValue())), event -> {
+            onAvanceButton();
+        }));
+        timelineJuego.setCycleCount(Timeline.INDEFINITE);
+        timelineJuego.play();
     }
 }

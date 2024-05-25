@@ -5,7 +5,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Ind
 
 import java.lang.reflect.Type;
 
-import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle.log;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+
 
 public class gsonAdapterIndividuo implements JsonSerializer<Individuo>, JsonDeserializer<Individuo> {
     @Override

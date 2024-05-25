@@ -19,6 +19,10 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle.colaIndividuos;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.valoresAjustables.cantidadMaximaIndividuosPorCelda;
+
 public class VentanaCasillaController {
     @FXML
     public Label labelCasilla;
@@ -137,7 +141,6 @@ public class VentanaCasillaController {
         labelIndividuosTipo2.setText(String.valueOf(cantidadIndividuo2));
         labelIndividuosTipo3.setText(String.valueOf(cantidadIndividuo3));
         labelCasilla.setText("CASILLA ACTUAL: (" + casilla.getCoordenadaX() + "," + casilla.getCoordenadaY() + ")");
-        log.info ("Saliendo del método de mostrarinfo de VentanaCasillaController");
     }
 
 
@@ -171,7 +174,6 @@ public class VentanaCasillaController {
         }
         id++;
         return id;
-        log.info ("Saliendo del método de mostrarinfo de VentanaCasillaController");
     }
 
     //FUNCIONES PARA LOS BOTONES DE AÑADIR INDIVIDUOS O RECURSOS
@@ -179,9 +181,8 @@ public class VentanaCasillaController {
     private void nuevoIndividuo(int tipo,String color) {
         log.info ("Entrando al método de nuevo Individuo de VentanaCasillaController");
         ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
-
         try {
-            if (individuos.getNumeroElementos() < 3) {
+            if (individuos.getNumeroElementos() < cantidadMaximaIndividuosPorCelda) {
                 Individuo nuevoIndividuo = new Individuo(casilla.getCoordenadaX(), casilla.getCoordenadaY(),
                         generarID(tablero), tipo, turnosDeVidaRestantes, turnoActual, probabilidadMuerte,
                         probabilidadClonacion, probabilidadReproduccion);
@@ -199,9 +200,11 @@ public class VentanaCasillaController {
                     } else if (numeroIndividuos == 3) {
                         casilla.getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + color + ";");
                         casilla.getBoton().setText("3");
+                    } else if (numeroIndividuos>cantidadMaximaIndividuosPorCelda){
+                        casilla.getBoton().setStyle("-fx-background-color: #ff0000;-fx-border-color: " + color + ";");
                     }
                 }
-            } else if (individuos.getNumeroElementos() == 3) {
+            } else if (individuos.getNumeroElementos() == cantidadMaximaIndividuosPorCelda) {
                 ponerBotonEnRojo(tipo);
             }
             mostrarInfo();
@@ -211,7 +214,6 @@ public class VentanaCasillaController {
 
         }
 
-        log.info ("Saliendo del método de nuevo Individuo de VentanaCasillaController");
     }
 
     private void quitarIndividuo(int tipo) {
@@ -223,6 +225,8 @@ public class VentanaCasillaController {
                 if (individuos.getElemento(i).getData().getTipo() == tipo) {
                     Individuo eliminado = individuos.getElemento(i).getData();
                     labelIndividuoCreado.setText("Individuo eliminado: " + eliminado.toString());
+                    colaIndividuos.push(eliminado);
+
                     individuos.delete(i);
 
                     ponerBotonesSinColor();
@@ -236,7 +240,6 @@ public class VentanaCasillaController {
             e.printStackTrace();
         }
 
-        log.info ("Saliendo del método de quitar individuo de VentanaCasillaController");
     }
 
 
@@ -285,12 +288,10 @@ public class VentanaCasillaController {
                 mostrarInfo();
             }
             casilla.setRecursos(recursos);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        log.info ("Saliendo del método de nuevo recurso de VentanaCasillaController");
     }
 
     public void eliminarRecurso(Class clase) {
@@ -311,13 +312,12 @@ public class VentanaCasillaController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        log.info ("Saliendo del método de nuevo recurso de VentanaCasillaController");
 
     }
 
     //Funciones para la visualización de los botones
     public void ponerBotonEnRojo(int numeroBoton) {
-        log.info ("Se ha excedido el numero de 3 individuos por casilla: Boton en rojo");
+        log.info ("Se ha excedido el numero de "+cantidadMaximaIndividuosPorCelda+" individuos por casilla: Boton en rojo");
         try {
             if (numeroBoton == 1) {
                 botonAñadirIndividuo1.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #000000;");
@@ -446,17 +446,6 @@ public class VentanaCasillaController {
         labelIndividuoCreado.setText("¡¡Valores Reiniciados!!");
     }
 
-    public void cogerValoresIniciales() {
-        log.info ("Entrando al método de cogerValoresIniciales en la partida");
-        ListaEnlazada<Individuo> individuos = casilla.getIndividuos();
-        ListaEnlazada<Entorno> recursos = casilla.getRecursos();
-        int x = casilla.getCoordenadaX();
-        int y = casilla.getCoordenadaY();
-        casillaValoresIniciales.setIndividuos(individuos);
-        casillaValoresIniciales.setRecursos(recursos);
-        casillaValoresIniciales.setCoordenadaX(x);
-        casillaValoresIniciales.setCoordenadaY(y);
-    }
 
     public void onBotonInfoTipo1(ActionEvent actionEvent) {
         log.info ("Se ha pulsado el boton info partida en VentanaCasillaController");

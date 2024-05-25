@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+
 public class NombreController implements Initializable {
     @FXML
     public Button continuarButton;

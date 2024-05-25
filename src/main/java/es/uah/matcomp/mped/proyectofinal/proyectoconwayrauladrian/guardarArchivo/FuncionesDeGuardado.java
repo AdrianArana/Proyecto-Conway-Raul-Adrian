@@ -1,25 +1,22 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazada;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.*;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.google.errorprone.annotations.Modifier;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.NombreController;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.*;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.adaptadores.gsonAdapterIndividuo;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.NombreGuardado;
-import org.apache.commons.logging.Log;
-
-import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.bucle.FuncionesBucle.log;
 
 public class FuncionesDeGuardado {
+    public static final Logger log = LogManager.getLogger();
+
     public static <T> void guardar(String nombreArchivo, T modeloDatosFinal) {
         log.info("Guardando archivo " + nombreArchivo);
         com.google.gson.Gson gson = new com.google.gson.GsonBuilder()
@@ -35,14 +32,13 @@ public class FuncionesDeGuardado {
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
-            //this.setGuardado(true);
             gson.toJson(modeloDatosFinal, writer);
         } catch (IOException e) {
             log.error("La ruta para guardar el archivo no existe");
         }
     }
 
-    public static modeloDatosFinal cargar (String nombreArchivo) {
+    public static modeloDatosFinal cargar(String nombreArchivo) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
                 .registerTypeAdapter(Entorno.class, new gsonAdapterRecurso())
@@ -52,7 +48,6 @@ public class FuncionesDeGuardado {
                 .registerTypeAdapter(Pozo.class, new gsonAdapterPozo())
                 .registerTypeAdapter(Tesoro.class, new gsonAdapterTesoro())
                 .registerTypeAdapter(Comida.class, new gsonAdapterComida())
-                .registerTypeAdapter(Individuo.class, new gsonAdapterIndividuo())
                 .registerTypeAdapter(modeloDatosFinal.class, new gsonAdapterModeloDatosFinal())
                 .excludeFieldsWithoutExposeAnnotation()
                 .setPrettyPrinting()
@@ -66,22 +61,26 @@ public class FuncionesDeGuardado {
     }
 
 
-    /*public static <T> void guardarObjetoEnArchivo(String rutaArchivo, T objeto) {
-        GsonBuilder gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation(FuncionesDeGuardado);
-        try (FileWriter writer = new FileWriter(rutaArchivo)) { //Constructor para la variable writer, de tipo FileWriter
-            gson.toJson(objeto, writer);
+    public static void guardarPartidasGuardadas(String nombreArchivo, ListaEnlazada<String> partidasGuardadas) {
+        log.info("Guardando archivo " + nombreArchivo);
+        com.google.gson.Gson gson = new com.google.gson.GsonBuilder()
+                .registerTypeAdapter(modeloDatosFinal.class, new gsonAdapterModeloDatosFinal())
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        try (FileWriter writer = new FileWriter(nombreArchivo)) {
+            gson.toJson(partidasGuardadas, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("La ruta para guardar el archivo no existe");
         }
     }
-    // Método para cargar un objeto desde un archivo JSON
-    public static <T> T cargarObjetoDesdeArchivo(String rutaArchivo, Class<T> clase) {
-        Gson gson = new Gson();
-        try (FileReader reader = new FileReader(rutaArchivo)) {
-            return gson.fromJson(reader, clase);
+
+    public static ListaEnlazada<String> cargarPartidasGuardadas() {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+        try (FileReader reader = new FileReader("partidasGuardadas.json")) {
+            return gson.fromJson(reader, ListaEnlazada.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("La ruta al archivo especificada no es correcta");
             return null;
         }
-    }*/
+    }
 }

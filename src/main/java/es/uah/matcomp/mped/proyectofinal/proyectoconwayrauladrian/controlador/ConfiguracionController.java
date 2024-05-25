@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+
 public class ConfiguracionController implements Initializable {
     public Slider sliderCasillasX;
     public Slider sliderCasillasY;
@@ -290,7 +292,6 @@ public class ConfiguracionController implements Initializable {
                 onBotonReanudarClick(controlador);
             }
         });
-        log.info ("Saliendo del método de cargarDatos en la partida");
     }
 
     private void onBotonReanudarClick(VentanaJuegoController ventanaJuegoController) {

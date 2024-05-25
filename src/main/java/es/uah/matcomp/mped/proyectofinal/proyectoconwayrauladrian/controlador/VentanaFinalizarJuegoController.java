@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+
 public class VentanaFinalizarJuegoController {
     @FXML
     private Button SiButton;
@@ -14,7 +16,7 @@ public class VentanaFinalizarJuegoController {
     @FXML
     private Button NoButton;
 
-
+//TODO AJUSTAR ESTA CLASE; ELIMINARLA
     @FXML
     protected void onNoButton() {
         log.info ("Se ha pulsado el boton 'NO' en VentanaFinalizarJuegoController");

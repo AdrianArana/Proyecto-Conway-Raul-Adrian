@@ -5,6 +5,8 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
 import javafx.scene.control.Label;
 
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
+
 public class VentanaInfoConcretaController {
 
 
@@ -27,6 +29,5 @@ public class VentanaInfoConcretaController {
                 label3.setText(individuos.getElemento(2).getData().toString());
             }
         }
-        log.info ("Saliendo del método de setIndividuos VentanaConcretaController");
     }
 }

@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.cargar;
+import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
 
 public class PrincipalController implements Initializable {
 
@@ -83,25 +84,17 @@ public class PrincipalController implements Initializable {
 
     public void onBotonCargarPartida(ActionEvent actionEvent) {
         log.info ("Se ha pulsado el boton cargar partida en PrincipalController");
-        String nombreArchivo = "datosGuardados.json";
-        modeloDatosFinal datosCargados = cargar(nombreArchivo);
-        //System.out.println();
-        Stage stageAntiguo = (Stage) nuevaPartidaButton.getScene().getWindow();
-        stageAntiguo.close();
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaJuego.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaSeleccionCargarArchivo.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 1100, 800);
-            stage.setTitle("Juego - La vida de Conway: PARTIDA DE "+datosCargados.getNombreGuardadoString().toUpperCase()+" CARGADA");
+            Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+            VentanaSeleccionCargarArchivoController ventanaSeleccionCargarArchivoController = fxmlLoader.getController();
             stage.setScene(scene);
-            VentanaJuegoController juegoController= fxmlLoader.getController();
-            //System.out.println(datosCargados.getTablero().getElemento(1).getData().getElemento(1).getData().getIndividuos().getElemento(1).getData().toString());
-            juegoController.setTablero(datosCargados.getTablero());
-            System.out.println("nombre guardado+"+datosCargados);
-            juegoController.setParametros(datosCargados.getNombreGuardadoString(), new ParametrosIndividuoModelProperties(datosCargados.getParametrosGuardadosIndividuos()),new ParametrosEntornoModelProperties(datosCargados.getParametrosGuardadosEntorno()),new ParametrosCasillasModelProperties(datosCargados.getParametrosGuardadosCasillas()));
-            juegoController.setBotones();
-            juegoController.setStage(stage);
+            stage.setTitle("Créditos");
+            ventanaSeleccionCargarArchivoController.hacerPagination();
+            ventanaSeleccionCargarArchivoController.setStage(stage);
             stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaEleccionEstadisticasController">
+   <children>
+      <Button fx:id="botonColaDeActividades" layoutX="60.0" layoutY="73.0" mnemonicParsing="false" onAction="#onBotonColaActividades" text="Cola de actividades de la partida">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonEstadisticas" layoutX="77.0" layoutY="189.0" mnemonicParsing="false" onAction="#onBotonEstadisticas" text="Estadísticas de la partida">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonArbolIndividuos" layoutX="77.0" layoutY="298.0" mnemonicParsing="false" onAction="#onBotonArbolIndividuos" text="Áarbol de los individuos">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonFinalizar" layoutX="493.0" layoutY="338.0" mnemonicParsing="false" onAction="#onBotonFinalizar" text="Finalizar">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="312.0" layoutY="73.0" prefHeight="184.0" prefWidth="181.0" text="GRACIAS POR JUGAR A NUESTRO JUEGO!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Baskerville Old Face" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -13,6 +13,7 @@ module es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian {
     requires com.google.errorprone.annotations;
     requires org.checkerframework.checker.qual;
     requires com.google.api.client;
+    requires jdk.compiler;
 
     opens es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian to javafx.fxml;
     exports es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian;

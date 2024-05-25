@@ -2,9 +2,12 @@ package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos;
 
 import com.google.gson.annotations.Expose;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.entorno.Entorno;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Cola;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ElementoLE;
-import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.ArbolAVL;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.Arbol;
+import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol.Nodo;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.modelo.ParametrosIndividuo;
+import org.checkerframework.checker.units.qual.A;
 
 public class Individuo extends ParametrosIndividuo {
     @Expose
@@ -19,19 +22,71 @@ public class Individuo extends ParametrosIndividuo {
     public int turnoGeneracion;
     @Expose
     public ElementoLE<Entorno> objetivo;
+    @Expose
+    public int turnosVividos=0;
+    @Expose
+    public int cantidadDeAguaBebida=0;
 
-    public ArbolAVL arbolDelIndividuo;
+    public int getCantidadDeAguaBebida() {
+        return cantidadDeAguaBebida;
+    }
 
-    public ArbolAVL getArbolDelIndividuo() {
+    public void setCantidadDeAguaBebida(int cantidadDeAguaBebida) {
+        this.cantidadDeAguaBebida = cantidadDeAguaBebida;
+    }
+
+    public int getNumeroDeClonaciones() {
+        return numeroDeClonaciones;
+    }
+
+    public void setNumeroDeClonaciones(int numeroDeClonaciones) {
+        this.numeroDeClonaciones = numeroDeClonaciones;
+    }
+
+
+    @Expose
+    public int numeroDeClonaciones=0;
+
+    public int getNumeroDeReproducciones() {
+        return numeroDeReproducciones;
+    }
+
+    public void setNumeroDeReproducciones(int numeroDeReproduccionesDado) {
+        this.numeroDeReproducciones = numeroDeReproduccionesDado;
+    }
+
+    @Expose
+    public int numeroDeReproducciones=0;
+
+    public Cola<String> cola=new Cola<>();
+
+    public Cola<String> getCola() {
+        return cola;
+    }
+
+    public void setCola(Cola<String> cola) {
+        this.cola = cola;
+    }
+
+    public int getTurnosVividos() {
+        return turnosVividos;
+    }
+
+    public void setTurnosVividos(int turnosVividos) {
+        this.turnosVividos = turnosVividos;
+    }
+
+    @Expose
+    public Arbol arbolDelIndividuo=new Arbol(new Nodo(this),null,null);
+
+    public Arbol getArbolDelIndividuo() {
         return arbolDelIndividuo;
     }
 
-    public void setArbolDelIndividuo(ArbolAVL arbolDelIndividuo) {
+    public void setArbolDelIndividuo(Arbol arbolDelIndividuo) {
         this.arbolDelIndividuo = arbolDelIndividuo;
     }
 
-    //private <? extends Entorno> recursoElegido=
-    //Constructor vacío
     public Individuo(int x, int y, int id, int tipo, int turnosVidaRestantes, int turnoGeneracion, int probabilidadMuerte, int probabilidadClonacion, int probabilidadReproduccion) {
         super(turnosVidaRestantes, probabilidadMuerte, probabilidadClonacion, probabilidadReproduccion);
         this.coordenadaX = x;
@@ -60,6 +115,8 @@ public class Individuo extends ParametrosIndividuo {
                         ")\n Id: '" + id +
                         "'\n Tipo: '" + tipoString +
                         "'\n Turno de Generacion= '" + turnoGeneracion +
+                        "'\n Turnos vividos: '" + getTurnosVividos() +
+                        "'\n Probabilidad de muerte: '" + getProbabilidadMuerte() +
                         "'\n Probabilidad de clonación: '" + getProbabilidadClonacion() +
                         "'\n Probabilidad de reproducción: '" + getProbabilidadReproduccion()+
                         "'\n Turnos de vida restantes: '"+getTurnosVidaRestantes()+"'";

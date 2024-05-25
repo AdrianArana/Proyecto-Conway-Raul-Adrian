@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="885.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaArboles">
+   <children>
+       <TreeView fx:id="treeView" layoutX="28.0" layoutY="77.0" onContextMenuRequested="#onAction" prefHeight="792.0" prefWidth="753.0" />
+      <Label layoutX="50.0" layoutY="41.0" text="Mostrando el árbol genealógico del individuo ganador:">
+         <font>
+            <Font name="Baskerville Old Face" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

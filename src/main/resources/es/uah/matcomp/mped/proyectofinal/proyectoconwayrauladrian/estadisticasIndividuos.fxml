@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="814.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaEstadisticasPartidaController">
+   <children>
+      <Label layoutX="48.0" layoutY="324.0" text="Individuo con más reproducciones: ">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="49.0" layoutY="50.0" text="Individuo más longevo:">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="544.0" text="Individuo que más agua ha bebido:">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="201.0" text="Cantidad de mutaciones total:">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="240.0" text="Cantidad de reproducciones total:">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="434.0" text="Individuo con más mutaciones:">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonColaIndividuoLongevo" layoutX="49.0" layoutY="72.0" mnemonicParsing="false" onAction="#onBotonIndividuoMasLongevo" text="Cola">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="42.0" layoutY="659.0" prefHeight="71.0" prefWidth="225.0" text="Individuo con mayor número de turnos de vida restantes a lo largo de la partida" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelIndividuoLongevo" layoutX="295.0" layoutY="43.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelCantidadMutacionesTotal" layoutX="299.0" layoutY="200.0" prefHeight="17.0" prefWidth="37.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelCantidadReproduccionesTotal" layoutX="299.0" layoutY="238.0" prefHeight="17.0" prefWidth="37.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="188.0" layoutY="23.0" text="ESTADÍSTICAS DE LA PARTIDA">
+         <font>
+            <Font name="Baskerville Old Face" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelIndividuoConMasReproducciones" layoutX="298.0" layoutY="325.0" prefHeight="17.0" prefWidth="4.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelIndividuoConMutaciones" layoutX="298.0" layoutY="435.0" prefHeight="17.0" prefWidth="4.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelIndividuoQueMasAguaHaBebido" layoutX="297.0" layoutY="545.0" prefHeight="17.0" prefWidth="4.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelConMasTurnosRestantesPartida" layoutX="299.0" layoutY="667.0" prefHeight="17.0" prefWidth="4.0" text="-">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonColaIndividuoReproducciones" layoutX="49.0" layoutY="344.0" mnemonicParsing="false" onAction="#onBotonColaIndividuoMasReproducciones" text="Cola">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonColaIndividuoMutaciones" layoutX="49.0" layoutY="454.0" mnemonicParsing="false" onAction="#onBotonIndividuoMasClonaciones" prefHeight="22.0" prefWidth="37.0" text="Cola">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonColaIndividuoAgua" layoutX="49.0" layoutY="565.0" mnemonicParsing="false" onAction="#onBotonColaIndividuoAgua" prefHeight="22.0" prefWidth="37.0" text="Cola">
+         <font>
+            <Font name="Baskerville Old Face" size="11.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

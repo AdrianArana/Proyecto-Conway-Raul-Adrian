@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.media.*?>
 <?import java.lang.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
@@ -90,8 +91,8 @@
             <Font name="Baskerville Old Face" size="20.0" />
          </font>
       </Text>
-      <Slider fx:id="sliderVelocidad" layoutX="159.0" layoutY="751.0" />
-      <ColorPicker fx:id="colorPicker" editable="true" layoutX="642.0" layoutY="566.0" prefHeight="49.0" prefWidth="136.0" />
+      <Slider fx:id="sliderVelocidad" blockIncrement="1.0" layoutX="159.0" layoutY="751.0" max="10.0" value="1.0" />
+      <ColorPicker fx:id="colorPicker" editable="true" layoutX="650.0" layoutY="566.0" prefHeight="49.0" prefWidth="136.0" />
       <ToolBar fx:id="toolBoxIndividuos" layoutX="363.0" layoutY="713.0" prefHeight="67.0" prefWidth="317.0">
          <items>
             <Button fx:id="botonBasico" mnemonicParsing="false" onAction="#onBotonBasico" prefHeight="39.0" prefWidth="74.0" text="Básico">
@@ -128,12 +129,12 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </BarChart>
-      <Label layoutX="175.0" layoutY="719.0" text="Velocidad">
+      <Label layoutX="159.0" layoutY="714.0" text="Velocidad:">
          <font>
             <Font name="Baskerville Old Face" size="27.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="638.0" layoutY="542.0" prefHeight="24.0" prefWidth="186.0" text="Cambiar color del tablero" textAlignment="CENTER" wrapText="true">
+      <Label alignment="TOP_LEFT" layoutX="645.0" layoutY="542.0" prefHeight="24.0" prefWidth="186.0" text="Cambiar color del tablero" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Baskerville Old Face" size="16.0" />
          </font>
@@ -213,14 +214,29 @@
             <Font name="Baskerville Old Face" size="19.0" />
          </font>
       </Button>
-      <Label layoutX="133.0" layoutY="669.0" prefHeight="22.0" prefWidth="103.0" text="Turno actual:">
+      <Label layoutX="22.0" layoutY="667.0" prefHeight="24.0" prefWidth="129.0" text="Turno actual:">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTurnoActual" layoutX="139.0" layoutY="671.0" prefHeight="22.0" prefWidth="64.0" text="-----">
          <font>
             <Font name="Baskerville Old Face" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="labelTurnoActual" layoutX="245.0" layoutY="669.0" prefHeight="22.0" prefWidth="95.0" text="-----">
+      <Label fx:id="labelVelocidadActual" alignment="CENTER" layoutX="284.0" layoutY="721.0" prefHeight="22.0" prefWidth="29.0" text="--">
          <font>
-            <Font name="Baskerville Old Face" size="18.0" />
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="132.0" layoutY="742.0" prefHeight="22.0" prefWidth="29.0" text="_">
+         <font>
+            <Font name="Baskerville Old Face" size="19.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="296.0" layoutY="749.0" prefHeight="22.0" prefWidth="29.0" text="+">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
          </font>
       </Label>
    </children>

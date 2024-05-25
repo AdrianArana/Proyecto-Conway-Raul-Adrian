@@ -1,25 +1,33 @@
 package es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.arbol;
 
-public class ArbolAVL<Individuo> {
+public class Arbol<Individuo> {
     Nodo<Individuo> raiz;
 
     //Constructores
-    public ArbolAVL(Nodo<Individuo> raiz, Nodo<Individuo> derecha, Nodo<Individuo> izquierda) {
+    public Arbol(Nodo<Individuo> raiz, Nodo<Individuo> derecha, Nodo<Individuo> izquierda) {
         this.raiz = raiz;
         this.raiz.setDerecha(derecha);
         this.raiz.setIzquierda(izquierda);
     }
 
-    public ArbolAVL(Nodo<Individuo> raiz) {
+    public Nodo<Individuo> getRaiz() {
+        return raiz;
+    }
+
+    public void setRaiz(Nodo<Individuo> raiz) {
         this.raiz = raiz;
     }
 
-    public ArbolAVL() {
+    public Arbol(Nodo<Individuo> raiz) {
+        this.raiz = raiz;
+    }
+
+    public Arbol() {
         Nodo<Individuo> nodo = new Nodo<>(null);
         this.raiz = nodo;
     }
 
-    public ArbolAVL(Individuo dato) {
+    public Arbol(Individuo dato) {
         this.raiz = new Nodo<>(dato);
     }
 
