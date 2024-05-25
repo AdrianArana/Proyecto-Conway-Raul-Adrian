@@ -74,7 +74,7 @@ public class VentanaGuardarPartidaController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaEleccionDeVistaResultados.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 600);
             stage.setTitle("Resultados de la partida");
             stage.setScene(scene);
             VentanaEleccionEstadisticasController controladorPantallaEstadisticas = fxmlLoader.getController();

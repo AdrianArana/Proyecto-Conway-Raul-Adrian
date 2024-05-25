@@ -344,14 +344,10 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
     @FXML
     protected void onFinalizarButton() {
         log.info ("Se ha pulsado el boton finalizar en VentanaJuegoController");
-
-        log.info("Saliendo de la ventana de juego");
-        Stage stageAnterior = (Stage) finalizarButton.getScene().getWindow();
-        stageAnterior.close();
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaFinalizarJuego.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 1100, 900);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 340);
             stage.setTitle("Fin del Juego");
             stage.setScene(scene);
             stage.show();
@@ -530,7 +526,7 @@ public class VentanaJuegoController extends FuncionesBucle implements Initializa
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaGuardarPartida.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 850, 750);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             stage.setScene(scene);
             VentanaGuardarPartidaController controladorGuardarPartida = fxmlLoader.getController();
             controladorGuardarPartida.setModeloDatosFinal(new modeloDatosFinal(nombreGuardadoString, tablero, parametrosIndividuo.getOriginal(), parametrosEntorno.getOriginal(), parametrosCasillas.getOriginal()));

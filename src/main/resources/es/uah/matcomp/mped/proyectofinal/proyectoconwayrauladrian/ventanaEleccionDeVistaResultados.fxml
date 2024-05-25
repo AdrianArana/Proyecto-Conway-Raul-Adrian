@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaEleccionEstadisticasController">
    <children>
-      <Button fx:id="botonColaDeActividades" layoutX="60.0" layoutY="73.0" mnemonicParsing="false" onAction="#onBotonColaActividades" text="Cola de actividades de la partida">
+      <Button fx:id="botonColaDeIndividuos" layoutX="60.0" layoutY="73.0" mnemonicParsing="false" onAction="#onBotonColaIndividuos" text="Cola de actividades de la partida">
          <font>
             <Font name="Baskerville Old Face" size="11.0" />
          </font>

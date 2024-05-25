@@ -22,7 +22,6 @@ public class FuncionesBucle {
     private int mayorEsperanzaDeVida;
 //TODO FALTA ARREGLAR QUE SE SUME 1 PARA CANTIDAD REPRODUCCIONES, CANTIDAD AGUA CONSUMIDA Y CANTIDAD CLONACIONES
     //TODO que el individuo ganador funcione
-
     public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno, ParametrosIndividuo parametrosIndividuo, String colorBordes) {
         log.info("Se realiza el recorrido de casillas.");
         int filas = tablero.getNumeroFilas();
@@ -493,13 +492,9 @@ public class FuncionesBucle {
                     Individuo hijo = new Individuo(individuo1.getCoordenadaX(), individuo1.getCoordenadaY(), generarID(tablero), Math.max(individuo1.getTipo(), individuo2.getTipo()), parametrosIndividuo.getTurnosVidaRestantes(), turnoActual, Math.min(individuo1.getProbabilidadMuerte(), individuo2.getProbabilidadMuerte()), Math.max(individuo1.getProbabilidadClonacion(), individuo2.getProbabilidadClonacion()), Math.max(individuo1.getProbabilidadReproduccion(), individuo2.getProbabilidadReproduccion()));
                     casillaActual.getIndividuos().add(hijo);
                     hijo.setArbolDelIndividuo(new Arbol<Individuo>(new Nodo<Individuo>(hijo), new Nodo<Individuo>(individuo1), new Nodo<Individuo>(individuo2)));
-                    individuo1.getCola().push("El individuo " + individuo1 + " junto con " + individuo2 + " han tenido un hijo/a" + '\n');
-                    int numeroReproduccionesAnteriores = (casillaActual.getIndividuos().getElemento(0).getData().getNumeroDeReproducciones());
-                    int nuevoNumeroReproducciones = numeroReproduccionesAnteriores + (1);
-                    casillaActual.getIndividuos().getElemento(0).getData().setNumeroDeReproducciones(nuevoNumeroReproducciones);
-                    int numeroReproduccionesAnteriores2 = (casillaActual.getIndividuos().getElemento(1).getData().getNumeroDeReproducciones());
-                    int nuevoNumeroReproducciones2 = numeroReproduccionesAnteriores2 + (1);
-                    casillaActual.getIndividuos().getElemento(0).getData().setNumeroDeReproducciones(nuevoNumeroReproducciones2);
+                    individuo1.getCola().push("El individuo " + individuo1 + "\n junto con " + individuo2 + " han tenido un hijo/a" + '\n');
+                    casillaActual.getIndividuos().getElemento(0).getData().sumarUnaReproduccion();
+                    casillaActual.getIndividuos().getElemento(0).getData().sumarUnaReproduccion();
                     numeroReproducciones++;
                 } else {
                     //De no reproducirse, puede morir uno de ellos
@@ -541,9 +536,7 @@ public class FuncionesBucle {
                         individuos.getElemento(i).getData().getCola().push("El individuo " + individuos.getElemento(i).getData() + " se ha clonado" + '\n');
                         clon.getCola().push("El individuo " + individuos.getElemento(i).getData() + " se ha clonado y ha dado al clon: " + clon + "numero de mutaciones" + '\n');
                         numeroMutaciones++;
-                        int numeroClonacionesAnterior = (casillaActual.getIndividuos().getElemento(i).getData().getNumeroDeClonaciones());
-                        int nuevoNumeroClonaciones = numeroClonacionesAnterior + (1);
-                        casillaActual.getIndividuos().getElemento(0).getData().setNumeroDeClonaciones(nuevoNumeroClonaciones);
+                        casillaActual.getIndividuos().getElemento(0).getData().sumarUnaClonacion();
                         return;
                     }
                 }

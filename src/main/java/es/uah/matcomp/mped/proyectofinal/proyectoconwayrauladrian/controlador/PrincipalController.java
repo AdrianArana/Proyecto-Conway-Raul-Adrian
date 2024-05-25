@@ -90,7 +90,7 @@ public class PrincipalController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load(), 800, 600);
             VentanaSeleccionCargarArchivoController ventanaSeleccionCargarArchivoController = fxmlLoader.getController();
             stage.setScene(scene);
-            stage.setTitle("Créditos");
+            stage.setTitle("Cargar partida desde archivo");
             ventanaSeleccionCargarArchivoController.hacerPagination();
             ventanaSeleccionCargarArchivoController.setStage(stage);
             stage.show();

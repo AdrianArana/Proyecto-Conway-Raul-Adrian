@@ -5,7 +5,6 @@ import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.Li
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaColumnas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.estructuras.ListaEnlazadaFilas;
 import es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.individuos.Individuo;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -43,16 +42,18 @@ public class VentanaEstadisticasPartidaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (individuoMayorEsperanzaDeVida!=null){
+            labelConMasTurnosRestantesPartida.setText(individuoMayorEsperanzaDeVida.toString());
+        }
         labelCantidadReproduccionesTotal.setText(String.valueOf(numeroReproducciones));
         labelCantidadMutacionesTotal.setText(String.valueOf(numeroMutaciones));
-        labelConMasTurnosRestantesPartida.setText(individuoMayorEsperanzaDeVida.toString());
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public Individuo buscarGanadorLongevidad() {
+    public void buscarGanadorLongevidad() {
         int mejorPuntuacion = 0;
         Individuo individuoGanador = null;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
@@ -73,19 +74,15 @@ public class VentanaEstadisticasPartidaController implements Initializable {
         }
         if (individuoGanador != null) {
             individuoMasLongevo = individuoGanador;
-            return individuoGanador;
-        } else {
-            return null;
         }
     }
 
-    public Individuo buscarGanadorReproducciones() {
+    public void buscarGanadorReproducciones() {
         int mejorPuntuacion = 0;
         Individuo individuoGanador = null;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
             for (int j = 0; j < tablero.getElemento(1).getData().getNumeroColumnas(); j++) {
                 for (int k = 0; k < tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getNumeroElementos(); k++) {
-                    System.out.println("numero reproducciones: "+tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getNumeroDeReproducciones());
                     if (tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getNumeroDeReproducciones() > mejorPuntuacion) {
                         individuoGanador = tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData();
                         mejorPuntuacion = tablero.getElemento(i).getData().getElemento(j).getData().getIndividuos().getElemento(k).getData().getNumeroDeReproducciones();
@@ -101,13 +98,10 @@ public class VentanaEstadisticasPartidaController implements Initializable {
         }
         if (individuoGanador != null) {
             individuoConMasReproducciones = individuoGanador;
-            return individuoGanador;
-        } else {
-            return null;
         }
     }
 
-    public Individuo buscarGanadorClonaciones() {
+    public void buscarGanadorClonaciones() {
         int mejorPuntuacion = 0;
         Individuo individuoGanador = null;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
@@ -128,13 +122,10 @@ public class VentanaEstadisticasPartidaController implements Initializable {
         }
         if (individuoGanador != null) {
             individuoConMasClonaciones = individuoGanador;
-            return individuoGanador;
-        } else {
-            return null;
         }
     }
 
-    public Individuo buscarGanadorAgua() {
+    public void buscarGanadorAgua() {
         int mejorPuntuacion = 0;
         Individuo individuoGanador = null;
         for (int i = 0; i < tablero.getNumeroFilas(); i++) {
@@ -155,9 +146,6 @@ public class VentanaEstadisticasPartidaController implements Initializable {
         }
         if (individuoGanador != null) {
             individuoQueMasAguaHaBebido = individuoGanador;
-            return individuoGanador;
-        } else {
-            return null;
         }
     }
 
@@ -167,10 +155,30 @@ public class VentanaEstadisticasPartidaController implements Initializable {
     }
 
     public void actualizarLabels(){
-        labelIndividuoLongevo.setText(individuoMasLongevo.toString());
-        labelIndividuoQueMasAguaHaBebido.setText(individuoQueMasAguaHaBebido.toString());
-        labelIndividuoConMutaciones.setText(individuoConMasClonaciones.toString());
-        labelIndividuoConMasReproducciones.setText(individuoConMasReproducciones.toString());
+        if (individuoMasLongevo!=null){
+            labelIndividuoLongevo.setText(individuoMasLongevo.toString());
+        }else{
+            labelIndividuoLongevo.setText("No ha habido el individuo pedido");
+        }
+        if (individuoQueMasAguaHaBebido!=null){
+            labelIndividuoQueMasAguaHaBebido.setText(individuoQueMasAguaHaBebido.toString());
+
+        }else{
+            labelIndividuoQueMasAguaHaBebido.setText("No ha habido el individuo pedido");
+        }
+        if (individuoConMasClonaciones!=null){
+            labelIndividuoConMutaciones.setText(individuoConMasClonaciones.toString());
+        }else{
+            labelIndividuoConMutaciones.setText("No ha habido el individuo pedido");
+        }
+        if (individuoConMasReproducciones!=null){
+            labelIndividuoConMasReproducciones.setText(individuoConMasReproducciones.toString());
+
+        }else{
+            labelIndividuoConMasReproducciones.setText("No ha habido el individuo pedido");
+        }if (individuoMayorEsperanzaDeVida!=null){
+            labelConMasTurnosRestantesPartida.setText(individuoMayorEsperanzaDeVida.toString());
+        }
 
     }
     private void mostrarColaIndividuo(int tipo) {

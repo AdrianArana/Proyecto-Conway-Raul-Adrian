@@ -13,14 +13,14 @@ import javafx.stage.Stage;
 import static es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.guardarArchivo.FuncionesDeGuardado.log;
 
 public class VentanaEleccionEstadisticasController {
-    public Button botonColaDeActividades;
     public Button botonEstadisticas;
     public Button botonArbolIndividuos;
     public Button botonFinalizar;
+    public Button botonColaDeIndividuos;
     private ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero;
     private Stage stage;
 
-    public void onBotonColaActividades(ActionEvent actionEvent) {
+    public void onBotonColaIndividuos(ActionEvent actionEvent) {
         log.info ("Se ha pulsado el boton colaActividades en VentanaEleccionEstadisticasController");
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("colaActividades.fxml"));
@@ -41,7 +41,7 @@ public class VentanaEleccionEstadisticasController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("estadisticasIndividuos.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 850, 750);
+            Scene scene = new Scene(fxmlLoader.load(), 850, 800);
             stage.setTitle("Estadisticas de la partida");
             stage.setScene(scene);
             VentanaEstadisticasPartidaController controlador=fxmlLoader.getController();

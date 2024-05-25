@@ -4,11 +4,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaFinalizarJuegoController">
-   <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <Text layoutX="230.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Desea guardar la partida?" />
-      <Button layoutX="261.0" layoutY="234.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="Si" />
-      <Button fx:id="NoButton" layoutX="300.0" layoutY="234.0" mnemonicParsing="false" onAction="#onNoButton" text="No" />
-   </children>
+<AnchorPane prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaFinalizarJuegoController">
+   <AnchorPane prefHeight="200.0" prefWidth="200.0"/>
+   <Text layoutX="205.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="¿Estás seguro de que quieres salir?"/>
+   <Button layoutX="94.0" layoutY="177.0" mnemonicParsing="false" onAction="#onBotonVolver" prefHeight="26.0"
+           prefWidth="200.0" text="Volver al juego"/>
+   <Button fx:id="noButton" layoutX="300.0" layoutY="177.0" mnemonicParsing="false" onAction="#onNoButton"
+           prefHeight="25.0" prefWidth="200.0" text="Cerrar sin guardar"/>
 </AnchorPane>
