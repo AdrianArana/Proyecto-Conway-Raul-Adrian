@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="599.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaSeleccionCargarArchivoController">
+<AnchorPane prefHeight="599.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.uah.matcomp.mped.proyectofinal.proyectoconwayrauladrian.controlador.VentanaSeleccionCargarArchivoController">
    <children>
       <Pagination fx:id="paginacionArchivo" cacheHint="QUALITY" layoutX="240.0" layoutY="148.0" pageCount="12" prefHeight="200.0" prefWidth="270.0" />
       <Label layoutX="73.0" layoutY="58.0" text="Elija la partida que desee cargar:">
@@ -13,17 +12,12 @@
             <Font name="Baskerville Old Face" size="23.0" />
          </font>
       </Label>
-      <Button fx:id="botonVolver" layoutX="37.0" layoutY="496.0" mnemonicParsing="false" onAction="#onBotonVolver" text="Volver">
-         <font>
-            <Font name="Baskerville Old Face" size="18.0" />
-         </font>
-      </Button>
       <Button fx:id="botonContinuar" layoutX="594.0" layoutY="498.0" mnemonicParsing="false" onAction="#onBotonContinuar" text="Cargar Partida">
          <font>
             <Font name="Baskerville Old Face" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="labelNingunaPartidaGuardada" layoutX="370.0" layoutY="236.0" text="--">
+      <Label fx:id="labelNingunaPartidaGuardada" layoutX="323.0" layoutY="236.0" text="--">
          <font>
             <Font name="Baskerville Old Face" size="20.0" />
          </font>
