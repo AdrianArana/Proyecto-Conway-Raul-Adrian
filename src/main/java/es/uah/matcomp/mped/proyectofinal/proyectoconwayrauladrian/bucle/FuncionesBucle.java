@@ -20,8 +20,7 @@ public class FuncionesBucle {
     public static int numeroReproducciones = 0;
     public static Individuo individuoMayorEsperanzaDeVida;
     private int mayorEsperanzaDeVida;
-//TODO FALTA ARREGLAR QUE SE SUME 1 PARA CANTIDAD REPRODUCCIONES, CANTIDAD AGUA CONSUMIDA Y CANTIDAD CLONACIONES
-    //TODO que el individuo ganador funcione
+
     public void recorrerCasillas(ListaEnlazadaFilas<ListaEnlazadaColumnas<Casilla>> tablero, int turnoActual, ParametrosEntorno parametrosEntorno, ParametrosIndividuo parametrosIndividuo, String colorBordes) {
         log.info("Se realiza el recorrido de casillas.");
         int filas = tablero.getNumeroFilas();

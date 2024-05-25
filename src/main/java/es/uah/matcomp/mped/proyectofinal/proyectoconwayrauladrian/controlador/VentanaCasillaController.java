@@ -33,13 +33,6 @@ public class VentanaCasillaController {
     public Button botonInfoTipo1;
     public Button botonInfoTipo2;
     public Button botonInfoTipo3;
-    //El id que se le pone a cada individuo cuando se crea uno nuevo
-    //TODO-> HACER QUE FUNCIONE EL ID
-    //se me ocurre hacer que se envien a este controlador, desde el del tyablero el
-    // último id, y que antes de mandarlo, siempre se compruebe cual es el más grande
-    // de los que hay en el tablero, ya que siempre va subiendo de uno en uno para
-    // cada individuo, asi se podria hacer
-    int id;
     int turnoActual;
     ParametrosIndividuoModelProperties parametrosIndividuo;
     ParametrosEntornoModelProperties parametrosEntorno;
