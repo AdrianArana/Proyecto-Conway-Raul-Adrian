@@ -63,7 +63,7 @@ public class VentanaEleccionEstadisticasController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VistaPrincipal.class.getResource("ventanaArboles.fxml"));
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 835, 900);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 750);
             stage.setTitle("Arboles Individuos");
             stage.setScene(scene);
             VentanaArboles controlador=fxmlLoader.getController();

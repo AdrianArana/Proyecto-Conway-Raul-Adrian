@@ -23,84 +23,105 @@ class ParametrosEntornoTest {
 
     @Test
     void getProbabilidadAgua() {
-        Agua agua= new Agua(1,1,1);
-        assertEquals(1, agua.getProbabilidadAgua());
+        ParametrosEntorno entorno=new ParametrosEntorno(1,1,1,1,1,1,1,1
+        );
+        assertEquals(1,entorno.getProbabilidadAgua());
     }
 
     @Test
     void setProbabilidadAgua() {
-        Agua agua= new Agua(1,1,1);
-        agua.setProbabilidadDeEsteRecurso(101);
-        assertEquals(101, agua.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(1,1,1,1,1,1,1,1
+        );
+        entorno.setProbabilidadAgua(21);
+        assertEquals(21,entorno.getProbabilidadAgua());
     }
 
     @Test
     void getProbabilidadComida() {
-        Comida comida= new Comida(1,1,1);
 
-        assertEquals(1, comida.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(2,2,2,2,2,2,2,2
+        );
+        assertEquals(2,entorno.getProbabilidadComida());
     }
 
     @Test
     void setProbabilidadComida() {
-        Comida comida= new Comida(1,1,1);
-        comida.setProbabilidadDeEsteRecurso(12);
-        assertEquals(12, comida.getProbabilidadDeEsteRecurso());
+
+        ParametrosEntorno entorno=new ParametrosEntorno(2,2,2,2,2,2,2,2
+        );
+        entorno.setProbabilidadComida(21);
+        assertEquals(21,entorno.getProbabilidadComida());
 
     }
 
     @Test
     void getProbabilidadMontaña() {
-        Montaña montaña= new Montaña(1,1,1);
 
-        assertEquals(1, montaña.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(3,3,3,3,3,3,3,3
+        );
+        assertEquals(3,entorno.getProbabilidadMontaña());
+
     }
 
     @Test
     void setProbabilidadMontaña() {
-        Montaña montaña= new Montaña(2,2,2);
-        montaña.setProbabilidadDeEsteRecurso(13);
-        assertEquals(13, montaña.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(3,3,3,3,3,3,3,3
+        );
+        entorno.setProbabilidadMontaña(44);
+        assertEquals(44,entorno.getProbabilidadMontaña());
+
     }
 
     @Test
     void getProbabilidadTesoro() {
-        Tesoro tesoro= new Tesoro(3,3,3);
-        assertEquals(3, tesoro.getProbabilidadDeEsteRecurso() );
+        ParametrosEntorno entorno=new ParametrosEntorno(5,5,5,5,5,5,5,5
+        );
+
+        assertEquals(5,entorno.getProbabilidadMontaña());
     }
 
     @Test
     void setProbabilidadTesoro() {
-        Tesoro tesoro= new Tesoro(3,3,3);
-        tesoro.setProbabilidadDeEsteRecurso(45);
-        assertEquals(45, tesoro.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(3,3,3,3,3,3,3,3
+        );
+        entorno.setProbabilidadTesoro(44);
+        assertEquals(44,entorno.getProbabilidadTesoro());
+
     }
 
     @Test
     void getProbabilidadBiblioteca() {
-        Biblioteca biblioteca= new Biblioteca(10,10,10);
-        assertEquals(10, biblioteca.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(6,6,6,6,6,6,6,6
+        );
+
+        assertEquals(6,entorno.getProbabilidadBiblioteca());
+
     }
 
     @Test
     void setProbabilidadBiblioteca() {
-        Biblioteca biblioteca= new Biblioteca(10,10,1);
-        biblioteca.setProbabilidadDeEsteRecurso(100);
-        assertEquals(100, biblioteca.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(3,3,3,3,3,3,3,3
+        );
+        entorno.setProbabilidadTesoro(44);
+        assertEquals(44,entorno.getProbabilidadTesoro());
+
 
     }
 
     @Test
     void getProbabilidadPozo() {
-        Pozo pozo= new Pozo(11,1,1);
-        assertEquals(1, pozo.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(8,8,8,8,8,8,8,8
+        );
+        assertEquals(8,entorno.getProbabilidadPozo());
+
     }
 
     @Test
     void setProbabilidadPozo() {
-        Pozo pozo= new Pozo(11,1,1);
-        pozo.setProbabilidadDeEsteRecurso(89);
-        assertEquals(89, pozo.getProbabilidadDeEsteRecurso());
+        ParametrosEntorno entorno=new ParametrosEntorno(3,3,3,3,3,3,3,3
+        );
+        entorno.setProbabilidadPozo(44);
+        assertEquals(44,entorno.getProbabilidadPozo());
 
     }
 }

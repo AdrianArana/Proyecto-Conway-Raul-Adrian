@@ -52,4 +52,5 @@ class ParametrosIndividuoTest {
         individuo.setProbabilidadReproduccion(21);
         assertEquals(21, individuo.getProbabilidadReproduccion());
     }
+
 }
